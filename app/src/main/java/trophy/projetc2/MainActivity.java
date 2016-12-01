@@ -1,44 +1,49 @@
 package trophy.projetc2;
 
-import android.content.Intent;
+import android.os.StrictMode;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import trophy.projetc2.Http.HttpClient;
 
 public class MainActivity extends AppCompatActivity {
-    protected ImageView Login_ImageView_Main;
-    protected EditText Login_EditText_ID;
-    protected EditText Login_EditText_PW;
-    protected CheckBox Login_Checkbox_Auto;
-    protected Button Login_Button_Login;
-    protected TextView Login_TextView_Membership;
-    protected TextView Login_TextView_FindPW;
-
-
+    String[][] pa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_login);
-        Login_ImageView_Main = (ImageView)findViewById(R.id.Login_ImageView_Main);
-        Login_EditText_ID = (EditText)findViewById(R.id.Login_EditText_ID);
-        Login_EditText_PW = (EditText)findViewById(R.id.Login_EditText_PW);
-        Login_Checkbox_Auto = (CheckBox) findViewById(R.id.Login_Checkbox_Auto);
-        Login_Button_Login = (Button)findViewById(R.id.Login_Button_Login);
-        Login_TextView_Membership = (TextView)findViewById(R.id.Login_TextView_Membership);
-        Login_TextView_FindPW = (TextView)findViewById(R.id.Login_TextView_FindPW);
+        setContentView(R.layout.activity_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar123);
+        toolbar.setTitle("ggg");
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
+        HttpClient a= new HttpClient();
+        Log.i("결과",a.HttpClient("Web_basket","NaviTeamInfo_Player.jsp","park123"));
 
-
-        Login_TextView_Membership.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent membershipintent =  new Intent(MainActivity.this, MemberShip.class);
-                startActivity(membershipintent);
-            }
-        });
     }
 }
