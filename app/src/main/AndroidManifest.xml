@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name="trophy.projetc2.MemberShip"></activity>
+        <activity android:name="trophy.projetc2.MainActivity"></activity>
 
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
