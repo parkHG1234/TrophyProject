@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Projetc2</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string-array name = "spinner_do">
         <item>서울</item>
         <item>인천</item>

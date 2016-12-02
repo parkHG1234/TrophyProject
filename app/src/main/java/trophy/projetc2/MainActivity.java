@@ -45,5 +45,6 @@ public class MainActivity extends AppCompatActivity {
         HttpClient a= new HttpClient();
         Log.i("결과",a.HttpClient("Web_basket","NaviTeamInfo_Player.jsp","park123"));
 
+
     }
 }
