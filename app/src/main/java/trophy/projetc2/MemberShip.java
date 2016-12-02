@@ -47,7 +47,8 @@ public class MemberShip extends AppCompatActivity{
     Button MemberShip_Button_MemberShip;
     Get_Spinner_Si Get_Spinner_Si;
     ArrayAdapter<CharSequence> adspin1, adspin2;
-
+    int rnd;
+    boolean flag=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,13 +90,25 @@ public class MemberShip extends AppCompatActivity{
                     if(phone.length()==11) {
 
                         Random random = new Random();
-                        int rnd = Math.abs(random.nextInt(899999) + 100000);
+                        rnd = Math.abs(random.nextInt(899999) + 100000);
                         String msg = "바스켓북 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
                         Date d = new Date();
                         String date = dateFormat.format(d);
                         HttpClient user = new HttpClient();
                         user.HttpClient("InetSMSExample", "example.jsp", msg,phone,phone,date);
+                }
+            }
+        });
+        MemberShip_Button_Confirm_Phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MemberShip_EditText_Confirm_Phone.getText().toString().equals(String.valueOf(rnd))){
+                    Toast.makeText(getApplicationContext(),"인증번호가확인되었습니다.",Toast.LENGTH_LONG).show();
+                    flag=true;
+                }else{
+                    Toast.makeText(getApplicationContext(),"인증번호를확인해주세요.",Toast.LENGTH_LONG).show();
+                    flag=false;
                 }
             }
         });
