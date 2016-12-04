@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/emblem"
+            android:src="@drawable/emblem"
             android:id="@+id/Layout_Navigation_TeamSearch_ImageView_Emblem"
             android:layout_weight="8" />
 

@@ -1,4 +1,4 @@
-package trophy.projetc2;
+package trophy.projetc2.User;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -17,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
+import trophy.projetc2.R;
 
 public class Login extends AppCompatActivity {
     protected ImageView Login_ImageView_Main;

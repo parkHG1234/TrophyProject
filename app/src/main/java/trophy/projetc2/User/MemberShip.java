@@ -1,4 +1,4 @@
-package trophy.projetc2;
+package trophy.projetc2.User;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -20,7 +20,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +31,9 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.R;
 
 /**
  * Created by 박지훈 on 2016-11-30.
@@ -59,7 +60,7 @@ public class MemberShip extends AppCompatActivity {
     EditText MemberShip_EditText_Confirm_Phone;
     Button MemberShip_Button_Confirm_Phone;
     Button MemberShip_Button_MemberShip;
-    Get_Spinner_Si Get_Spinner_Si;
+    trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     static TimerTask myTask;
     static Timer timer;
