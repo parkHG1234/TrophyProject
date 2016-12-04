@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#418cff</color>
-    <color name="colorPrimaryDark">#418cff</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="Red">#ff0101</color>
-    <color name = "White">#ffffff</color>
-    <color name = "Black">#000000</color>
-    <color name="DarkGray">#cdcdcc</color>
-    <color name="BlackGray">#5f5e5e</color>
-    <color name="LinerColor">#8f8e8e</color>
-    <color name="Gray">#eceaea</color>
-    <color name="MainColor_Navy">#418cff</color>
-    <color name="MainColor_Yellow">#ffeb12</color>
-    <color name="Profile_BackGround">#418cff</color>
-    <color name="accent_material_light_1">#40ffff</color>
+    <color name="White">#ffffff</color>
 </resources>
