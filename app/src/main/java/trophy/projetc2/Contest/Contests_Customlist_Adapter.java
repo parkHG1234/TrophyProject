@@ -60,7 +60,6 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             String Contest_currentNum = arrData.get(position).getContest_currentNum();
             String Contest_maxNum = arrData.get(position).getContest_maxNum();
             String Contest_Payment = arrData.get(position).getContest_Payment();
-            Log.i("마짱뜨자 씨빨", Contest_Pk);
 
             ImageView viewContest_Image = (ImageView)convertView.findViewById(R.id.Contest_logoImage);
             TextView viewContest_Title = (TextView)convertView.findViewById(R.id.contest_title);
