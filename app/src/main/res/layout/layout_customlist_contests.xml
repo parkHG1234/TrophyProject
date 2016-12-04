@@ -64,7 +64,7 @@
                     app:srcCompat="@drawable/ic_account_circle_black_36px" />
 
                 <TextView
-                    android:text="17/30"
+                    android:text="현재인원/모집인원"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
