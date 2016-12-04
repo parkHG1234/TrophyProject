@@ -52,13 +52,14 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.layout_customlist_contests, parent, false);
 
 
+
+            Contest_Pk = arrData.get(position).getContest_Pk();
             String Contest_Title = arrData.get(position).getContest_Title();
             String Contest_Image = arrData.get(position).getContest_Image();
-            String Contest_Date = arrData.get(position).getContest_Date();
+            String Contest_Date = arrData.get(position).getContestDate();
             String Contest_currentNum = arrData.get(position).getContest_currentNum();
             String Contest_maxNum = arrData.get(position).getContest_maxNum();
-            String Contest_Point = arrData.get(position).getContest_Point();
-            Contest_Pk = arrData.get(position).getContest_Pk();
+            String Contest_Payment = arrData.get(position).getContest_Payment();
             Log.i("마짱뜨자 씨빨", Contest_Pk);
 
             ImageView viewContest_Image = (ImageView)convertView.findViewById(R.id.Contest_logoImage);
@@ -79,7 +80,6 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     /*Log.i("Pk",arrData.get(position).getContest_Pk());
-                    Intent intent = new Intent(context, Contest_Detail.class);
                     intent.putExtra("position", arrData.get(position).getContest_Pk());
                     intent.putExtra("Id", "qwer1");
                     context.startActivity(intent);*/

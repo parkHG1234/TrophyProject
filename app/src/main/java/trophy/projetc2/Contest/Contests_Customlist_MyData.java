@@ -5,22 +5,38 @@ package trophy.projetc2.Contest;
  */
 
 public class Contests_Customlist_MyData {
+    String Contest_Pk;
     String Contest_Title;
     String Contest_Image;
-    String Contest_Date;
     String Contest_currentNum;
     String Contest_maxNum;
-    String Contest_Point;
-    String Contest_Pk;
+    String Contest_Payment;
+    String Contest_Host;
+    String Contest_Management;
+    String Support;
+    String ContestDate;
+    String RecruitStartDate;
+    String RecruitFinishDate;
+    String DetailInfo;
 
-    public Contests_Customlist_MyData(String contest_Title, String contest_Image, String contest_Date, String contest_currentNum, String contest_maxNum, String contest_Point, String contest_Pk) {
+    public Contests_Customlist_MyData(String contest_Pk, String contest_Title, String contest_Image, String contest_currentNum, String contest_maxNum, String contest_Payment, String contest_Host, String contest_Management, String support, String contestDate, String recruitStartDate, String recruitFinishDate, String detailInfo) {
+        Contest_Pk = contest_Pk;
         Contest_Title = contest_Title;
         Contest_Image = contest_Image;
-        Contest_Date = contest_Date;
         Contest_currentNum = contest_currentNum;
         Contest_maxNum = contest_maxNum;
-        Contest_Point = contest_Point;
-        Contest_Pk = contest_Pk;
+        Contest_Payment = contest_Payment;
+        Contest_Host = contest_Host;
+        Contest_Management = contest_Management;
+        Support = support;
+        ContestDate = contestDate;
+        RecruitStartDate = recruitStartDate;
+        RecruitFinishDate = recruitFinishDate;
+        DetailInfo = detailInfo;
+    }
+
+    public String getContest_Pk() {
+        return Contest_Pk;
     }
 
     public String getContest_Title() {
@@ -31,10 +47,6 @@ public class Contests_Customlist_MyData {
         return Contest_Image;
     }
 
-    public String getContest_Date() {
-        return Contest_Date;
-    }
-
     public String getContest_currentNum() {
         return Contest_currentNum;
     }
@@ -43,12 +55,43 @@ public class Contests_Customlist_MyData {
         return Contest_maxNum;
     }
 
-    public String getContest_Point() {
-        return Contest_Point;
+    public String getContest_Payment() {
+        return Contest_Payment;
     }
 
-    public String getContest_Pk() {
-        return Contest_Pk;
+    public String getContest_Host() {
+        return Contest_Host;
+    }
+
+    public String getContest_Management() {
+        return Contest_Management;
+    }
+
+    public String getSupport() {
+        return Support;
+    }
+
+    public String getContestDate() {
+        return ContestDate;
+    }
+
+    public String getRecruitStartDate() {
+        return RecruitStartDate;
+    }
+
+    public String getRecruitFinishDate() {
+        return RecruitFinishDate;
+    }
+
+    public String getDetailInfo() {
+        return DetailInfo;
+    }
+
+    //setter
+
+
+    public void setContest_Pk(String contest_Pk) {
+        Contest_Pk = contest_Pk;
     }
 
     public void setContest_Title(String contest_Title) {
@@ -59,10 +102,6 @@ public class Contests_Customlist_MyData {
         Contest_Image = contest_Image;
     }
 
-    public void setContest_Date(String contest_Date) {
-        Contest_Date = contest_Date;
-    }
-
     public void setContest_currentNum(String contest_currentNum) {
         Contest_currentNum = contest_currentNum;
     }
@@ -71,11 +110,35 @@ public class Contests_Customlist_MyData {
         Contest_maxNum = contest_maxNum;
     }
 
-    public void setContest_Point(String contest_Point) {
-        Contest_Point = contest_Point;
+    public void setContest_Payment(String contest_Payment) {
+        Contest_Payment = contest_Payment;
     }
 
-    public void setContest_Pk(String contest_Pk) {
-        Contest_Pk = contest_Pk;
+    public void setContest_Host(String contest_Host) {
+        Contest_Host = contest_Host;
+    }
+
+    public void setContest_Management(String contest_Management) {
+        Contest_Management = contest_Management;
+    }
+
+    public void setSupport(String support) {
+        Support = support;
+    }
+
+    public void setContestDate(String contestDate) {
+        ContestDate = contestDate;
+    }
+
+    public void setRecruitStartDate(String recruitStartDate) {
+        RecruitStartDate = recruitStartDate;
+    }
+
+    public void setRecruitFinishDate(String recruitFinishDate) {
+        RecruitFinishDate = recruitFinishDate;
+    }
+
+    public void setDetailInfo(String detailInfo) {
+        DetailInfo = detailInfo;
     }
 }
