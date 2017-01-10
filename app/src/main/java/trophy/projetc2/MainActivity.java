@@ -1,5 +1,6 @@
 package trophy.projetc2;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
@@ -9,33 +10,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Contest.Contests_Customlist_Adapter;
 import trophy.projetc2.Contest.Contests_Customlist_MyData;
 import trophy.projetc2.Http.HttpClient;
@@ -45,6 +40,7 @@ import trophy.projetc2.Navigation.TeamSearch;
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
     String[][] parseredData_user;
+    private LayoutInflater inflater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        inflater=getLayoutInflater();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar123);
         toolbar.setTitle("트로피");
         setSupportActionBar(toolbar);
@@ -125,7 +122,25 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
             }
         });
-
+        Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final View layout = inflater.inflate(R.layout.layout_customdialog_navigation_teammanager, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager));
+                final LinearLayout ContestJoin = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_ContestJoin);
+                final LinearLayout PlayerManager = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_PlayerManager);
+                final LinearLayout TeamIntroduce = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_Teamintroduce);
+                final MaterialDialog DutyDialog = new MaterialDialog(MainActivity.this);
+                DutyDialog
+                        .setNegativeButton("취소", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                DutyDialog.dismiss();
+                            }
+                        })
+                        .setContentView(layout);
+                DutyDialog.show();
+            }
+        });
         /////////////////////////////////////////////
         //리스트뷰
         HttpClient ContestHttp = new HttpClient();

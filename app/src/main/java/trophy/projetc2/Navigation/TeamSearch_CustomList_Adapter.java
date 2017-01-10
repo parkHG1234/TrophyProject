@@ -30,82 +30,81 @@ import trophy.projetc2.R;
 
 public class TeamSearch_CustomList_Adapter extends BaseAdapter{
     private Context context;
-    private ArrayList<TeamSearch_CustomList_MyData> arrayList;
     private LayoutInflater inflater;
-    private List<TeamSearch_CustomList_MyData> potionList = null;
-    public TeamSearch_CustomList_Adapter(Context c, List<TeamSearch_CustomList_MyData> potionList) {
+    private List<TeamSearch_CustomList_MyData> test1 = null;
+    private ArrayList<TeamSearch_CustomList_MyData> arrData;
+    ImageView Layout_Navigation_TeamSearch_ImageView_Emblem;
+    public TeamSearch_CustomList_Adapter(Context c, ArrayList<TeamSearch_CustomList_MyData> arr) {
         this.context = c;
-        this.potionList = potionList;
+        this.arrData = arr;
         inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.arrayList = new ArrayList<TeamSearch_CustomList_MyData>();
-        this.arrayList.addAll(potionList);
-    }
-    public class ViewHolder{
-        ImageView Emblem;
-        TextView TeamName;
-    }
-    public int getCount() {
-        return potionList.size();
+        this.test1 = new ArrayList<TeamSearch_CustomList_MyData>();
+        this.test1.addAll(arr);
     }
 
-    public TeamSearch_CustomList_MyData getItem(int position) {
-        return potionList.get(position);
+    public int getCount() {
+        return arrData.size();
+    }
+
+    public Object getItem(int position) {
+        return arrData.get(position).getTeamName();
     }
 
     public long getItemId(int position) {
         return position;
     }
 
-    public View getView(final int position, View View, ViewGroup parent) {
-        final ViewHolder holder;
-        final TeamSearch_CustomList_MyData potion = potionList.get(position);
-        if (View == null) {
-            holder = new ViewHolder();
-            View = inflater.inflate(R.layout.layout_navigation_teamsearch_customlist, null);
-            holder.Emblem = (ImageView) View.findViewById(R.id.Layout_Navigation_TeamSearch_ImageView_Emblem);
-            holder.TeamName = (TextView) View.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_TeamName);
-            View.setTag(holder);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.layout_navigation_teamsearch_customlist, parent, false);
         }
-        else{
-            holder = (ViewHolder)View.getTag();
+
+        TextView Layout_Navigation_TeamSearch_TextView_TeamName = (TextView) convertView.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_TeamName);
+
+        Layout_Navigation_TeamSearch_ImageView_Emblem = (ImageView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_ImageView_Emblem);
+        Layout_Navigation_TeamSearch_TextView_TeamName.setText(arrData.get(position).getTeamName());
+        try {
+            String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
+            if (arrData.get(position).getEmblem().equals(".")) {
+                Glide.with(context).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                        .into(Layout_Navigation_TeamSearch_ImageView_Emblem);
+            } else {
+                Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(Layout_Navigation_TeamSearch_ImageView_Emblem);
+            }
+        } catch (UnsupportedEncodingException e) {
 
         }
-        holder.TeamName.setText(potion.getTeamName());
-        Glide.with(context).load(R.drawable.emblem).into(holder.Emblem);
-        // CheckBox check= (CheckBox)convertView.findViewById(R.id.Contest_Detail_Form_Player_CustomList_Check);
-
-//        try {
-//            String En_Profile = URLEncoder.encode(arrData.get(position).getProfile(), "utf-8");
-//            if (arrData.get(position).getProfile().equals(".")) {
-//                Glide.with(context).load(R.drawable.profile_basic_image).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-//                        .into(Contest_Detail_Form_Player_CustomList_ProfileImage);
-//            } else {
-//                Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                        .skipMemoryCache(true)
-//                        .into(Contest_Detail_Form_Player_CustomList_ProfileImage);
-//            }
-//        } catch (UnsupportedEncodingException e) {
-//
-//        }
-
-        return View;
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,TeamSearch_Focus.class);
+                intent.putExtra("TeamName", arrData.get(position).getTeamName());
+                intent.putExtra("Pk",arrData.get(position).getPk());
+                context.startActivity(intent);
+            }
+        });
+        return convertView;
     }
-    public void filter(String charText){
+    // Filter Class
+    public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        potionList.clear();
-        if(charText.length() == 0){
-            potionList.addAll(arrayList);
+        arrData.clear();
+        if (charText.length() == 0) {
+            arrData.addAll(test1);
         }
-        else{
-            for (TeamSearch_CustomList_MyData potion : arrayList) {
-                String name = potion.getTeamName();
-                if (name.toLowerCase().contains(charText)) {
-                    potionList.add(potion);
+        else
+        {
+            for (TeamSearch_CustomList_MyData wp : test1)
+            {
+                if (wp.getTeamName().toLowerCase(Locale.getDefault()).contains(charText))
+                {
+                    arrData.add(wp);
                 }
             }
         }
         notifyDataSetChanged();
     }
-
 }
