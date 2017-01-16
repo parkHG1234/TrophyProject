@@ -89,15 +89,12 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yy / MM / dd");
             try {
                 Date date = dateFormat.parse(Contest_RecruitFinishData);
-                out.println(date);
                 Date currentDay = new Date();
-                out.println("현재시간 : " + currentDay);
 
                 if(currentDay.getTime() < date.getTime()) {
                     long diff = date.getTime() - currentDay.getTime();
-
-
                     long diffday = diff / (24 * 60 * 60 * 1000);
+
                     if(diff > 7) {
                         diffday = diffday/7;
                         Da = " 주";
