@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login_layout_root">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/Layout_Login_Point">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/id_Layout_EditText"
+                        android:textColor="@color/White"
+                        android:ems="20"
+                        android:hint="아이디"
+                        android:textColorHint="@color/White"
+                        android:textColorHighlight="@color/White"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center"
+                        android:paddingBottom="7dp"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1.1"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/pw_Layout_EditText"
+                        android:textColor="@color/White"
+                        android:ems="20"
+                        android:hint="비밀번호"
+                        android:inputType="textPassword"
+                        android:textColorHint="@color/White"
+                        android:textColorHighlight="@color/White"
+                        android:gravity="bottom|center"
+                        android:background="@null"
+                        android:layout_weight="1"
+                        android:paddingBottom="7dp"
+                        android:textSize="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="로그인"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@color/colorPrimary"
+                android:id="@+id/login_button"
+                android:onClick="onClicked"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/White"
+                android:textStyle="normal|bold"
+                android:textSize="17dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="100dp" />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="신규 회원가입"
+                    android:id="@+id/join_button"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:text="비밀번호 찾기"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/search_Button"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@color/White"
+                    android:layout_weight="1"
+                    android:textSize="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
