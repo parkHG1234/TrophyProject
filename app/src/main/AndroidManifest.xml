@@ -19,6 +19,7 @@
         <activity android:name=".Navigation.TeamMake"></activity>
         <activity android:name=".Navigation.TeamSearch" android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".Navigation.TeamSearch_Focus"></activity>
+        <activity android:name=".Navigation.TeamManager"></activity>
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
 </manifest>

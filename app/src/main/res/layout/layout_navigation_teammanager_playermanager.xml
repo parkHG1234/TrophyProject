@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:text="참가신청 중 인원"
+        android:layout_width="match_parent"
+        android:id="@+id/button8"
+        android:gravity="left|center_vertical|center_horizontal"
+        android:layout_height="40dp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Layout_Navigation_TeamManager_ListView_Joiner"/>
+
+    <Button
+        android:text="'클린쳐'팀 팀원"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/button10"
+        android:gravity="left|center_vertical|center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Layout_Navigation_TeamManager_ListView_Player"/>
+
+</LinearLayout>
