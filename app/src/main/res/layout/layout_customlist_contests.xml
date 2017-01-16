@@ -51,21 +51,28 @@
                 android:layout_weight="0.25"
                 android:elevation="1dp">
 
-                <ImageView
+                <TextView
+                    android:text="마감"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/ic_account_circle_black_36px"
-                    android:id="@+id/imageView4"
-                    android:layout_weight="1" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:textColor="#3f51b5"
+                    android:id="@+id/contest_list_remainder1" />
 
                 <TextView
-                    android:text="현재인원/모집인원"
+                    android:text="2주"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:id="@+id/textView"
-                    android:textColor="@color/Black" />
+                    android:id="@+id/contest_list_remainder"
+                    android:textColor="#3f51b5" />
+
+                <TextView
+                    android:text="전"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/contest_list_remainder2"
+                    android:textColor="#3f51b5" />
+
             </LinearLayout>
 
             <LinearLayout
