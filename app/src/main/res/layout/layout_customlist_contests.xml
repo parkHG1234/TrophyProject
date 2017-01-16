@@ -48,7 +48,25 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"></LinearLayout>
+                android:layout_weight="0.25"
+                android:elevation="1dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/ic_account_circle_black_36px"
+                    android:id="@+id/imageView4"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="현재인원/모집인원"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/textView"
+                    android:textColor="@color/Black" />
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
