@@ -35,7 +35,6 @@ import trophy.projetc2.Contest.Contests_Customlist_Adapter;
 import trophy.projetc2.Contest.Contests_Customlist_MyData;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.Navigation.TeamMake;
-import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
 
 public class MainActivity extends AppCompatActivity {
@@ -126,24 +125,20 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                final View layout = inflater.inflate(R.layout.layout_customdialog_navigation_teammanager, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager));
-//                final LinearLayout ContestJoin = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_ContestJoin);
-//                final LinearLayout PlayerManager = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_PlayerManager);
-//                final LinearLayout TeamIntroduce = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_Teamintroduce);
-//                final MaterialDialog DutyDialog = new MaterialDialog(MainActivity.this);
-//                DutyDialog
-//                        .setNegativeButton("취소", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                DutyDialog.dismiss();
-//                            }
-//                        })
-//                        .setContentView(layout);
-//                DutyDialog.show();
-                Intent intent_TeamManager = new Intent(MainActivity.this, TeamManager.class);
-                intent_TeamManager.putExtra("TeamName", Team);
-                startActivity(intent_TeamManager);
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+                final View layout = inflater.inflate(R.layout.layout_customdialog_navigation_teammanager, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager));
+                final LinearLayout ContestJoin = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_ContestJoin);
+                final LinearLayout PlayerManager = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_PlayerManager);
+                final LinearLayout TeamIntroduce = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_Teamintroduce);
+                final MaterialDialog DutyDialog = new MaterialDialog(MainActivity.this);
+                DutyDialog
+                        .setNegativeButton("취소", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                DutyDialog.dismiss();
+                            }
+                        })
+                        .setContentView(layout);
+                DutyDialog.show();
             }
         });
         /////////////////////////////////////////////
