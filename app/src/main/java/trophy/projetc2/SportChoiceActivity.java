@@ -1,6 +1,7 @@
 package trophy.projetc2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,15 +13,51 @@ import android.widget.Button;
  */
 
 public class SportChoiceActivity extends AppCompatActivity {
-    String Id;
     Button Button_Basketball, Button_Baseball, Button_Coach, Button_Balling, Button_Biking, Button_Soccer;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_choice_sport);
 
-        Intent intent = getIntent();
-        Id = intent.getStringExtra("Id");
+        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+        String sport = preferences.getString("sportType",".");
+
+        if (sport.equals("basketball")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        } else if (sport.equals("")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        } else if (sport.equals("")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        } else if (sport.equals("")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        } else if (sport.equals("")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        } else if (sport.equals("")) {
+            Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
+            intent1.putExtra("sportType", "basketball");
+            startActivity(intent1);
+            finish();
+        }
+
 
         Button_Basketball = (Button) findViewById(R.id.layout_choice_basketball_button);
         Button_Baseball = (Button) findViewById(R.id.layout_choice_baseball_button);
@@ -32,9 +69,14 @@ public class SportChoiceActivity extends AppCompatActivity {
         Button_Basketball.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                editor = preferences.edit();
+
+                editor.putString("sportType","basketball");
+                editor.commit();
+
                 Intent intent1 = new Intent(SportChoiceActivity.this, MainActivity.class);
-                intent1.putExtra("Id", Id);
-                intent1.putExtra("SportType", "basketball");
+                intent1.putExtra("sportType", "basketball");
                 startActivity(intent1);
             }
         });

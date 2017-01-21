@@ -24,6 +24,8 @@
         <activity android:name=".Navigation.Last_Contest_Detail"></activity>
         <activity android:name=".Navigation.TeamSearch_Focus"></activity>
         <activity android:name=".Navigation.TeamManager"></activity>
+        <activity android:name=".Contest.Contest_Detail"></activity>
+        <activity android:name=".Contest.Contest_Detail_Form"></activity>
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
 </manifest>

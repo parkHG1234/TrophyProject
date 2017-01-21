@@ -1,6 +1,7 @@
 package trophy.projetc2.Contest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,10 +115,10 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    /*Log.i("Pk",arrData.get(position).getContest_Pk());
+                    Log.i("Pk",arrData.get(position).getContest_Pk());
+                    Intent intent = new Intent(context, Contest_Detail.class);
                     intent.putExtra("position", arrData.get(position).getContest_Pk());
-                    intent.putExtra("Id", "qwer1");
-                    context.startActivity(intent);*/
+                    context.startActivity(intent);
                 }
             });
         }

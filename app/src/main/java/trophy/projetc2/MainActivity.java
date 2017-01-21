@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
         HttpClient ContestHttp = new HttpClient();
         String result = ContestHttp.HttpClient("Trophy_part3", "Contest_Customlist.jsp");
         String[][] ContestsParsedList = jsonParserList_getContestList(result);
-        Log.i("개 ㅄ이세요 ?", result);
 
         ArrayList<Contests_Customlist_MyData> Contests_Customlist_MyData;
         Contests_Customlist_MyData = new ArrayList<Contests_Customlist_MyData>();

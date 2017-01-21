@@ -126,7 +126,7 @@ Button layout_contest_submit;
         String result = "";
         try {
             HttpClient client = new DefaultHttpClient();
-            String postURL = "http://210.122.7.193:8080/pp/Contest_Customlist_detail.jsp";
+            String postURL = "http://210.122.7.193:8080/Trophy_part3/Contest_Customlist_detail.jsp";
             HttpPost post = new HttpPost(postURL);
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -148,14 +148,14 @@ Button layout_contest_submit;
         String[][] ContestsDetailParsedData = jsonParserList_getContestDetail(result);
 
         title.setText(ContestsDetailParsedData[0][1]);
-        date.setText(ContestsDetailParsedData[0][2]);
-        host.setText(ContestsDetailParsedData[0][7]);
-        management.setText(ContestsDetailParsedData[0][8]);
-        support.setText(ContestsDetailParsedData[0][9]);
+        host.setText(ContestsDetailParsedData[0][6]);
+        management.setText(ContestsDetailParsedData[0][7]);
+        support.setText(ContestsDetailParsedData[0][8]);
+        date.setText(ContestsDetailParsedData[0][9]);
         recruitPeriod.setText(ContestsDetailParsedData[0][10] + " ~ " + ContestsDetailParsedData[0][11]);
         DetailInfo.setText(ContestsDetailParsedData[0][12]);
 
-        Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+ContestsDetailParsedData[0][3]+".jpg")
+        Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+ContestsDetailParsedData[0][2]+".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(image);
@@ -169,7 +169,7 @@ Button layout_contest_submit;
             Date currentDay = new Date();
 
             if(currentDay.getTime() < date2.getTime()) {
-                long diff = currentDay.getTime() - date2.getTime();
+                long diff = date2.getTime() - currentDay.getTime();
                 long diffday = diff / (24 * 60 * 60 * 1000);
                 if(diff > 7) {
                     diffday = diffday/7;
@@ -236,7 +236,7 @@ Button layout_contest_submit;
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"Pk", "Title", "Date", "Image", "currentNum", "maxNum", "Point", "Host", "Management", "Support", "RecruitmentStart", "RecruitmentFinish", "DetailInfo"};
+            String[] jsonName = {"Pk", "Title", "Image", "currentNum", "maxNum", "Payment", "Host", "Management", "Support", "ContestDate", "RecruitStartDate", "RecruitFinishDate", "DetailInfo"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);
