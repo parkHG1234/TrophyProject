@@ -59,42 +59,37 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getImage(), "utf-8");
             String Image = arrData.get(position).getImage().toString();
+            int cnt = Integer.parseInt(arrData.get(position).getCnt().toString());
             String[] Images = Image.split("/");
-            for (int i = 0; i < Images.length; i++) {
-                Log.i("Image",Images[i]);
-                Log.i("ImageNum",String.valueOf(i%3));
-                if (i % 3 == 0) {
-                    if (Images[i].equals(".")) {
+                    if (Images[cnt].equals(".")) {
                         Glide.with(context).load(R.drawable.emblem)
                                 .into(Layout_Last_Contest_detail_ImageView_first);
                     } else {
-                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[i] + ".jpg")
+                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[cnt] + ".jpg")
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(Layout_Last_Contest_detail_ImageView_first);
                     }
-                } else if (i % 3 == 1) {
-                    if (Images[i].equals(".")) {
+                    if (Images[cnt+1].equals(".")) {
                         Glide.with(context).load(R.drawable.emblem)
                                 .into(Layout_Last_Contest_detail_ImageView_second);
                     } else {
-                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[i] + ".jpg")
+                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[cnt+1] + ".jpg")
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(Layout_Last_Contest_detail_ImageView_second);
                     }
-                } else if (i % 3 == 2) {
-                    if (Images[i].equals(".")) {
+                    if (Images[cnt+2].equals(".")) {
                         Glide.with(context).load(R.drawable.emblem)
                                 .into(Layout_Last_Contest_detail_ImageView_third);
                     } else {
-                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[i] + ".jpg")
+                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/last_contest/" + Images[cnt+2] + ".jpg")
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(Layout_Last_Contest_detail_ImageView_third);
                     }
-                }
-            }
+
+
         } catch (UnsupportedEncodingException e) {
 
         }
