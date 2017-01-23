@@ -2,6 +2,7 @@ package trophy.projetc2.Contest;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
@@ -47,11 +48,14 @@ import trophy.projetc2.R;
  */
 
 public class Contest_Detail extends AppCompatActivity {
-Button layout_contest_submit;
+    Button layout_contest_submit;
     private LayoutInflater inflater;
     static TimerTask myTask;
     static Timer timer;
     static String Id,Contest_Pk;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,9 @@ Button layout_contest_submit;
 
         Intent intent = getIntent();
         Contest_Pk = intent.getStringExtra("Contest_Pk");
-        Id = "qwer1";
+
+        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+        Id = preferences.getString("Pk", ".");
         String Da = " 일";
 ////다이얼로그 광고
         final View layout = inflater.inflate(R.layout.layout_customdialog_contest_ad, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Contest_AD_Root));
@@ -189,43 +195,49 @@ Button layout_contest_submit;
         layout_contest_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String result = "";
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    String postURL = "http://210.122.7.193:8080/Web_basket/Contest_Detail_Check.jsp";
-                    HttpPost post = new HttpPost(postURL);
 
-                    List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("Pk", Contest_Pk));
-                    params.add(new BasicNameValuePair("Id", Id));
+                if (Id.equals("") || Id.equals(".")) {  /////////////로그인이 안되어 있는 경우
 
-                    UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                    post.setEntity(ent);
+                } else {  //////////////////////로그인 되어있는경우
+                    String result = "";
+                    try {
+                        HttpClient client = new DefaultHttpClient();
+                        String postURL = "http://210.122.7.193:8080/Web_basket/Contest_Detail_Check.jsp";
+                        HttpPost post = new HttpPost(postURL);
 
-                    HttpResponse response = client.execute(post);
-                    BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
+                        List<NameValuePair> params = new ArrayList<NameValuePair>();
+                        params.add(new BasicNameValuePair("Pk", Contest_Pk));
+                        params.add(new BasicNameValuePair("Id", Id));
 
-                    String line = null;
-                    while ((line = bufreader.readLine()) != null) {
-                        result += line;
+                        UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
+                        post.setEntity(ent);
+
+                        HttpResponse response = client.execute(post);
+                        BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
+
+                        String line = null;
+                        while ((line = bufreader.readLine()) != null) {
+                            result += line;
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    String[][] ParsedData_Check = jsonParserList_ContestDetail_Check(result);
+                    if (ParsedData_Check[0][0].equals("succed")) {
+                        Intent intent = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
+                        intent.putExtra("Id",Id);
+                        intent.putExtra("Pk",Contest_Pk);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
+                    }
+                    else if (ParsedData_Check[0][0].equals("already")) {
+                        Snackbar.make(view,"이미 신청중입니다.", Snackbar.LENGTH_SHORT).show();
+                    }
+                    else if (ParsedData_Check[0][0].equals("notDuty")) {
+                        Snackbar.make(view,"대회 신청권한이 없습니다.", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
-                String[][] ParsedData_Check = jsonParserList_ContestDetail_Check(result);
-                if (ParsedData_Check[0][0].equals("succed")) {
-                    Intent intent = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
-                    intent.putExtra("Id",Id);
-                    intent.putExtra("Pk",Contest_Pk);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
-                }
-                else if (ParsedData_Check[0][0].equals("already")) {
-                    Snackbar.make(view,"이미 신청중입니다.", Snackbar.LENGTH_SHORT).show();
-                }
-                else if (ParsedData_Check[0][0].equals("notDuty")) {
-                    Snackbar.make(view,"대회 신청권한이 없습니다.", Snackbar.LENGTH_SHORT).show();
-                }
+
             }
         });
     }
