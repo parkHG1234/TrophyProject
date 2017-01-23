@@ -260,12 +260,15 @@ public class MemberShip extends AppCompatActivity {
         MemberShip_RadioGroup_Sex_RadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (String.valueOf(MemberShip_RadioGroup_Sex_RadioGroup.getCheckedRadioButtonId()).equals("2131558537")) {
-                    Sex_flag = true;
-                    Sex = "M";
-                } else if (String.valueOf(MemberShip_RadioGroup_Sex_RadioGroup.getCheckedRadioButtonId()).equals("2131558538")) {
-                    Sex_flag = true;
-                    Sex = "W";
+                switch (checkedId) {
+                    case R.id.MemberShip_RadioButton_Sex_Radio_male:
+                        Sex_flag = true;
+                        Sex = "M";
+                        Log.i("sex",Sex);
+                    case R.id.MemberShip_RadioButton_Sex_Radio_Female:
+                        Sex_flag = true;
+                        Sex = "W";
+                        Log.i("sex",Sex);
                 }
             }
         });
@@ -374,14 +377,24 @@ public class MemberShip extends AppCompatActivity {
 
                 Address_Do = MemberShip_Spinner_Do.getSelectedItem().toString();
                 Address_Si = MemberShip_Spinner_Si.getSelectedItem().toString();
-                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag) {
+                Log.i("Name_flag",Boolean.toString(Name_flag));
+                Log.i("Password_flag",Boolean.toString(Password_flag));
+                Log.i("Password_Confirm_flag",Boolean.toString(Password_Confirm_flag));
+                Log.i("Year_flag",Boolean.toString(Year_flag));
+                Log.i("Month_flag",Boolean.toString(Month_flag));
+                Log.i("Day_flag",Boolean.toString(Day_flag));
+                Log.i("Sex_flag",Boolean.toString(Sex_flag));
+                Log.i("Phone_flag",Boolean.toString(Phone_flag));
+                Log.i("Phone_Confirm_flag",Boolean.toString(Phone_Confirm_flag));
+                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex != null && Phone_flag && Phone_Confirm_flag) {
                     String Birth = Year + " / " + Month + " / " + Day;
                     HttpClient user = new HttpClient();
                     user.HttpClient("Trophy_part2", "MemberShip.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
+                    finish();
                 } else {
                     Snackbar.make(getCurrentFocus(), "입력하신정보를확인해주세요", Snackbar.LENGTH_SHORT).show();
                 }
-                finish();
+
             }
         });
     }
@@ -410,6 +423,7 @@ public class MemberShip extends AppCompatActivity {
             return null;
         }
     }
+
 
     class BackThread extends Thread {
         @Override

@@ -38,6 +38,7 @@ import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
+import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
@@ -69,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         //유저 네비게이션바
         HttpClient a= new HttpClient();
         Log.i("결과",a.HttpClient("Web_basket","NaviTeamInfo_Player.jsp","park123"));
-        Pk="1";
+        //캐쉬에 저장되어있는 Pk값 저장
+        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+        Pk = preferences.getString("Pk", ".");
         //네비게이션 메뉴 선언 및 연결
         final View aa = navigationView.inflateHeaderView(R.layout.layout_navigationbar);
         final ImageView Main_Navigation_ImageView_Profile = (ImageView)aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
@@ -83,35 +86,86 @@ public class MainActivity extends AppCompatActivity {
         final Button Main_Navigation_Button_Notice = (Button)aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final Button Main_Navigation_Button_Setting = (Button)aa.findViewById(R.id.Main_Navigation_Button_Setting);
+        final Button Main_Navigation_Button_Logout = (Button)aa.findViewById(R.id.Main_Navigation_Button_Logout);
 
 
-        HttpClient user= new HttpClient();
-        String result1 =user.HttpClient("Trophy_part1","User.jsp",Pk);
-        Log.i("결과",result1);
-        parseredData_user =  jsonParserList_User(result1);
-        Name = parseredData_user[0][0];
-        Team = parseredData_user[0][1];
-        Profile = parseredData_user[0][2];
-        //프로필 관리
-        try{
-            String Profile1 = URLEncoder.encode(Profile, "utf-8");
-            Log.i("Profile1 : ", Profile1);
-            if(Profile1.equals(".")){
-                Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(Main_Navigation_ImageView_Profile);
+        if(Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
+            Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(Main_Navigation_ImageView_Profile);
+
+            Main_Navigation_TextView_Name.setText("로그인을 해주세요");
+            Main_Navigation_TextView_Team.setVisibility(View.GONE);
+            Main_Navigation_Button_Logout.setVisibility(View.GONE);
+
+            Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent_Login = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent_Login);
+                    finish();
+                }
+            });
+        } else { ///////////////////////////////////로그인시
+            HttpClient user= new HttpClient();
+            String result1 =user.HttpClient("Trophy_part1","User.jsp",Pk);
+            Log.i("결과",result1);
+            parseredData_user =  jsonParserList_User(result1);
+            Name = parseredData_user[0][0];
+            Team = parseredData_user[0][1];
+            Profile = parseredData_user[0][2];
+            //프로필 관리
+            try{
+                String Profile1 = URLEncoder.encode(Profile, "utf-8");
+                Log.i("Profile1 : ", Profile1);
+                if(Profile1.equals(".")){
+                    Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(Main_Navigation_ImageView_Profile);
+                }
+                else{
+                    Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_part1/imgs/Profile/"+Profile1+".jpg") .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(Main_Navigation_ImageView_Profile);
+                }
             }
-            else{
-                Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_part1/imgs/Profile/"+Profile1+".jpg") .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(Main_Navigation_ImageView_Profile);
-            }
-        }
-        catch (UnsupportedEncodingException e){
+            catch (UnsupportedEncodingException e){
 
+            }
+            Main_Navigation_TextView_Name.setText(Name);
+            Main_Navigation_TextView_Team.setText(Team);
+            Main_Navigation_TextView_Team.setVisibility(View.VISIBLE);
+            Main_Navigation_Button_Logout.setVisibility(View.VISIBLE);
+
+            Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+                    editor = preferences.edit();
+                    editor.remove("sportType");
+                    editor.commit();
+
+                    Intent intent_SportChoice = new Intent(MainActivity.this, SportChoiceActivity.class);
+                    startActivity(intent_SportChoice);
+                    finish();
+                }
+            });
         }
-        Main_Navigation_TextView_Name.setText(Name);
-        Main_Navigation_TextView_Team.setText(Team);
+
+        Main_Navigation_Button_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.putString("Pk", ".");
+                editor.commit();
+
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                finish();
+
+            }
+        });
+
 
         //스포츠 버튼 이미지 변경
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
