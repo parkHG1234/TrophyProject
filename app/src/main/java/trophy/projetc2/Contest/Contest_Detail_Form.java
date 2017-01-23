@@ -36,8 +36,8 @@ import trophy.projetc2.R;
  */
 
 public class Contest_Detail_Form extends AppCompatActivity {
-    static String Id;
     static String Pk;
+    static String Contest_Pk;
     static String MyTeam;
     static String Phone;
     static String Name;
@@ -66,61 +66,23 @@ public class Contest_Detail_Form extends AppCompatActivity {
         Contest_Detail_Form_Input = (Button)findViewById(R.id.Contest_Detail_Form_Input);
         
         Intent intent = getIntent();
+        Contest_Pk = intent.getStringExtra("Contest_Pk");
         Pk = intent.getStringExtra("Pk");
-        Id = intent.getStringExtra("Id");
-        String result_profile = "";
-        try {
-            HttpClient client = new DefaultHttpClient();
-            String postURL = "http://210.122.7.193:8080/Web_basket/Profile.jsp";
-            HttpPost post = new HttpPost(postURL);
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("Id", Id));
-
-            UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-            post.setEntity(ent);
-
-            HttpResponse response = client.execute(post);
-            BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-
-            String line = null;
-            while ((line = bufreader.readLine()) != null) {
-                result_profile += line;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        parsedData_Profile = jsonParserList_UserInfo(result_profile);
-        MyTeam = parsedData_Profile[0][6];
-        Phone = parsedData_Profile[0][12];
-        Name = parsedData_Profile[0][2];
+        trophy.projetc2.Http.HttpClient http_profile = new trophy.projetc2.Http.HttpClient();
+        String result = http_profile.HttpClient("Trophy_part1","Contest_Detail_Form_Profile.jsp",Pk);
+        parsedData_Profile = jsonParserList_UserInfo(result);
+        MyTeam = parsedData_Profile[0][1];
+        Phone = parsedData_Profile[0][2];
+        Name = parsedData_Profile[0][0];
         Contest_Detail_Form_Button_TeamName.setText(MyTeam);
         Contest_Detail_Form_Button_TeamLeader.setText(Name);
         Contest_Detail_Form_Button_TeamPhone.setText(Phone);
 
-        String result_Player="";
-        try {
-            HttpClient client = new DefaultHttpClient();
-            String postURL = "http://210.122.7.193:8080/Web_basket/Contest_Detail_Fomr_Player.jsp";
-            HttpPost post = new HttpPost(postURL);
+        trophy.projetc2.Http.HttpClient http_player = new trophy.projetc2.Http.HttpClient();
+        String result1 = http_player.HttpClient("Trophy_part1","Contest_Detail_Form_Player.jsp",MyTeam);
+        parsedData_Player = jsonParserList_Player(result1);
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("TeamName", MyTeam));
-
-            UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-            post.setEntity(ent);
-
-            HttpResponse response = client.execute(post);
-            BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-
-            String line = null;
-            while ((line = bufreader.readLine()) != null) {
-                result_Player += line;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        parsedData_Player = jsonParserList_Player(result_Player);
         setData_Player();
         Contest_Detail_Form_Customlist_Adapter = new Contest_Detail_Form_Customlist_Adapter(Contest_Detail_Form.this, Contest_Detail_Form_Customlist_MyData);
         //리스트뷰에 어댑터 연결
@@ -150,7 +112,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
                     JoinerCount++;
                     Contest_Detail_Form_JoinerCount.setText(Integer.toString(JoinerCount)+"명 참가");
                     view.setBackgroundColor(getResources().getColor(R.color.Red));
-                    JoinerId[i]=Contest_Detail_Form_Customlist_MyData.get(i).getId();
+                    JoinerId[i]=Contest_Detail_Form_Customlist_MyData.get(i).getPk();
                 }
                 Log.i("aa", Integer.toString(i));
             }
@@ -170,7 +132,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
 
                             List<NameValuePair> params = new ArrayList<NameValuePair>();
                             params.add(new BasicNameValuePair("TeamName", MyTeam));
-                            params.add(new BasicNameValuePair("ContestId", Pk));
+                            params.add(new BasicNameValuePair("ContestId", Contest_Pk));
                             params.add(new BasicNameValuePair("Id", JoinerId[i]));
                             UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
                             post.setEntity(ent);
@@ -222,7 +184,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7", "msg8","msg9","msg10","msg11","msg12","msg13"};
+            String[] jsonName = {"msg1", "msg2", "msg3"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);
@@ -242,7 +204,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1","msg2","msg3","msg4", "msg5", "msg6","msg7"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -282,7 +244,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
         Contest_Detail_Form_Customlist_MyData = new ArrayList<Contest_Detail_Form_Customlist_MyData>();
         for(int i =0; i<parsedData_Player.length; i++)
         {
-            Contest_Detail_Form_Customlist_MyData.add(new Contest_Detail_Form_Customlist_MyData(parsedData_Player[i][0],parsedData_Player[i][1],parsedData_Player[i][2],parsedData_Player[i][3],parsedData_Player[i][4],parsedData_Player[i][5],MyTeam,parsedData_Player[i][6]));
+            Contest_Detail_Form_Customlist_MyData.add(new Contest_Detail_Form_Customlist_MyData(parsedData_Player[i][0],parsedData_Player[i][1],parsedData_Player[i][2],parsedData_Player[i][3],parsedData_Player[i][4]));
         }
         Player = parsedData_Player.length;
     }

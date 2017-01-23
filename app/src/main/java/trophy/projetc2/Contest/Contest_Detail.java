@@ -51,7 +51,7 @@ Button layout_contest_submit;
     private LayoutInflater inflater;
     static TimerTask myTask;
     static Timer timer;
-    static String Id,Contest_Pk;
+    static String Pk,Contest_Pk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ Button layout_contest_submit;
 
         Intent intent = getIntent();
         Contest_Pk = intent.getStringExtra("Contest_Pk");
-        Id = "qwer1";
+        Pk = "1";
         String Da = " 일";
 ////다이얼로그 광고
         final View layout = inflater.inflate(R.layout.layout_customdialog_contest_ad, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Contest_AD_Root));
@@ -189,34 +189,13 @@ Button layout_contest_submit;
         layout_contest_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String result = "";
-                try {
-                    HttpClient client = new DefaultHttpClient();
-                    String postURL = "http://210.122.7.193:8080/Web_basket/Contest_Detail_Check.jsp";
-                    HttpPost post = new HttpPost(postURL);
-
-                    List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("Pk", Contest_Pk));
-                    params.add(new BasicNameValuePair("Id", Id));
-
-                    UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                    post.setEntity(ent);
-
-                    HttpResponse response = client.execute(post);
-                    BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-
-                    String line = null;
-                    while ((line = bufreader.readLine()) != null) {
-                        result += line;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                trophy.projetc2.Http.HttpClient http_check = new trophy.projetc2.Http.HttpClient();
+                String result = http_check.HttpClient("Trophy_part1","Contest_Detail_Check.jsp",Pk,Contest_Pk);
                 String[][] ParsedData_Check = jsonParserList_ContestDetail_Check(result);
                 if (ParsedData_Check[0][0].equals("succed")) {
                     Intent intent = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
-                    intent.putExtra("Id",Id);
-                    intent.putExtra("Pk",Contest_Pk);
+                    intent.putExtra("Pk",Pk);
+                    intent.putExtra("Contest_Pk",Contest_Pk);
                     startActivity(intent);
                     overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
                 }
