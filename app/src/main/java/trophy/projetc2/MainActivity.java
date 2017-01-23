@@ -2,6 +2,7 @@ package trophy.projetc2;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -41,6 +42,11 @@ import trophy.projetc2.Navigation.TeamSearch;
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
     String[][] parseredData_user;
+
+
+    SharedPreferences preferences; //캐쉬 데이터 생성
+    SharedPreferences.Editor editor; //캐쉬 데이터 에디터 생성
+
     private LayoutInflater inflater;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView Main_Navigation_ImageView_Profile = (ImageView)aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
         final TextView Main_Navigation_TextView_Name = (TextView)aa.findViewById(R.id.Main_Navigation_TextView_Name);
         final TextView Main_Navigation_TextView_Team = (TextView)aa.findViewById(R.id.Main_Navigation_TextView_Team);
+        final Button Main_Navigation_Button_SportChoice = (Button)aa.findViewById(R.id.Main_Navigation_Button_SportChoice);
         final Button Main_Navigation_Button_TeamMake = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
         final Button Main_Navigation_Button_TeamManager = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
         final Button Main_Navigation_Button_TeamSearch = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
@@ -76,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         final Button Main_Navigation_Button_Notice = (Button)aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final Button Main_Navigation_Button_Setting = (Button)aa.findViewById(R.id.Main_Navigation_Button_Setting);
+
 
         HttpClient user= new HttpClient();
         String result1 =user.HttpClient("Trophy_part1","User.jsp",Pk);
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         //프로필 관리
         try{
             String Profile1 = URLEncoder.encode(Profile, "utf-8");
+            Log.i("Profile1 : ", Profile1);
             if(Profile1.equals(".")){
                 Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
@@ -104,6 +113,39 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_TextView_Name.setText(Name);
         Main_Navigation_TextView_Team.setText(Team);
 
+        //스포츠 버튼 이미지 변경
+        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+        String sport = preferences.getString("sportType", "");
+        if (sport.equals("basketball")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball_a);
+        } else if (sport.equals("baseball")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball_a);
+        } else if (sport.equals("Coach")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.badminton_a);
+        } else if (sport.equals("balling")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.balling_a);
+        } else if (sport.equals("biking")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.biking_a);
+        } else if (sport.equals("soccer")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.soccer_a);
+        }
+
+
+
+        //스포츠 변경 버튼 이벤트
+        Main_Navigation_Button_SportChoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+                editor = preferences.edit();
+                editor.remove("sportType");
+                editor.commit();
+
+                Intent intent_SportChoice = new Intent(MainActivity.this, SportChoiceActivity.class);
+                startActivity(intent_SportChoice);
+                finish();
+            }
+        });
         //팀 만들기 이벤트
         Main_Navigation_Button_TeamMake.setOnClickListener(new View.OnClickListener() {
             @Override

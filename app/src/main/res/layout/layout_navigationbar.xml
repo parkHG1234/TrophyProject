@@ -131,7 +131,14 @@
 
             </LinearLayout>
                 </LinearLayout>
-                <Button
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/Main_Navigation_Button_SportChoice"
+            android:background="@drawable/basketball_a" />
+
+        <Button
                     android:text="팀 만들기"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -172,8 +179,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Main_Navigation_Button_Setting" />
 
-            </LinearLayout>
+    </LinearLayout>
         </ScrollView>
 
-    </LinearLayout>
+</LinearLayout>
 
