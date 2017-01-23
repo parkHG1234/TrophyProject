@@ -54,6 +54,7 @@ import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
+import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
@@ -99,106 +100,126 @@ public class MainActivity extends AppCompatActivity {
         final Button Main_Navigation_Button_Notice = (Button)aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final Button Main_Navigation_Button_Setting = (Button)aa.findViewById(R.id.Main_Navigation_Button_Setting);
+        final Button Main_Navigation_Button_Logout = (Button)aa.findViewById(R.id.Main_Navigation_Button_Logout);
 
+        if(Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
+            Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
+                    .skipMemoryCache(true)
+                    .into(Main_Navigation_ImageView_Profile);
 
-        HttpClient user= new HttpClient();
-        String result1 =user.HttpClient("Trophy_part1","User.jsp",Pk);
-        Log.i("결과",result1);
-        parseredData_user =  jsonParserList_User(result1);
-        Name = parseredData_user[0][0];
-        Team = parseredData_user[0][1];
-        Profile = parseredData_user[0][2];
-        //프로필 관리
-        try{
-            String Profile1 = URLEncoder.encode(Profile, "utf-8");
-            Log.i("Profile1 : ", Profile1);
-            if(Profile1.equals(".")){
-                Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
-                        .skipMemoryCache(true)
-                        .into(Main_Navigation_ImageView_Profile);
-            }
-            else{
-                Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+Pk+".jpg") .diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
-                        .skipMemoryCache(true)
-                        .into(Main_Navigation_ImageView_Profile);
-            }
-        }
-        catch (UnsupportedEncodingException e){
+            Main_Navigation_TextView_Name.setText("로그인을 해주세요");
+            Main_Navigation_TextView_Team.setVisibility(View.GONE);
+            Main_Navigation_Button_Logout.setVisibility(View.GONE);
 
-        }
-        Main_Navigation_TextView_Name.setText(Name);
-        Main_Navigation_TextView_Team.setText(Team);
-
-        Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Profile.equals(".")) {
-                    HttpClient user = new HttpClient();
-                    String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, Pk);
-                    Profile = "exist";
-                    //사진 읽어오기위한 uri 작성하기.
-                    Uri uri = Uri.parse("content://media/external/images/media");
-                    //무언가 보여달라는 암시적 인텐트 객체 생성하기.
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    //인텐트에 요청을 덛붙인다.
-                    intent.setAction(Intent.ACTION_PICK);
-                    //모든 이미지
-                    intent.setType("image/*");
-                    //결과값을 받아오는 액티비티를 실행한다.
-                    startActivityForResult(intent, 0);
-                } else {
-                    LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    View layout = inflater.inflate(R.layout.layout_customdialog_album, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_Album_Root));
-                    final Button Layout_CustomDialog_Album_BasicImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_BasicImage);
-                    final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
-                    final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
-                    final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
-                    aDialog.setTitle("이미지 변경");
-                    aDialog.setView(layout);
-                    final AlertDialog ad = aDialog.create();
-                    ad.show();
-                    Layout_CustomDialog_Album_Cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            ad.dismiss();
-                        }
-                    });
-                    Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
-                                    .skipMemoryCache(true)
-                                    .into(Main_Navigation_ImageView_Profile);
-                            HttpClient user = new HttpClient();
-                            user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, ".");
-//                            Main_Navigation_ImageView_Profile.setImageResource(R.drawable.profile_basic_image);
-                            ad.dismiss();
-                            Profile = ".";
-                        }
-                    });
-                    Layout_CustomDialog_Album_AlbumImage.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            HttpClient user = new HttpClient();
-                            String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk,Pk);
-                            //사진 읽어오기위한 uri 작성하기.
-                            Uri uri = Uri.parse("content://media/external/images/media");
-                            //무언가 보여달라는 암시적 인텐트 객체 생성하기.
-                            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                            //인텐트에 요청을 덛붙인다.
-                            intent.setAction(Intent.ACTION_PICK);
-                            //모든 이미지
-                            intent.setType("image/*");
-                            //결과값을 받아오는 액티비티를 실행한다.
-                            startActivityForResult(intent, 0);
-                            ad.dismiss();
-                            Profile = "exist";
-                        }
-                    });
+            Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent_Login = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent_Login);
+                    finish();
+                }
+            });
+        } else { ///////////////////////////로그인시
+            HttpClient user= new HttpClient();
+            String result1 =user.HttpClient("Trophy_part1","User.jsp",Pk);
+            Log.i("결과",result1);
+            parseredData_user =  jsonParserList_User(result1);
+            Name = parseredData_user[0][0];
+            Team = parseredData_user[0][1];
+            Profile = parseredData_user[0][2];
+            //프로필 관리
+            try{
+                String Profile1 = URLEncoder.encode(Profile, "utf-8");
+                Log.i("Profile1 : ", Profile1);
+                if(Profile1.equals(".")){
+                    Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
+                            .skipMemoryCache(true)
+                            .into(Main_Navigation_ImageView_Profile);
+                }
+                else{
+                    Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+Pk+".jpg") .diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
+                            .skipMemoryCache(true)
+                            .into(Main_Navigation_ImageView_Profile);
                 }
             }
-        });
+            catch (UnsupportedEncodingException e){
+
+            }
+            Main_Navigation_TextView_Name.setText(Name);
+            Main_Navigation_TextView_Team.setText(Team);
+
+            Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Profile.equals(".")) {
+                        HttpClient user = new HttpClient();
+                        String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, Pk);
+                        Profile = "exist";
+                        //사진 읽어오기위한 uri 작성하기.
+                        Uri uri = Uri.parse("content://media/external/images/media");
+                        //무언가 보여달라는 암시적 인텐트 객체 생성하기.
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        //인텐트에 요청을 덛붙인다.
+                        intent.setAction(Intent.ACTION_PICK);
+                        //모든 이미지
+                        intent.setType("image/*");
+                        //결과값을 받아오는 액티비티를 실행한다.
+                        startActivityForResult(intent, 0);
+                    } else {
+                        LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View layout = inflater.inflate(R.layout.layout_customdialog_album, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_Album_Root));
+                        final Button Layout_CustomDialog_Album_BasicImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_BasicImage);
+                        final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
+                        final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
+                        final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
+                        aDialog.setTitle("이미지 변경");
+                        aDialog.setView(layout);
+                        final AlertDialog ad = aDialog.create();
+                        ad.show();
+                        Layout_CustomDialog_Album_Cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ad.dismiss();
+                            }
+                        });
+                        Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
+                                        .skipMemoryCache(true)
+                                        .into(Main_Navigation_ImageView_Profile);
+                                HttpClient user = new HttpClient();
+                                user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, ".");
+//                            Main_Navigation_ImageView_Profile.setImageResource(R.drawable.profile_basic_image);
+                                ad.dismiss();
+                                Profile = ".";
+                            }
+                        });
+                        Layout_CustomDialog_Album_AlbumImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                HttpClient user = new HttpClient();
+                                String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk,Pk);
+                                //사진 읽어오기위한 uri 작성하기.
+                                Uri uri = Uri.parse("content://media/external/images/media");
+                                //무언가 보여달라는 암시적 인텐트 객체 생성하기.
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                //인텐트에 요청을 덛붙인다.
+                                intent.setAction(Intent.ACTION_PICK);
+                                //모든 이미지
+                                intent.setType("image/*");
+                                //결과값을 받아오는 액티비티를 실행한다.
+                                startActivityForResult(intent, 0);
+                                ad.dismiss();
+                                Profile = "exist";
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
         //스포츠 버튼 이미지 변경
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         String sport = preferences.getString("sportType", "");
@@ -279,6 +300,20 @@ public class MainActivity extends AppCompatActivity {
                 intent_TeamSearch.putExtra("TeamName", Team);
                 startActivity(intent_TeamSearch);
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+            }
+        });
+        //로그아웃
+        Main_Navigation_Button_Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+                editor = preferences.edit();
+
+                editor.putString("Pk", ".");
+                editor.commit();
+
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                finish();
             }
         });
         /////////////////////////////////////////////
