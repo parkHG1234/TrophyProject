@@ -109,15 +109,12 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
-
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Log.i("Pk",arrData.get(position).getContest_Pk());
                     Intent intent = new Intent(context, Contest_Detail.class);
-                    intent.putExtra("position", arrData.get(position).getContest_Pk());
+                    intent.putExtra("Contest_Pk", arrData.get(position).getContest_Pk());
                     context.startActivity(intent);
                 }
             });

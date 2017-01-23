@@ -179,6 +179,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/Main_Navigation_Button_Setting" />
 
+        <Button
+            android:text="로그아웃"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Main_Navigation_Button_Logout" />
+
     </LinearLayout>
         </ScrollView>
 

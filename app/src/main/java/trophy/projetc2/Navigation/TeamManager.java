@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import devlight.io.library.ntb.NavigationTabBar;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Navigation.TeamManager_PlayerManager.timer;
+
 /**
  * Created by 박효근 on 2017-01-10.
  */
@@ -157,5 +159,11 @@ public class TeamManager extends AppCompatActivity {
             return null;
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        timer.cancel();
+        finish();
+        super.onBackPressed();
     }
 }
