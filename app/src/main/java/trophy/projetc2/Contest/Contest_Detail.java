@@ -51,7 +51,7 @@ Button layout_contest_submit;
     private LayoutInflater inflater;
     static TimerTask myTask;
     static Timer timer;
-    static String Id,Pk;
+    static String Id,Contest_Pk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +64,7 @@ Button layout_contest_submit;
         StrictMode.setThreadPolicy(policy);
 
         Intent intent = getIntent();
-        Pk = intent.getStringExtra("position");
+        Contest_Pk = intent.getStringExtra("Contest_Pk");
         Id = "qwer1";
         String Da = " 일";
 ////다이얼로그 광고
@@ -130,7 +130,7 @@ Button layout_contest_submit;
             HttpPost post = new HttpPost(postURL);
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("Pk", Pk));
+            params.add(new BasicNameValuePair("Pk", Contest_Pk));
 
             UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
             post.setEntity(ent);
@@ -196,7 +196,7 @@ Button layout_contest_submit;
                     HttpPost post = new HttpPost(postURL);
 
                     List<NameValuePair> params = new ArrayList<NameValuePair>();
-                    params.add(new BasicNameValuePair("Pk", Pk));
+                    params.add(new BasicNameValuePair("Pk", Contest_Pk));
                     params.add(new BasicNameValuePair("Id", Id));
 
                     UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
@@ -216,7 +216,7 @@ Button layout_contest_submit;
                 if (ParsedData_Check[0][0].equals("succed")) {
                     Intent intent = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
                     intent.putExtra("Id",Id);
-                    intent.putExtra("Pk",Pk);
+                    intent.putExtra("Pk",Contest_Pk);
                     startActivity(intent);
                     overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
                 }

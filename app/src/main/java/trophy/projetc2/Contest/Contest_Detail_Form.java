@@ -98,7 +98,6 @@ public class Contest_Detail_Form extends AppCompatActivity {
         Contest_Detail_Form_Button_TeamLeader.setText(Name);
         Contest_Detail_Form_Button_TeamPhone.setText(Phone);
 
-
         String result_Player="";
         try {
             HttpClient client = new DefaultHttpClient();
