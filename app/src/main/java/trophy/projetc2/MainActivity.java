@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         //유저 네비게이션바
         HttpClient a= new HttpClient();
         Log.i("결과",a.HttpClient("Web_basket","NaviTeamInfo_Player.jsp","park123"));
-        Pk="1";
+        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+        Pk = preferences.getString("Pk", ".");
         //네비게이션 메뉴 선언 및 연결
         final View aa = navigationView.inflateHeaderView(R.layout.layout_navigationbar);
         Main_Navigation_ImageView_Profile = (ImageView)aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
