@@ -1,5 +1,7 @@
 package trophy.projetc2.Contest;
 
+import android.app.Activity;
+
 /**
  * Created by KimIkJoong on 2016-11-08.
  */
@@ -18,8 +20,8 @@ public class Contests_Customlist_MyData {
     String RecruitStartDate;
     String RecruitFinishDate;
     String DetailInfo;
-
-    public Contests_Customlist_MyData(String contest_Pk, String contest_Title, String contest_Image, String contest_currentNum, String contest_maxNum, String contest_Payment, String contest_Host, String contest_Management, String support, String contestDate, String recruitStartDate, String recruitFinishDate, String detailInfo) {
+    Activity Activity;
+    public Contests_Customlist_MyData(String contest_Pk, String contest_Title, String contest_Image, String contest_currentNum, String contest_maxNum, String contest_Payment, String contest_Host, String contest_Management, String support, String contestDate, String recruitStartDate, String recruitFinishDate, String detailInfo,Activity activity) {
         Contest_Pk = contest_Pk;
         Contest_Title = contest_Title;
         Contest_Image = contest_Image;
@@ -33,8 +35,11 @@ public class Contests_Customlist_MyData {
         RecruitStartDate = recruitStartDate;
         RecruitFinishDate = recruitFinishDate;
         DetailInfo = detailInfo;
+        Activity = activity;
     }
-
+    public Activity getActivity(){
+        return Activity;
+    }
     public String getContest_Pk() {
         return Contest_Pk;
     }

@@ -197,6 +197,7 @@ public class Contest_Detail extends AppCompatActivity {
                 if (Pk.equals("") || Pk.equals(".")) {
                     Intent intent_login = new Intent(Contest_Detail.this, Login.class);
                     startActivity(intent_login);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
                 else {
                     trophy.projetc2.Http.HttpClient http_check = new trophy.projetc2.Http.HttpClient();
@@ -207,7 +208,7 @@ public class Contest_Detail extends AppCompatActivity {
                         intent.putExtra("Pk",Pk);
                         intent.putExtra("Contest_Pk",Contest_Pk);
                         startActivity(intent);
-                        overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                     }
                     else if (ParsedData_Check[0][0].equals("already")) {
                         Snackbar.make(view,"이미 신청중입니다.", Snackbar.LENGTH_SHORT).show();
@@ -260,5 +261,12 @@ public class Contest_Detail extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+        super.onBackPressed();
     }
 }

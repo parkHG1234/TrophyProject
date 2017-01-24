@@ -58,7 +58,7 @@ import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
-    String[][] parseredData_user;
+    String[][] parseredData_user, parseredData_teammake;
 
 
     SharedPreferences preferences; //캐쉬 데이터 생성
@@ -258,10 +258,18 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_TeamMake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_TeamMake = new Intent(MainActivity.this, TeamMake.class);
-                intent_TeamMake.putExtra("Pk", Pk);
-                startActivity(intent_TeamMake);
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+                HttpClient http_teammake= new HttpClient();
+                String result1 =http_teammake.HttpClient("Trophy_part1","TeamMake_Check.jsp",Pk);
+                parseredData_teammake =  jsonParserList_TeamMake(result1);
+                if(parseredData_teammake[0][0].equals("succed")){
+                    Intent intent_TeamMake = new Intent(MainActivity.this, TeamMake.class);
+                    intent_TeamMake.putExtra("Pk", Pk);
+                    startActivity(intent_TeamMake);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
+                else if(parseredData_teammake[0][0].equals("already")){
+                    Snackbar.make(view, "팀에 이미 가입 중 입니다.",Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
         Main_Navigation_Button_TeamSearch.setOnClickListener(new View.OnClickListener() {
@@ -270,7 +278,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_TeamSearch = new Intent(MainActivity.this, TeamSearch.class);
                 intent_TeamSearch.putExtra("Pk", Pk);
                 startActivity(intent_TeamSearch);
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         Main_Navigation_Button_LastContest.setOnClickListener(new View.OnClickListener() {
@@ -278,29 +286,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent_LastContest = new Intent(MainActivity.this, Last_Contest.class);
                 startActivity(intent_LastContest);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                final View layout = inflater.inflate(R.layout.layout_customdialog_navigation_teammanager, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager));
-//                final LinearLayout ContestJoin = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_ContestJoin);
-//                final LinearLayout PlayerManager = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_PlayerManager);
-//                final LinearLayout TeamIntroduce = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_Navigation_TeamManager_Teamintroduce);
-//                final MaterialDialog DutyDialog = new MaterialDialog(MainActivity.this);
-//                DutyDialog
-//                        .setNegativeButton("취소", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                DutyDialog.dismiss();
-//                            }
-//                        })
-//                        .setContentView(layout);
-//                DutyDialog.show();
                 Intent intent_TeamSearch = new Intent(MainActivity.this, TeamManager.class);
                 intent_TeamSearch.putExtra("TeamName", Team);
                 startActivity(intent_TeamSearch);
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         //로그아웃
@@ -329,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
             Contests_Customlist_MyData.add(new Contests_Customlist_MyData(ContestsParsedList[i][0], ContestsParsedList[i][1],
                     ContestsParsedList[i][2], ContestsParsedList[i][3], ContestsParsedList[i][4], ContestsParsedList[i][5],
                     ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i][8], ContestsParsedList[i][9],
-                    ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12]));
+                    ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12],this));
         }
         Contests_Customlist_Adapter Adapter = new Contests_Customlist_Adapter(this, Contests_Customlist_MyData);
         listView.setAdapter(Adapter);
@@ -379,7 +374,25 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+    public String[][] jsonParserList_TeamMake(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
