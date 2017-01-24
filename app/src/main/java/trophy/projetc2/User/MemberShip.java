@@ -273,6 +273,7 @@ public class MemberShip extends AppCompatActivity {
             }
         });
 
+
         MemberShip_Spinner_Do.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -377,19 +378,10 @@ public class MemberShip extends AppCompatActivity {
 
                 Address_Do = MemberShip_Spinner_Do.getSelectedItem().toString();
                 Address_Si = MemberShip_Spinner_Si.getSelectedItem().toString();
-                Log.i("Name_flag",Boolean.toString(Name_flag));
-                Log.i("Password_flag",Boolean.toString(Password_flag));
-                Log.i("Password_Confirm_flag",Boolean.toString(Password_Confirm_flag));
-                Log.i("Year_flag",Boolean.toString(Year_flag));
-                Log.i("Month_flag",Boolean.toString(Month_flag));
-                Log.i("Day_flag",Boolean.toString(Day_flag));
-                Log.i("Sex_flag",Boolean.toString(Sex_flag));
-                Log.i("Phone_flag",Boolean.toString(Phone_flag));
-                Log.i("Phone_Confirm_flag",Boolean.toString(Phone_Confirm_flag));
                 if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex != null && Phone_flag && Phone_Confirm_flag) {
                     String Birth = Year + " / " + Month + " / " + Day;
                     HttpClient user = new HttpClient();
-                    user.HttpClient("Trophy_part2", "MemberShip.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
+                    user.HttpClient("Trophy_part3", "MemberShip.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
                     finish();
                 } else {
                     Snackbar.make(getCurrentFocus(), "입력하신정보를확인해주세요", Snackbar.LENGTH_SHORT).show();

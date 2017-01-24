@@ -97,17 +97,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
 
-                <TextView
-                    android:text="회원정보 수정"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/Main_Navigation_TextView_Modify"
-                    android:textColor="@color/Black"
+                <Button
+                    android:text="개인정보변경"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Main_Navigation_Button_Change_PersonalInfo"
                     android:layout_weight="1"
+                    android:background="@color/White"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="17dp"/>
-
+                    android:paddingLeft="20dp" />
             </LinearLayout>
             <Button
                 android:layout_width="match_parent"

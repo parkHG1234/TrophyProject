@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/DarkGray">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="비밀번호 변경"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:background="@color/White"
+            android:textSize="20sp"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="현재 비밀번호를 입력해 주세요"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8"
+            android:background="@color/White"
+            android:textSize="15sp"
+            android:textColor="@color/BlackGray"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/edt_confromPw"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <Button
+            android:text="확인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_confirmPw"
+            android:background="@color/Gray"
+            android:textColor="@color/White"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+</LinearLayout>

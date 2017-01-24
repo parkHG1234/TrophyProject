@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -54,6 +55,7 @@ import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
+import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
@@ -102,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final Button Main_Navigation_Button_Setting = (Button)aa.findViewById(R.id.Main_Navigation_Button_Setting);
         final Button Main_Navigation_Button_Logout = (Button)aa.findViewById(R.id.Main_Navigation_Button_Logout);
+        final Button Main_Navigation_Button_Change_PersonalInfo = (Button)aa.findViewById(R.id.Main_Navigation_Button_Change_PersonalInfo);
 
         if(Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
@@ -220,6 +223,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        // 개인정보 수정
+        Main_Navigation_Button_Change_PersonalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ChangePersonalInfoActivity.class));
+            }
+        });
+
 
         //스포츠 버튼 이미지 변경
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);

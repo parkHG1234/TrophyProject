@@ -26,6 +26,10 @@
         <activity android:name=".Navigation.TeamManager"></activity>
         <activity android:name=".Contest.Contest_Detail"></activity>
         <activity android:name=".Contest.Contest_Detail_Form"></activity>
+        <activity android:name=".User.ChangePersonalInfoActivity"></activity>
+        <activity android:name=".User.MemberShip"></activity>
+        <activity android:name=".User.ChangePw1Activity"></activity>
+        <activity android:name=".User.ChangePw2Activity"></activity>
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
