@@ -44,7 +44,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
     static int Player=0;
     static int JoinerCount=0;
     static String[] JoinerId;
-    String[][] parsedData_Profile,parsedData_Player,parsedData_Joiner;
+    String[][] parsedData_Profile,parsedData_Player,parsedData_Join_Team;
     Button Contest_Detail_Form_Button_TeamName;
     Button Contest_Detail_Form_Button_TeamLeader;
     Button Contest_Detail_Form_Button_TeamPhone;
@@ -124,32 +124,15 @@ public class Contest_Detail_Form extends AppCompatActivity {
                 for(int i = 0;i<Player;i++){
                     Log.i("qwe1",JoinerId[i]);
                     if(!JoinerId[i].equals("false")){
-                        String result="";
-                        try {
-                            HttpClient client = new DefaultHttpClient();
-                            String postURL = "http://210.122.7.193:8080/Web_basket/Contest_Detail_Form_Joiner.jsp";
-                            HttpPost post = new HttpPost(postURL);
-
-                            List<NameValuePair> params = new ArrayList<NameValuePair>();
-                            params.add(new BasicNameValuePair("TeamName", MyTeam));
-                            params.add(new BasicNameValuePair("ContestId", Contest_Pk));
-                            params.add(new BasicNameValuePair("Id", JoinerId[i]));
-                            UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
-                            post.setEntity(ent);
-
-                            HttpResponse response = client.execute(post);
-                            BufferedReader bufreader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "utf-8"));
-
-                            String line = null;
-                            while ((line = bufreader.readLine()) != null) {
-                                result += line;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        trophy.projetc2.Http.HttpClient http_form_joiner = new trophy.projetc2.Http.HttpClient();
+                        http_form_joiner.HttpClient("Trophy_part1","Contest_Detail_Form_Join.jsp",JoinerId[i],Contest_Pk);
                     }
                 }
-                final MaterialDialog recommendDialog = new MaterialDialog(Contest_Detail_Form.this);
+                trophy.projetc2.Http.HttpClient http_form_join_team = new trophy.projetc2.Http.HttpClient();
+                String result1 = http_form_join_team.HttpClient("Trophy_part1","Contest_Detail_Form_Join_Team.jsp",Contest_Pk,MyTeam);
+                parsedData_Join_Team = jsonParserList_Join_Team(result1);
+                if(parsedData_Join_Team[0][0].equals("succed")){
+                    final MaterialDialog recommendDialog = new MaterialDialog(Contest_Detail_Form.this);
                     recommendDialog
                             .setTitle("참가신청서")
                             .setMessage("참가신청이 완료되었습니다.")
@@ -161,19 +144,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
                                 }
                             });
                     recommendDialog.show();
-//                if(parsedData_Joiner[0][0].equals("succed")){
-//                    final MaterialDialog recommendDialog = new MaterialDialog(Contest_Detail_Form.this);
-//                    recommendDialog
-//                            .setTitle("참가신청서")
-//                            .setMessage("참가신청이 완료되었습니다.")
-//                            .setPositiveButton("확인", new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    recommendDialog.dismiss();
-//                                }
-//                            });
-//                    recommendDialog.show();
-//                }
+                }
             }
         });
     }
@@ -218,7 +189,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
             return null;
         }
     }
-    public String[][] jsonParserList_Joiner(String pRecvServerPage) {
+    public String[][] jsonParserList_Join_Team(String pRecvServerPage) {
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
