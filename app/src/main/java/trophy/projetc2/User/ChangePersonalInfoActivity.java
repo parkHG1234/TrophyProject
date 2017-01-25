@@ -25,7 +25,7 @@ import trophy.projetc2.R;
 
 public class ChangePersonalInfoActivity extends AppCompatActivity {
     TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone;
-    Button btn_change_area, btn_change_phone, btn_change_pw;
+    Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal;
     SharedPreferences preferences;
     String Pk;
 
@@ -56,6 +56,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         btn_change_area = (Button) findViewById(R.id.btn_change_area);
         btn_change_pw = (Button) findViewById(R.id.btn_change_pw);
         btn_change_phone = (Button) findViewById(R.id.btn_change_phone);
+        btn_withdrawal = (Button) findViewById(R.id.btn_withdrawal);
 
 
 
@@ -86,6 +87,13 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 Intent changePw_intent = new Intent(ChangePersonalInfoActivity.this, ChangePw1Activity.class);
                 changePw_intent.putExtra("Pw", parsedData[0][6]);
                 startActivity(changePw_intent);
+            }
+        });
+
+        btn_withdrawal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChangePersonalInfoActivity.this, Withdrawal.class));
             }
         });
 
