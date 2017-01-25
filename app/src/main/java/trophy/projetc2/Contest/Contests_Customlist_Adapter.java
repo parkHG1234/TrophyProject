@@ -1,5 +1,6 @@
 package trophy.projetc2.Contest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -18,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
 
 import static java.lang.System.out;
@@ -116,6 +118,7 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
                     Intent intent = new Intent(context, Contest_Detail.class);
                     intent.putExtra("Contest_Pk", arrData.get(position).getContest_Pk());
                     context.startActivity(intent);
+                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
             });
         }

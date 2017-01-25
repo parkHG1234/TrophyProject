@@ -6,45 +6,29 @@ package trophy.projetc2.Contest;
 
 public class Contest_Detail_Form_Customlist_MyData {
     private String Name;
-    private String Duty;
-    private String Profile;
     private String Birth;
-    private String Sex;
-    private String Position;
-    private String TeamName;
-    private String Id;
-
-    public Contest_Detail_Form_Customlist_MyData(String Duty, String Name, String Profile, String Birth, String Sex, String Position, String TeamName, String Id){
+    private String Profile;
+    private String Pk;
+    private String Duty;
+    public Contest_Detail_Form_Customlist_MyData(String Name, String Birth, String Profile, String Pk,String Duty){
         this.Name = Name;
-        this.Duty = Duty;
         this.Profile = Profile;
         this.Birth = Birth;
-        this.Sex = Sex;
-        this.Position = Position;
-        this.TeamName = TeamName;
-        this.Id = Id;
+        this.Pk = Pk;
+        this.Duty = Duty;
     }
     public String getName() {
         return Name;
-    }
-    public String getDuty() {
-        return Duty;
     }
     public String getProfile(){return Profile;}
     public String getBirth(){
         return Birth;
     }
-    public String getSex(){
-        return Sex;
+    public String getPk() {
+        return Pk;
     }
-    public String getPosition(){
-        return Position;
-    }
-    public String getTeamName(){
-        return TeamName;
-    }
-    public String getId() {
-        return Id;
+    public String getDuty(){
+        return Duty;
     }
 
 }
