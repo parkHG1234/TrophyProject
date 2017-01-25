@@ -26,6 +26,7 @@
         <activity android:name=".Navigation.TeamManager"></activity>
         <activity android:name=".Contest.Contest_Detail"></activity>
         <activity android:name=".Contest.Contest_Detail_Form"></activity>
+        <activity android:name=".Navigation.Last_Contest_ViewPager"></activity>
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>

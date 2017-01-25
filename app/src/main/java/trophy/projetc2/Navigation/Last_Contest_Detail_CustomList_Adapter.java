@@ -1,6 +1,7 @@
 package trophy.projetc2.Navigation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
 
 /**
@@ -30,6 +32,9 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
     private ImageView Layout_Last_Contest_detail_ImageView_first;
     private ImageView Layout_Last_Contest_detail_ImageView_second;
     private ImageView Layout_Last_Contest_detail_ImageView_third;
+    private String Image;
+    static int cnt;
+    private String[] Images;
 
     public Last_Contest_Detail_CustomList_Adapter(Context c, ArrayList<Last_Contest_Detail_CustomList_MyData> arr) {
         this.context = c;
@@ -56,11 +61,12 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
         Layout_Last_Contest_detail_ImageView_first = (ImageView) convertView.findViewById(R.id.Layout_Last_Contest_detail_ImageView_first);
         Layout_Last_Contest_detail_ImageView_second = (ImageView) convertView.findViewById(R.id.Layout_Last_Contest_detail_ImageView_second);
         Layout_Last_Contest_detail_ImageView_third = (ImageView) convertView.findViewById(R.id.Layout_Last_Contest_detail_ImageView_third);
+
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getImage(), "utf-8");
-            String Image = arrData.get(position).getImage().toString();
-            int cnt = Integer.parseInt(arrData.get(position).getCnt().toString());
-            String[] Images = Image.split("/");
+            Image = arrData.get(position).getImage().toString();
+            cnt = Integer.parseInt(arrData.get(position).getCnt().toString());
+            Images = Image.split("/");
                     if (Images[cnt].equals(".")) {
                         Glide.with(context).load(R.drawable.emblem)
                                 .into(Layout_Last_Contest_detail_ImageView_first);
@@ -89,7 +95,36 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
                                 .into(Layout_Last_Contest_detail_ImageView_third);
                     }
 
-
+            Layout_Last_Contest_detail_ImageView_first.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
+                    intent_Last_Contest_ViewPager.putExtra("Images", Image);
+                    intent_Last_Contest_ViewPager.putExtra("Num", "0");
+                    intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
+                    context.startActivity(intent_Last_Contest_ViewPager);
+                }
+            });
+            Layout_Last_Contest_detail_ImageView_second.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
+                    intent_Last_Contest_ViewPager.putExtra("Images", Image);
+                    intent_Last_Contest_ViewPager.putExtra("Num", "1");
+                    intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
+                    context.startActivity(intent_Last_Contest_ViewPager);
+                }
+            });
+            Layout_Last_Contest_detail_ImageView_third.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
+                    intent_Last_Contest_ViewPager.putExtra("Images", Image);
+                    intent_Last_Contest_ViewPager.putExtra("Num", "2");
+                    intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
+                    context.startActivity(intent_Last_Contest_ViewPager);
+                }
+            });
         } catch (UnsupportedEncodingException e) {
 
         }

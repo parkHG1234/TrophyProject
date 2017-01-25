@@ -458,8 +458,6 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Log.d("Test", "exception " + e.getMessage());
-//            Snackbar.make(rootView, "업로드중 에러발생!.", Snackbar.LENGTH_SHORT).show();
-
         }
     }
 

@@ -23,19 +23,21 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:design:24.0+'
-    testCompile 'junit:junit:4.12'
     ///httpClient 라이브러리
-    provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     ///glide 라이브러리
+    //material
+    //color
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'jp.wasabeef:glide-transformations:1.0.6@aar'
-    //material
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.wdullaer:materialdatetimepicker:2.3.0'
     compile 'me.drakeet.materialdialog:library:1.3.1'
-    //color
     compile 'org.xdty.preference:color-picker:0.0.4'
     compile 'devlight.io:navigationtabbar:1.2.5'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+    provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }
