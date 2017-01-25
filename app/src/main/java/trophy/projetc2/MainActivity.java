@@ -231,9 +231,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Pk.equals(".")) {
-
+                    Snackbar.make(view, "로그인을 해주세요", Snackbar.LENGTH_LONG)
+                            .show();
                 }else {
-                    startActivity(new Intent(MainActivity.this, ChangePersonalInfoActivity.class));
+                    Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
+                    intent.putExtra("TeamName", Team);
+                    startActivity(intent);
                 }
             }
         });

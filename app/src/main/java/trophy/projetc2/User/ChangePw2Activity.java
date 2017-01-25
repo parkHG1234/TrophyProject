@@ -1,9 +1,11 @@
 package trophy.projetc2.User;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,8 @@ import org.json.JSONObject;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+
+import static trophy.projetc2.User.ChangePersonalInfoActivity.view;
 
 /**
  * Created by ldong on 2017-01-24.
@@ -52,8 +56,21 @@ public class ChangePw2Activity extends AppCompatActivity {
                     String result = changePw.HttpClient("Trophy_part3", "Change_Password.jsp", pw1, preferences.getString("Pk", "."));
 
                     if(jsonParserListgetChangePwIsOk(result)[0][0].equals("isOk")) {
-                        //추후 다이얼로그 넣기
-                        finish();
+                        AlertDialog.Builder alert = new AlertDialog.Builder(ChangePw2Activity.this);
+                        alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(ChangePw2Activity.this, ChangePersonalInfoActivity.class);
+                                finish();
+                                ChangePersonalInfoActivity CA = (ChangePersonalInfoActivity) ChangePersonalInfoActivity.activity;
+                                CA.finish();
+                                startActivity(intent);
+                                dialog.dismiss();     //닫기
+                            }
+                        });
+                        alert.setMessage("비밀번호가 변경되었습니다");
+                        alert.show();
+
                     }
                 }else {
                     Snackbar.make(v , "정확한 비밀번호를 입력해 주세요.", Snackbar.LENGTH_LONG)
