@@ -1,5 +1,7 @@
 package trophy.projetc2.User;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -15,7 +17,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+import trophy.projetc2.SportChoiceActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
 /**
  * Created by ldong on 2017-01-25.
@@ -25,6 +32,7 @@ public class Withdrawal extends AppCompatActivity {
     Button btn_goTeamManage, btn_commit_withdrawal;
     CheckBox chk_withdraw_agreement;
     SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     String Pk;
 
     @Override
@@ -58,6 +66,17 @@ public class Withdrawal extends AppCompatActivity {
                         String[][] parsedData1 = jsonParserListWithdrawal(result1);
                         if (parsedData1[0][0].equals("true")) { //회원탈퇴 완료
                             //다이얼로그로 회원탈퇴 완료 표시후 캐시 삭제
+                            preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+
+                            editor = preferences.edit();
+                            editor.clear();
+                            editor.commit();
+                            startActivity(new Intent(Withdrawal.this, SportChoiceActivity.class));
+                            MainActivity MA = (MainActivity) MainActivity.activity;
+                            ChangePersonalInfoActivity CA = (ChangePersonalInfoActivity) ChangePersonalInfoActivity.activity;
+                            MA.finish();
+                            CA.finish();
+                            finish();
                         } else { //회원탈퇴 실패
                             Snackbar.make(v, "다시 시도해 주세요", Snackbar.LENGTH_LONG)
                                     .show();
