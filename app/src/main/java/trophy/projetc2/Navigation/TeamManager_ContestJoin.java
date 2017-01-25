@@ -38,7 +38,7 @@ public class TeamManager_ContestJoin extends Fragment {
         TeamManager_ContestJoin_Customlist_MyData = new ArrayList<TeamManager_ContestJoin_Customlist_MyData>();
         for (int i = 0; i < ContestJoin.length; i++) {
             TeamManager_ContestJoin_Customlist_MyData.add(new TeamManager_ContestJoin_Customlist_MyData(ContestJoin[i][0], ContestJoin[i][1],
-                    ContestJoin[i][2], ContestJoin[i][3]));
+                    ContestJoin[i][2], ContestJoin[i][3],ContestJoin[i][4],ContestJoin[i][5],getActivity()));
         }
         TeamManager_ContestJoin_Customlist_MyAdapter Adapter = new TeamManager_ContestJoin_Customlist_MyAdapter(getContext(), TeamManager_ContestJoin_Customlist_MyData);
         Layout_Navigation_TeamManager_ContestJoin_ListView.setAdapter(Adapter);
@@ -50,7 +50,7 @@ public class TeamManager_ContestJoin extends Fragment {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1", "msg2", "msg3", "msg4"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4","msg5","msg6"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
