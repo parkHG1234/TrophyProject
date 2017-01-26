@@ -35,6 +35,7 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
     private String Image;
     static int cnt;
     private String[] Images;
+    int i=0;
 
     public Last_Contest_Detail_CustomList_Adapter(Context c, ArrayList<Last_Contest_Detail_CustomList_MyData> arr) {
         this.context = c;
@@ -94,14 +95,15 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
                                 .skipMemoryCache(true)
                                 .into(Layout_Last_Contest_detail_ImageView_third);
                     }
-
             Layout_Last_Contest_detail_ImageView_first.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
                     intent_Last_Contest_ViewPager.putExtra("Images", Image);
                     intent_Last_Contest_ViewPager.putExtra("Num", "0");
+                    intent_Last_Contest_ViewPager.putExtra("Pk", arrData.get(position).getPk());
                     intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
+
                     context.startActivity(intent_Last_Contest_ViewPager);
                 }
             });
@@ -111,6 +113,7 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
                     Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
                     intent_Last_Contest_ViewPager.putExtra("Images", Image);
                     intent_Last_Contest_ViewPager.putExtra("Num", "1");
+                    intent_Last_Contest_ViewPager.putExtra("Pk", arrData.get(position).getPk());
                     intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
                     context.startActivity(intent_Last_Contest_ViewPager);
                 }
@@ -121,6 +124,7 @@ public class Last_Contest_Detail_CustomList_Adapter extends BaseAdapter {
                     Intent intent_Last_Contest_ViewPager = new Intent(context, Last_Contest_ViewPager.class);
                     intent_Last_Contest_ViewPager.putExtra("Images", Image);
                     intent_Last_Contest_ViewPager.putExtra("Num", "2");
+                    intent_Last_Contest_ViewPager.putExtra("Pk", arrData.get(position).getPk());
                     intent_Last_Contest_ViewPager.putExtra("Line", String.valueOf(Integer.parseInt(arrData.get(position).getCnt().toString())/3));
                     context.startActivity(intent_Last_Contest_ViewPager);
                 }
