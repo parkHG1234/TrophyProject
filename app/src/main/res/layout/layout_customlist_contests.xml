@@ -6,56 +6,73 @@
     android:weightSum="1">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:weightSum="1"
-        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:background="@color/White">
+        android:layout_weight="1"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/BlackGray">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
             android:scaleType="fitXY"
             android:id="@+id/Contest_logoImage"
-            app:srcCompat="@drawable/contest_example" />
-
-        <TextView
-            android:text="대회명 : "
-            android:textColor="@color/Black"
-            android:textSize="17dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contest_title" />
-
-        <TextView
-            android:text="대회일시 : "
-            android:textColor="@color/Black"
-            android:textSize="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contest_date" />
+            app:srcCompat="@drawable/contest_example"
+            android:layout_margin="1dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_gravity="right"
-            android:layout_weight="0.10">
+            android:weightSum="1"
+            android:background="@color/White"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="대회명 : "
+                android:textColor="@color/Black"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/contest_title"
+                android:layout_margin="2dp" />
+
+            <TextView
+                android:text="대회일시 : "
+                android:textColor="@color/Black"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/contest_date"
+                android:layout_margin="2dp"
+                android:elevation="1dp" />
+
+            <TextView
+                android:text="대회장소"
+                android:textColor="@color/Black"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:id="@+id/Contest_place"
+                android:layout_margin="2dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:elevation="1dp">
+                android:background="@color/soso"
+                android:layout_height="30dp"
+                android:gravity="center_vertical|fill_horizontal"
+                android:padding="2dp">
 
                 <TextView
                     android:text="마감"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
                     android:textColor="#3f51b5"
                     android:id="@+id/contest_list_remainder1" />
 
@@ -73,38 +90,22 @@
                     android:id="@+id/contest_list_remainder2"
                     android:textColor="#3f51b5" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25">
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:id="@+id/imageView9"
-                    android:layout_weight="1"
                     app:srcCompat="@drawable/ic_account_circle_black_36px" />
 
                 <TextView
                     android:text="현재인원/모집인원"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
                     android:gravity="center_horizontal"
                     android:id="@+id/contest_num"
-                    android:textColor="@color/Black"/>
+                    android:textColor="@color/Black" />
 
             </LinearLayout>
-
         </LinearLayout>
-        <Button
-            android:layout_width="match_parent"
-            android:background="@color/Gray"
-            android:layout_height="3dp"
-            android:layout_margin="1dp" />
     </LinearLayout>
 
 </LinearLayout>

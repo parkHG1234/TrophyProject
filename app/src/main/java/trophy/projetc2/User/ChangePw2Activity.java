@@ -17,7 +17,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+
+import static trophy.projetc2.User.ChangePersonalInfoActivity.view;
 
 /**
  * Created by ldong on 2017-01-24.

@@ -3,6 +3,7 @@ package trophy.projetc2.Navigation;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,9 @@ import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
+import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_player;
+
 /**
  * Created by 박효근 on 2017-01-23.
  */
@@ -38,7 +42,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
     private LayoutInflater inflater;
     ImageView FirstProfile, SecondProfile, ThirdProfile;
     TextView FirstName, SecondName, ThirdName;
-    String[][] parsedData_Player_Focus,parsedData_Joiner_Refuse;
+    String[][] parsedData_Player_Focus,parsedData_Joiner_Refuse,parsedData_Player_Out,parsedData_ChangeRepresent;
     String ProfileUrl;
     public TeamManager_PlayerManager_Customlist_MyAdapter_Player(Context c, ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player> arr) {
         this.context = c;
@@ -127,7 +131,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:01073225945"));
+                            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+parsedData_Player_Focus[0][4]));
                             context.startActivity(intent);
                         }
                     });
@@ -136,16 +140,63 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                             .setTitle("신청자 정보")
                             .setView(layout)
                             .setCanceledOnTouchOutside(true)
-                            .setNegativeButton("거절", new View.OnClickListener() {
+                            .setPositiveButton("방출", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-
+                                    final MaterialDialog PlayerOutDialog = new MaterialDialog(context);
+                                    PlayerOutDialog.setTitle("팀원 방출")
+                                            .setMessage("팀원을 방출합니다.")
+                                            .setPositiveButton("취소", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    PlayerOutDialog.dismiss();
+                                                }
+                                            }).setNegativeButton("방출", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            HttpClient http_PlayerOut= new HttpClient();
+                                            String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getFirst_Pk());
+                                            parsedData_Player_Out = jsonParserList_Player_Out(result);
+                                            if(parsedData_Player_Out[0][0].equals("succed")){
+                                                PlayerOutDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                refresh_player= "refresh";
+                                            }
+                                            else{
+                                                Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    PlayerOutDialog.show();
                                 }
                             })
-                            .setPositiveButton("수락", new View.OnClickListener() {
+                            .setNegativeButton("팀대표 위임", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    TeamPlayerDialog.dismiss();
+                                    final MaterialDialog ChangeRepresentDialog = new MaterialDialog(context);
+                                    ChangeRepresentDialog.setTitle("팀대표 위임")
+                                            .setMessage("팀대표를 위임합니다.")
+                                            .setPositiveButton("취소", new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    ChangeRepresentDialog.dismiss();
+                                                }
+                                            }).setNegativeButton("팀 대표 위임", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            HttpClient http_ChangeRepresent= new HttpClient();
+                                            String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFirst_Pk(),TeamManager_TeamName);
+                                            parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
+                                            if(parsedData_ChangeRepresent[0][0].equals("succed")){
+                                                ChangeRepresentDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                            }
+                                            else{
+                                                Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                                    ChangeRepresentDialog.show();
                                 }
                             });
                     TeamPlayerDialog.show();
@@ -199,6 +250,46 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
             JSONArray jArr = json.getJSONArray("List");
 
             String[] jsonName = {"msg1","msg2","msg3","msg4","msg5"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for (int i = 0; i < jArr.length(); i++) {
+                json = jArr.getJSONObject(i);
+                for (int j = 0; j < jsonName.length; j++) {
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String[][] jsonParserList_Player_Out(String pRecvServerPage) {
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try {
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+
+            String[] jsonName = {"msg1"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for (int i = 0; i < jArr.length(); i++) {
+                json = jArr.getJSONObject(i);
+                for (int j = 0; j < jsonName.length; j++) {
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String[][] jsonParserList_ChangeRepresent(String pRecvServerPage) {
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try {
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+
+            String[] jsonName = {"msg1"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

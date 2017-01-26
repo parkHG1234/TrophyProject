@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
             Main_Navigation_TextView_Name.setText("로그인을 해주세요");
             Main_Navigation_TextView_Team.setVisibility(View.GONE);
             Main_Navigation_Button_Logout.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamMake.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
 
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -345,7 +347,7 @@ public class MainActivity extends AppCompatActivity {
             Contests_Customlist_MyData.add(new Contests_Customlist_MyData(ContestsParsedList[i][0], ContestsParsedList[i][1],
                     ContestsParsedList[i][2], ContestsParsedList[i][3], ContestsParsedList[i][4], ContestsParsedList[i][5],
                     ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i][8], ContestsParsedList[i][9],
-                    ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12],this));
+                    ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12],this, ContestsParsedList[i][13]));
         }
         Contests_Customlist_Adapter Adapter = new Contests_Customlist_Adapter(this, Contests_Customlist_MyData);
         listView.setAdapter(Adapter);
@@ -359,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"_Pk", "_Title", "_Image", "_currentNum", "_maxNum", "_Payment", "_Host", "_Management", "_Support", "_ContestDate", "_RecruitStartDate", "_RecruitFinishDate", "_DetailInfo"};
+            String[] jsonName = {"_Pk", "_Title", "_Image", "_currentNum", "_maxNum", "_Payment", "_Host", "_Management", "_Support", "_ContestDate", "_RecruitStartDate", "_RecruitFinishDate", "_DetailInfo", "_Place"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
