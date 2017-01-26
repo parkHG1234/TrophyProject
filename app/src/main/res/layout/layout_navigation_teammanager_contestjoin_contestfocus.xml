@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ad1"
+                    android:id="@+id/TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage"
+                    android:layout_weight="2"
+                    android:scaleType="fitXY"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:text="제 ~ ~~~ 대회"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle"
+                        android:layout_weight="0.8"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="신청상태"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView22"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="계좌명"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView223"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_AcountName"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:text="계좌번호"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView2234"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="우리은행 / 112-123-2342"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber"
+                            android:layout_weight="1"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:text="대회정보"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="참가신청기간"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView18" />
+
+                <TextView
+                    android:text="2017 - 06 - 24 / 2017 - 07 - "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_JoinDate" />
+                <TextView
+                    android:text="대회일시"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView28" />
+
+                <TextView
+                    android:text="2017 - 06 - 24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_ContestDate" />
+
+                <TextView
+                    android:text="유의사항"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView48" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail" />
+
+            </LinearLayout>
+
+            <TextView
+                android:text="참가정보"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="팀명"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView13"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_TeamName"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="대표자"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView16"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_Represent"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="대표자번호"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView20"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <TextView
+                    android:text="참가팀원"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView21" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/TeamManager_ContestJoin_ContestFocus_ListView_Player"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

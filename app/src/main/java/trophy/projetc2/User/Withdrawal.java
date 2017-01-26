@@ -1,9 +1,13 @@
 package trophy.projetc2.User;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +19,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+import trophy.projetc2.SportChoiceActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
 /**
  * Created by ldong on 2017-01-25.
@@ -25,7 +34,8 @@ public class Withdrawal extends AppCompatActivity {
     Button btn_goTeamManage, btn_commit_withdrawal;
     CheckBox chk_withdraw_agreement;
     SharedPreferences preferences;
-    String Pk;
+    SharedPreferences.Editor editor;
+    String Pk, TeamName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,8 @@ public class Withdrawal extends AppCompatActivity {
         chk_withdraw_agreement = (CheckBox) findViewById(R.id.chk_withdraw_agreement);
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         Pk = preferences.getString("Pk", ".");
+        Intent intent = getIntent();
+        TeamName = intent.getStringExtra("TeamName");
 
         btn_goTeamManage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +69,26 @@ public class Withdrawal extends AppCompatActivity {
                         String result1 = Withdrawal.HttpClient("Trophy_part3", "Withdrawal.jsp", Pk);
                         String[][] parsedData1 = jsonParserListWithdrawal(result1);
                         if (parsedData1[0][0].equals("true")) { //회원탈퇴 완료
-                            //다이얼로그로 회원탈퇴 완료 표시후 캐시 삭제
+                            AlertDialog.Builder alert = new AlertDialog.Builder(Withdrawal.this);
+                            alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    preferences = getSharedPreferences("trophy", MODE_PRIVATE);
+
+                                    editor = preferences.edit();
+                                    editor.clear();
+                                    editor.commit();
+                                    startActivity(new Intent(Withdrawal.this, SportChoiceActivity.class));
+                                    MainActivity MA = (MainActivity) MainActivity.activity;
+                                    ChangePersonalInfoActivity CA = (ChangePersonalInfoActivity) ChangePersonalInfoActivity.activity;
+                                    MA.finish();
+                                    CA.finish();
+                                    finish();
+                                    dialog.dismiss();     //닫기
+                                }
+                            });
+                            alert.setMessage("회원탈퇴가 성공적으로 이루어졌습니다");
+                            alert.show();
                         } else { //회원탈퇴 실패
                             Snackbar.make(v, "다시 시도해 주세요", Snackbar.LENGTH_LONG)
                                     .show();

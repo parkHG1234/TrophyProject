@@ -91,6 +91,21 @@ public class TeamManager_ContestJoin_Customlist_MyAdapter  extends BaseAdapter {
         }
         contestjoin_Title.setText(arrData.get(position).getContest_Title());
         contestjoin_Status.setText(arrData.get(position).getContest_Status());
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_contestfocus = new Intent(context, TeamManager_ContestJoin_ContestFocus.class);
+                intent_contestfocus.putExtra("Contest_Pk",arrData.get(position).getContest_Pk());
+                intent_contestfocus.putExtra("Contest_Image",arrData.get(position).getContest_Image());
+                intent_contestfocus.putExtra("Contest_Title",arrData.get(position).getContest_Title());
+                intent_contestfocus.putExtra("Contest_Status",arrData.get(position).getContest_Status());
+                intent_contestfocus.putExtra("AcountName",arrData.get(position).getAcountName());
+                intent_contestfocus.putExtra("AcountNumber",arrData.get(position).getAcountNumber());
+                context.startActivity(intent_contestfocus);
+                arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         return convertView;
     }
     public String[][] jsonParserList_Player_Focus(String pRecvServerPage) {

@@ -1,5 +1,6 @@
 package trophy.projetc2.User;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,16 +28,20 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
     TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone;
     Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal;
     SharedPreferences preferences;
-    String Pk;
-
+    String Pk, TeamName;
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_change_personalinfo);
+        activity = ChangePersonalInfoActivity.this;
 
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         Pk = preferences.getString("Pk", ".");
+
+        Intent intent = getIntent();
+        TeamName = intent.getStringExtra("TeamName");
 
         HttpClient getInfo = new HttpClient();
         String result = getInfo.HttpClient("Trophy_part3", "ChangePersonalInfo.jsp", Pk);
@@ -93,7 +98,9 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         btn_withdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ChangePersonalInfoActivity.this, Withdrawal.class));
+                Intent intent = new Intent(ChangePersonalInfoActivity.this, Withdrawal.class);
+                intent.putExtra("TeamName", TeamName);
+                startActivity(intent);
             }
         });
 

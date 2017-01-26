@@ -1,5 +1,6 @@
 package trophy.projetc2;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -61,7 +62,7 @@ import trophy.projetc2.User.Login;
 public class MainActivity extends AppCompatActivity {
     String Pk, Name, Team, Profile;
     String[][] parseredData_user, parseredData_teammake;
-
+    public static Activity activity;
 
     SharedPreferences preferences; //캐쉬 데이터 생성
     SharedPreferences.Editor editor; //캐쉬 데이터 에디터 생성
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        activity = MainActivity.this;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         inflater=getLayoutInflater();
@@ -228,7 +230,14 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_Change_PersonalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ChangePersonalInfoActivity.class));
+                if (Pk.equals(".")) {
+                    Snackbar.make(view, "로그인을 해주세요", Snackbar.LENGTH_LONG)
+                            .show();
+                }else {
+                    Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
+                    intent.putExtra("TeamName", Team);
+                    startActivity(intent);
+                }
             }
         });
 

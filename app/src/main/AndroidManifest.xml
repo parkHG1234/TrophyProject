@@ -8,7 +8,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SportChoiceActivity">
+        <activity
+            android:name=".SportChoiceActivity"
+            android:noHistory="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +27,7 @@
         <activity android:name=".Navigation.Last_Contest_Detail"></activity>
         <activity android:name=".Navigation.TeamSearch_Focus"></activity>
         <activity android:name=".Navigation.TeamManager"></activity>
+        <activity android:name=".Navigation.TeamManager_ContestJoin_ContestFocus"></activity>
         <activity android:name=".Contest.Contest_Detail"></activity>
         <activity android:name=".Contest.Contest_Detail_Form"></activity>
         <activity android:name=".User.ChangePersonalInfoActivity"></activity>
