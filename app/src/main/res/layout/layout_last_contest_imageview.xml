@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_weight="1">
 
 
@@ -12,4 +12,11 @@
         android:id="@+id/Last_Contest_ImageView"
         android:src="@drawable/emblem"
         android:layout_weight="1"/>
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/save"
+        android:id="@+id/Last_Contest_ImageButton_Save"
+        android:layout_weight="8"/>
+
 </LinearLayout>

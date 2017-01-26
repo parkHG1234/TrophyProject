@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -25,13 +26,15 @@ public class Last_Contest_ImageView29 extends Fragment {
     public Last_Contest_ImageView29(String Pk){
         this.Pk = Pk ;
     }
-    ImageView Last_Contest_ImageView;
+    private ImageView Last_Contest_ImageView;
+    private ImageButton Last_Contest_ImageButton_Save;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.layout_last_contest_imageview, container, false);
         Last_Contest_ImageView = (ImageView) rootView.findViewById(R.id.Last_Contest_ImageView);
+        Last_Contest_ImageButton_Save = (ImageButton)rootView.findViewById(R.id.Last_Contest_ImageButton_Save);
         Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/last_contest/" +  Pk + "29.jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
