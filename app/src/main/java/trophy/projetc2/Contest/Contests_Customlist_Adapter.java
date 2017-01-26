@@ -69,11 +69,13 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             String Contest_maxNum = arrData.get(position).getContest_maxNum();
             String Contest_Payment = arrData.get(position).getContest_Payment();
             String Contest_RecruitFinishData = arrData.get(position).getRecruitFinishDate();
+            String Contest_Place = arrData.get(position).getContest_Place();
 
             ImageView viewContest_Image = (ImageView)convertView.findViewById(R.id.Contest_logoImage);
             TextView viewContest_Title = (TextView)convertView.findViewById(R.id.contest_title);
             TextView viewContest_Date = (TextView)convertView.findViewById(R.id.contest_date);
             TextView viewContest_Num = (TextView)convertView.findViewById(R.id.contest_num);
+            TextView viewContest_Place = (TextView) convertView.findViewById(R.id.Contest_place);
 
             TextView remainder = (TextView)convertView.findViewById(R.id.contest_list_remainder);
             TextView remainder1 = (TextView)convertView.findViewById(R.id.contest_list_remainder1);
@@ -82,6 +84,7 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
 
             viewContest_Title.setText(Contest_Title);
             viewContest_Date.setText(Contest_Date);
+            viewContest_Place.setText(Contest_Place);
             viewContest_Num.setText(Contest_currentNum + " / " + Contest_maxNum);
             Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+Contest_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
