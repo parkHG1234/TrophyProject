@@ -27,8 +27,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.drakeet.materialdialog.MaterialDialog;
+import trophy.projetc2.Contest.Contest_Detail;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
+import trophy.projetc2.User.Login;
 
 /**
  * Created by 박효근 on 2017-01-03.
@@ -80,22 +83,44 @@ public class TeamSearch_Focus extends AppCompatActivity {
         Layout_Navigation_TeamSearch_Focus_Button_Join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HttpClient TeamInfo = new HttpClient();
-                String result =TeamInfo.HttpClient("Trophy_part1","TeamSearch_Focus_TeamJoin_OverLap.jsp",Pk);
+                if(Pk.equals(".")){
+                    final MaterialDialog loginDialog = new MaterialDialog(TeamSearch_Focus.this);
+                    loginDialog.setTitle("로그인 하기")
+                            .setMessage("팀 가입시 로그인이 필요합니다.")
+                            .setPositiveButton("취소", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    loginDialog.dismiss();
+                                }
+                            }).setNegativeButton("로그인 하기", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent_login = new Intent(TeamSearch_Focus.this, Login.class);
+                            startActivity(intent_login);
+                            overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                            loginDialog.dismiss();
+                        }
+                    });
+                    loginDialog.show();
+                }
+                else{
+                    HttpClient TeamInfo = new HttpClient();
+                    String result =TeamInfo.HttpClient("Trophy_part1","TeamSearch_Focus_TeamJoin_OverLap.jsp",Pk);
 
-                parseredData_teamOverlap = jsonParserList_teamOverlap(result);
-                if(parseredData_teamOverlap[0][0].equals("overLap")){
-                    Snackbar.make(view,"이미 다른 팀에 가입 중 이십니다.", Snackbar.LENGTH_SHORT).show();
-                }else{
-                    HttpClient TeamJoin = new HttpClient();
-                    String result_join =TeamJoin.HttpClient("Trophy_part1","TeamSearch_Focus_Join.jsp",Pk,TeamName);
-                    parseredData_teamJoin = jsonParserList_teamJoin(result_join);
-                    if(parseredData_teamJoin[0][0].equals("succed")){
-                        Snackbar.make(view, "가입 신청 완료", Snackbar.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    else {
-                        Snackbar.make(view, "해당 팀에 이미 신청중입니다", Snackbar.LENGTH_SHORT).show();
+                    parseredData_teamOverlap = jsonParserList_teamOverlap(result);
+                    if(parseredData_teamOverlap[0][0].equals("overLap")){
+                        Snackbar.make(view,"이미 다른 팀에 가입 중 이십니다.", Snackbar.LENGTH_SHORT).show();
+                    }else{
+                        HttpClient TeamJoin = new HttpClient();
+                        String result_join =TeamJoin.HttpClient("Trophy_part1","TeamSearch_Focus_Join.jsp",Pk,TeamName);
+                        parseredData_teamJoin = jsonParserList_teamJoin(result_join);
+                        if(parseredData_teamJoin[0][0].equals("succed")){
+                            Snackbar.make(view, "가입 신청 완료", Snackbar.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else {
+                            Snackbar.make(view, "해당 팀에 이미 신청중입니다", Snackbar.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }

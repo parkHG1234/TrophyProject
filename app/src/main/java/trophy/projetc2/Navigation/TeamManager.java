@@ -70,7 +70,7 @@ public class TeamManager extends AppCompatActivity {
                         .build()
         );
         navigationTabBar.setModels(models);
-        navigationTabBar.setViewPager(mViewPager, 2);
+        navigationTabBar.setViewPager(mViewPager, 0);
 
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);

@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
             Main_Navigation_TextView_Name.setText("로그인을 해주세요");
             Main_Navigation_TextView_Team.setVisibility(View.GONE);
             Main_Navigation_Button_Logout.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamMake.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
 
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
                 @Override
