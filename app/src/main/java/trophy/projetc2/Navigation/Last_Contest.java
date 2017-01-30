@@ -50,6 +50,8 @@ public class Last_Contest extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent Last_Contest_Detail_Intent = new Intent(Last_Contest.this , Last_Contest_Detail.class);
                 Last_Contest_Detail_Intent.putExtra("Pk",parsedData_Last_Contest_Search[position][0].toString());
+                Last_Contest_Detail_Intent.putExtra("Title",parsedData_Last_Contest_Search[position][1].toString());
+                Last_Contest_Detail_Intent.putExtra("ContestDate",parsedData_Last_Contest_Search[position][3].toString());
                 startActivity(Last_Contest_Detail_Intent);
             }
         });
@@ -63,11 +65,11 @@ public class Last_Contest extends AppCompatActivity{
         });
     }
     public String[][] jsonParserList_Last_Contest(String pRecvServerPage){
-        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        Log.i("Last_Contest_Search내용", pRecvServerPage);
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);

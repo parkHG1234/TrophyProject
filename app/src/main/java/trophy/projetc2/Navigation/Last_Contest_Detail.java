@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,11 +24,16 @@ import trophy.projetc2.R;
  */
 
 public class Last_Contest_Detail extends AppCompatActivity {
-    String[][] parsedData_Last_Contest_Detail_Search;
-    String Pk;
-    LinearLayout Last_Contest_Detail_Layout_Root;
-    ListView Last_Contest_Detail_ListView;
-
+    private String[][] parsedData_Last_Contest_Detail_Search;
+    private String Pk;
+    private String Title;
+    private String ContestDate;
+    private LinearLayout Last_Contest_Detail_Layout_Root;
+    private ListView Last_Contest_Detail_ListView;
+    private TextView Last_Contest_Detail_TextView_ContestName;
+    private TextView Last_Contest_Detail_TextView_ContestDate;
+    private TextView Last_Contest_Detail_TextView_Award;
+    private String[] Award;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +42,14 @@ public class Last_Contest_Detail extends AppCompatActivity {
 
         Intent intent = getIntent();
         Pk = intent.getStringExtra("Pk");
-
+        Title = intent.getStringExtra("Title");
+        ContestDate = intent.getStringExtra("ContestDate");
         Last_Contest_Detail_Layout_Root = (LinearLayout) findViewById(R.id.Last_Contest_Detail_Layout_Root);
         Last_Contest_Detail_ListView = (ListView) findViewById(R.id.Last_Contest_Detail_ListView);
+        Last_Contest_Detail_TextView_ContestName = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_ContestName);
+        Last_Contest_Detail_TextView_ContestDate = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_ContestDate);
+        Last_Contest_Detail_TextView_Award = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_Award);
+
 
         HttpClient http_Last_Contest_Detail_Search = new HttpClient();
         String result = http_Last_Contest_Detail_Search.HttpClient("Trophy_part2", "Last_Contest_Detail.jsp", Pk);
@@ -47,6 +58,12 @@ public class Last_Contest_Detail extends AppCompatActivity {
         Last_Contest_Detail_CustomList_MyData = new ArrayList<Last_Contest_Detail_CustomList_MyData>();
         String img = parsedData_Last_Contest_Detail_Search[0][1];
         String[] imgs = img.split("/");
+
+        Last_Contest_Detail_TextView_ContestName.setText(Title);
+        Last_Contest_Detail_TextView_ContestDate.setText(ContestDate);
+        Award = parsedData_Last_Contest_Detail_Search[0][2].split("/");
+        for(int i = 0; i<Award.length;i++)
+                Last_Contest_Detail_TextView_Award.setText(Last_Contest_Detail_TextView_Award.getText()+Award[i].toString()+"\n");
         int cnt = 0;
         for (int i = 0; i < imgs.length / 3; i++) {
             Last_Contest_Detail_CustomList_MyData.add(new Last_Contest_Detail_CustomList_MyData(parsedData_Last_Contest_Detail_Search[0][0], parsedData_Last_Contest_Detail_Search[0][1], imgs[cnt], imgs[cnt + 1], imgs[cnt + 2], parsedData_Last_Contest_Detail_Search[0][2], String.valueOf(cnt)));

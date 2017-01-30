@@ -38,12 +38,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
-import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
-import trophy.projetc2.User.MemberShip;
 
 import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
 
@@ -100,31 +97,52 @@ public class TeamManager_TeamIntroduce extends Fragment {
         adspin2 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_do_seoul, android.R.layout.simple_spinner_item);
         adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         TeamManager_TeamIntro_Spinner_Si.setAdapter(adspin2);
-
         setSpinText(TeamManager_TeamIntro_Spinner_Do, parseredData[0][1]);
         TeamManager_TeamIntro_EditText_HomeCourt.setText(parseredData[0][3]);
         TeamManager_TeamIntro_EditText_Introduce.setText(parseredData[0][4]);
 
-
-        Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][5] + ".jpg")
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(TeamManager_TeamIntro_ImageView_Emblem);
-
-        Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][6] + ".jpg")
+        if(parseredData[0][5].equals(".")) {
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamManager_TeamIntro_ImageView_Emblem);
+        }else {
+            Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][5] + ".jpg")
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamManager_TeamIntro_ImageView_Emblem);
+        }
+        if(parseredData[0][6].equals(".")) {
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamManager_TeamIntro_ImageView_Image1);
+        }else{
+            Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][8] + ".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(TeamManager_TeamIntro_ImageView_Image1);
-
-        Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][7] + ".jpg")
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(TeamManager_TeamIntro_ImageView_Image2);
-
+        }
+        if(parseredData[0][7].equals(".")){
+            Glide.with(getContext()).load(R.drawable.profile_basic_image)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamManager_TeamIntro_ImageView_Image2);
+        }else{
+            Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][7] + ".jpg")
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamManager_TeamIntro_ImageView_Image2);
+        }
+        if(parseredData[0][8].equals(".")){
+            Glide.with(getContext()).load(R.drawable.profile_basic_image)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+        .into(TeamManager_TeamIntro_ImageView_Image3);
+    }else{
         Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][8] + ".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(TeamManager_TeamIntro_ImageView_Image3);
+    }
 
         TeamManager_TeamIntro_Button_Modify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,7 +152,6 @@ public class TeamManager_TeamIntroduce extends Fragment {
 
                 HttpClient ContestHttp = new HttpClient();
                 String result = ContestHttp.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce_Upload.jsp", TeamManager_TeamName.toString(), TeamIntro_Do.toString(), TeamIntro_Si.toString(), TeamIntro_HomeCourt.toString(), TeamIntro_Introduce.toString());
-
                 Snackbar.make(v, "팀 정보가 변경되었습니다.", Snackbar.LENGTH_SHORT).show();
             }
         });

@@ -55,35 +55,31 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:id="@+id/TeamManager_TeamIntro_ImageView_Emblem"
                 android:src="@drawable/basic_image"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:scaleType="fitXY"/>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:id="@+id/TeamManager_TeamIntro_ImageView_Image1"
                 android:src="@drawable/basic_image"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:scaleType="fitXY"/>
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:id="@+id/TeamManager_TeamIntro_ImageView_Image2"
                 android:src="@drawable/basic_image"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="150dp"
                 android:id="@+id/TeamManager_TeamIntro_ImageView_Image3"
                 android:src="@drawable/basic_image"
-                android:scaleType="fitXY"
-                android:layout_weight="1" />
+                android:scaleType="fitXY"/>
         </LinearLayout>
 
     </ScrollView>

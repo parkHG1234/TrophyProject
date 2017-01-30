@@ -149,7 +149,6 @@ public class TeamManager_PlayerManager extends Fragment {
         JoinerCount = parsedData_Joiner.length;
         Row = JoinerCount/3;
         Extra = JoinerCount%3;
-        Log.i("extra",Integer.toString(Extra));
         TeamManager_PlayerManager_Customlist_MyData_Joiner = new ArrayList<TeamManager_PlayerManager_Customlist_MyData_Joiner>();
 
         for(int i =0; i<Row; i++)
@@ -170,7 +169,6 @@ public class TeamManager_PlayerManager extends Fragment {
         PlayerCount = parsedData_Player.length;
         Row = PlayerCount/3;
         Extra = PlayerCount%3;
-        Log.i("extra",Integer.toString(Extra));
         TeamManager_PlayerManager_Customlist_MyData_Player = new ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player>();
 
         for(int i =0; i<Row; i++)

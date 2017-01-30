@@ -310,7 +310,7 @@ public class MemberShip extends AppCompatActivity {
                         Date d = new Date();
                         String date = dateFormat.format(d);
                         user = new HttpClient();
-                        //user.HttpClient("InetSMSExample", "example.jsp", msg, phone, phone, date);
+                        user.HttpClient("InetSMSExample", "example.jsp", msg, phone, phone, date);
                         Phone_flag = true;
 
                         cnt=3;
