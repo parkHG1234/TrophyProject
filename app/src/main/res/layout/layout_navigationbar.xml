@@ -54,40 +54,48 @@
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp">
+                        android:layout_height="50dp"
+                        android:background="@color/MainColor_Navy">
 
-                        <TextView
-                            android:text="TextView"
+                        <LinearLayout
+                            android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/Main_Navigation_TextView_Name"
-                            android:textColor="@color/Black"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:layout_marginLeft="15dp"
-                            android:textSize="17dp"/>
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/Main_Navigation_TextView_Name"
+                                android:textColor="@color/White"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:textSize="17dp" />
+                            <TextView
+                                android:text="TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/Main_Navigation_TextView_Team"
+                                android:textColor="@color/White"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:textSize="17dp" />
+                        </LinearLayout>
 
+
+                        <Button
+                            android:layout_width="51dp"
+                            android:id="@+id/Main_Navigation_Button_SportChoice"
+                            android:background="@drawable/basketball_a"
+                            android:layout_height="51dp" />
                     </LinearLayout>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="1px"
                         android:background="@color/Gray"/>
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp">
 
-                        <TextView
-                            android:text="TextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/Main_Navigation_TextView_Team"
-                            android:textColor="@color/Black"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:layout_marginLeft="15dp"
-                            android:textSize="17dp"/>
-                    </LinearLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -130,11 +138,7 @@
             </LinearLayout>
                 </LinearLayout>
 
-        <Button
-            android:layout_width="51dp"
-            android:id="@+id/Main_Navigation_Button_SportChoice"
-            android:background="@drawable/basketball_a"
-            android:layout_height="51dp" />
+
 
         <Button
                     android:text="팀 만들기"
