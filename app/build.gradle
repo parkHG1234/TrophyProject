@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
@@ -27,6 +28,7 @@ dependencies {
     ///glide 라이브러리
     //material
     //color
+    compile 'com.google.android.gms:play-services-appindexing:9.0.0'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.github.bumptech.glide:glide:3.6.0'
@@ -38,7 +40,8 @@ dependencies {
     compile 'devlight.io:navigationtabbar:1.2.5'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.google.firebase:firebase-messaging:9.2.1'
     testCompile 'junit:junit:4.12'
     provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
+

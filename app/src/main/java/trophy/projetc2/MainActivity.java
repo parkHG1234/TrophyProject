@@ -31,21 +31,32 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
@@ -58,10 +69,11 @@ import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
 import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
+import trophy.projetc2.User.MyInstanceIDListenerService;
 
 public class MainActivity extends AppCompatActivity {
-    String Pk, Name, Team, Profile;
-    String[][] parseredData_user, parseredData_teammake;
+    String Pk, Name, Team, Profile, Token="hh";
+    String[][] parseredData_AddToken, parseredData_user, parseredData_teammake;
     public static Activity activity;
 
     SharedPreferences preferences; //캐쉬 데이터 생성
@@ -87,11 +99,20 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
+
         //유저 네비게이션바
         HttpClient a= new HttpClient();
         Log.i("결과",a.HttpClient("Web_basket","NaviTeamInfo_Player.jsp","park123"));
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         Pk = preferences.getString("Pk", ".");
+
+        //gcm 데이터 등록
+        Token = FirebaseInstanceId.getInstance().getToken();
+        Log.i("token", Token);
+        HttpClient http_addtoken= new HttpClient();
+        String result12 =http_addtoken.HttpClient("Trophy_part1","Fcm_Add.jsp",Pk,Token);
+        parseredData_AddToken =  jsonParserList_AddToken(result12);
+
         //네비게이션 메뉴 선언 및 연결
         final View aa = navigationView.inflateHeaderView(R.layout.layout_navigationbar);
         Main_Navigation_ImageView_Profile = (ImageView)aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
@@ -119,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             Main_Navigation_Button_TeamMake.setVisibility(View.GONE);
             Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
 
-            Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
+            Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent_Login = new Intent(MainActivity.this, Login.class);
@@ -416,7 +437,25 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+    public String[][] jsonParserList_AddToken(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         try {
@@ -532,5 +571,4 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Test", "exception " + e.getMessage());
         }
     }
-
 }
