@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "845516068534",
+    "firebase_url": "https://trophyproject0124.firebaseio.com",
+    "project_id": "trophyproject0124",
+    "storage_bucket": "trophyproject0124.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845516068534:android:ee193dcdf6f4d656",
+        "android_client_info": {
+          "package_name": "trophy.projetc2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "845516068534-7e0pa0hmnkp3ohmhegf2ie3ffcmuufmn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "trophy.projetc2",
+            "certificate_hash": "67EC882FCE3A68023C20648AE9CD8E3649568067"
+          }
+        },
+        {
+          "client_id": "845516068534-e3dp7lnhtt0n6cke520n9gnob90qe59q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA15_G4sQSK1Yn3HPo-4x3jxGXj9UC67WQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "845516068534-e3dp7lnhtt0n6cke520n9gnob90qe59q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

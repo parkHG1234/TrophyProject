@@ -119,24 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/Gray"/>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <TextView
-                    android:text="비밀번호 변경"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/Main_Navigation_TextView_PassWord"
-                    android:textColor="@color/Black"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="17dp"/>
-
-            </LinearLayout>
-                </LinearLayout>
+        </LinearLayout>
 
 
 
