@@ -129,7 +129,7 @@
                 android:layout_height="50dp">
 
                 <TextView
-                    android:text="관심 지역 설정"
+                    android:text="주소 설정"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
@@ -138,6 +138,28 @@
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:background="@color/White"
+                android:gravity="center_vertical"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:text="해당 주소에 대회가 등록될 시 알림을 받습니다"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView3"
+                    android:background="@color/White"
+                    android:textSize="15sp"
+                    android:textColor="@color/BlackGray"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 

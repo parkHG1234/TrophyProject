@@ -75,7 +75,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         btn_change_area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ChangePersonalInfoActivity.this, MainActivity.class));
+                startActivity(new Intent(ChangePersonalInfoActivity.this, ChangeAreaActivity.class));
             }
         });
 
