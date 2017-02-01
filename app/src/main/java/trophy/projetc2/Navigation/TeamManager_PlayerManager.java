@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -28,6 +29,7 @@ import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
 public class TeamManager_PlayerManager extends Fragment {
     ListView Layout_Navigation_TeamManager_ListView_Joiner;
     ListView Layout_Navigation_TeamManager_ListView_Player;
+    Button Layout_Navigation_TeamManager_Button_PlayerTitle;
     TeamManager_PlayerManager_Customlist_MyAdapter_Joiner TeamManager_PlayerManager_Customlist_MyAdapter_Joiner;
     ArrayList<TeamManager_PlayerManager_Customlist_MyData_Joiner> TeamManager_PlayerManager_Customlist_MyData_Joiner;
     TeamManager_PlayerManager_Customlist_MyAdapter_Player TeamManager_PlayerManager_Customlist_MyAdapter_Player;
@@ -44,7 +46,9 @@ public class TeamManager_PlayerManager extends Fragment {
         final View rootView = inflater.inflate(R.layout.layout_navigation_teammanager_playermanager, container, false);
         Layout_Navigation_TeamManager_ListView_Joiner = (ListView)rootView.findViewById(R.id.Layout_Navigation_TeamManager_ListView_Joiner);
         Layout_Navigation_TeamManager_ListView_Player = (ListView)rootView.findViewById(R.id.Layout_Navigation_TeamManager_ListView_Player);
+        Layout_Navigation_TeamManager_Button_PlayerTitle = (Button)rootView.findViewById(R.id.Layout_Navigation_TeamManager_Button_PlayerTitle);
         TeamName = TeamManager_TeamName;
+        Layout_Navigation_TeamManager_Button_PlayerTitle.setText("  '"+TeamName+"'팀 팀원");
         //신청자 리스트
         HttpClient http_Joiner= new HttpClient();
         String result = http_Joiner.HttpClient("Trophy_part1","TeamManager_Joiner.jsp",TeamName);
