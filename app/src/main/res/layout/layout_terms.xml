@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/softWhite"
+        android:id="@+id/Terms_ScrollView_Main">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="250dp"
+                app:srcCompat="@drawable/banner"
+                android:id="@+id/imageView5"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="30dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="이용약관, 개인정보 수집 및 이용, \n위치정보 이용약관(선택), \n프로모션 안내에 모두 동의합니다"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView12"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center_vertical"
+                        android:padding="15dp"
+                        android:textColor="@color/Black"
+                        android:textSize="15sp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@color/White"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:padding="10dp"
+                        android:id="@+id/Terms_CheckBox_All" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="트로피 이용약관 동의"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView12"
+                        android:background="@color/White"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/Black"
+                        android:paddingLeft="15dp"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:text="(필수)"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView15"
+                        android:background="@color/White"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/basil"
+                        android:layout_weight="1"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Terms_CheckBox_1"
+                        android:background="@color/White"
+                        android:layout_marginRight="1dp"
+                        android:layout_gravity="right"
+                        android:padding="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@color/White"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:id="@+id/Terms_ScrollView_1"
+                        android:layout_height="120dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:text="a\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\na"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView23"
+                                android:background="@color/softWhite" />
+                        </LinearLayout>
+                    </ScrollView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="개인정보 수집 및 이용에 대한 안내"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView12"
+                        android:background="@color/White"
+                        android:layout_marginLeft="1dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/Black"
+                        android:paddingLeft="15dp"
+                        android:paddingBottom="15dp"
+                        android:paddingTop="15dp"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:text="(필수)"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/textView15"
+                        android:background="@color/White"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/basil"
+                        android:layout_weight="1"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Terms_CheckBox_2"
+                        android:background="@color/White"
+                        android:layout_marginRight="1dp"
+                        android:layout_gravity="right"
+                        android:padding="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@color/White"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:layout_marginBottom="1dp">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:id="@+id/Terms_ScrollView_2"
+                        android:layout_height="120dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:text="a\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\na"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView23"
+                                android:background="@color/softWhite" />
+                        </LinearLayout>
+                    </ScrollView>
+
+                    <TextView
+                        android:text="트로피 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해 주세요"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Terms_TextView_Warnning"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/Red" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/DarkGray"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/White"
+                        android:layout_margin="1dp"
+                        android:gravity="center_vertical|center_horizontal|center"
+                        android:id="@+id/Terms_LinearLayout_NoAgreement">
+
+                        <TextView
+                            android:text="비동의"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView25"
+                            android:textColor="@color/Black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/MainColor2"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/Terms_LinearLayout_Agreement">
+
+                    <TextView
+                        android:text="동의"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView27"
+                        android:layout_gravity="center_vertical|center_horizontal|center"
+                        android:textColor="@color/White"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

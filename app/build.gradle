@@ -39,6 +39,7 @@ dependencies {
     compile 'devlight.io:navigationtabbar:1.2.5'
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.tsengvn:Typekit:1.0.0' // 커스텀 폰트 적용 라이브러리
     compile 'com.google.firebase:firebase-messaging:9.2.1'
     testCompile 'junit:junit:4.12'
     provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'

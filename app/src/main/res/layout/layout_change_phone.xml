@@ -105,7 +105,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8"
+                android:id="@+id/textView11"
                 android:background="@color/White"
                 android:textSize="15sp"
                 android:textColor="@color/BlackGray"
@@ -126,7 +126,6 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:ems="10"
                 android:id="@+id/edt_confirmPhoneRnd"
                 android:layout_weight="1" />
@@ -142,7 +141,7 @@
             android:id="@+id/changePhone6">
 
             <Button
-                android:text="인증번호 전송"
+                android:text="확인"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn_confirmPhoneRnd"

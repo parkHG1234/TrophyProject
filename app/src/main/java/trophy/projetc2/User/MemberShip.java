@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import trophy.projetc2.BaseActivity;
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
@@ -39,7 +40,7 @@ import trophy.projetc2.R;
  * Created by 박지훈 on 2016-11-30.
  */
 
-public class MemberShip extends AppCompatActivity {
+public class MemberShip extends BaseActivity {
 
     LinearLayout MemberShip_Layout_Root;
     EditText MemberShip_EditText_Name;
