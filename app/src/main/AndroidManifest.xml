@@ -35,8 +35,12 @@
         <activity android:name=".User.ChangePw1Activity"></activity>
         <activity android:name=".User.ChangePw2Activity"></activity>
         <activity android:name=".User.Withdrawal"></activity>
-        <activity android:name=".Navigation.Last_Contest_ViewPager"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity android:name=".Navigation.Last_Contest_ViewPager"></activity>
+        <activity android:name=".User.ChangePhoneActivity"></activity>
+        <activity android:name=".User.ChangeAreaActivity"></activity>
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <service
             android:name=".User.MyInstanceIDListenerService">
             <intent-filter>
