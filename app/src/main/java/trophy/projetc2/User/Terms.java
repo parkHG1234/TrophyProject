@@ -51,7 +51,7 @@ public class Terms extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (Terms_CheckBox_1.isChecked() && Terms_CheckBox_2.isChecked()) {
-                    startActivity(new Intent(Terms.this, MemberShip2.class));
+                    startActivity(new Intent(Terms.this, Join.class));
                     finish();
                 } else {
                     Terms_TextView_Warnning.setText("트로피 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해 주세요");

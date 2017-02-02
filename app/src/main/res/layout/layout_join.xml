@@ -42,7 +42,7 @@
                         android:layout_height="50dp"
                         android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/Join_EditText_Name"
                         android:layout_weight="1"
                         android:background="@color/White"
                         android:hint="이름"
@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/Join_EditText_Password"
                         android:layout_weight="1"
                         android:background="@color/White"
                         android:hint="비밀번호"
@@ -103,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/Join_EditText_Password_Confirm"
                         android:layout_weight="1"
                         android:background="@color/White"
                         android:hint="비밀번호 확인"
@@ -132,21 +132,140 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+                    <TextView
+                        android:text="생일"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp" />
+
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/Join_EditText_Birth_Year"
                         android:layout_weight="1"
                         android:background="@color/White"
-                        android:hint="이름"
+                        android:hint="년(4자)"
                         android:layout_marginLeft="1dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:elevation="1dp" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:id="@+id/Join_EditText_Birth_Month"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:hint="월"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:elevation="1dp"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:id="@+id/Join_EditText_Birth_Day"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:hint="일"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:elevation="1dp"
+                        android:inputType="number" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:text="남자"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_SexM"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="1dp"
+                        android:gravity="center_vertical" />
+
+                    <CheckBox
+                        android:text="여자"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_SexW"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginBottom="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:ems="10"
+                        android:id="@+id/Join_EditText_Phone"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:hint="휴대전화번호"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingLeft="10dp"
+                        android:textSize="14sp"
+                        android:inputType="number" />
+
+                    <Button
+                        android:text="인증"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_Button_Phone"
+                        android:background="@color/White"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -167,17 +286,25 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:inputType="textPersonName"
                         android:ems="10"
-                        android:id="@+id/editText"
+                        android:id="@+id/Join_EditText_Phone_Confirm"
                         android:layout_weight="1"
                         android:background="@color/White"
-                        android:hint="이름"
+                        android:hint="인증번호"
                         android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:layout_marginBottom="1dp"
+                        android:inputType="number" />
+
+                    <Button
+                        android:text="확인"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_Button_Phone_Confirm"
+                        android:background="@color/White"
+                        android:layout_marginRight="1dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -186,7 +313,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:paddingTop="15dp">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -196,7 +324,7 @@
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:gravity="center_vertical"
-                    android:id="@+id/Terms_LinearLayout_Agreement">
+                    android:id="@+id/Join_LinearLayout_Join">
 
                     <TextView
                         android:text="가입하기"

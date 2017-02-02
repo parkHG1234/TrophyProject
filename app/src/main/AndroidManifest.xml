@@ -40,7 +40,7 @@
         <activity android:name=".User.ChangePhoneActivity"></activity>
         <activity android:name=".User.ChangeAreaActivity"></activity>
         <activity android:name=".User.Terms"></activity>
-        <activity android:name=".User.MemberShip2"></activity>
+        <activity android:name=".User.Join"></activity>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
         App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
