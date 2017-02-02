@@ -18,13 +18,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_weight="1"
-        android:background="@color/WhiteGray">
+        android:background="@color/WhiteGray"
+        android:layout_weight="1">
     </android.support.v4.view.ViewPager>
 
     <devlight.io.library.ntb.NavigationTabBar
         android:background="@color/White"
-        android:layout_weight="6"
         android:id="@+id/ntb"
         app:ntb_animation_duration="200"
         app:ntb_active_color="@color/MainColor_Navy"
@@ -46,5 +45,6 @@
         app:ntb_badge_size="10sp"
         app:ntb_title_size="10sp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="6"/>
 </LinearLayout>
