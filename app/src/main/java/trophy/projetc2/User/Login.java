@@ -7,8 +7,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -25,10 +25,10 @@ import trophy.projetc2.R;
 
 public class Login extends AppCompatActivity {
 
-    protected EditText phone_Layout_EditText, pw_Layout_EditText;
-    protected Button login_button;
-    protected TextView join_button, search_button;
-    protected String phone, pw;
+    protected EditText Login_EditText_Phone, Login_EditText_Password;
+    protected LinearLayout Login_LinearLayout_Login;
+    protected TextView Login_TextView_Join, Login_TextView_FindPW;
+    protected String Phone, Password;
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -38,24 +38,24 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        phone_Layout_EditText = (EditText) findViewById(R.id.phone_Layout_EditText);
-        pw_Layout_EditText = (EditText) findViewById(R.id.pw_Layout_EditText);
-        login_button = (Button) findViewById(R.id.login_button);
-        join_button = (TextView) findViewById(R.id.join_button);
-        search_button = (TextView) findViewById(R.id.search_button);
+        Login_EditText_Phone = (EditText) findViewById(R.id.Login_EditText_Phone);
+        Login_EditText_Password = (EditText) findViewById(R.id.Login_EditText_Password);
+        Login_LinearLayout_Login = (LinearLayout) findViewById(R.id.Login_LinearLayout_Login);
+        Login_TextView_Join = (TextView) findViewById(R.id.Login_TextView_Join);
+        Login_TextView_FindPW = (TextView) findViewById(R.id.Login_TextView_FindPW);
 
-        login_button.setOnClickListener(new View.OnClickListener() {
+        Login_LinearLayout_Login.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            phone = phone_Layout_EditText.getText().toString();
-            pw = pw_Layout_EditText.getText().toString();
-            if(phone.equals("")) {
+            Phone = Login_EditText_Phone.getText().toString();
+            Password = Login_EditText_Password.getText().toString();
+            if(Phone.equals("")) {
                 Snackbar.make(v, "아이디를 입력해 주세요", Snackbar.LENGTH_SHORT).show();
-            } else if (pw.equals("")){
+            } else if (Password.equals("")){
                 Snackbar.make(v, "비밀번호를 입력해 주세요", Snackbar.LENGTH_SHORT).show();
             } else {
                 HttpClient user = new HttpClient();
-                String result = user.HttpClient("Trophy_part3", "Login_Confirm.jsp",phone,pw);
+                String result = user.HttpClient("Trophy_part3", "Login_Confirm.jsp", Phone, Password);
                 String[][] parseData = jsonParserListLogin(result);
                 Log.i("parsedData[0][0]", parseData[0][0]);
                 if(parseData[0][0].equals("isOk")){
@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
             }
         }});
 
-        join_button.setOnClickListener(new View.OnClickListener() {
+        Login_TextView_Join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Terms.class));
