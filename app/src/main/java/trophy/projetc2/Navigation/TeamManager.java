@@ -47,26 +47,22 @@ public class TeamManager extends AppCompatActivity {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.emblem),
-                        Color.RED
-                ).title("Heart")
-                        .badgeTitle("NTB")
+                        getResources().getDrawable(R.drawable.teammanager),Color.WHITE
+                )
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.emblem),
-                        Color.BLUE
-                ).title("Cup")
-                        .badgeTitle("with")
+                        getResources().getDrawable(R.drawable.teammanager_player),
+                        Color.WHITE
+                )
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.emblem),
-                        Color.GREEN
-                ).title("Diploma")
-                        .badgeTitle("state")
+                        getResources().getDrawable(R.drawable.teammanager),
+                        Color.WHITE
+                )
                         .build()
         );
         navigationTabBar.setModels(models);
@@ -75,17 +71,13 @@ public class TeamManager extends AppCompatActivity {
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);
         navigationTabBar.setBadgePosition(NavigationTabBar.BadgePosition.CENTER);
-        navigationTabBar.setIsBadged(true);
-        navigationTabBar.setIsTitled(true);
-        navigationTabBar.setIsTinted(true);
-        navigationTabBar.setIsBadgeUseTypeface(true);
-        navigationTabBar.setBadgeBgColor(Color.RED);
-        navigationTabBar.setBadgeTitleColor(Color.WHITE);
-        navigationTabBar.setIsSwiped(true);
-        navigationTabBar.setBgColor(Color.BLACK);
-        navigationTabBar.setBadgeSize(10);
-        navigationTabBar.setTitleSize(10);
-        navigationTabBar.setIconSizeFraction(1);
+//        navigationTabBar.setIsBadged(true);
+//        navigationTabBar.setIsTitled(true);
+//        navigationTabBar.setIsTinted(true);
+//        navigationTabBar.setIsBadgeUseTypeface(true);
+//        navigationTabBar.setIsSwiped(true);
+//        navigationTabBar.setBadgeSize(10);
+        //navigationTabBar.setTitleSize(10);
     }
     public static class PlaceholderFragment extends Fragment {
         /**

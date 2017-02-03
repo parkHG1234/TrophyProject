@@ -1,6 +1,7 @@
 package trophy.projetc2.Contest;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -159,7 +161,6 @@ public class Contest_Detail extends AppCompatActivity {
         date.setText(ContestsDetailParsedData[0][9]);
         recruitPeriod.setText(ContestsDetailParsedData[0][10] + " ~ " + ContestsDetailParsedData[0][11]);
         DetailInfo.setText(ContestsDetailParsedData[0][12]);
-
         Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+ContestsDetailParsedData[0][2]+".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
@@ -216,6 +217,9 @@ public class Contest_Detail extends AppCompatActivity {
                     else if (ParsedData_Check[0][0].equals("notTeam")) {
                         Snackbar.make(view,"대회 신청할 팀이 존재하지 않습니다", Snackbar.LENGTH_SHORT).show();
                     }
+                    else if (ParsedData_Check[0][0].equals("notDuty")) {
+                        Snackbar.make(view,"팀 대표만 대회신청할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
+                    }
                 }
 
             }
@@ -268,5 +272,9 @@ public class Contest_Detail extends AppCompatActivity {
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
         super.onBackPressed();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

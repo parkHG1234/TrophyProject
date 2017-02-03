@@ -32,6 +32,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -594,5 +595,9 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.d("Test", "exception " + e.getMessage());
         }
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

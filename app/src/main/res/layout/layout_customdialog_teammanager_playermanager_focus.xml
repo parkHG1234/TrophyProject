@@ -8,76 +8,113 @@
     >
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_height="180dp"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
-
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
             android:layout_weight="1">
 
-            <Button
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="New Button"
-                android:textColor="@color/White"
-                android:background="@color/colorPrimary"
-                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile"
                 android:layout_weight="1"
-                android:layout_marginBottom="3dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="New Button"
+                android:layout_weight="1">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor_Navy"
+                    android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor_Navy"
+                    android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor_Navy"
+                    android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor_Navy"
+                    android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:textColor="@color/White"
-                android:background="@color/colorPrimary"
-                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age"
-                android:layout_weight="1"
-                android:layout_marginBottom="3dp"/>
-
-            <Button
+                android:src="@drawable/phone"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone"
+                android:layout_weight="1" />
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="New Button"
                 android:textColor="@color/White"
-                android:background="@color/colorPrimary"
-                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex"
-                android:layout_weight="1"
-                android:layout_marginBottom="3dp"/>
-
-            <Button
+                android:src="@drawable/leader"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader"
+                android:layout_weight="1" />
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="New Button"
                 android:textColor="@color/White"
-                android:background="@color/colorPrimary"
-                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address"
-                android:layout_weight="1"
-                android:layout_marginBottom="3dp"/>
+                android:src="@drawable/out"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out"
+                android:layout_weight="1" />
 
-            <Button
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="."
                 android:textColor="@color/White"
                 android:background="@drawable/phone"
-                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_extra"
                 android:layout_weight="1"
-                android:layout_marginBottom="3dp"/>
-
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
+
+
 
 </LinearLayout>
 

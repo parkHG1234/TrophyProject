@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -49,7 +50,7 @@ import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
  */
 
 public class TeamManager_TeamIntroduce extends Fragment {
-
+    private TextView TeamManager_TeamIntro_TextView_TeamName;
     private Spinner TeamManager_TeamIntro_Spinner_Do;
     private Spinner TeamManager_TeamIntro_Spinner_Si;
     private EditText TeamManager_TeamIntro_EditText_HomeCourt;
@@ -76,6 +77,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.layout_navigation_teammanager_teamintroduce, container, false);
 
+        TeamManager_TeamIntro_TextView_TeamName = (TextView)rootView.findViewById(R.id.TeamManager_TeamIntro_TextView_TeamName);
         TeamManager_TeamIntro_Spinner_Do = (Spinner) rootView.findViewById(R.id.TeamManager_TeamIntro_Spinner_Do);
         TeamManager_TeamIntro_Spinner_Si = (Spinner) rootView.findViewById(R.id.TeamManager_TeamIntro_Spinner_Si);
         TeamManager_TeamIntro_EditText_HomeCourt = (EditText) rootView.findViewById(R.id.TeamManager_TeamIntro_EditText_HomeCourt);
@@ -90,7 +92,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
         String result = ContestHttp.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce.jsp", TeamManager_TeamName.toString());
         String[][] ContestsParsedList = jsonParserList_TeamIntroduce(result);
 
-
+        TeamManager_TeamIntro_TextView_TeamName.setText("  "+TeamManager_TeamName);
         adspin1 = ArrayAdapter.createFromResource(getContext(), R.array.spinner_do, android.R.layout.simple_spinner_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         TeamManager_TeamIntro_Spinner_Do.setAdapter(adspin1);
@@ -102,7 +104,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
         TeamManager_TeamIntro_EditText_Introduce.setText(parseredData[0][4]);
 
         if(parseredData[0][5].equals(".")) {
-            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
         }else {
@@ -112,7 +114,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
         }
         if(parseredData[0][6].equals(".")) {
-            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Image1);
         }else{
@@ -122,7 +124,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 .into(TeamManager_TeamIntro_ImageView_Image1);
         }
         if(parseredData[0][7].equals(".")){
-            Glide.with(getContext()).load(R.drawable.profile_basic_image)
+            Glide.with(getContext()).load(R.drawable.plus)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Image2);
@@ -133,7 +135,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                     .into(TeamManager_TeamIntro_ImageView_Image2);
         }
         if(parseredData[0][8].equals(".")){
-            Glide.with(getContext()).load(R.drawable.profile_basic_image)
+            Glide.with(getContext()).load(R.drawable.plus)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
         .into(TeamManager_TeamIntro_ImageView_Image3);

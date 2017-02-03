@@ -3,48 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Gray"
+    android:background="@color/White"
     >
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp">
-
-        <TextView
-            android:text="검 색"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/textView2"
-            android:textColor="@color/Black"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_weight="7" />
+            android:background="@color/MainColor_Navy"
+            android:layout_height="50dp">
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@color/White">
+            android:layout_marginLeft="10dp"
+            android:background="@color/White"
+            android:layout_marginTop="10dp"
+            android:layout_height="55dp">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPersonName"
-                android:text="Name"
+               android:hint="팀명을 입력해주세요."
                 android:id="@+id/Layout_Navigation_TeamSearch_EditText_TeamName"
                 android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/location1"
+                android:src="@drawable/search"
                 android:id="@+id/imageView2"
-                android:layout_weight="5" />
+                android:layout_weight="5"
+                android:scaleType="centerInside"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp" />
         </LinearLayout>
 
         <ListView
@@ -53,6 +52,8 @@
             android:layout_weight="1"
             android:id="@+id/Layout_Navigation_TeamSearch_ListView_TeamSearch"
             android:background="@color/White"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="30dp" />
     </LinearLayout>
-    </LinearLayout>
+</LinearLayout>

@@ -15,10 +15,12 @@
             android:layout_height="match_parent"
             android:src="@drawable/emblem"
             android:id="@+id/Layout_Navigation_TeamSearch_ImageView_Emblem"
-            android:layout_weight="8" />
+            android:layout_weight="8"
+            android:padding="5dp" />
 
         <TextView
             android:text="TextView"
+            android:textColor="@color/Black"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamName"

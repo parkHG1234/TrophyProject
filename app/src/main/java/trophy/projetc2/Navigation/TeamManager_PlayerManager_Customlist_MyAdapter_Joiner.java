@@ -103,12 +103,12 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address);
-                    final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone);
+                    final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
                         if(arrData.get(position).getFirst_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
@@ -128,7 +128,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex.setText(parsedData_Player_Focus[0][2]);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address.setText(parsedData_Player_Focus[0][3]);
                     //Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone.setText(parsedData_Player_Focus[0][4]);
-                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Phone.setOnClickListener(new View.OnClickListener() {
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:01073225945"));

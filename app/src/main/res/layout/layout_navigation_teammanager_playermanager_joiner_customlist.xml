@@ -7,71 +7,104 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_Root">
+        android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_Root"
+        android:layout_height="140dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/DarkGray"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/emblem"
+                android:background="@color/White"
+                app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"
+                android:background="@color/White"
+                android:textColor="@color/Black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_TextView_FirstName"
-                android:layout_weight="2"
-                android:gravity="center" />
+                android:layout_weight="2.4"
+                android:gravity="center"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/DarkGray"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/emblem"
+                android:background="@color/White"
+                app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"
+                android:textColor="@color/Black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/White"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_TextView_SecondName"
-                android:layout_weight="2"
-                android:gravity="center" />
+                android:layout_weight="2.4"
+                android:gravity="center"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/DarkGray"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/emblem"
+                android:background="@color/White"
+                app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textColor="@color/Black"
+                android:background="@color/White"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_TextView_ThirdName"
-                android:layout_weight="2"
-                android:gravity="center" />
+                android:layout_weight="2.4"
+                android:gravity="center"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

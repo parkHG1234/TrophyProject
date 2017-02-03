@@ -12,22 +12,24 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
-        android:layout_height="450dp"
-        android:layout_width="300dp">
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
         <ImageView
             app:srcCompat="@drawable/ad1"
             android:id="@+id/Layout_CustomDialog_Contest_AD_ImageView"
             android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="430dp" />
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/aaa"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_weight="20">
 
             <Button
                 android:text="자세히 보기"
@@ -60,7 +62,8 @@
             android:textColor="@color/Black"
             android:id="@+id/Layout_CustomDialog_Contest_AD_TextView"
             android:gravity="bottom|right"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:layout_weight="20" />
 
     </LinearLayout>
 

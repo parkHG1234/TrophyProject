@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_introduce"
+                android:id="@+id/imageView3"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  팀명"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView24"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_Navigation_TeamSearch_Focus_EditText_TeamName"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_address"
+                android:id="@+id/imageView32"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  팀 주소"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView241"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_Navigation_TeamSearch_Focus_EditText_TeamAddress"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_homecouty"
+                android:id="@+id/imageView33"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  홈코트 위치"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView244"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_Navigation_TeamSearch_Focus_EditText_HomeCourt"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_introduce"
+                android:id="@+id/imageView3233"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  팀 소개"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView243"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/text123123"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView3233444"
+                android:layout_weight="3.5"
+                android:padding="5dp"
+                android:visibility="invisible"
+                android:elevation="0dp" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_Navigation_TeamSearch_Focus_EditText_Introduce"
+                android:layout_weight="1"
+                android:textColor="@color/Black"
+                android:textSize="15dp"
+                android:gravity="top" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_introduce"
+                android:id="@+id/imageView32333"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  팀원 소개"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView2432"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/text1231233"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/Layout_Navigation_TeamSearch_Focus_ListView_TeamPlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/White"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/White">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/team_introduce"
+                android:id="@+id/imageView323333"
+                android:layout_weight="2"
+                android:padding="5dp" />
+
+            <TextView
+                android:text="  팀 사진"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView243222"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/text12312333"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:textSize="15dp"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Layout_Navigation_TeamSearch_Focus_LinearLayout_Image1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/White"
+            android:layout_height="220dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ad1"
+                    android:id="@+id/Layout_Navigation_TeamSearch_Focus_ImageView_Image1"
+                    android:padding="1dp"
+                    android:scaleType="fitXY"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Layout_Navigation_TeamSearch_Focus_LinearLayout_Image2"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/White"
+            android:layout_height="220dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ad1"
+                    android:id="@+id/Layout_Navigation_TeamSearch_Focus_ImageView_Image2"
+                    android:padding="1dp"
+                    android:scaleType="fitXY"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/Layout_Navigation_TeamSearch_Focus_LinearLayout_Image3"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/White"
+            android:layout_height="220dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ad1"
+                    android:id="@+id/Layout_Navigation_TeamSearch_Focus_ImageView_Image3"
+                    android:padding="1dp"
+                    android:scaleType="fitXY"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <Button
+            android:text="가입 신청"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Layout_Navigation_TeamSearch_Focus_Button_Join" />
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
