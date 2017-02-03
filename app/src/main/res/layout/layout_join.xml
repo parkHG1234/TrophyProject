@@ -50,9 +50,24 @@
                         android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:maxLines="1" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Name_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="필수 입력 항목입니다"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -81,9 +96,24 @@
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
                         android:inputType="textPassword"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:maxLines="1" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Password_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="필수 입력 항목입니다"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -113,9 +143,29 @@
                         android:paddingLeft="10dp"
                         android:inputType="textPassword"
                         android:textSize="14sp"
-                        android:layout_marginBottom="1dp" />
+                        android:maxLines="1" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Password_Confirm_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="비밀번호가 일치하지 않습니다."
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"></LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +204,9 @@
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
-                        android:elevation="1dp" />
+                        android:elevation="1dp"
+                        android:maxLines="1"
+                        android:maxLength="4" />
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -169,7 +221,9 @@
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:elevation="1dp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:maxLength="2" />
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -184,9 +238,96 @@
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:elevation="1dp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:maxLength="2" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Birth_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="정확한 생일을 입력해주세요"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="2dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"></LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="주소"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_gravity="center_vertical" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/White"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp">
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Join_Spinner_AddressDo"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="1dp" />
+
+                        <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/Join_Spinner_AddressSi"
+                            android:layout_weight="1"
+                            android:layout_marginRight="1dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Birth_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/basil"
+                    android:text="지정한 주소의 대회 알람을 받습니다"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="2dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -210,7 +351,6 @@
                         android:layout_weight="1"
                         android:background="@color/White"
                         android:layout_marginLeft="1dp"
-                        android:layout_marginBottom="1dp"
                         android:layout_marginTop="1dp"
                         android:gravity="center_vertical" />
 
@@ -221,11 +361,29 @@
                         android:id="@+id/Join_CheckBox_SexW"
                         android:layout_weight="1"
                         android:background="@color/White"
-                        android:layout_marginBottom="1dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Sex_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="필수 입력 항목입니다"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"></LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -255,7 +413,9 @@
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:maxLength="11" />
 
                     <Button
                         android:text="인증"
@@ -264,10 +424,29 @@
                         android:id="@+id/Join_Button_Phone"
                         android:background="@color/White"
                         android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp" />
+                        android:layout_marginRight="1dp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Phone_Warning"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="정확한 휴대전화번호를 입력해주세요"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"></LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -296,7 +475,9 @@
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
                         android:layout_marginBottom="1dp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:maxLength="6" />
 
                     <Button
                         android:text="확인"
