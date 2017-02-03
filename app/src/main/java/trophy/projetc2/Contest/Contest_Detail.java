@@ -161,7 +161,6 @@ public class Contest_Detail extends AppCompatActivity {
         date.setText(ContestsDetailParsedData[0][9]);
         recruitPeriod.setText(ContestsDetailParsedData[0][10] + " ~ " + ContestsDetailParsedData[0][11]);
         DetailInfo.setText(ContestsDetailParsedData[0][12]);
-
         Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+ContestsDetailParsedData[0][2]+".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
@@ -217,6 +216,9 @@ public class Contest_Detail extends AppCompatActivity {
                     }
                     else if (ParsedData_Check[0][0].equals("notTeam")) {
                         Snackbar.make(view,"대회 신청할 팀이 존재하지 않습니다", Snackbar.LENGTH_SHORT).show();
+                    }
+                    else if (ParsedData_Check[0][0].equals("notDuty")) {
+                        Snackbar.make(view,"팀 대표만 대회신청할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
 

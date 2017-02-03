@@ -16,8 +16,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/DarkGray"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -26,7 +26,8 @@
                 app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile"
                 android:layout_weight="1"
-                android:layout_margin="1dp" />
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"
@@ -47,8 +48,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/DarkGray"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -57,7 +58,8 @@
                 app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile"
                 android:layout_weight="1"
-                android:layout_margin="1dp" />
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"
@@ -78,8 +80,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/DarkGray"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -88,7 +90,8 @@
                 app:srcCompat="@drawable/teammanager_player"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile"
                 android:layout_weight="1"
-                android:layout_margin="1dp" />
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
 
             <TextView
                 android:text="TextView"

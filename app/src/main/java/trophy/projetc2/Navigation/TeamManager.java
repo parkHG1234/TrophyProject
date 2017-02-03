@@ -71,14 +71,13 @@ public class TeamManager extends AppCompatActivity {
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);
         navigationTabBar.setBadgePosition(NavigationTabBar.BadgePosition.CENTER);
-        navigationTabBar.setIsBadged(true);
-        navigationTabBar.setIsTitled(true);
-        navigationTabBar.setIsTinted(true);
-        navigationTabBar.setIsBadgeUseTypeface(true);
-        navigationTabBar.setIsSwiped(true);
-        navigationTabBar.setBadgeSize(10);
-        navigationTabBar.setTitleSize(10);
-        navigationTabBar.setIconSizeFraction(1);
+//        navigationTabBar.setIsBadged(true);
+//        navigationTabBar.setIsTitled(true);
+//        navigationTabBar.setIsTinted(true);
+//        navigationTabBar.setIsBadgeUseTypeface(true);
+//        navigationTabBar.setIsSwiped(true);
+//        navigationTabBar.setBadgeSize(10);
+        //navigationTabBar.setTitleSize(10);
     }
     public static class PlaceholderFragment extends Fragment {
         /**

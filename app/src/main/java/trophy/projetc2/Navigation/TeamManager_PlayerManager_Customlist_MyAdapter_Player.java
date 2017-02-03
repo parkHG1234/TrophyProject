@@ -92,6 +92,21 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         }
         //첫번째 프로필이 존재할경우
         if(FirstProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.teammanager_player).into(FirstProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            .into(FirstProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             FirstName.setText(arrData.get(position).getFirst_Name());
             FirstProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -115,7 +130,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -213,6 +228,21 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
         }
         if(SecondProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.teammanager_player).into(SecondProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            .into(SecondProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             SecondName.setText(arrData.get(position).getSecond_Name());
             SecondProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -236,7 +266,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -333,6 +363,22 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
             });
         }
         if(ThirdProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
+                Log.i("eeeee",En_Profile);
+                if(En_Profile.equals("."))
+                {
+                   //Glide.with(context).load(R.drawable.teammanager_player).into(ThirdProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            .into(ThirdProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             ThirdName.setText(arrData.get(position).getThird_Name());
             ThirdProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -350,13 +396,13 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
-                        if(arrData.get(position).getThird_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
