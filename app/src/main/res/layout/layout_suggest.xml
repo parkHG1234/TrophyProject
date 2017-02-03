@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/Sugegest_EditText"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:maxLength="150"
+        android:scrollHorizontally="false"
+        android:paddingLeft="15dp"
+        android:maxLines="12"
+        android:hint="150자로간단하게입력해주세요" />
+
+    <Button
+        android:id="@+id/Suggest_Button"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="공지사항 등록"
+        android:textSize="15dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:ems="10"
+        android:inputType="textMultiLine"/>
+</LinearLayout>
