@@ -83,8 +83,8 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             //TextView viewContest_Point = (TextView)convertView.findViewById(R.id.contest_point);
 
             viewContest_Title.setText(Contest_Title);
-            viewContest_Date.setText(Contest_Date);
-            viewContest_Place.setText(Contest_Place);
+            viewContest_Date.setText("│대회기간 "+Contest_Date);
+            viewContest_Place.setText("│대회장소 "+Contest_Place);
             viewContest_Num.setText(Contest_currentNum + " / " + Contest_maxNum);
             Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+Contest_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)

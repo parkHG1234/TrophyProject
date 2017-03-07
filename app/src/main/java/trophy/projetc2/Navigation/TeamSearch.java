@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -26,6 +28,7 @@ import trophy.projetc2.R;
  */
 
 public class TeamSearch extends AppCompatActivity{
+    ImageView Layout_Navigation_TeamSearch_Button_Back;
     EditText Layout_Navigation_TeamSearch_EditText_TeamName;
     ListView Layout_Navigation_TeamSearch_ListView_TeamSearch;
     TeamSearch_CustomList_Adapter adapter;
@@ -35,6 +38,7 @@ public class TeamSearch extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_teamsearch);
+        Layout_Navigation_TeamSearch_Button_Back = (ImageView)findViewById(R.id.Layout_Navigation_TeamSearch_Button_Back);
         Layout_Navigation_TeamSearch_ListView_TeamSearch = (ListView) findViewById(R.id.Layout_Navigation_TeamSearch_ListView_TeamSearch);
         Layout_Navigation_TeamSearch_EditText_TeamName = (EditText)findViewById(R.id.Layout_Navigation_TeamSearch_EditText_TeamName);
 
@@ -72,6 +76,12 @@ public class TeamSearch extends AppCompatActivity{
             public void onTextChanged(CharSequence arg0, int arg1, int arg2,
                                       int arg3) {
                 // TODO Auto-generated method stub
+            }
+        });
+        Layout_Navigation_TeamSearch_Button_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

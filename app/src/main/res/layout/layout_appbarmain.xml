@@ -5,22 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/White">
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar123"
                 android:layout_width="match_parent"
-                android:background="?attr/colorPrimary"
+                android:background="@android:color/white"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                android:layout_height="40dp" />
+                android:layout_height="40dp" >
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/main_title"
+                        android:layout_centerVertical="true"
+                        android:layout_centerInParent="true"
+                        android:padding="3dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/MainActivity_ActionBar_Drawer"
+                        android:src="@drawable/main_drawer"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/button16"
+            android:background="@color/MainColor1"
+            android:layout_height="2dp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/main_1"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:text="추천 스포츠 대회"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView20"
+            android:paddingLeft="8dp"
+            android:textColor="@color/MainColor1"
+            android:textStyle="normal|bold"
+            android:textSize="17dp"
+            android:paddingBottom="10dp" />
 
         <include layout="@layout/layout_main" />
 

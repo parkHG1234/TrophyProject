@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -154,7 +155,7 @@ public class Contest_Detail extends AppCompatActivity {
         }
         String[][] ContestsDetailParsedData = jsonParserList_getContestDetail(result);
 
-        title.setText(ContestsDetailParsedData[0][1]);
+        title.setText(ContestsDetailParsedData[0][1]+" │ ");
         host.setText(ContestsDetailParsedData[0][6]);
         management.setText(ContestsDetailParsedData[0][7]);
         support.setText(ContestsDetailParsedData[0][8]);

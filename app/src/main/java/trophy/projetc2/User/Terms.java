@@ -2,14 +2,19 @@ package trophy.projetc2.User;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.BaseActivity;
 import trophy.projetc2.R;
 
@@ -18,83 +23,86 @@ import trophy.projetc2.R;
  */
 
 public class Terms extends BaseActivity {
-    CheckBox Terms_CheckBox_All, Terms_CheckBox_1, Terms_CheckBox_2;
-    ScrollView Terms_ScrollView_Main, Terms_ScrollView_1, Terms_ScrollView_2;
-    LinearLayout Terms_LinearLayout_NoAgreement, Terms_LinearLayout_Agreement;
-    TextView Terms_TextView_Warnning;
-
+    ImageView Terms_ImageView_Back;
+    ImageView User_Terms_ImageView_Agree1, User_Terms_ImageView_Agree2, User_Terms_ImageView_Agree3;
+    Button User_Terms_Button_Allagree;
+    String Agree1 = "disagree", Agree2 = "disagree", Agree3 = "disagree";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_terms);
 
-        Terms_CheckBox_All = (CheckBox) findViewById(R.id.Terms_CheckBox_All);
-        Terms_CheckBox_1 = (CheckBox) findViewById(R.id.Terms_CheckBox_1);
-        Terms_CheckBox_2 = (CheckBox) findViewById(R.id.Terms_CheckBox_2);
-        Terms_ScrollView_Main = (ScrollView) findViewById(R.id.Terms_ScrollView_Main);
-        Terms_ScrollView_1 = (ScrollView) findViewById(R.id.Terms_ScrollView_1);
-        Terms_ScrollView_2 = (ScrollView) findViewById(R.id.Terms_ScrollView_2);
-        Terms_LinearLayout_NoAgreement = (LinearLayout) findViewById(R.id.Terms_LinearLayout_NoAgreement);
-        Terms_LinearLayout_Agreement = (LinearLayout) findViewById(R.id.Terms_LinearLayout_Agreement);
-        Terms_TextView_Warnning = (TextView) findViewById(R.id.Terms_TextView_Warnning);
+        Terms_ImageView_Back  = (ImageView)findViewById(R.id.Terms_ImageView_Back);
+        User_Terms_ImageView_Agree1 = (ImageView)findViewById(R.id.User_Terms_ImageView_Agree1);
+        User_Terms_ImageView_Agree2 = (ImageView)findViewById(R.id.User_Terms_ImageView_Agree2);
+        User_Terms_ImageView_Agree3 = (ImageView)findViewById(R.id.User_Terms_ImageView_Agree3);
+        User_Terms_Button_Allagree = (Button)findViewById(R.id.User_Terms_Button_Allagree);
 
-        Terms_TextView_Warnning.setText("");
-
-        Terms_LinearLayout_NoAgreement.setOnClickListener(new View.OnClickListener() {
+        Terms_ImageView_Back.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
             }
         });
-
-        Terms_LinearLayout_Agreement.setOnClickListener(new View.OnClickListener() {
+        User_Terms_ImageView_Agree1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (Terms_CheckBox_1.isChecked() && Terms_CheckBox_2.isChecked()) {
-                    startActivity(new Intent(Terms.this, Join.class));
-                    finish();
-                } else {
-                    Terms_TextView_Warnning.setText("트로피 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해 주세요");
+            public void onClick(View view) {
+                if(Agree1.equals("disagree")){
+                    User_Terms_ImageView_Agree1.setImageResource(R.drawable.agree);
+                    Agree1="agree";
+                }
+                else{
+                    User_Terms_ImageView_Agree1.setImageResource(R.drawable.disagree);
+                    Agree1="disagree";
                 }
             }
         });
-
-        Terms_ScrollView_1.setOnTouchListener(new View.OnTouchListener() {
+        User_Terms_ImageView_Agree2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                    Terms_ScrollView_Main.requestDisallowInterceptTouchEvent(false);
-                else
-                    Terms_ScrollView_Main.requestDisallowInterceptTouchEvent(true);
-
-                return false;
-            }
-        });
-
-        Terms_ScrollView_2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                    Terms_ScrollView_Main.requestDisallowInterceptTouchEvent(false);
-                else
-                    Terms_ScrollView_Main.requestDisallowInterceptTouchEvent(true);
-
-                return false;
-            }
-        });
-
-        Terms_CheckBox_All.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (Terms_CheckBox_All.isChecked()) {
-                    Terms_CheckBox_1.setChecked(true);
-                    Terms_CheckBox_2.setChecked(true);
-                } else {
-                    Terms_CheckBox_1.setChecked(false);
-                    Terms_CheckBox_2.setChecked(false);
+            public void onClick(View view) {
+                if(Agree2.equals("disagree")){
+                    User_Terms_ImageView_Agree2.setImageResource(R.drawable.agree);
+                    Agree2="agree";
+                }
+                else{
+                    User_Terms_ImageView_Agree2.setImageResource(R.drawable.disagree);
+                    Agree2="disagree";
                 }
             }
         });
+        User_Terms_ImageView_Agree3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Agree3.equals("disagree")){
+                    User_Terms_ImageView_Agree3.setImageResource(R.drawable.agree);
+                    Agree3="agree";
+                }
+                else{
+                    User_Terms_ImageView_Agree3.setImageResource(R.drawable.disagree);
+                    Agree3="disagree";
+                }
+            }
+        });
+        User_Terms_Button_Allagree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Agree1.equals("agree")&&Agree2.equals("agree")&&Agree3.equals("agree")){
+                    Intent intent1 = new Intent(Terms.this,Join.class);
+                    startActivity(intent1);
 
+                }
+                else{
+                    Snackbar.make(view,"모든 약관의 동의하셔야 가입이 진행됩니다.",Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

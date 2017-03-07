@@ -12,16 +12,19 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     String[][] parseredData_AddToken, parseredData_user, parseredData_teammake;
     public static Activity activity;
 
+    DrawerLayout drawer;
     SharedPreferences preferences; //캐쉬 데이터 생성
     SharedPreferences.Editor editor; //캐쉬 데이터 에디터 생성
     ImageView Main_Navigation_ImageView_Profile;
@@ -71,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         activity = MainActivity.this;
@@ -79,13 +82,22 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         inflater = getLayoutInflater();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar123);
-        toolbar.setTitle("트로피");
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ImageView MainActivity_ActionBar_Drawer = (ImageView)toolbar.findViewById(R.id.MainActivity_ActionBar_Drawer);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        MainActivity_ActionBar_Drawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("aa","tt");
+                drawer.openDrawer(Gravity.LEFT);
+            }
+        });
+
+
         ListView listView = (ListView) findViewById(R.id.Contest_ListView_contest);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
@@ -108,15 +120,14 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_TextView_Name = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Name);
         final TextView Main_Navigation_TextView_Team = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Team);
         final Button Main_Navigation_Button_SportChoice = (Button) aa.findViewById(R.id.Main_Navigation_Button_SportChoice);
-        final Button Main_Navigation_Button_TeamMake = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
-        final Button Main_Navigation_Button_TeamManager = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
-        final Button Main_Navigation_Button_TeamSearch = (Button) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
-        final Button Main_Navigation_Button_LastContest = (Button) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
+        final ImageButton Main_Navigation_Button_TeamMake = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
+        final ImageButton Main_Navigation_Button_TeamManager = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
+        final ImageButton Main_Navigation_Button_TeamSearch = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
+        final ImageButton Main_Navigation_Button_LastContest = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
         final Button Main_Navigation_Button_Notice = (Button) aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
-        final Button Main_Navigation_Button_Setting = (Button) aa.findViewById(R.id.Main_Navigation_Button_Setting);
-        final Button Main_Navigation_Button_Logout = (Button) aa.findViewById(R.id.Main_Navigation_Button_Logout);
-        final Button Main_Navigation_Button_Change_PersonalInfo = (Button) aa.findViewById(R.id.Main_Navigation_Button_Change_PersonalInfo);
+        final ImageButton Main_Navigation_Button_Setting = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_Setting);
+        final ImageButton Main_Navigation_Button_Logout = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_Logout);
 
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
@@ -134,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent_Login = new Intent(MainActivity.this, Login.class);
                     startActivity(intent_Login);
-                    finish();
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+
                 }
             });
         } else { ///////////////////////////로그인시
@@ -163,7 +175,15 @@ public class MainActivity extends AppCompatActivity {
             }
             Main_Navigation_TextView_Name.setText(Name);
             Main_Navigation_TextView_Team.setText(Team);
-
+            Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //개인정보 수정
+                    Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
+                    intent.putExtra("TeamName", Team);
+                    startActivity(intent);
+                }
+            });
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -236,37 +256,27 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-        // 개인정보 수정
-        Main_Navigation_Button_Change_PersonalInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Pk.equals(".")) {
-                    Snackbar.make(view, "로그인을 해주세요", Snackbar.LENGTH_LONG)
-                            .show();
-                } else {
-                    Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
-                    intent.putExtra("TeamName", Team);
-                    startActivity(intent);
-                }
-            }
-        });
-
-
         //스포츠 버튼 이미지 변경
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         String sport = preferences.getString("sportType", "");
         if (sport.equals("basketball")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball_a);
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball);
         } else if (sport.equals("baseball")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball_a);
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball);
         } else if (sport.equals("Coach")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.badminton_a);
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.badminton);
         } else if (sport.equals("balling")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.balling_a);
-        } else if (sport.equals("biking")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.biking_a);
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball);
         } else if (sport.equals("soccer")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.soccer_a);
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.soccer);
+        }else if (sport.equals("football")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.football);
+        }else if (sport.equals("golf")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.golf);
+        }else if (sport.equals("volleyball")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.volleyball);
+        }else if (sport.equals("billiards")) {
+            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.billiards);
         }
 
 
@@ -584,5 +594,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public void onBackPressed() {
+      //  super.onBackPressed();
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawers();
+        }
+        else{
+            finish();
+        }
     }
 }

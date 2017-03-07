@@ -1,31 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:text="참가신청서"
+    android:layout_height="match_parent"
+    android:background="@color/backColor">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2"
-        android:id="@+id/textView26"
-        android:textSize="20dp"
-        android:textStyle="normal|bold"
-        android:gravity="center" />
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참가신청서"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Contest_Detail_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/MainColor1"
+        android:layout_height="2dp"
+        android:layout_marginBottom="10dp" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.15">
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <TextView
             android:text="참가팀명"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/aa"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:textStyle="normal|bold"
-            android:paddingLeft="10dp"
-            android:gravity="bottom" />
+            android:gravity="bottom"
+            android:textColor="@color/Black"
+            android:textSize="15dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -34,46 +58,74 @@
             android:id="@+id/Contest_Detail_Form_Button_TeamName"
             android:layout_weight="1"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:text="gggg"
+            android:textColor="@color/White"
+            android:background="@color/MainColor1"
+            android:textSize="15dp"
+
+            android:gravity="left|center_vertical|center_horizontal"
+            android:paddingLeft="10dp"
+
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/MainColor1"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.15">
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <TextView
             android:text="참가팀대표명"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/bb"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:textStyle="normal|bold"
-            android:paddingLeft="10dp"
-            android:gravity="bottom" />
+            android:gravity="bottom"
+            android:textColor="@color/Black"
+            android:textSize="15dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPersonName"
             android:id="@+id/Contest_Detail_Form_Button_TeamLeader"
             android:layout_weight="1"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:text="gggg"
+            android:textColor="@color/Black"
+            android:background="@color/backColor"
+            android:textSize="15dp"
+            android:gravity="bottom|left|center_vertical|center_horizontal"
+            android:paddingLeft="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/MainColor1"/>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1.15">
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <TextView
             android:text="참가팀대표번호"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/cc"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:textStyle="normal|bold"
-            android:paddingLeft="10dp"
-            android:gravity="bottom" />
+            android:gravity="bottom"
+            android:textColor="@color/Black"
+            android:textSize="15dp"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,14 +133,27 @@
             android:id="@+id/Contest_Detail_Form_Button_TeamPhone"
             android:layout_weight="1"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:text="gggg"
+            android:textColor="@color/Black"
+            android:background="@color/backColor"
+            android:textSize="15dp"
+            android:gravity="bottom|left|center_vertical|center_horizontal"
+            android:paddingLeft="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/MainColor1"/>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.6">
+        android:layout_weight="0.5"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -105,7 +170,7 @@
                 android:textSize="15dp"
                 android:textStyle="normal|bold"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp" />
+                android:textColor="@color/Black" />
 
             <TextView
                 android:text="0명 참가"

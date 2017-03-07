@@ -19,6 +19,8 @@ import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.MainActivity.activity;
+
 /**
  * Created by ldong on 2017-01-16.
  */
@@ -67,7 +69,9 @@ public class Login extends AppCompatActivity {
 
                     Intent MainActivityintent =  new Intent(Login.this, MainActivity.class);
                     startActivity(MainActivityintent);
+                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                     finish();
+                    activity.finish();
 
                 }else{
                     Snackbar.make(getCurrentFocus(), "아이디 비밀번호를 확인해 주세요", Snackbar.LENGTH_SHORT).show();
@@ -80,6 +84,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login.this, Terms.class));
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
     }

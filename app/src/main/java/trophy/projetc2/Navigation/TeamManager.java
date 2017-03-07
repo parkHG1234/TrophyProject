@@ -1,5 +1,6 @@
 package trophy.projetc2.Navigation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import static trophy.projetc2.Navigation.TeamManager_PlayerManager.timer;
  */
 
 public class TeamManager extends AppCompatActivity {
+    Activity TeamManager_Activity;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     static String TeamManager_TeamName;
@@ -33,6 +35,7 @@ public class TeamManager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_teammanager);
+        TeamManager_Activity = this;
         Intent intent = getIntent();
         TeamManager_TeamName = intent.getStringExtra("TeamName");
         //프래그먼트 정의

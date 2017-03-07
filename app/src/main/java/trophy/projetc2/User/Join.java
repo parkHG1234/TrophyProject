@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.BaseActivity;
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
@@ -393,7 +394,18 @@ public class Join extends BaseActivity {
                 if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag) {
                     HttpClient user = new HttpClient();
                     user.HttpClient("Trophy_part3", "MemberShip.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
-                    finish();
+                    final MaterialDialog TeamPlayerDialog = new MaterialDialog(getApplicationContext());
+                    TeamPlayerDialog
+                            .setTitle("확인")
+                            .setMessage("회원가입이 완료되었습니다.")
+                            .setCanceledOnTouchOutside(true)
+                            .setPositiveButton("확인", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    finish();
+                                }
+                            });
+                    TeamPlayerDialog.show();
                 } else {
                     Snackbar.make(v, "입력하신 정보를 확인해주세요", Snackbar.LENGTH_LONG).show();
                 }
@@ -489,5 +501,11 @@ public class Join extends BaseActivity {
         }
 
         return false;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

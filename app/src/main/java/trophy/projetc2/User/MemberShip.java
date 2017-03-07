@@ -31,6 +31,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.BaseActivity;
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
@@ -119,7 +120,6 @@ public class MemberShip extends BaseActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         final BackThread thread = new BackThread();
-
 
         adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do, android.R.layout.simple_spinner_item);
         adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

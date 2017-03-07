@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import trophy.projetc2.R;
 
 /**
@@ -69,7 +70,7 @@ public class TeamSearch_CustomList_Adapter extends BaseAdapter{
                 Glide.with(context).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                         .into(Layout_Navigation_TeamSearch_ImageView_Emblem);
             } else {
-                Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(Layout_Navigation_TeamSearch_ImageView_Emblem);

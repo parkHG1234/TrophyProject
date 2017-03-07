@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1c1e26">
+    android:background="@color/backColor">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="180dp">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"></LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="120dp">
 
         <TextView
-            android:text="관심 스포츠를 정해주세요"
+            android:text="관심 스포츠를 선택해주세요."
+            android:textSize="20dp"
+            android:textColor="@color/Black"
+            android:textStyle="normal|bold"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/textView"
-            android:gravity="center_horizontal"
-            android:textSize="18sp"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="300dp">
+            android:layout_weight="1.1"
+            android:gravity="center"
+            />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -36,30 +34,29 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/badminton"
                 android:id="@+id/layout_choice_coach_button"
                 android:layout_weight="1"
-                android:background="@drawable/badminton_a"
-                android:layout_margin="20dp" />
+                android:background="@color/backColor" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/layout_choice_baseball_button"
-                android:layout_weight="1"
-                android:background="@drawable/baseball_a"
-                android:layout_margin="20dp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/basketball"
                 android:id="@+id/layout_choice_basketball_button"
                 android:layout_weight="1"
-                android:background="@drawable/basketball_a"
-                android:layout_margin="20dp" />
+                android:background="@color/backColor"/>
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/soccer"
+                android:id="@+id/layout_choice_soccer_button"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,32 +65,68 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <Button
-                android:layout_height="match_parent"
-                android:id="@+id/layout_choice_soccer_button"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:background="@drawable/soccer_a"
-                android:layout_margin="20dp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/layout_choice_biking_button"
-                android:layout_weight="1"
-                android:background="@drawable/biking_a"
-                android:layout_margin="20dp" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/bowling"
                 android:id="@+id/layout_choice_balling_button"
                 android:layout_weight="1"
-                android:background="@drawable/balling_a"
-                android:layout_margin="20dp" />
+                android:background="@color/backColor"/>
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/billiards"
+                android:id="@+id/imageButton8"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseball"
+                android:id="@+id/layout_choice_baseball_button"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/volleyball"
+                android:id="@+id/imageButton12"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/golf"
+                android:id="@+id/imageButton11"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/football"
+                android:id="@+id/imageButton10"
+                android:layout_weight="1"
+                android:background="@color/backColor"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/otherbutton"
+            android:id="@+id/imageButton2"
+            android:layout_weight="1.2"
+            android:background="@color/backColor"/>
+    </LinearLayout>
 </LinearLayout>

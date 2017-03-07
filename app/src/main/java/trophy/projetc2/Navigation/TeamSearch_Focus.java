@@ -57,7 +57,7 @@ public class TeamSearch_Focus extends AppCompatActivity {
     ImageView Layout_Navigation_TeamSearch_Focus_ImageView_Image2;
     ImageView Layout_Navigation_TeamSearch_Focus_ImageView_Image3;
 
-    TeamManager_PlayerManager_Customlist_MyAdapter_Player TeamManager_PlayerManager_Customlist_MyAdapter_Player;
+    TeamSearch_Focus_Customlist_MyAdapter TeamSearch_Focus_Customlist_MyAdapter;
     ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player> TeamManager_PlayerManager_Customlist_MyData_Player;
 
     private String Pk, TeamName, TeamAddress_Do, TeamAddress_Si, HomeCourt, Introduce, Emblem, Image1, Image2, Image3;
@@ -120,9 +120,9 @@ public class TeamSearch_Focus extends AppCompatActivity {
         String result12 = http_Player.HttpClient("Trophy_part1","TeamManager_Player.jsp",TeamName);
         parsedData_Player = jsonParserList_Player(result12);
         setData_Player();
-        TeamManager_PlayerManager_Customlist_MyAdapter_Player = new TeamManager_PlayerManager_Customlist_MyAdapter_Player(TeamSearch_Focus.this, TeamManager_PlayerManager_Customlist_MyData_Player);
+        TeamSearch_Focus_Customlist_MyAdapter = new TeamSearch_Focus_Customlist_MyAdapter(TeamSearch_Focus.this, TeamManager_PlayerManager_Customlist_MyData_Player);
         //리스트뷰에 어댑터 연결
-        Layout_Navigation_TeamSearch_Focus_ListView_TeamPlayer.setAdapter(TeamManager_PlayerManager_Customlist_MyAdapter_Player);
+        Layout_Navigation_TeamSearch_Focus_ListView_TeamPlayer.setAdapter(TeamSearch_Focus_Customlist_MyAdapter);
 
         if(Image1.equals(".")) {
             Layout_Navigation_TeamSearch_Focus_LinearLayout_Image1.setVisibility(View.GONE);
