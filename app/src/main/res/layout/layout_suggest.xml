@@ -3,25 +3,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <EditText
         android:id="@+id/Sugegest_EditText"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="450dp"
+        android:hint="150자로간단하게입력해주세요"
         android:maxLength="150"
-        android:scrollHorizontally="false"
-        android:paddingLeft="15dp"
         android:maxLines="12"
-        android:hint="150자로간단하게입력해주세요" />
+        android:paddingLeft="15dp"
+        android:scrollHorizontally="false" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="문의하신 내용에 대한 원인파악 및 원활한 상담을 위하여 이메일을 수집합니다.수집된 개인정보는 개인정보의 수집 및 이용 목적이 달성되면 관련 법령 또는 회사 내부 방침에 의해 보존할 필요가 있는 경우를 제외하고는 지체없이 파기 됩니다."
+        android:textAlignment="textStart"
+        android:textSize="15dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/Suggest_CheckBox"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="위 내용에 동의합니다." />
+    </LinearLayout>
 
     <Button
         android:id="@+id/Suggest_Button"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:text="공지사항 등록"
-        android:textSize="15dp"
         android:layout_gravity="center"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:ems="10"
-        android:inputType="textMultiLine"/>
+        android:inputType="textMultiLine"
+        android:text="건의사항 등록"
+        android:textSize="15dp" />
 </LinearLayout>

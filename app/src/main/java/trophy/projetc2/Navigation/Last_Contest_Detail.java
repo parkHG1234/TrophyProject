@@ -48,7 +48,7 @@ public class Last_Contest_Detail extends AppCompatActivity {
         Last_Contest_Detail_ListView = (ListView) findViewById(R.id.Last_Contest_Detail_ListView);
         Last_Contest_Detail_TextView_ContestName = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_ContestName);
         Last_Contest_Detail_TextView_ContestDate = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_ContestDate);
-        Last_Contest_Detail_TextView_Award = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_Award);
+//        Last_Contest_Detail_TextView_Award = (TextView)findViewById(R.id.Last_Contest_Detail_TextView_Award);
 
 
         HttpClient http_Last_Contest_Detail_Search = new HttpClient();
@@ -62,8 +62,8 @@ public class Last_Contest_Detail extends AppCompatActivity {
         Last_Contest_Detail_TextView_ContestName.setText(Title);
         Last_Contest_Detail_TextView_ContestDate.setText(ContestDate);
         Award = parsedData_Last_Contest_Detail_Search[0][2].split("/");
-        for(int i = 0; i<Award.length;i++)
-                Last_Contest_Detail_TextView_Award.setText(Last_Contest_Detail_TextView_Award.getText()+Award[i].toString()+"\n");
+//        for(int i = 0; i<Award.length;i++)
+//                Last_Contest_Detail_TextView_Award.setText(Last_Contest_Detail_TextView_Award.getText()+Award[i].toString()+"\n");
         int cnt = 0;
         for (int i = 0; i < imgs.length / 3; i++) {
             Last_Contest_Detail_CustomList_MyData.add(new Last_Contest_Detail_CustomList_MyData(parsedData_Last_Contest_Detail_Search[0][0], parsedData_Last_Contest_Detail_Search[0][1], imgs[cnt], imgs[cnt + 1], imgs[cnt + 2], parsedData_Last_Contest_Detail_Search[0][2], String.valueOf(cnt)));

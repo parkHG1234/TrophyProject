@@ -14,19 +14,34 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/emblem"
+            android:scaleType="fitXY"
             android:id="@+id/Layout_Last_Contest_detail_ImageView_first"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:layout_weight="1" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/emblem"
+            android:scaleType="fitXY"
             android:id="@+id/Layout_Last_Contest_detail_ImageView_second"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:layout_weight="1" />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/emblem"
+            android:scaleType="fitXY"
             android:id="@+id/Layout_Last_Contest_detail_ImageView_third"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>
