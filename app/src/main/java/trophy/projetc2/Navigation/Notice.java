@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListViewCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,27 +27,86 @@ import trophy.projetc2.R;
 
 public class Notice extends AppCompatActivity {
 
-    ExpandableListView Notice_ListView;
+    TextView Notice_TextView_MainTitle, Notice_TextView_MainContent;
+    ListView Notice_ListView;
+    ImageView Notice_ImageView_ListTop, Notice_ImageView_ListBottom, Notice_ImageVIew_Back;
     Notice_Adapter Notice_Adapter;
     ArrayList<Notice_Setting> Notice_arrData;
+    String[][] ContestsParsedList;
+    static int Notice_Num_Position = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_notice);
-
-        Notice_ListView = (ExpandableListView)findViewById(R.id.Notice_ListView);
-
+        Notice_ImageVIew_Back = (ImageView)findViewById(R.id.Notice_ImageVIew_Back);
+        Notice_TextView_MainTitle = (TextView)findViewById(R.id.Notice_TextView_MainTitle);
+        Notice_ListView = (ListView) findViewById(R.id.Notice_ListView);
+        Notice_TextView_MainContent = (TextView)findViewById(R.id.Notice_TextView_MainContent);
+        Notice_ImageView_ListTop = (ImageView) findViewById(R.id.Notice_ImageView_ListTop);
+        Notice_ImageView_ListBottom = (ImageView) findViewById(R.id.Notice_ImageView_ListBottom);
 
         HttpClient ContestHttp = new HttpClient();
-        String result = ContestHttp.HttpClient("Trophy_part2", "notice_download.jsp");
-        String[][] ContestsParsedList = jsonParserList_getNotice(result);
+        String result = ContestHttp.HttpClient("Trophy_part1", "Notice.jsp");
+        ContestsParsedList = jsonParserList_getNotice(result);
 
         Notice_arrData = new ArrayList<Notice_Setting>();
         for (int i = 0; i < ContestsParsedList.length; i++) {
-            Notice_arrData.add(new Notice_Setting(ContestsParsedList[i][0], ContestsParsedList[i][1], ContestsParsedList[i][2]));
+            Notice_arrData.add(new Notice_Setting(ContestsParsedList[i][0], ContestsParsedList[i][1], ContestsParsedList[i][2],ContestsParsedList[i][3]));
         }
         Notice_Adapter = new Notice_Adapter(this, Notice_arrData);
         Notice_ListView.setAdapter(Notice_Adapter);
+        Notice_TextView_MainTitle.setText(ContestsParsedList[0][1]);
+        Notice_TextView_MainContent.setText(ContestsParsedList[0][2]);
+        Notice_ListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Notice_TextView_MainTitle.setText(ContestsParsedList[i][1]);
+                Notice_TextView_MainContent.setText(ContestsParsedList[i][2]);
+                view.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                Log.i("test", "test123213");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        Notice_ImageView_ListTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Notice_Num_Position == 0){
+
+                }else{
+                    Notice_Num_Position--;
+                    Notice_TextView_MainTitle.setText(ContestsParsedList[Notice_Num_Position][1]);
+                    Notice_TextView_MainContent.setText(ContestsParsedList[Notice_Num_Position][2]);
+                    Notice_Adapter.notifyDataSetChanged();
+                    Notice_ListView.setSelection(Notice_Num_Position);
+                }
+            }
+        });
+        Notice_ImageView_ListBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Notice_Num_Position+1 == ContestsParsedList.length){
+
+                }else{
+                    Notice_Num_Position++;
+                    Notice_TextView_MainTitle.setText(ContestsParsedList[Notice_Num_Position][1]);
+                    Notice_TextView_MainContent.setText(ContestsParsedList[Notice_Num_Position][2]);
+                    Notice_Adapter.notifyDataSetChanged();
+                    Notice_ListView.setSelection(Notice_Num_Position);
+                }
+
+            }
+        });
+        Notice_ImageVIew_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
     }
 
 
@@ -54,7 +117,7 @@ public class Notice extends AppCompatActivity {
             JSONArray jarr = json.getJSONArray("List");
 
 
-            String[] jsonName = {"notice_num", "notice_title", "notice_data"};
+            String[] jsonName = {"notice_num", "notice_title", "notice_data","notice_image"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
@@ -70,5 +133,10 @@ public class Notice extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

@@ -34,38 +34,28 @@ import trophy.projetc2.CapturePhotoUtils;
 import trophy.projetc2.ImageDownload;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Navigation.Last_Contest_ViewPager.Last_Contest_ViewPager_Pk;
+
 /**
  * Created by 박효근 on 2017-01-10.
  */
 
 public class Last_Contest_ImageView1 extends Fragment {
-    private static String Pk;
-    public Last_Contest_ImageView1(String Pk){
-        this.Pk = Pk ;
-    }
+//    public Last_Contest_ImageView1(String Pk){
+//        this.Pk = Pk ;
+//    }
     private ImageView Last_Contest_ImageView;
-    private ImageButton Last_Contest_ImageButton_Save;
+    private ImageView Last_Contest_ImageView_Save;
     private CapturePhotoUtils CapturePhotoUtils;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.layout_last_contest_imageview, container, false);
         Last_Contest_ImageView = (ImageView) rootView.findViewById(R.id.Last_Contest_ImageView);
-        Last_Contest_ImageButton_Save = (ImageButton)rootView.findViewById(R.id.Last_Contest_ImageButton_Save);
-        Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/last_contest/" +  Pk + "01.jpg")
+        Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/last_contest/" +  Last_Contest_ViewPager_Pk + "0.jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(Last_Contest_ImageView);
-
-        Last_Contest_ImageButton_Save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String imgUrl = "http://210.122.7.193:8080/Trophy_img/last_contest/" +  Pk + "01.jpg";
-                new ImageDownload(getContext()).execute(imgUrl);
-                Snackbar.make(v, "사진이저장되었습니다.", Snackbar.LENGTH_SHORT).show();
-            }
-        });
         return rootView;
     }
 

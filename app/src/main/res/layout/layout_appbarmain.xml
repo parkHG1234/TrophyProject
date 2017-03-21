@@ -50,13 +50,10 @@
         <Button
             android:layout_width="match_parent"
             android:id="@+id/button16"
-            android:background="@color/MainColor1"
-            android:layout_height="2dp" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/main_1"
+            android:background="@color/WhiteGray"
+            android:layout_height="1dp"
             android:layout_marginBottom="20dp" />
+
 
         <TextView
             android:text="추천 스포츠 대회"

@@ -59,10 +59,10 @@ public class Last_Contest_CustomList_Adapter extends BaseAdapter{
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getImage(), "utf-8");
             if (arrData.get(position).getImage().equals(".")) {
-                Glide.with(context).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                Glide.with(context).load(R.drawable.emblem)
                         .into(Layout_Last_Contest_ImageView);
             } else {
-                Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/" + En_Profile + ".jpg")
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(Layout_Last_Contest_ImageView);

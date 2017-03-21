@@ -7,195 +7,143 @@
     android:orientation="vertical"
     android:background="@color/White">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.8"
-        android:orientation="horizontal">
-
+        android:layout_height="40dp"
+        android:padding="5dp"
+        >
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.3"
-            android:text="대회명 : " />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 대회 상세보기"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Last_Contest_Detail_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
 
-        <TextView
-            android:id="@+id/Last_Contest_Detail_TextView_ContestName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.8"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.3"
-            android:text="대회날짜 : " />
-
-        <TextView
-            android:id="@+id/Last_Contest_Detail_TextView_ContestDate"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.5"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1.3"
-            android:text="수상팀 : " />
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="1"-->
-        <!--android:orientation="horizontal">-->
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/Last_Contest_Detail_TextView_Award"-->
-        <!--android:layout_weight="1" />-->
-        <!--</LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:src="@drawable/second_trophy" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.3"
-                    android:gravity="center_horizontal"
-                    android:text="2등" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:src="@drawable/second_trophy" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.3"
-                    android:gravity="center_horizontal"
-                    android:text="1등" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:src="@drawable/second_trophy" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.3"
-                    android:gravity="center_horizontal"
-                    android:text="3등" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="4"
-                    android:scaleType="fitXY" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/bbb" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:src="@drawable/aaa" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2" />
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ccc" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/White" />
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
 
-    <ListView
-        android:id="@+id/Last_Contest_Detail_ListView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:text="│대회명"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView18"
+                    android:layout_weight="1"
+                    android:textColor="@color/MainColor1"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    />
+
+                <TextView
+                    android:text="테스트테스트은행"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Last_Contest_Detail_TextView_ContestName"
+                    android:layout_weight="1"
+                    android:textColor="@color/Black"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <TextView
+                    android:text="│대회날짜"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView181"
+                    android:layout_weight="1"
+                    android:textColor="@color/MainColor1"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    />
+
+                <TextView
+                    android:text="테스트테스트은행"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Last_Contest_Detail_TextView_ContestDate"
+                    android:layout_weight="1"
+                    android:textColor="@color/Black"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    android:paddingLeft="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="│수상팀"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:id="@+id/textView1812"
+                    android:layout_weight="1"
+                    android:textColor="@color/MainColor1"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    />
+
+                <TextView
+                    android:text="테스트테스트은행"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Last_Contest_Detail_TextView_Award"
+                    android:layout_weight="1"
+                    android:textColor="@color/Black"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    android:paddingLeft="10dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+            <TextView
+                android:text="│대회사진"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:id="@+id/textView18122"
+                android:layout_weight="1"
+                android:textColor="@color/MainColor1"
+                android:textSize="15dp"
+                android:textStyle="normal|bold"
+                />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:id="@+id/Last_Contest_Detail_ListView"></ListView>
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>

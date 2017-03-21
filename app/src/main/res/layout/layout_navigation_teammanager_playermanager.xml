@@ -4,44 +4,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:background="@color/White"
-        android:text="  가입신청 인원"
-        android:textColor="@color/MainColor_Navy"
-        android:textSize="15dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:id="@+id/button8"
-        android:gravity="left|center_vertical|center_horizontal"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:textStyle="normal|bold" />
+        android:layout_height="match_parent">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/Layout_Navigation_TeamManager_ListView_Joiner"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <Button
+                android:background="@color/White"
+                android:text="  가입신청 인원"
+                android:textColor="@color/MainColor_Navy"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:id="@+id/button8"
+                android:gravity="left|center_vertical|center_horizontal"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:textStyle="normal|bold" />
 
-    <Button
-        android:background="@color/White"
-        android:text="  '클린쳐'팀 팀원"
-        android:textColor="@color/MainColor_Navy"
-        android:textSize="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/Layout_Navigation_TeamManager_Button_PlayerTitle"
-        android:textStyle="normal|bold"
-        android:gravity="left|center_vertical|center_horizontal" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/Layout_Navigation_TeamManager_ListView_Joiner"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/Layout_Navigation_TeamManager_ListView_Player"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
+            <Button
+                android:background="@color/White"
+                android:text="  '클린쳐'팀 팀원"
+                android:textColor="@color/MainColor_Navy"
+                android:textSize="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/Layout_Navigation_TeamManager_Button_PlayerTitle"
+                android:textStyle="normal|bold"
+                android:gravity="left|center_vertical|center_horizontal" />
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:id="@+id/Layout_Navigation_TeamManager_ListView_Player"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="50dp" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
 
 </LinearLayout>

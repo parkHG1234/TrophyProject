@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -26,6 +27,7 @@ public class Last_Contest extends AppCompatActivity{
 
     LinearLayout Last_Contest_Layout_Root;
     ListView Last_contest_ListView;
+    ImageView Last_Contest_Back;
     String[][] parsedData_Last_Contest_Search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class Last_Contest extends AppCompatActivity{
         setContentView(R.layout.layout_last_contest);
         Last_Contest_Layout_Root = (LinearLayout)findViewById(R.id.Last_Contest_Layout_Root);
         Last_contest_ListView = (ListView) findViewById(R.id.Last_contest_ListView);
+        Last_Contest_Back = (ImageView)findViewById(R.id.Last_Contest_Back);
 
         HttpClient http_Last_Contest_Search = new HttpClient();
         String result = http_Last_Contest_Search.HttpClient("Trophy_part2","Last_Contest.jsp");
@@ -53,6 +56,7 @@ public class Last_Contest extends AppCompatActivity{
                 Last_Contest_Detail_Intent.putExtra("Title",parsedData_Last_Contest_Search[position][1].toString());
                 Last_Contest_Detail_Intent.putExtra("ContestDate",parsedData_Last_Contest_Search[position][3].toString());
                 startActivity(Last_Contest_Detail_Intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
 
@@ -63,7 +67,21 @@ public class Last_Contest extends AppCompatActivity{
 
             }
         });
+        Last_Contest_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+
     public String[][] jsonParserList_Last_Contest(String pRecvServerPage){
         Log.i("Last_Contest_Search내용", pRecvServerPage);
         try{

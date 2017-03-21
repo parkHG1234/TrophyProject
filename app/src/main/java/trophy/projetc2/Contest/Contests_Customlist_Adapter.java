@@ -86,7 +86,7 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             viewContest_Date.setText("│대회기간 "+Contest_Date);
             viewContest_Place.setText("│대회장소 "+Contest_Place);
             viewContest_Num.setText(Contest_currentNum + " / " + Contest_maxNum);
-            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+Contest_Image+".jpg")
+            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/"+Contest_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(viewContest_Image);

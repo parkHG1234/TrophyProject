@@ -48,5 +48,13 @@
             android:textSize="15dp"
             android:textColor="@color/Black"/>
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/check"
+            android:id="@+id/Contest_Detail_Form_Player_CustomList_Check"
+            android:layout_weight="1"
+            android:padding="10dp" />
+
     </LinearLayout>
 </LinearLayout>

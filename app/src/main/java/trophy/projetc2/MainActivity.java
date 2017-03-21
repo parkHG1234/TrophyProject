@@ -56,6 +56,7 @@ import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Navigation.Notice;
 import trophy.projetc2.Navigation.Suggest;
+import trophy.projetc2.Navigation.TeamInfo;
 import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamManager;
 import trophy.projetc2.Navigation.TeamSearch;
@@ -63,7 +64,7 @@ import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
-    String Pk, Name, Team, Profile, Token = "hh";
+    String Pk, Name, Team, Profile, Token = "hh",Team_Pk;
     String[][] parseredData_AddToken, parseredData_user, parseredData_teammake;
     public static Activity activity;
 
@@ -102,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
         //navigationView.setNavigationItemSelectedListener(this);
 
         //유저 네비게이션바
-        HttpClient a = new HttpClient();
-        Log.i("결과", a.HttpClient("Web_basket", "NaviTeamInfo_Player.jsp", "park123"));
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         Pk = preferences.getString("Pk", ".");
 
@@ -120,14 +119,13 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_TextView_Name = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Name);
         final TextView Main_Navigation_TextView_Team = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Team);
         final Button Main_Navigation_Button_SportChoice = (Button) aa.findViewById(R.id.Main_Navigation_Button_SportChoice);
-        final ImageButton Main_Navigation_Button_TeamMake = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
-        final ImageButton Main_Navigation_Button_TeamManager = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
-        final ImageButton Main_Navigation_Button_TeamSearch = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
-        final ImageButton Main_Navigation_Button_LastContest = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
-        final Button Main_Navigation_Button_Notice = (Button) aa.findViewById(R.id.Main_Navigation_Button_Notice);
-        final Button Main_Navigation_Button_Suggest = (Button) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
-        final ImageButton Main_Navigation_Button_Setting = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_Setting);
-        final ImageButton Main_Navigation_Button_Logout = (ImageButton) aa.findViewById(R.id.Main_Navigation_Button_Logout);
+        final TextView Main_Navigation_Button_TeamMake = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
+        final TextView Main_Navigation_Button_TeamManager = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
+        final TextView Main_Navigation_Button_TeamSearch = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
+        final TextView Main_Navigation_Button_LastContest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
+        final TextView Main_Navigation_Button_Notice = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Notice);
+        final TextView Main_Navigation_Button_Suggest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
+        final TextView Main_Navigation_Button_Logout = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Logout);
 
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
@@ -157,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             Name = parseredData_user[0][0];
             Team = parseredData_user[0][1];
             Profile = parseredData_user[0][2];
+            Team_Pk = parseredData_user[0][3];
             //프로필 관리
             try {
                 String Profile1 = URLEncoder.encode(Profile, "utf-8");
@@ -166,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             .skipMemoryCache(true)
                             .into(Main_Navigation_ImageView_Profile);
                 } else {
-                    Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_img/profile/" + Pk + ".jpg").diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
+                    Glide.with(MainActivity.this).load("http://210.122.7.193:8080/Trophy_img/profile/" + Profile1 + ".jpg").diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
                             .skipMemoryCache(true)
                             .into(Main_Navigation_ImageView_Profile);
                 }
@@ -331,7 +330,9 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_TeamSearch = new Intent(MainActivity.this, TeamManager.class);
+                Intent intent_TeamSearch = new Intent(MainActivity.this, TeamInfo.class);
+                intent_TeamSearch.putExtra("User_Pk", Pk);
+                intent_TeamSearch.putExtra("Team_Pk", Team_Pk);
                 intent_TeamSearch.putExtra("TeamName", Team);
                 startActivity(intent_TeamSearch);
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
@@ -344,6 +345,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent_Notice = new Intent(MainActivity.this, Notice.class);
                 startActivity(intent_Notice);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         Main_Navigation_Button_Suggest.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent_Suggest = new Intent(MainActivity.this, Suggest.class);
                     intent_Suggest.putExtra("Pk", Pk);
                     startActivity(intent_Suggest);
-
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
             }
         });
@@ -422,7 +424,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1", "msg2", "msg3"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

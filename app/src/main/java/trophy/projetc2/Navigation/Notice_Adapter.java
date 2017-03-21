@@ -8,6 +8,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
@@ -16,87 +17,52 @@ import java.util.ArrayList;
 
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Navigation.Notice.Notice_Num_Position;
+
 /**
  * Created by 박지훈 on 2016-06-24.
  */
-public class Notice_Adapter extends BaseExpandableListAdapter {
+public class Notice_Adapter extends BaseAdapter {
     private Context context;
     private ArrayList<Notice_Setting> arrData;
     private LayoutInflater inflater;
-
-    String[][] parsedData;
-    boolean flag = true;
-
-
-
-    public Notice_Adapter(Context c, ArrayList<Notice_Setting> arrData ) {
+    TextView Notice_TextView_title;
+    public Notice_Adapter(Context c, ArrayList<Notice_Setting> arr) {
         this.context = c;
-        this.arrData = arrData;
+        this.arrData = arr;
         inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-
-    @Override
-    public int getGroupCount() {
+    public int getCount() {
         return arrData.size();
     }
 
-    @Override
-    public int getChildrenCount(int groupPosition) {
-        return 1;
+    public Object getItem(int position) {
+        return arrData.get(position).getNotice_num();
     }
 
-    @Override
-    public Object getGroup(int groupPosition) {
-        return arrData.get(groupPosition);
+    public long getItemId(int position) {
+        return position;
     }
 
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return arrData.get(groupPosition).getNotice_content();
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return 0;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_notice_parent, null);
+            convertView = inflater.inflate(R.layout.layout_notice_customlist, parent, false);
+        }
+        Notice_TextView_title = (TextView) convertView.findViewById(R.id.Notice_TextView_title);
+        if(Notice_Num_Position == position){
+            Notice_TextView_title.setBackgroundColor(convertView.getResources().getColor(R.color.MainColor1));
+            Notice_TextView_title.setTextColor(convertView.getResources().getColor(R.color.White));
+        }
+        else{
+            Notice_TextView_title.setBackgroundColor(convertView.getResources().getColor(R.color.backColor));
+            Notice_TextView_title.setTextColor(convertView.getResources().getColor(R.color.Black));
         }
 
-        TextView notice_Parent_TextView_title = (TextView) convertView.findViewById(R.id.notice_Parent_TextView_title);
-        notice_Parent_TextView_title.setText(arrData.get(groupPosition).getNotice_title());
+        Notice_TextView_title.setText(" 〉 "+arrData.get(position).getNotice_title());
+
 
         return convertView;
     }
 
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_notice_child, null);
-        }
-
-        TextView notice_Chile_TextView_title = (TextView) convertView.findViewById(R.id.notice_Child_TextView_title);
-        notice_Chile_TextView_title.setText(arrData.get(groupPosition).getNotice_content());
-
-        return convertView;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return true;
-    }
 }

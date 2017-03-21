@@ -53,10 +53,12 @@ import trophy.projetc2.User.Login;
 
 public class Contest_Detail extends AppCompatActivity {
     Button layout_contest_submit;
+    ImageView Contest_Detail_Back;
     private LayoutInflater inflater;
     static TimerTask myTask;
     static Timer timer;
-    static String Pk,Contest_Pk;
+    static String Pk,Contest_Pk,Contest_Name;
+    static String Status="succed";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     @Override
@@ -66,7 +68,14 @@ public class Contest_Detail extends AppCompatActivity {
         //GlobalApplication.setCurrentActivity(this);
         inflater=getLayoutInflater();
         layout_contest_submit = (Button)findViewById(R.id.layout_contest_submit);
-
+        Contest_Detail_Back = (ImageView) findViewById(R.id.Contest_Detail_Back);
+        Contest_Detail_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -116,9 +125,10 @@ public class Contest_Detail extends AppCompatActivity {
         timer.schedule(myTask, 1000, 1000); // 5초후 첫실행, 1초마다 계속실행
         DutyDialog.show();
         ////////////////////////////////////
+        TextView layout_contest_detail_caution = (TextView)findViewById(R.id.layout_contest_detail_caution);
         TextView title = (TextView) findViewById(R.id.layout_contest_detail_title);
         TextView price = (TextView) findViewById(R.id.layout_contest_register_price);
-        TextView remainder = (TextView) findViewById(R.id.layout_contest_remainder);
+        final TextView remainder = (TextView) findViewById(R.id.layout_contest_remainder);
         TextView remainder1 = (TextView) findViewById(R.id.layout_contest_remainder1);
         TextView remainder2 = (TextView) findViewById(R.id.layout_contest_remainder2);
 
@@ -138,7 +148,7 @@ public class Contest_Detail extends AppCompatActivity {
             HttpPost post = new HttpPost(postURL);
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("Pk", Contest_Pk));
+            params.add(new BasicNameValuePair("Data1", Contest_Pk));
 
             UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params, HTTP.UTF_8);
             post.setEntity(ent);
@@ -153,8 +163,10 @@ public class Contest_Detail extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String[][] ContestsDetailParsedData = jsonParserList_getContestDetail(result);
 
+
+        String[][] ContestsDetailParsedData = jsonParserList_getContestDetail(result);
+        Contest_Name = ContestsDetailParsedData[0][1];
         title.setText(ContestsDetailParsedData[0][1]+" │ ");
         host.setText(ContestsDetailParsedData[0][6]);
         management.setText(ContestsDetailParsedData[0][7]);
@@ -162,13 +174,41 @@ public class Contest_Detail extends AppCompatActivity {
         date.setText(ContestsDetailParsedData[0][9]);
         recruitPeriod.setText(ContestsDetailParsedData[0][10] + " ~ " + ContestsDetailParsedData[0][11]);
         DetailInfo.setText(ContestsDetailParsedData[0][12]);
-        Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+ContestsDetailParsedData[0][2]+".jpg")
+        price.setText(ContestsDetailParsedData[0][5]);
+        place.setText(ContestsDetailParsedData[0][13]);
+        Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Trophy_img/contest/"+ContestsDetailParsedData[0][2]+".jpg")
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(image);
 
         String a = ContestsDetailParsedData[0][10].trim();
         String b = ContestsDetailParsedData[0][11].trim();
+
+        trophy.projetc2.Http.HttpClient http_check = new trophy.projetc2.Http.HttpClient();
+        String result1 = http_check.HttpClient("Trophy_part1","Contest_Detail_Check.jsp",Pk,Contest_Pk);
+        String[][] ParsedData_Check = jsonParserList_ContestDetail_Check(result1);
+        if (ParsedData_Check[0][0].equals("succed")) {
+            Status = "succed";
+            layout_contest_detail_caution.setVisibility(View.GONE);
+        }
+        else if (ParsedData_Check[0][0].equals("already")) {
+            Status = "already";
+            layout_contest_detail_caution.setText("이미 신청중입니다.");
+            layout_contest_submit.setBackgroundColor(getResources().getColor(R.color.DarkGray));
+            layout_contest_submit.setTextColor(getResources().getColor(R.color.White));
+        }
+        else if (ParsedData_Check[0][0].equals("notTeam")) {
+            Status = "notTeam";
+            layout_contest_detail_caution.setText("팀 가입 후, 대회신청 가능합니다.");
+            layout_contest_submit.setBackgroundColor(getResources().getColor(R.color.DarkGray));
+            layout_contest_submit.setTextColor(getResources().getColor(R.color.White));
+        }
+        else if (ParsedData_Check[0][0].equals("notDuty")) {
+            Status = "notDuty";
+            layout_contest_detail_caution.setText("대회 신청은 팀 대표만 가능합니다.");
+            layout_contest_submit.setBackgroundColor(getResources().getColor(R.color.DarkGray));
+            layout_contest_submit.setTextColor(getResources().getColor(R.color.White));
+        }
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yy / MM / dd");
         try {
@@ -188,6 +228,9 @@ public class Contest_Detail extends AppCompatActivity {
                 remainder.setText("마감");
                 remainder1.setVisibility(View.GONE);
                 remainder2.setVisibility(View.GONE);
+                layout_contest_submit.setText("마감");
+                layout_contest_submit.setBackgroundColor(getResources().getColor(R.color.DarkGray));
+                layout_contest_submit.setTextColor(getResources().getColor(R.color.White));
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -196,33 +239,29 @@ public class Contest_Detail extends AppCompatActivity {
         layout_contest_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Pk.equals("") || Pk.equals(".")) {
-                    Intent intent_login = new Intent(Contest_Detail.this, Login.class);
-                    startActivity(intent_login);
-                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(layout_contest_submit.getText().toString().equals("마감")){
+                    Snackbar.make(view,"대회 접수가 마감되었습니다.",Snackbar.LENGTH_SHORT).show();
                 }
-                else {
-                    trophy.projetc2.Http.HttpClient http_check = new trophy.projetc2.Http.HttpClient();
-                    String result = http_check.HttpClient("Trophy_part1","Contest_Detail_Check.jsp",Pk,Contest_Pk);
-                    String[][] ParsedData_Check = jsonParserList_ContestDetail_Check(result);
-                    if (ParsedData_Check[0][0].equals("succed")) {
-                        Intent intent = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
-                        intent.putExtra("Pk",Pk);
-                        intent.putExtra("Contest_Pk",Contest_Pk);
-                        startActivity(intent);
+                else{
+                    if (Pk.equals("") || Pk.equals(".")) {
+                        Intent intent_login = new Intent(Contest_Detail.this, Login.class);
+                        startActivity(intent_login);
                         overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                     }
-                    else if (ParsedData_Check[0][0].equals("already")) {
-                        Snackbar.make(view,"이미 신청중입니다.", Snackbar.LENGTH_SHORT).show();
-                    }
-                    else if (ParsedData_Check[0][0].equals("notTeam")) {
-                        Snackbar.make(view,"대회 신청할 팀이 존재하지 않습니다", Snackbar.LENGTH_SHORT).show();
-                    }
-                    else if (ParsedData_Check[0][0].equals("notDuty")) {
-                        Snackbar.make(view,"팀 대표만 대회신청할 수 있습니다.", Snackbar.LENGTH_SHORT).show();
+                    else {
+                        if(Status.equals("succed")){
+                            Intent intent1 = new Intent(Contest_Detail.this, Contest_Detail_Form.class);
+                            intent1.putExtra("Pk",Pk);
+                            intent1.putExtra("Contest_Pk",Contest_Pk);
+                            intent1.putExtra("Contest_Name",Contest_Name);
+                            startActivity(intent1);
+                            overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                        }
+                        else {
+
+                        }
                     }
                 }
-
             }
         });
     }
@@ -233,7 +272,7 @@ public class Contest_Detail extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"Pk", "Title", "Image", "currentNum", "maxNum", "Payment", "Host", "Management", "Support", "ContestDate", "RecruitStartDate", "RecruitFinishDate", "DetailInfo"};
+            String[] jsonName = {"Pk", "Title", "Image", "currentNum", "maxNum", "Payment", "Host", "Management", "Support", "ContestDate", "RecruitStartDate", "RecruitFinishDate", "DetailInfo","ContestPlace"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

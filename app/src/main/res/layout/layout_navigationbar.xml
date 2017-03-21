@@ -24,61 +24,48 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:background="@color/MainColor1">
 
-                <ImageView
-                    android:text="Button"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/button7"
-                    android:src="@drawable/teamintroduce"
-                    android:background="@color/MainColor_Navy"/>
-
-                <Button
-                    android:text="프로필"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button6"
-                    android:paddingRight="40dp"
-                    android:background="@color/White"
-                    android:textColor="@color/White" />
             </LinearLayout>
 
             <ImageView
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
                 android:id="@+id/Main_Navigation_ImageView_Profile"
-                    android:background="@color/White"
-                    android:padding="20dp"
-                android:layout_height="150dp" />
+                android:background="@color/MainColor1"
+                android:padding="20dp"
+                android:layout_height="150dp"
+                />
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:background="@color/White"
-                        android:layout_marginBottom="10dp">
+                        android:background="@color/MainColor1">
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
+
                             <TextView
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:id="@+id/Main_Navigation_TextView_Name"
-                                android:textColor="@color/Black"
+                                android:textColor="@color/White"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:layout_marginLeft="15dp"
                                 android:textSize="17dp" />
+
                             <TextView
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:id="@+id/Main_Navigation_TextView_Team"
-                                android:textColor="@color/Black"
+                                android:textColor="@color/White"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:layout_marginLeft="15dp"
@@ -99,203 +86,130 @@
                 android:layout_width="match_parent"
                 android:background="@color/MainColor1"
                 android:layout_height="2dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:src="@drawable/drawer_teammake"
-                    android:background="@color/White"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="팀"
+                    android:textColor="@color/Black"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Main_Navigation_Button_TeamMake"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
+                    android:id="@+id/textView23" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@color/MainColor1_second"
+                    android:layout_height="2dp" />
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:text="팀 만들기"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_TeamMake"
+                    android:gravity="center_vertical" />
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView28"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <ImageButton
-                    android:src="@drawable/drawer_teammanager"
-                    android:background="@color/White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="팀 정보"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:gravity="center_vertical"
                     android:id="@+id/Main_Navigation_Button_TeamManager"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
+                    />
                 <TextView
-                    android:text="팀 관리"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView281"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:src="@drawable/drawer_teamsearch"
-                    android:background="@color/White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Main_Navigation_Button_TeamSearch"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
-                <TextView
+                    android:layout_height="40dp"
                     android:text="팀 찾기"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2812"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_TeamSearch"
+                    android:gravity="center_vertical" />
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:src="@drawable/drawer_lastcontest"
-                    android:background="@color/White"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="대회"
+                    android:textColor="@color/Black"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Main_Navigation_Button_LastContest"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
+                    android:id="@+id/textView231" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@color/MainColor1_second"
+                    android:layout_height="2dp" />
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:text="지난 대회보기"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView282"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
-
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_LastContest"
+                    android:gravity="center_vertical" />
             </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-
-                <ImageButton
-                    android:src="@drawable/drawer_setting"
-                    android:background="@color/White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Main_Navigation_Button_Setting"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
+                android:layout_height="match_parent">
                 <TextView
-                    android:text="설 정"
+                    android:text="고객문의"
+                    android:textColor="@color/Black"
+                    android:textSize="16dp"
+                    android:textStyle="normal|bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView28123"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
+                    android:id="@+id/textView2312" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:background="@color/MainColor1_second"
+                    android:layout_height="2dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="1544-5000"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:gravity="center_vertical" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="건의사항"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_Suggest"
+                    android:gravity="center_vertical" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="공지사항"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:layout_marginBottom="50dp"
+                    android:id="@+id/Main_Navigation_Button_Notice"
+                    android:gravity="center_vertical" />
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:src="@drawable/drawer_logout"
-                    android:background="@color/White"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Main_Navigation_Button_Logout"
-                    android:layout_weight="1"
-                    android:layout_marginBottom="5dp" />
-
-                <TextView
-                    android:text="로그아웃"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView28132"
-                    android:layout_weight="1"
-                    android:textStyle="normal|bold"
-                    android:textColor="@color/MainColor1"
-                    android:textSize="15dp"
-                    android:gravity="center" />
-            </LinearLayout>
-
+                android:layout_height="40dp"
+                android:text="로그아웃"
+                android:textSize="13dp"
+                android:textColor="@color/DarkGray"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/Main_Navigation_Button_Logout"
+                />
         </LinearLayout>
-        <Button
-            android:text="건의사항"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Main_Navigation_Button_Suggest" />
 
-        <Button
-            android:text="공지사항"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/Main_Navigation_Button_Notice" />
+
+
     </LinearLayout>
         </ScrollView>
 

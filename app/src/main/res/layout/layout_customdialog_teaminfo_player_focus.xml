@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Root"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="팀원 정보"
+                android:textColor="@color/Black"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:padding="3dp"
+                android:textStyle="normal|bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Back"
+                android:src="@drawable/back"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/button16"
+            android:background="@color/MainColor1"
+            android:layout_height="2dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Profile"
+                android:layout_weight="1"
+                android:layout_margin="15dp"
+                android:scaleType="fitXY"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor1"
+                    android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_TeamName"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor1"
+                    android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Age"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor1"
+                    android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Sex"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="New Button"
+                    android:textColor="@color/White"
+                    android:background="@color/MainColor1"
+                    android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Address"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="3dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/White"
+                android:src="@drawable/phone"
+                android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_Phone"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/White"
+                android:background="@drawable/phone"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_extra"
+                android:layout_weight="1"
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+

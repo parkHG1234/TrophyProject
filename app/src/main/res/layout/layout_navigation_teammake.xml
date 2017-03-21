@@ -1,294 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_navigation_teammake_root">
-
-
-    <LinearLayout
-        android:orientation="vertical"
+    android:orientation="vertical"
+    android:background="@color/backColor">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="팀 만들기"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Contest_Detail_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1sp" />
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        android:background="@color/White">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/banner"
-            android:id="@+id/imageView14"
-            android:layout_weight="6"
-            android:scaleType="fitXY"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/backColor">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            android:id="@+id/TeamManager_TeamMake_Layout_Maker"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/backColor">
+
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="4.9"
-                android:background="@color/Gray">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/White"
-                    android:layout_marginTop="10dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/teamname"
-                        android:id="@+id/imageView15"
-                        android:scaleType="fitXY"
-                        android:layout_weight="4"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginLeft="25dp" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="팀명을 정하세요"
-                        android:textColorHint="@color/Black"
-                        android:textSize="14dp"
-                        android:textColor="@color/Black"
-                        android:id="@+id/Layout_Navigation_TeamMake_EditText_TeamName"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical|center"
-                        android:background="@color/Gray"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="25dp"
-                        android:layout_marginRight="20dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/Gray">
-
-                <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:background="@color/LinerColor"
-                    android:id="@+id/button13"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="1px" />
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_weight="1">
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:background="@color/White"
-                        android:layout_marginBottom="10dp">
-
-
-                        <ImageView
-                            android:src="@drawable/location1"
-                            android:id="@+id/Layout_Navigation_TeamMake_ImageView_Location"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1.5" />
-
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_height="50dp">
                         <TextView
-                            android:text="팀 주소"
+                            android:text="│팀명"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/textView18212112"
+                            android:layout_weight="3"
+                            android:textColor="@color/MainColor1"
+                            android:textSize="15dp"
+                            android:textStyle="normal|bold"
+                            android:gravity="center_vertical" />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Layout_Navigation_TeamMake_EditText_TeamName"
+                            android:layout_weight="1"
                             android:textColor="@color/Black"
                             android:textSize="15dp"
-                            android:gravity="center"
-                            android:layout_height="match_parent"
-                            android:id="@+id/Layout_Navigation_TeamMake_TextView_Location"
-                            android:textStyle="normal|bold"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1.4" />
-
-                        <Spinner
-                            android:layout_height="match_parent"
-                            android:id="@+id/Layout_Navigation_TeamMake_Spinner_AddressDo"
-                            android:layout_marginRight="15dp"
-                            android:layout_width="match_parent"
-                            android:popupBackground="@color/Gray"
-                            android:layout_weight="1" />
-
-                        <Spinner
-                            android:layout_height="match_parent"
-                            android:id="@+id/Layout_Navigation_TeamMake_Spinner_AddressSe"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1" />
-
+                            android:textStyle="normal|bold"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:background="@color/White"
-                        android:layout_marginBottom="10dp">
-
-
-                        <ImageView
-                            android:id="@+id/Layout_Navigation_TeamMake_ImageView_TeamAddress"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp" />
+                        android:background="@color/backColor"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp">
 
                         <TextView
-                            android:text="홈코트 위치"
-                            android:textColor="@color/Black"
-                            android:textSize="15dp"
-                            android:gravity="left|center"
+                            android:text="│팀 주소"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/textView14"
+                            android:id="@+id/textView182121112"
+                            android:textColor="@color/MainColor1"
+                            android:textSize="15dp"
                             android:textStyle="normal|bold"
-                            android:layout_width="100dp" />
+                            android:layout_weight="1" />
 
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="14dp"
-                            android:layout_marginBottom="14dp"
-                            android:layout_marginRight="15dp">
-
-                            <EditText
+                            android:layout_weight="1"
+                            android:background="@color/MainColor1"
+                            android:layout_marginRight="5dp">
+                            <LinearLayout
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/Layout_Navigation_TeamMake_EditText_HomeCourt"
-                                android:gravity="right|center_vertical"
-                                android:textColor="@color/Black"
-                                android:textSize="13dp"
-                                android:hint="ex) 의정부 농구센터  "
-                                android:background="@color/Gray"
-                                android:layout_marginBottom="1dp" />
+                                android:layout_margin="1dp">
 
-                            <Button
-                                android:text="Button"
-                                android:layout_width="match_parent"
-                                android:layout_height="2px"
-                                android:background="@color/LinerColor"
-                                android:id="@+id/button3" />
+                                <Spinner
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/Layout_Navigation_TeamMake_Spinner_AddressDo"
+                                    android:layout_weight="1"
+                                    android:background="@color/White"
+                                    android:backgroundTint="@color/White"
+                                    />
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/spinner"
+                                    android:background="@color/WhiteGray"/>
+                            </LinearLayout>
                         </LinearLayout>
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.3"
-                        android:background="@color/White">
-
                         <LinearLayout
-                            android:orientation="vertical"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:background="@color/MainColor1"
+                            android:layout_marginRight="5dp">
 
                             <LinearLayout
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                                <LinearLayout
-                                    android:orientation="horizontal"
+                                android:layout_height="match_parent"
+                                android:layout_margin="1dp">
+
+                                <Spinner
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp">
-
-                                    <ImageView
-                                        android:layout_height="30dp"
-                                        android:src="@drawable/teamintroduce"
-                                        android:scaleType="fitXY"
-                                        android:id="@+id/imageView20"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginLeft="15dp"
-                                        android:layout_width="20dp"
-                                        android:layout_marginTop="10dp"
-                                        android:padding="2dp" />
-
-                                    <TextView
-                                        android:text="팀 소개"
-                                        android:textColor="@color/Black"
-                                        android:textSize="15dp"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:id="@+id/textView17"
-                                        android:gravity="left|center"
-                                        android:layout_marginTop="10dp" />
-                                </LinearLayout>
-
-
-                            </LinearLayout>
-
-                            <Button
-                                android:text="Button"
-                                android:layout_width="match_parent"
-                                android:id="@+id/button14"
-                                android:background="@color/Gray"
-                                android:layout_marginLeft="50dp"
-                                android:layout_marginRight="50dp"
-                                android:layout_height="1px" />
-
-                            <LinearLayout
-                                android:orientation="vertical"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <EditText
-                                    android:layout_width="match_parent"
-                                    android:inputType="textPersonName"
-                                    android:hint="ex) 안녕하세요. "
-                                    android:textColorHint="@color/Black"
-                                    android:textColor="@color/Black"
-                                    android:textSize="14dp"
-                                    android:ems="10"
-                                    android:id="@+id/Layout_Navigation_TeamMake_EditText_TeamIntro"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_marginLeft="40dp"
-                                    android:layout_marginRight="40dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1" />
+                                    android:id="@+id/Layout_Navigation_TeamMake_Spinner_AddressSi"
+                                    android:layout_weight="1"
+                                    android:background="@color/White"/>
 
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:src="@drawable/spinner"
+                                    android:background="@color/WhiteGray"/>
                             </LinearLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
-                </LinearLayout>
 
+                </LinearLayout>
 
             </LinearLayout>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/button2"
+                android:background="@color/MainColor1"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:text="│홈코트"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView18212"
+                    android:layout_weight="1"
+                    android:textColor="@color/MainColor1"
+                    android:textSize="15dp"
+                    android:textStyle="normal|bold"
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Layout_Navigation_TeamMake_EditText_HomeCourt"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/MainColor1"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    android:layout_margin="1dp">
+
+                    <TextView
+                        android:text="팀 소개"
+                        android:textSize="18dp"
+                        android:textColor="@color/Black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView26"
+                        android:gravity="center" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:id="@+id/button22"
+                        android:background="@color/MainColor1"
+                        android:layout_height="1dp" />
+
+                    <EditText
+                        android:text=""
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Layout_Navigation_TeamMake_EditText_TeamIntro" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/button15"
+                android:background="@color/MainColor1"
+                android:layout_marginBottom="10dp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="팀 만들기"
+                android:textColor="@color/White"
+                android:textSize="15dp"
+                android:textStyle="normal|bold"
+                android:background="@color/MainColor1"
+                android:id="@+id/Layout_Navigation_TeamMake_Button_TeamMake"
+                android:layout_marginBottom="30dp" />
         </LinearLayout>
-
-        <Button
-            android:text="팀 만들기"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/Layout_Navigation_TeamMake_Button_TeamMake"
-            android:layout_weight="6" />
-
-
-    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

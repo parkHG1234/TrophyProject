@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -30,7 +31,11 @@ import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Navigation.TeamManager.TeamManager_Activity;
 import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
+import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
+import static trophy.projetc2.Navigation.TeamManager_ContestJoin.Contestjoin_timer;
+import static trophy.projetc2.Navigation.TeamManager_PlayerManager.PlayerManager_timer;
 import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_player;
 
 /**
@@ -41,8 +46,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
     private Context context;
     private ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player> arrData;
     private LayoutInflater inflater;
-    ImageView FirstProfile, SecondProfile, ThirdProfile;
-    TextView FirstName, SecondName, ThirdName;
+    ImageView FirstProfile, SecondProfile, ThirdProfile, FourthProfile;
+    TextView FirstName, SecondName, ThirdName, FourthName;
+    LinearLayout Player1, Player2, Player3, Player4;
     String[][] parsedData_Player_Focus,parsedData_Joiner_Refuse,parsedData_Player_Out,parsedData_ChangeRepresent;
     String ProfileUrl;
     public TeamManager_PlayerManager_Customlist_MyAdapter_Player(Context c, ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player> arr) {
@@ -73,23 +79,44 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         SecondName = (TextView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_SecondName);
         ThirdProfile = (ImageView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile);
         ThirdName = (TextView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_ThirdName);
+        FourthProfile = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile);
+        FourthName = (TextView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_FourthName);
+        Player1 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player1);
+        Player2 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player2);
+        Player3 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player3);
+        Player4 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player4);
 
         if(arrData.get(position).getSecond_Name().equals("null")){
             SecondProfile.setVisibility(View.INVISIBLE);
             SecondName.setVisibility(View.INVISIBLE);
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
         }
         else{
             SecondProfile.setVisibility(View.VISIBLE);
             SecondName.setVisibility(View.VISIBLE);
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
             ThirdName.setVisibility(View.INVISIBLE);
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
         }
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
             ThirdName.setVisibility(View.VISIBLE);
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
+        if(arrData.get(position).getFourth_Name().equals("null")){
+            FourthProfile.setVisibility(View.INVISIBLE);
+            FourthName.setVisibility(View.INVISIBLE);
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+        }
+        else{
+            FourthProfile.setVisibility(View.VISIBLE);
+            FourthName.setVisibility(View.VISIBLE);
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
+        }
+
         //첫번째 프로필이 존재할경우
         if(FirstProfile.getVisibility()==View.VISIBLE){
             try{
@@ -113,6 +140,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 public void onClick(View view) {
                     LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                     final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_playermanager_focus, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Root));
+                    final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age);
@@ -121,6 +149,8 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
+                    final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
 
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
@@ -156,14 +186,14 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     TeamPlayerDialog
                             .setTitle("신청자 정보")
                             .setView(layout)
-                            .setCanceledOnTouchOutside(true)
-                            .setPositiveButton("확인", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    TeamPlayerDialog.dismiss();
-                                }
-                            });
+                            .setCanceledOnTouchOutside(true);
                     TeamPlayerDialog.show();
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TeamPlayerDialog.dismiss();
+                        }
+                    });
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -179,11 +209,19 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFirst_Pk(),TeamManager_TeamName);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk);
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
-                                        ChangeRepresentDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
+                                        Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Contestjoin_timer.cancel();
+                                                PlayerManager_timer.cancel();
+                                                ChangeRepresentDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                TeamManager_Activity.finish();
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -211,9 +249,14 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                     String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getFirst_Pk());
                                     parsedData_Player_Out = jsonParserList_Player_Out(result);
                                     if(parsedData_Player_Out[0][0].equals("succed")){
-                                        PlayerOutDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
-                                        refresh_player= "refresh";
+                                        Snackbar.make(view,"팀원이 방출되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                PlayerOutDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                refresh_player= "refresh";
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -249,6 +292,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 public void onClick(View view) {
                     LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                     final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_playermanager_focus, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Root));
+                    final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age);
@@ -257,7 +301,8 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
-
+                    final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
                         if(arrData.get(position).getSecond_Profile().equals("."))
@@ -292,14 +337,14 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     TeamPlayerDialog
                             .setTitle("신청자 정보")
                             .setView(layout)
-                            .setCanceledOnTouchOutside(true)
-                            .setPositiveButton("확인", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    TeamPlayerDialog.dismiss();
-                                }
-                            });
+                            .setCanceledOnTouchOutside(true);
                     TeamPlayerDialog.show();
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TeamPlayerDialog.dismiss();
+                        }
+                    });
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -315,11 +360,19 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getSecond_Pk(),TeamManager_TeamName);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk);
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
-                                        ChangeRepresentDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
+                                        Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Contestjoin_timer.cancel();
+                                                PlayerManager_timer.cancel();
+                                                ChangeRepresentDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                TeamManager_Activity.finish();
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -347,9 +400,14 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                     String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getSecond_Pk());
                                     parsedData_Player_Out = jsonParserList_Player_Out(result);
                                     if(parsedData_Player_Out[0][0].equals("succed")){
-                                        PlayerOutDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
-                                        refresh_player= "refresh";
+                                        Snackbar.make(view,"팀원이 방출되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                PlayerOutDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                refresh_player= "refresh";
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -380,11 +438,163 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
             }
             ThirdName.setText(arrData.get(position).getThird_Name());
-            ThirdProfile.setOnClickListener(new View.OnClickListener() {
+        ThirdProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
+                final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_playermanager_focus, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Root));
+                final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back);
+                final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName);
+                final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age);
+                final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex);
+                final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address);
+                final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone);
+                final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader);
+                final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
+                final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
+                try{
+                    String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
+                    if(En_Profile.equals("."))
+                    {
+                        Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                    }
+                    else
+                    {
+                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                                .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                    }
+                }
+                catch (UnsupportedEncodingException e){
+
+                }
+
+                HttpClient http_Joiner= new HttpClient();
+                String result = http_Joiner.HttpClient("Trophy_part1","TeamManager_Player_Focus.jsp",arrData.get(position).getThird_Pk());
+                parsedData_Player_Focus = jsonParserList_Player_Focus(result);
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName.setText(parsedData_Player_Focus[0][0]);
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex.setText(parsedData_Player_Focus[0][2]);
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address.setText(parsedData_Player_Focus[0][3]);
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+parsedData_Player_Focus[0][4]));
+                        context.startActivity(intent);
+                    }
+                });
+                final MaterialDialog TeamPlayerDialog = new MaterialDialog(context);
+                TeamPlayerDialog
+                        .setTitle("신청자 정보")
+                        .setView(layout)
+                        .setCanceledOnTouchOutside(true);
+                TeamPlayerDialog.show();
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TeamPlayerDialog.dismiss();
+                    }
+                });
+                Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final MaterialDialog ChangeRepresentDialog = new MaterialDialog(context);
+                        ChangeRepresentDialog.setTitle("팀대표 위임")
+                                .setMessage("팀대표를 위임합니다.")
+                                .setPositiveButton("취소", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        ChangeRepresentDialog.dismiss();
+                                    }
+                                }).setNegativeButton("팀 대표 위임", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                HttpClient http_ChangeRepresent= new HttpClient();
+                                String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk);
+                                parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
+                                if(parsedData_ChangeRepresent[0][0].equals("succed")){
+                                    Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Contestjoin_timer.cancel();
+                                            PlayerManager_timer.cancel();
+                                            ChangeRepresentDialog.dismiss();
+                                            TeamPlayerDialog.dismiss();
+                                            TeamManager_Activity.finish();
+                                        }
+                                    }).show();
+                                }
+                                else{
+                                    Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        ChangeRepresentDialog.show();
+                    }
+                });
+                Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final MaterialDialog PlayerOutDialog = new MaterialDialog(context);
+                        PlayerOutDialog.setTitle("팀원 방출")
+                                .setMessage("팀원을 방출합니다.")
+                                .setPositiveButton("취소", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        PlayerOutDialog.dismiss();
+                                    }
+                                }).setNegativeButton("방출", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                HttpClient http_PlayerOut= new HttpClient();
+                                String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getThird_Pk());
+                                parsedData_Player_Out = jsonParserList_Player_Out(result);
+                                if(parsedData_Player_Out[0][0].equals("succed")){
+                                    Snackbar.make(view,"팀원이 방출되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            PlayerOutDialog.dismiss();
+                                            TeamPlayerDialog.dismiss();
+                                            refresh_player= "refresh";
+                                        }
+                                    }).show();
+                                }
+                                else{
+                                    Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                        PlayerOutDialog.show();
+                    }
+                });
+            }
+        });
+    }
+        if(FourthProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
+                Log.i("eeeee",En_Profile);
+                if(En_Profile.equals("."))
+                {
+                    //Glide.with(context).load(R.drawable.teammanager_player).into(ThirdProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            .into(FourthProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
+            FourthName.setText(arrData.get(position).getFourth_Name());
+            FourthProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(context.LAYOUT_INFLATER_SERVICE);
                     final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_playermanager_focus, (ViewGroup) view.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Root));
+                    final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile = (ImageView)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName);
                     final Button Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age);
@@ -393,16 +603,17 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader);
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
-
+                    final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
                     try{
-                        String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
+                        String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
                         if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFourth_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -411,7 +622,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     }
 
                     HttpClient http_Joiner= new HttpClient();
-                    String result = http_Joiner.HttpClient("Trophy_part1","TeamManager_Player_Focus.jsp",arrData.get(position).getThird_Pk());
+                    String result = http_Joiner.HttpClient("Trophy_part1","TeamManager_Player_Focus.jsp",arrData.get(position).getFourth_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName.setText(parsedData_Player_Focus[0][0]);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
@@ -428,14 +639,14 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     TeamPlayerDialog
                             .setTitle("신청자 정보")
                             .setView(layout)
-                            .setCanceledOnTouchOutside(true)
-                            .setPositiveButton("확인", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    TeamPlayerDialog.dismiss();
-                                }
-                            });
+                            .setCanceledOnTouchOutside(true);
                     TeamPlayerDialog.show();
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TeamPlayerDialog.dismiss();
+                        }
+                    });
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -451,11 +662,19 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getThird_Pk(),TeamManager_TeamName);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk);
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
-                                        ChangeRepresentDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
+                                        Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                Contestjoin_timer.cancel();
+                                                PlayerManager_timer.cancel();
+                                                ChangeRepresentDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                TeamManager_Activity.finish();
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -480,12 +699,17 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_PlayerOut= new HttpClient();
-                                    String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getThird_Pk());
+                                    String result = http_PlayerOut.HttpClient("Trophy_part1","TeamManager_Player_Out.jsp",arrData.get(position).getFourth_Pk());
                                     parsedData_Player_Out = jsonParserList_Player_Out(result);
                                     if(parsedData_Player_Out[0][0].equals("succed")){
-                                        PlayerOutDialog.dismiss();
-                                        TeamPlayerDialog.dismiss();
-                                        refresh_player= "refresh";
+                                        Snackbar.make(view,"팀원이 방출되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                PlayerOutDialog.dismiss();
+                                                TeamPlayerDialog.dismiss();
+                                                refresh_player= "refresh";
+                                            }
+                                        }).show();
                                     }
                                     else{
                                         Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -498,26 +722,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 }
             });
         }
-
-//        Contest_Detail_Form_Player_CustomList_ProfileImage = (ImageView)convertView.findViewById(R.id.Contest_Detail_Form_Player_CustomList_ProfileImage);
-//        Name.setText(arrData.get(position).getName());
-//        Duty.setText(arrData.get(position).getDuty());
-//        Age.setText(ChangeAge(arrData.get(position).getBirth()));
-//        try {
-//            String En_Profile = URLEncoder.encode(arrData.get(position).getProfile(), "utf-8");
-//            if (arrData.get(position).getProfile().equals(".")) {
-//                Glide.with(context).load(R.drawable.profile_basic_image).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-//                        .into(Contest_Detail_Form_Player_CustomList_ProfileImage);
-//            } else {
-//                Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                        .skipMemoryCache(true)
-//                        .into(Contest_Detail_Form_Player_CustomList_ProfileImage);
-//            }
-//        } catch (UnsupportedEncodingException e) {
-//
-//        }
-
         return convertView;
     }
     public String[][] jsonParserList_Player_Focus(String pRecvServerPage) {

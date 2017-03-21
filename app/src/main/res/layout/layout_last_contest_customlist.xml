@@ -7,15 +7,16 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/Layout_Navigation_TeamSearch_LinearLayout_Root">
+        android:id="@+id/Layout_Navigation_TeamSearch_LinearLayout_Root"
+        android:layout_height="70dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/emblem"
+            android:src="@drawable/baseball"
             android:id="@+id/Layout_Last_Contest_ImageView"
-            android:layout_weight="3" />
+            android:layout_weight="4"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:text="TextView"
@@ -24,7 +25,8 @@
             android:id="@+id/Layout_Last_Contest_TextView_ContestName"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:textSize="18dp"
+            android:textSize="16dp"
+            android:textColor="@color/Black"
             android:layout_marginLeft="10dp" />
     </LinearLayout>
 </LinearLayout>

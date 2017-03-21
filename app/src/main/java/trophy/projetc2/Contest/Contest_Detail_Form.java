@@ -2,12 +2,14 @@ package trophy.projetc2.Contest;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +33,8 @@ import java.util.List;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.R.id.Contest_Detail_Form_Player_CustomList_Check;
+
 /**
  * Created by 박효근 on 2016-11-13.
  */
@@ -38,6 +42,8 @@ import trophy.projetc2.R;
 public class Contest_Detail_Form extends AppCompatActivity {
     static String Pk;
     static String Contest_Pk;
+    static String Contest_Name;
+    static String Team_Pk;
     static String MyTeam;
     static String Phone;
     static String Name;
@@ -45,12 +51,14 @@ public class Contest_Detail_Form extends AppCompatActivity {
     static int JoinerCount=0;
     static String[] JoinerId;
     String[][] parsedData_Profile,parsedData_Player,parsedData_Join_Team;
-    Button Contest_Detail_Form_Button_TeamName;
-    Button Contest_Detail_Form_Button_TeamLeader;
-    Button Contest_Detail_Form_Button_TeamPhone;
+    TextView Contest_Detail_Form_Button_ContestName;
+    TextView Contest_Detail_Form_Button_TeamName;
+    TextView Contest_Detail_Form_Button_TeamLeader;
+    TextView Contest_Detail_Form_Button_TeamPhone;
     Button Contest_Detail_Form_Input;
     ListView Contest_Detail_Form_ListView;
     TextView Contest_Detail_Form_JoinerCount;
+    ImageView Contest_Detail_Form_Back;
     Contest_Detail_Form_Customlist_Adapter Contest_Detail_Form_Customlist_Adapter;
     ArrayList<Contest_Detail_Form_Customlist_MyData> Contest_Detail_Form_Customlist_MyData;
     @Override
@@ -58,16 +66,28 @@ public class Contest_Detail_Form extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_contest_detail_form);
 
-        Contest_Detail_Form_Button_TeamName = (Button)findViewById(R.id.Contest_Detail_Form_Button_TeamName);
-        Contest_Detail_Form_Button_TeamLeader = (Button)findViewById(R.id.Contest_Detail_Form_Button_TeamLeader);
-        Contest_Detail_Form_Button_TeamPhone = (Button)findViewById(R.id.Contest_Detail_Form_Button_TeamPhone);
+        Contest_Detail_Form_Back = (ImageView)findViewById(R.id.Contest_Detail_Form_Back);
+        Contest_Detail_Form_Button_ContestName = (TextView)findViewById(R.id.Contest_Detail_Form_Button_ContestName);
+        Contest_Detail_Form_Button_TeamName = (TextView)findViewById(R.id.Contest_Detail_Form_Button_TeamName);
+        Contest_Detail_Form_Button_TeamLeader = (TextView)findViewById(R.id.Contest_Detail_Form_Button_TeamLeader);
+        Contest_Detail_Form_Button_TeamPhone = (TextView)findViewById(R.id.Contest_Detail_Form_Button_TeamPhone);
         Contest_Detail_Form_JoinerCount = (TextView)findViewById(R.id.Contest_Detail_Form_JoinerCount);
         Contest_Detail_Form_ListView = (ListView)findViewById(R.id.Contest_Detail_Form_ListView);
         Contest_Detail_Form_Input = (Button)findViewById(R.id.Contest_Detail_Form_Input);
-        
+
+        Contest_Detail_Form_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
+
+
         Intent intent = getIntent();
         Contest_Pk = intent.getStringExtra("Contest_Pk");
         Pk = intent.getStringExtra("Pk");
+        Contest_Name = intent.getStringExtra("Contest_Name");
 
         trophy.projetc2.Http.HttpClient http_profile = new trophy.projetc2.Http.HttpClient();
         String result = http_profile.HttpClient("Trophy_part1","Contest_Detail_Form_Profile.jsp",Pk);
@@ -75,6 +95,9 @@ public class Contest_Detail_Form extends AppCompatActivity {
         MyTeam = parsedData_Profile[0][1];
         Phone = parsedData_Profile[0][2];
         Name = parsedData_Profile[0][0];
+        Team_Pk = parsedData_Profile[0][3];
+
+        Contest_Detail_Form_Button_ContestName.setText(Contest_Name);
         Contest_Detail_Form_Button_TeamName.setText(MyTeam);
         Contest_Detail_Form_Button_TeamLeader.setText(Name);
         Contest_Detail_Form_Button_TeamPhone.setText(Phone);
@@ -122,14 +145,14 @@ public class Contest_Detail_Form extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 for(int i = 0;i<Player;i++){
-                    Log.i("qwe1",JoinerId[i]);
                     if(!JoinerId[i].equals("false")){
+                        Log.i("Contest_Pk", Contest_Pk);
                         trophy.projetc2.Http.HttpClient http_form_joiner = new trophy.projetc2.Http.HttpClient();
                         http_form_joiner.HttpClient("Trophy_part1","Contest_Detail_Form_Join.jsp",JoinerId[i],Contest_Pk);
                     }
                 }
                 trophy.projetc2.Http.HttpClient http_form_join_team = new trophy.projetc2.Http.HttpClient();
-                String result1 = http_form_join_team.HttpClient("Trophy_part1","Contest_Detail_Form_Join_Team.jsp",Contest_Pk,MyTeam);
+                String result1 = http_form_join_team.HttpClient("Trophy_part1","Contest_Detail_Form_Join_Team.jsp",Contest_Pk,Team_Pk);
                 parsedData_Join_Team = jsonParserList_Join_Team(result1);
                 if(parsedData_Join_Team[0][0].equals("succed")){
                     final MaterialDialog recommendDialog = new MaterialDialog(Contest_Detail_Form.this);
@@ -155,7 +178,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1", "msg2", "msg3"};
+            String[] jsonName = {"msg1", "msg2", "msg3","msg4"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

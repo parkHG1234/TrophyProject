@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/WhiteGray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="팀 정보"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TeamInfo_ImageVIew_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/management"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/TeamInfo_ImageVIew_TeamManger"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:text="팀 대표는 대표인계 후 탈퇴가능합니다."
+                android:layout_width="match_parent"
+                android:id="@+id/TeamInfo_TextView_caution"
+                android:background="@color/MainColor1_White"
+                android:textColor="@color/White"
+                android:paddingLeft="2dp"
+                android:textStyle="normal|bold"
+                android:layout_height="20dp"
+                android:gravity="center_vertical" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/basketball"
+                        android:id="@+id/TeamInfo_ImageView_Emblem"
+                        android:layout_weight="2"
+                        android:scaleType="fitXY"
+                        android:layout_margin="10dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:text="┃팀명"
+                                android:textColor="@color/MainColor1"
+                                android:textSize="18dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textView22"
+                                android:layout_weight="2"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="10dp" />
+
+                            <TextView
+                                android:text="클린쳐"
+                                android:textColor="@color/Black"
+                                android:textSize="18dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/TeamInfo_TextView_TeamName"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="5dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:text="┃팀주소"
+                                android:textColor="@color/MainColor1"
+                                android:textSize="18dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textView222"
+                                android:layout_weight="2"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="10dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:background="@color/MainColor1"
+                                    android:layout_margin="5dp">
+
+                                    <TextView
+                                        android:text="서울"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/Black"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/TeamInfo_TextView_TeamAddress_Do"
+                                        android:background="@color/White"
+                                        android:layout_margin="1dp"
+                                        android:gravity="center" />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="2"
+                                    android:background="@color/MainColor1"
+                                    android:layout_margin="5dp">
+
+                                    <TextView
+                                        android:text="서울"
+                                        android:textSize="18dp"
+                                        android:textColor="@color/Black"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/TeamInfo_TextView_TeamAddress_Si"
+                                        android:background="@color/White"
+                                        android:layout_margin="1dp"
+                                        android:gravity="center" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:text="┃홈코트"
+                                android:textColor="@color/MainColor1"
+                                android:textSize="18dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/textView223"
+                                android:layout_weight="2"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="10dp" />
+
+                            <TextView
+                                android:text="클린쳐"
+                                android:textColor="@color/Black"
+                                android:textSize="18dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/TeamInfo_TextView_HomeCourt"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="5dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:id="@+id/button162"
+                    android:background="@color/MainColor1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="1dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:background="@color/MainColor1"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="200dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/White"
+                        android:layout_margin="1dp">
+
+                        <TextView
+                            android:text="팀 소개"
+                            android:textSize="18dp"
+                            android:textColor="@color/Black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView26"
+                            android:gravity="center" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:id="@+id/button22"
+                            android:background="@color/MainColor1"
+                            android:layout_height="1dp" />
+
+                        <TextView
+                            android:text="TextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/TeamInfo_TextView_TeamIntro" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:id="@+id/button223"
+                    android:background="@color/MainColor1"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="1dp" />
+
+                <TextView
+                    android:text="┃팀 소개 이미지"
+                    android:textSize="18dp"
+                    android:textColor="@color/MainColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView261"
+                    android:layout_marginBottom="20dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@drawable/badminton"
+                    android:id="@+id/TeamInfo_ImageView_Image1"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="220dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:srcCompat="@drawable/badminton"
+                    android:id="@+id/TeamInfo_ImageView_Image2"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="20dp"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    app:srcCompat="@drawable/badminton"
+                    android:id="@+id/TeamInfo_ImageView_Image3"
+                    android:scaleType="fitXY"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="220dp"  />
+                <TextView
+                    android:text="┃팀원 소개"
+                    android:textSize="18dp"
+                    android:textColor="@color/MainColor1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2612"
+                    android:layout_marginBottom="10dp" />
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TeamInfo_ListView_Player"
+                    android:layout_marginBottom="50dp" />
+
+                <Button
+                    android:text="팀 탈퇴"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:id="@+id/TeamInfo_Button_Out"
+                    android:background="@color/MainColor1"
+                    android:textColor="@color/White"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

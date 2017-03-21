@@ -10,21 +10,47 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="선수 정보"
+                android:textColor="@color/Black"
+                android:textSize="16dp"
+                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
+                android:padding="3dp"
+                android:textStyle="normal|bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back"
+                android:src="@drawable/back"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/button16"
+            android:background="@color/MainColor1"
+            android:layout_height="2dp" />
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_weight="1">
+            android:layout_height="140dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile"
                 android:layout_weight="1"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp" />
+                android:scaleType="fitXY"
+                android:layout_margin="15dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -37,7 +63,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor_Navy"
+                    android:background="@color/MainColor1"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp" />
@@ -47,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor_Navy"
+                    android:background="@color/MainColor1"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -57,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor_Navy"
+                    android:background="@color/MainColor1"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -67,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor_Navy"
+                    android:background="@color/MainColor1"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -77,11 +103,12 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty">
+            android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -112,6 +139,32 @@
                 android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_extra"
                 android:layout_weight="1"
                 android:visibility="invisible"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:text="영입하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Agree"
+                android:layout_weight="1"
+                android:background="@color/MainColor1"
+                android:textColor="@color/White"/>
+
+            <Button
+                android:text="거절하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_DisAgree"
+                android:layout_weight="1"
+                android:background="@color/DarkGray"
+                android:textColor="@color/White"/>
         </LinearLayout>
     </LinearLayout>
 

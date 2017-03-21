@@ -31,8 +31,19 @@
     <Button
         android:layout_width="match_parent"
         android:id="@+id/button16"
-        android:background="@color/MainColor1"
-        android:layout_height="2dp" />
+        android:background="@color/DarkGray"
+        android:layout_height="1sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:id="@+id/layout_contest_detail_caution"
+        android:background="@color/MainColor1_White"
+        android:textColor="@color/White"
+        android:paddingLeft="2dp"
+        android:textStyle="normal|bold"
+        android:layout_height="20dp"
+        android:gravity="center_vertical" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -336,11 +347,11 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="35dp">
 
         <Button
             android:text="대회신청"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:textStyle="normal|bold"
             android:layout_width="match_parent"
             android:id="@+id/layout_contest_submit"

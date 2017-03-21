@@ -4,53 +4,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:background="@color/White"
         android:layout_height="40dp"
-        android:layout_marginRight="10dp">
+        android:padding="5dp"
+        android:background="@color/White"
+        >
 
         <ImageView
             android:layout_width="32dp"
             android:layout_height="match_parent"
             android:src="@drawable/back_button"
-            android:id="@+id/Layout_Navigation_TeamManager_ContestJoin_ImageView_Back"
+            android:id="@+id/Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back"
             android:scaleType="centerInside"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:inputType="textPersonName"
             android:text="참가대회 상세보기"
             android:id="@+id/TextView_Title"
             android:textSize="13sp"
             android:textStyle="normal|bold"
-            android:layout_gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="@color/Black" />
-
-    </LinearLayout>
+        <ImageView
+            android:layout_height="match_parent"
+            android:src="@drawable/delete"
+            android:id="@+id/Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="50dp" />
+    </RelativeLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:id="@+id/button11"
-        android:background="@color/MainColor1" />
+        android:background="@color/WhiteGray" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/TeamManager_ContestJoin_ContestFocus_Scroll"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -168,7 +177,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:textColor="@color/Black"
                             android:textStyle="normal|bold"
                             android:paddingLeft="10dp"
@@ -270,7 +279,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="5dp">
                 <TextView
@@ -288,11 +297,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail"
-                    android:layout_weight="1"
                     android:textColor="@color/Black"
                     android:textSize="15dp"
                     android:textStyle="normal|bold"
-                    android:paddingLeft="10dp" />
+                    android:paddingLeft="10dp"
+                    android:layout_weight="1" />
             </LinearLayout>
             <Button
                 android:layout_width="match_parent"
@@ -386,12 +395,14 @@
                 android:textSize="15dp"
                 android:textStyle="normal|bold"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:id="@+id/TeamManager_ContestJoin_ContestFocus_ListView_Player"/>
+                android:id="@+id/TeamManager_ContestJoin_ContestFocus_ListView_Player"
+                android:layout_marginBottom="50dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

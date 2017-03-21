@@ -6,8 +6,8 @@
     <color name="Red">#ff0101</color>
     <color name = "White">#ffffff</color>
     <color name = "Black">#000000</color>
-    <color name="WhiteGray">#f4f4f4</color>
-    <color name="DarkGray">#dfdfdd</color>
+    <color name="WhiteGray">#fafafd</color>
+    <color name="DarkGray">#b3b2b2</color>
     <color name="BlackGray">#5f5e5e</color>
     <color name="LinerColor">#8f8e8e</color>
     <color name="Gray">#4b4b4b</color>
@@ -15,6 +15,8 @@
     <color name="MainColor_Yellow">#ffeb12</color>
     <color name="MainColor1">#e94538</color>
     <color name="MainColor2">#2f3440</color>
+    <color name="MainColor1_White">#e96d6d</color>
+    <color name="MainColor1_second">#fbd8cb</color>
     <color name="soso">#dfdfdf</color>
     <color name="softWhite">#fcfcfc</color>
     <color name="backColor">#f7f7f7</color>

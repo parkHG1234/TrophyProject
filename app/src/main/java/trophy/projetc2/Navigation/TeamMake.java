@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,8 +24,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+
+import static trophy.projetc2.MainActivity.activity;
 
 /**
  * Created by 박효근 on 2016-12-01.
@@ -36,10 +42,12 @@ public class TeamMake extends AppCompatActivity{
     AlertDialog dlg;
     EditText Layout_Navigation_TeamMake_EditText_TeamName;
     Spinner Layout_Navigation_TeamMake_Spinner_AddressDo;
-    Spinner Layout_Navigation_TeamMake_Spinner_AddressSe;
+    Spinner Layout_Navigation_TeamMake_Spinner_AddressSi;
     EditText Layout_Navigation_TeamMake_EditText_HomeCourt;
     EditText Layout_Navigation_TeamMake_EditText_TeamIntro;
     Button Layout_Navigation_TeamMake_Button_TeamMake;
+    private trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
+    private ArrayAdapter<CharSequence> adspin1, adspin2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +57,45 @@ public class TeamMake extends AppCompatActivity{
 
         Layout_Navigation_TeamMake_EditText_TeamName = (EditText)findViewById(R.id.Layout_Navigation_TeamMake_EditText_TeamName);
         Layout_Navigation_TeamMake_Spinner_AddressDo = (Spinner)findViewById(R.id.Layout_Navigation_TeamMake_Spinner_AddressDo);
-        Layout_Navigation_TeamMake_Spinner_AddressSe= (Spinner)findViewById(R.id.Layout_Navigation_TeamMake_Spinner_AddressSe);
+        Layout_Navigation_TeamMake_Spinner_AddressSi= (Spinner)findViewById(R.id.Layout_Navigation_TeamMake_Spinner_AddressSi);
         Layout_Navigation_TeamMake_EditText_HomeCourt = (EditText)findViewById(R.id.Layout_Navigation_TeamMake_EditText_HomeCourt);
         Layout_Navigation_TeamMake_EditText_TeamIntro = (EditText)findViewById(R.id.Layout_Navigation_TeamMake_EditText_TeamIntro);
         Layout_Navigation_TeamMake_Button_TeamMake = (Button)findViewById(R.id.Layout_Navigation_TeamMake_Button_TeamMake);
 
+
+        adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do, R.layout.spinner_style);
+        adspin1.setDropDownViewResource(R.layout.spinner_style);
+        Layout_Navigation_TeamMake_Spinner_AddressDo.setAdapter(adspin1);
+        adspin2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do_seoul, R.layout.spinner_style);
+        adspin2.setDropDownViewResource(R.layout.spinner_style);
+        Layout_Navigation_TeamMake_Spinner_AddressSi.setAdapter(adspin2);
+
+        Layout_Navigation_TeamMake_Spinner_AddressDo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Get_Spinner_Si = new Get_Spinner_Si(getApplicationContext());
+                adspin2 = Get_Spinner_Si.getAdapter(position);
+                Layout_Navigation_TeamMake_Spinner_AddressSi.setAdapter(adspin2);
+                adspin2.setDropDownViewResource(R.layout.spinner_style);
+                //setSpinText(Layout_Navigation_TeamMake_Spinner_AddressSi, parseredData[0][2]);
+                Spinner_Do = Layout_Navigation_TeamMake_Spinner_AddressDo.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        Layout_Navigation_TeamMake_Spinner_AddressSi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Spinner_Si = Layout_Navigation_TeamMake_Spinner_AddressSi.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Layout_Navigation_TeamMake_Button_TeamMake.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +104,6 @@ public class TeamMake extends AppCompatActivity{
                 TeamName = Layout_Navigation_TeamMake_EditText_TeamName.getText().toString();
                 HomeCourt = Layout_Navigation_TeamMake_EditText_HomeCourt.getText().toString();
                 TeamIntro = Layout_Navigation_TeamMake_EditText_TeamIntro.getText().toString();
-                Spinner_Do = "서울";
-                Spinner_Si = "강남구";
                 if(TeamName.equals("")){
                     Snackbar.make(view,"팀명을 입력해주세요.",Snackbar.LENGTH_SHORT).show();
                 }
@@ -80,19 +120,23 @@ public class TeamMake extends AppCompatActivity{
                             HttpClient http_teammake = new HttpClient();
                             String result =http_teammake.HttpClient("Trophy_part1","TeamMake.jsp",Pk,TeamName,Spinner_Do,Spinner_Si,HomeCourt,TeamIntro);
                             parsedData_TeamMake = jsonParserList_TeamMake(result);
-                            if(parsedData_TeamMake[0][0].equals("succed")){
-                                ///
+                            if(parsedData_TeamMake[0][0].equals("succed"))
+                            {
                                 dlg = new AlertDialog.Builder(TeamMake.this).setTitle("트로피")
                                         .setMessage("팀이 생성되었습니다.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
+                                                dlg.dismiss();
+                                                activity.finish();
+                                                startActivity(new Intent(TeamMake.this, MainActivity.class));
                                                 finish();
+                                                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                                             }
                                         }).show();
                             }
-                            else{
-                                ///
+                            else
+                            {
                                 dlg = new AlertDialog.Builder(TeamMake.this).setTitle("트로피")
                                         .setMessage("잠시 후 다시 시도해주세요.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -126,6 +170,14 @@ public class TeamMake extends AppCompatActivity{
         }catch (JSONException e){
             e.printStackTrace();
             return null;
+        }
+    }
+    public void setSpinText(Spinner spin, String text) {
+        for (int i = 0; i < spin.getAdapter().getCount(); i++) {
+            if (spin.getAdapter().getItem(i).toString().contains(text)) {
+                spin.setSelection(i);
+                break;
+            }
         }
     }
 }

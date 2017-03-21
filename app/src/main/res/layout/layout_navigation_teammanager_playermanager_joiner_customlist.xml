@@ -2,22 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/WhiteGray">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_Root"
-        android:layout_height="140dp">
+        android:layout_height="200dp"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/DarkGray"
+            android:background="@color/backColor"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
+            android:layout_marginRight="8dp"
+            android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player1">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -47,9 +51,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/DarkGray"
+            android:background="@color/backColor"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
+            android:layout_marginRight="8dp"
+            android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player2">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -79,9 +84,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/DarkGray"
+            android:background="@color/backColor"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp">
+            android:layout_marginRight="8dp"
+            android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player3">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -100,6 +106,39 @@
                 android:textColor="@color/Black"
                 android:background="@color/White"
                 android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_TextView_ThirdName"
+                android:layout_weight="2.4"
+                android:gravity="center"
+                android:layout_marginBottom="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginLeft="1dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/backColor"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player4">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/White"
+                app:srcCompat="@drawable/teammanager_player"
+                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile"
+                android:layout_weight="1"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/Black"
+                android:background="@color/White"
+                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_TextView_FourthName"
                 android:layout_weight="2.4"
                 android:gravity="center"
                 android:layout_marginBottom="1dp"

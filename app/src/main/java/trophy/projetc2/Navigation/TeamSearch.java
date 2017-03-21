@@ -52,7 +52,7 @@ public class TeamSearch extends AppCompatActivity{
         ArrayList<TeamSearch_CustomList_MyData> TeamSearch_CustomList_MyData;
         TeamSearch_CustomList_MyData = new ArrayList<TeamSearch_CustomList_MyData>();
         for (int i = 0; i < parsedData_TeamSearch.length; i++) {
-            TeamSearch_CustomList_MyData.add(new TeamSearch_CustomList_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1]));
+            TeamSearch_CustomList_MyData.add(new TeamSearch_CustomList_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2]));
         }
         adapter = new TeamSearch_CustomList_Adapter(this, TeamSearch_CustomList_MyData);
         Layout_Navigation_TeamSearch_ListView_TeamSearch.setAdapter(adapter);
@@ -82,6 +82,7 @@ public class TeamSearch extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
             }
         });
     }
@@ -92,7 +93,7 @@ public class TeamSearch extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2"};
+            String[] jsonName = {"msg1","msg2","msg3"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -106,5 +107,9 @@ public class TeamSearch extends AppCompatActivity{
             return null;
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
 }

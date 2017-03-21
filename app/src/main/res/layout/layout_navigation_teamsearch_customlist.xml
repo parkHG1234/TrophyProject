@@ -3,45 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="62dp">
+    android:layout_height="60dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:id="@+id/Layout_Navigation_TeamSearch_LinearLayout_Root"
-        android:layout_height="60dp">
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/emblem"
             android:id="@+id/Layout_Navigation_TeamSearch_ImageView_Emblem"
-            android:layout_weight="5"
-            android:scaleType="fitXY"
-            android:layout_margin="15dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
-
-        <TextView
-            android:text="TextView"
-            android:textColor="@color/BlackGray"
+            android:scaleType="fitCenter"
+            android:layout_margin="5dp"
+            android:layout_weight="5"/>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamName"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:textSize="15dp"
-            android:textStyle="normal|bold"/>
-
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamName"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textSize="13dp"
+                android:textColor="@color/Black"
+                android:textStyle="normal|bold"/>
+            <TextView
+                android:text="경기도 의정부시"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamAddress"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:textSize="13dp"
+                android:textColor="@color/Black"
+                android:textStyle="normal|bold"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:id="@+id/button19"
-        android:layout_height="1dp"
-        android:background="@color/DarkGray"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
 </LinearLayout>

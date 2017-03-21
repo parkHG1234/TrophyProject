@@ -2,52 +2,122 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/Sugegest_EditText"
+    android:orientation="vertical"
+    android:background="@color/backColor">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:hint="150자로간단하게입력해주세요"
-        android:maxLength="150"
-        android:maxLines="12"
-        android:paddingLeft="15dp"
-        android:scrollHorizontally="false" />
-
-    <TextView
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="건의사항"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Suggest_ImageVIew_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="문의하신 내용에 대한 원인파악 및 원활한 상담을 위하여 이메일을 수집합니다.수집된 개인정보는 개인정보의 수집 및 이용 목적이 달성되면 관련 법령 또는 회사 내부 방침에 의해 보존할 필요가 있는 경우를 제외하고는 지체없이 파기 됩니다."
-        android:textAlignment="textStart"
-        android:textSize="15dp" />
-
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/MainColor1"
+            android:layout_height="350dp">
+            <EditText
+                android:id="@+id/Sugegest_EditText_Content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="건의사항을 입력해주시기 바랍니다."
+                android:maxLength="150"
+                android:maxLines="12"
+                android:paddingLeft="15dp"
+                android:scrollHorizontally="false"
+                android:background="@color/White"
+                android:layout_margin="1dp" />
+        </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/Suggest_CheckBox"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/MainColor1"
+            android:id="@+id/button6"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/Sugegest_EditText_Email"
+            android:hint="abcd@abcd.com" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="위 내용에 동의합니다." />
-    </LinearLayout>
+            android:layout_height="100dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="문의하신 내용에 대한 원인파악 및 원활한 상담을 위하여 이메일을 수집합니다.수집된 개인정보는 개인정보의 수집 및 이용 목적이 달성되면 관련 법령 또는 회사 내부 방침에 의해 보존할 필요가 있는 경우를 제외하고는 지체없이 파기 됩니다."
+            android:textAlignment="textStart"
+            android:textSize="15dp" />
 
-    <Button
-        android:id="@+id/Suggest_Button"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="건의사항 등록"
-        android:textSize="15dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/Suggest_CheckBox"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="위 내용에 동의합니다." />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/Suggest_Button"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:inputType="textMultiLine"
+            android:text="건의사항 등록"
+            android:textSize="15dp"
+            android:background="@color/MainColor1"
+            android:textColor="@color/White" />
+    </LinearLayout>
+</ScrollView>
+
+
+
 </LinearLayout>

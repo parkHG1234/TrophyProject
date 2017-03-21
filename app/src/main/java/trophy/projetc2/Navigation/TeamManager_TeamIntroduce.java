@@ -45,6 +45,7 @@ import trophy.projetc2.R;
 
 import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
 
+
 /**
  * Created by 박효근 on 2017-01-10.
  */

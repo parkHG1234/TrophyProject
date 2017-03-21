@@ -83,7 +83,8 @@ public class TeamSearch_CustomList_Adapter extends BaseAdapter{
             public void onClick(View view) {
                 Intent intent = new Intent(context,TeamSearch_Focus.class);
                 intent.putExtra("TeamName", arrData.get(position).getTeamName());
-                intent.putExtra("Pk",arrData.get(position).getPk());
+                intent.putExtra("User_Pk",arrData.get(position).getPk());
+                intent.putExtra("Team_Pk",arrData.get(position).getTeam_Pk());
                 context.startActivity(intent);
             }
         });

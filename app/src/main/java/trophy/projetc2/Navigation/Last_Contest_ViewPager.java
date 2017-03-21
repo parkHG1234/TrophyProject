@@ -3,6 +3,8 @@ package trophy.projetc2.Navigation;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,9 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import trophy.projetc2.ImageDownload;
 import trophy.projetc2.Navigation.Last_Contest_ImageView.Last_Contest_ImageView1;
 import trophy.projetc2.Navigation.Last_Contest_ImageView.Last_Contest_ImageView10;
 import trophy.projetc2.Navigation.Last_Contest_ImageView.Last_Contest_ImageView11;
@@ -55,11 +59,15 @@ import trophy.projetc2.R;
 public class Last_Contest_ViewPager extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    private ImageView Last_Contest_ImageView_Back;
+    private ImageView Last_Contest_ImageView_Save;
     static String Images;
     public static String[] imgs;
     public static String Num;
     public static String Line;
+    public static String Last_Contest_ViewPager_Pk=null;
     public static String Pk=null;
+    public static String PictureCount="0";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -70,11 +78,36 @@ public class Last_Contest_ViewPager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_last_contest_viewpager);
+
         Intent intent = getIntent();
         Images = intent.getStringExtra("Images");
         Num = intent.getStringExtra("Num");
         Line = intent.getStringExtra("Line");
-        Pk = intent.getStringExtra("Pk")+"_";
+        Last_Contest_ViewPager_Pk = intent.getStringExtra("Pk")+"_";
+
+        Last_Contest_ImageView_Back = (ImageView)findViewById(R.id.Last_Contest_ImageView_Back);
+        Last_Contest_ImageView_Save = (ImageView)findViewById(R.id.Last_Contest_ImageView_Save);
+        Last_Contest_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        Last_Contest_ImageView_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imgUrl = "http://210.122.7.193:8080/Trophy_img/last_contest/" +  Last_Contest_ViewPager_Pk + PictureCount+ ".jpg";
+                new ImageDownload(getApplication()).execute(imgUrl);
+                Snackbar.make(view, "사진이저장되었습니다.", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        Last_Contest_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
 
         //프래그먼트 정의
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -86,43 +119,23 @@ public class Last_Contest_ViewPager extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                PictureCount = Integer.toString(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-//    public Action getIndexApiAction() {
-//        Thing object = new Thing.Builder()
-//                .setName("Last_Contest_ViewPager Page") // TODO: Define a title for the content shown.
-//                // TODO: Make sure this auto-generated URL is correct.
-//                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-//                .build();
-//        return new Action.Builder(Action.TYPE_VIEW)
-//                .setObject(object)
-//                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-//                .build();
-//    }
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        client.connect();
-//        AppIndex.AppIndexApi.start(client, getIndexApiAction());
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//
-//        // ATTENTION: This was auto-generated to implement the App Indexing API.
-//        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        AppIndex.AppIndexApi.end(client, getIndexApiAction());
-//        client.disconnect();
-//    }
 
     public static class PlaceholderFragment extends Fragment {
         /**
@@ -171,94 +184,94 @@ public class Last_Contest_ViewPager extends AppCompatActivity {
             Fragment fragment = null;
             switch (position) {
                 case 0:
-                    fragment = new Last_Contest_ImageView1(Pk);
+                    fragment = new Last_Contest_ImageView1();
                     break;
                 case 1:
-                    fragment = new Last_Contest_ImageView2(Pk);
+                    fragment = new Last_Contest_ImageView2();
                     break;
                 case 2:
-                    fragment = new Last_Contest_ImageView3(Pk);
+                    fragment = new Last_Contest_ImageView3();
                     break;
                 case 3:
-                    fragment = new Last_Contest_ImageView4(Pk);
+                    fragment = new Last_Contest_ImageView4();
                     break;
                 case 4:
-                    fragment = new Last_Contest_ImageView5(Pk);
+                    fragment = new Last_Contest_ImageView5();
                     break;
                 case 5:
-                    fragment = new Last_Contest_ImageView6(Pk);
+                    fragment = new Last_Contest_ImageView6();
                     break;
                 case 6:
-                    fragment = new Last_Contest_ImageView7(Pk);
+                    fragment = new Last_Contest_ImageView7();
                     break;
                 case 7:
-                    fragment = new Last_Contest_ImageView8(Pk);
+                    fragment = new Last_Contest_ImageView8();
                     break;
                 case 8:
-                    fragment = new Last_Contest_ImageView9(Pk);
+                    fragment = new Last_Contest_ImageView9();
                     break;
                 case 9:
-                    fragment = new Last_Contest_ImageView10(Pk);
+                    fragment = new Last_Contest_ImageView10();
                     break;
                 case 10:
-                    fragment = new Last_Contest_ImageView11(Pk);
+                    fragment = new Last_Contest_ImageView11();
                     break;
                 case 11:
-                    fragment = new Last_Contest_ImageView12(Pk);
+                    fragment = new Last_Contest_ImageView12();
                     break;
                 case 12:
-                    fragment = new Last_Contest_ImageView13(Pk);
+                    fragment = new Last_Contest_ImageView13();
                     break;
                 case 13:
-                    fragment = new Last_Contest_ImageView14(Pk);
+                    fragment = new Last_Contest_ImageView14();
                     break;
                 case 14:
-                    fragment = new Last_Contest_ImageView15(Pk);
+                    fragment = new Last_Contest_ImageView15();
                     break;
                 case 15:
-                    fragment = new Last_Contest_ImageView16(Pk);
+                    fragment = new Last_Contest_ImageView16();
                     break;
                 case 16:
-                    fragment = new Last_Contest_ImageView17(Pk);
+                    fragment = new Last_Contest_ImageView17();
                     break;
                 case 17:
-                    fragment = new Last_Contest_ImageView18(Pk);
+                    fragment = new Last_Contest_ImageView18();
                     break;
                 case 18:
-                    fragment = new Last_Contest_ImageView19(Pk);
+                    fragment = new Last_Contest_ImageView19();
                     break;
                 case 19:
-                    fragment = new Last_Contest_ImageView20(Pk);
+                    fragment = new Last_Contest_ImageView20();
                     break;
                 case 20:
-                    fragment = new Last_Contest_ImageView21(Pk);
+                    fragment = new Last_Contest_ImageView21();
                     break;
                 case 21:
-                    fragment = new Last_Contest_ImageView22(Pk);
+                    fragment = new Last_Contest_ImageView22();
                     break;
                 case 22:
-                    fragment = new Last_Contest_ImageView23(Pk);
+                    fragment = new Last_Contest_ImageView23();
                     break;
                 case 23:
-                    fragment = new Last_Contest_ImageView24(Pk);
+                    fragment = new Last_Contest_ImageView24();
                     break;
                 case 24:
-                    fragment = new Last_Contest_ImageView25(Pk);
+                    fragment = new Last_Contest_ImageView25();
                     break;
                 case 25:
-                    fragment = new Last_Contest_ImageView26(Pk);
+                    fragment = new Last_Contest_ImageView26();
                     break;
                 case 26:
-                    fragment = new Last_Contest_ImageView27(Pk);
+                    fragment = new Last_Contest_ImageView27();
                     break;
                 case 27:
-                    fragment = new Last_Contest_ImageView28(Pk);
+                    fragment = new Last_Contest_ImageView28();
                     break;
                 case 28:
-                    fragment = new Last_Contest_ImageView29(Pk);
+                    fragment = new Last_Contest_ImageView29();
                     break;
                 case 29:
-                    fragment = new Last_Contest_ImageView30(Pk);
+                    fragment = new Last_Contest_ImageView30();
                     break;
             }
             return fragment;
@@ -274,5 +287,11 @@ public class Last_Contest_ViewPager extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }
