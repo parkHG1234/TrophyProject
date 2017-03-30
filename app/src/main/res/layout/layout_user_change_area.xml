@@ -2,14 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkGray">
+    android:background="@color/backColor">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주소 설정"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/User_Chage_Area_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
 
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@color/White"
         android:gravity="center_vertical"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:text="주소 설정"
@@ -17,7 +46,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
             android:background="@color/White"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/Black"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp" />
@@ -66,10 +95,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_changeAreaCommit"
-            android:background="@color/Gray"
+            android:background="@color/MainColor1"
             android:textColor="@color/White"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp" />
     </LinearLayout>
 
 </LinearLayout>

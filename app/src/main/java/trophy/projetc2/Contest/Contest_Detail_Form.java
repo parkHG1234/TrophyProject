@@ -1,5 +1,6 @@
 package trophy.projetc2.Contest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
@@ -33,6 +34,7 @@ import java.util.List;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Contest.Contest_Detail.Contest_Detail_activity;
 import static trophy.projetc2.R.id.Contest_Detail_Form_Player_CustomList_Check;
 
 /**
@@ -50,6 +52,7 @@ public class Contest_Detail_Form extends AppCompatActivity {
     static int Player=0;
     static int JoinerCount=0;
     static String[] JoinerId;
+
     String[][] parsedData_Profile,parsedData_Player,parsedData_Join_Team;
     TextView Contest_Detail_Form_Button_ContestName;
     TextView Contest_Detail_Form_Button_TeamName;
@@ -65,7 +68,6 @@ public class Contest_Detail_Form extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_contest_detail_form);
-
         Contest_Detail_Form_Back = (ImageView)findViewById(R.id.Contest_Detail_Form_Back);
         Contest_Detail_Form_Button_ContestName = (TextView)findViewById(R.id.Contest_Detail_Form_Button_ContestName);
         Contest_Detail_Form_Button_TeamName = (TextView)findViewById(R.id.Contest_Detail_Form_Button_TeamName);
@@ -164,6 +166,8 @@ public class Contest_Detail_Form extends AppCompatActivity {
                                 public void onClick(View v) {
                                     recommendDialog.dismiss();
                                     finish();
+                                    Contest_Detail_activity.finish();
+                                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                                 }
                             });
                     recommendDialog.show();

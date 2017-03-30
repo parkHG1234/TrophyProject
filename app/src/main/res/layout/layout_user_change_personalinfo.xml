@@ -2,11 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개인정보 수정"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/User_Change_Personalinfo_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
 
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/DarkGray">
+        android:background="@color/backColor">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,7 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/White"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:text="기본 사용자 정보"
@@ -26,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView4"
                     android:background="@color/White"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp" />
@@ -134,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
                     android:background="@color/White"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp" />
@@ -200,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_change_area"
-                    android:background="@color/Gray"
+                    android:background="@color/MainColor1"
                     android:textColor="@color/White"
                     android:layout_margin="5dp" />
             </LinearLayout>
@@ -219,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
                     android:background="@color/White"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp" />
@@ -252,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_change_phone"
                     android:textColor="@color/White"
-                    android:background="@color/Gray"
+                    android:background="@color/MainColor1"
                     android:layout_margin="5dp" />
             </LinearLayout>
 
@@ -270,7 +299,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
                     android:background="@color/White"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp"
@@ -282,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_change_pw"
                     android:textColor="@color/White"
-                    android:background="@color/Gray"
+                    android:background="@color/MainColor1"
                     android:layout_margin="5dp" />
 
             </LinearLayout>
@@ -301,7 +330,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView6"
                     android:background="@color/White"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:textColor="@color/Black"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="10dp"
@@ -343,7 +372,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_withdrawal"
-                    android:background="@color/Gray"
+                    android:background="@color/MainColor1"
                     android:textColor="@color/White"
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="10dp" />

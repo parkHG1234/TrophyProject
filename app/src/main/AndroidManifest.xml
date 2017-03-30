@@ -25,12 +25,14 @@
         <activity android:name=".Navigation.TeamMake"></activity>
         <activity android:name=".Navigation.TeamInfo"></activity>
         <activity android:name=".Navigation.TeamSearch" android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".Navigation.TeamRanking"></activity>
         <activity android:name=".Navigation.Last_Contest"></activity>
         <activity android:name=".Navigation.Last_Contest_Detail"></activity>
         <activity android:name=".Navigation.Notice"></activity>
         <activity android:name=".Navigation.Suggest"></activity>
         <activity android:name=".Navigation.TeamSearch_Focus"></activity>
         <activity android:name=".Navigation.TeamManager"></activity>
+        <activity android:name=".Contest.Navigation_Contest"></activity>
         <activity android:name=".Navigation.TeamManager_ContestJoin_ContestFocus"></activity>
         <activity android:name=".Contest.Contest_Detail"></activity>
         <activity android:name=".Contest.Contest_Detail_Form"></activity>

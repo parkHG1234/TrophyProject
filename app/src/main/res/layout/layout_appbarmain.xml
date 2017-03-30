@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/backColor">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,19 +53,7 @@
             android:id="@+id/button16"
             android:background="@color/WhiteGray"
             android:layout_height="1dp"
-            android:layout_marginBottom="20dp" />
-
-
-        <TextView
-            android:text="추천 스포츠 대회"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView20"
-            android:paddingLeft="8dp"
-            android:textColor="@color/MainColor1"
-            android:textStyle="normal|bold"
-            android:textSize="17dp"
-            android:paddingBottom="10dp" />
+            android:layout_marginBottom="2dp"/>
 
         <include layout="@layout/layout_main" />
 

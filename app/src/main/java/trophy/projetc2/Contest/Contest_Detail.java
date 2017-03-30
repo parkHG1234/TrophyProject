@@ -1,5 +1,6 @@
 package trophy.projetc2.Contest;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -61,11 +62,13 @@ public class Contest_Detail extends AppCompatActivity {
     static String Status="succed";
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    static Activity Contest_Detail_activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_contest_detail);
         //GlobalApplication.setCurrentActivity(this);
+        Contest_Detail_activity = Contest_Detail.this;
         inflater=getLayoutInflater();
         layout_contest_submit = (Button)findViewById(R.id.layout_contest_submit);
         Contest_Detail_Back = (ImageView) findViewById(R.id.Contest_Detail_Back);

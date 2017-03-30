@@ -23,15 +23,31 @@
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player1">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/White"
-                app:srcCompat="@drawable/teammanager_player"
-                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile"
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    app:srcCompat="@drawable/teammanager_player"
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:scaleType="fitXY" />
+                <ImageView
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstRepresent"
+                    android:src="@drawable/represent"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
+
+
 
             <TextView
                 android:text="TextView"
@@ -56,15 +72,29 @@
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player2">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/White"
-                app:srcCompat="@drawable/teammanager_player"
-                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile"
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    app:srcCompat="@drawable/teammanager_player"
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:scaleType="fitXY" />
+                <ImageView
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondRepresent"
+                    android:src="@drawable/represent"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
 
             <TextView
                 android:text="TextView"
@@ -89,15 +119,29 @@
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player3">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/White"
-                app:srcCompat="@drawable/teammanager_player"
-                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile"
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    app:srcCompat="@drawable/teammanager_player"
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:scaleType="fitXY" />
+                <ImageView
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdRepresent"
+                    android:src="@drawable/represent"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
 
             <TextView
                 android:text="TextView"
@@ -122,15 +166,29 @@
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player4">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/White"
-                app:srcCompat="@drawable/teammanager_player"
-                android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile"
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:scaleType="fitXY"/>
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    app:srcCompat="@drawable/teammanager_player"
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp"
+                    android:scaleType="fitXY" />
+                <ImageView
+                    android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthRepresent"
+                    android:src="@drawable/represent"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:visibility="invisible"/>
+            </RelativeLayout>
 
             <TextView
                 android:text="TextView"

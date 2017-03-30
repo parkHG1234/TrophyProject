@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +35,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.matthewtamlin.sliding_intro_screen_library.DotIndicator;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
@@ -48,30 +52,41 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Contest.Contests_Customlist_Adapter;
 import trophy.projetc2.Contest.Contests_Customlist_MyData;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.Main.MainActivity_VierPage1;
+import trophy.projetc2.Main.MainActivity_VierPage2;
+import trophy.projetc2.Main.MainActivity_VierPage3;
+import trophy.projetc2.Contest.Navigation_Contest;
 import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Navigation.Notice;
 import trophy.projetc2.Navigation.Suggest;
 import trophy.projetc2.Navigation.TeamInfo;
 import trophy.projetc2.Navigation.TeamMake;
-import trophy.projetc2.Navigation.TeamManager;
+import trophy.projetc2.Navigation.TeamRanking;
 import trophy.projetc2.Navigation.TeamSearch;
+import trophy.projetc2.Navigation.TeamSearch_Focus;
 import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
-    String Pk, Name, Team, Profile, Token = "hh",Team_Pk;
-    String[][] parseredData_AddToken, parseredData_user, parseredData_teammake;
+    String Pk, Name, Team, Profile, Token = "hh", Team_Pk, Team_Duty;
+    String[][] parseredData_AddToken, parseredData_user, parseredData_teammake,RankingParsedList;
     public static Activity activity;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
 
     DrawerLayout drawer;
     SharedPreferences preferences; //캐쉬 데이터 생성
     SharedPreferences.Editor editor; //캐쉬 데이터 에디터 생성
     ImageView Main_Navigation_ImageView_Profile;
+    static TimerTask myTask;
+    static Timer timer;
     private LayoutInflater inflater;
 
     @Override
@@ -84,12 +99,12 @@ public class MainActivity extends AppCompatActivity {
         inflater = getLayoutInflater();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar123);
         setSupportActionBar(toolbar);
-        ImageView MainActivity_ActionBar_Drawer = (ImageView)toolbar.findViewById(R.id.MainActivity_ActionBar_Drawer);
+        ImageView MainActivity_ActionBar_Drawer = (ImageView) toolbar.findViewById(R.id.MainActivity_ActionBar_Drawer);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         MainActivity_ActionBar_Drawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("aa","tt");
+                Log.i("aa", "tt");
                 drawer.openDrawer(Gravity.LEFT);
             }
         });
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_Button_Notice = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final TextView Main_Navigation_Button_Suggest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final TextView Main_Navigation_Button_Logout = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Logout);
+        final TextView Main_Navigation_Button_Ranking = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
 
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
@@ -156,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             Team = parseredData_user[0][1];
             Profile = parseredData_user[0][2];
             Team_Pk = parseredData_user[0][3];
+            Team_Duty = parseredData_user[0][4];
             //프로필 관리
             try {
                 String Profile1 = URLEncoder.encode(Profile, "utf-8");
@@ -173,7 +190,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
             Main_Navigation_TextView_Name.setText(Name);
-            Main_Navigation_TextView_Team.setText(Team);
+            if (Team_Duty.equals("신청중")) {
+                Main_Navigation_TextView_Team.setText(".");
+                Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
+            } else {
+                Main_Navigation_TextView_Team.setText(Team);
+                Main_Navigation_Button_TeamManager.setVisibility(View.VISIBLE);
+            }
+
             Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -181,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
                     intent.putExtra("TeamName", Team);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
             });
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
@@ -268,13 +293,13 @@ public class MainActivity extends AppCompatActivity {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball);
         } else if (sport.equals("soccer")) {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.soccer);
-        }else if (sport.equals("football")) {
+        } else if (sport.equals("football")) {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.football);
-        }else if (sport.equals("golf")) {
+        } else if (sport.equals("golf")) {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.golf);
-        }else if (sport.equals("volleyball")) {
+        } else if (sport.equals("volleyball")) {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.volleyball);
-        }else if (sport.equals("billiards")) {
+        } else if (sport.equals("billiards")) {
             Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.billiards);
         }
 
@@ -338,7 +363,15 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-
+        Main_Navigation_Button_Ranking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_TeamSearch = new Intent(MainActivity.this, TeamRanking.class);
+                intent_TeamSearch.putExtra("Pk", Pk);
+                startActivity(intent_TeamSearch);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         Main_Navigation_Button_Notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -376,32 +409,225 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /////////////////////////////////////////////
-        //리스트뷰
+        //슬라이딩
+        //프래그먼트 정의
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        final DotIndicator indicator = (DotIndicator) findViewById(R.id.main_indicator_ad);
+        // 도트 색 지정
+        indicator.setSelectedDotColor(Color.parseColor("#F96332"));
+        indicator.setUnselectedDotColor(Color.parseColor("#CFCFCF"));
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(1);
+        ////////////
+        final int pageCount = 3;
+        indicator.setNumberOfItems(pageCount);
+
+        myTask = new TimerTask() {
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        int currentPage = mViewPager.getCurrentItem();
+                        if (currentPage >= pageCount - 1) mViewPager.setCurrentItem(0, true);
+                        else mViewPager.setCurrentItem(currentPage + 1, true);
+                        indicator.setSelectedItem((currentPage + 1 == pageCount) ? 0 : currentPage + 1, true);
+                    }
+                });
+            }
+        };
+        timer = new Timer();
+        //timer.schedule(myTask, 5000);  // 5초후 실행하고 종료
+        timer.schedule(myTask, 500, 6000); // 5초후 첫실행, 3초마다 계속실행
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                indicator.setSelectedItem(mViewPager.getCurrentItem(), true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        ////////////////////////////////////////////
+        //대회 더보기
+        TextView Main_Contest_TextView_ContestFocus = (TextView)findViewById(R.id.Main_Contest_TextView_ContestFocus);
+        Main_Contest_TextView_ContestFocus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Suggest = new Intent(MainActivity.this, Navigation_Contest.class);
+                intent_Suggest.putExtra("Pk", Pk);
+                startActivity(intent_Suggest);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        //대회 리스트뷰
         HttpClient ContestHttp = new HttpClient();
-        String result = ContestHttp.HttpClient("Trophy_part3", "Contest_Customlist.jsp");
+        String result = ContestHttp.HttpClient("Trophy_part1", "Main_Contest.jsp");
         String[][] ContestsParsedList = jsonParserList_getContestList(result);
 
         ArrayList<Contests_Customlist_MyData> Contests_Customlist_MyData;
         Contests_Customlist_MyData = new ArrayList<Contests_Customlist_MyData>();
-        for (int i = 0; i < ContestsParsedList.length; i++) {
-            Contests_Customlist_MyData.add(new Contests_Customlist_MyData(ContestsParsedList[i][0], ContestsParsedList[i][1],
+        for (int i = 0; i < 5; i=i+2) {
+            Contests_Customlist_MyData.add(new Contests_Customlist_MyData(this, ContestsParsedList[i][0], ContestsParsedList[i][1],
                     ContestsParsedList[i][2], ContestsParsedList[i][3], ContestsParsedList[i][4], ContestsParsedList[i][5],
-                    ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i][8], ContestsParsedList[i][9],
-                    ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12], this, ContestsParsedList[i][13]));
+                    ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i+1][0], ContestsParsedList[i+1][1],
+                    ContestsParsedList[i+1][2], ContestsParsedList[i+1][3], ContestsParsedList[i+1][4], ContestsParsedList[i+1][5], ContestsParsedList[i+1][6], ContestsParsedList[i+1][7]));
         }
         Contests_Customlist_Adapter Adapter = new Contests_Customlist_Adapter(this, Contests_Customlist_MyData);
         listView.setAdapter(Adapter);
 
+        //랭킹 더보기
+        TextView Main_Contest_TextView_RankingFocus = (TextView)findViewById(R.id.Main_Contest_TextView_RankingFocus);
+        Main_Contest_TextView_RankingFocus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_TeamSearch = new Intent(MainActivity.this, TeamRanking.class);
+                intent_TeamSearch.putExtra("Pk", Pk);
+                startActivity(intent_TeamSearch);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
 
+        //메인 랭킹 -xml연결
+        TextView Main_Ranking_TextView_Ranking1 = (TextView)findViewById(R.id.Main_Ranking_TextView_Ranking1);
+        ImageView Main_Ranking_ImageView_Emblem1 = (ImageView)findViewById(R.id.Main_Ranking_ImageView_Emblem1);
+        TextView Main_Ranking_ImageView_TeamName1 = (TextView)findViewById(R.id.Main_Ranking_ImageView_TeamName1);
+
+        TextView Main_Ranking_TextView_Ranking2 = (TextView)findViewById(R.id.Main_Ranking_TextView_Ranking2);
+        ImageView Main_Ranking_ImageView_Emblem2 = (ImageView)findViewById(R.id.Main_Ranking_ImageView_Emblem2);
+        TextView Main_Ranking_ImageView_TeamName2 = (TextView)findViewById(R.id.Main_Ranking_ImageView_TeamName2);
+
+        TextView Main_Ranking_TextView_Ranking3 = (TextView)findViewById(R.id.Main_Ranking_TextView_Ranking3);
+        ImageView Main_Ranking_ImageView_Emblem3 = (ImageView)findViewById(R.id.Main_Ranking_ImageView_Emblem3);
+        TextView Main_Ranking_ImageView_TeamName3 = (TextView)findViewById(R.id.Main_Ranking_ImageView_TeamName3);
+
+        TextView Main_Ranking_TextView_Ranking4 = (TextView)findViewById(R.id.Main_Ranking_TextView_Ranking4);
+        ImageView Main_Ranking_ImageView_Emblem4 = (ImageView)findViewById(R.id.Main_Ranking_ImageView_Emblem4);
+        TextView Main_Ranking_ImageView_TeamName4 = (TextView)findViewById(R.id.Main_Ranking_ImageView_TeamName4);
+        HttpClient RankingHttp = new HttpClient();String result_Ranking="";
+
+        //메인 랭킹 -http 값 받아오기
+        result_Ranking = RankingHttp.HttpClient("Trophy_part1", "Main_Ranking.jsp",Pk);
+        RankingParsedList = jsonParserList_Ranking(result_Ranking);
+
+        //메인 랭킹 -받아온 텍스트값 저장
+        Main_Ranking_TextView_Ranking1.setText(RankingParsedList[0][3]);
+        Main_Ranking_TextView_Ranking2.setText(RankingParsedList[1][3]);
+        Main_Ranking_TextView_Ranking3.setText(RankingParsedList[2][3]);
+        Main_Ranking_TextView_Ranking4.setText(RankingParsedList[3][3]);
+
+        Main_Ranking_ImageView_TeamName1.setText(RankingParsedList[0][2]);
+        Main_Ranking_ImageView_TeamName2.setText(RankingParsedList[1][2]);
+        Main_Ranking_ImageView_TeamName3.setText(RankingParsedList[2][2]);
+        Main_Ranking_ImageView_TeamName4.setText(RankingParsedList[3][2]);
+
+        //메인 랭킹 -받아온 이미지값 저장
+        try{
+            String En_Emblem1 = URLEncoder.encode(RankingParsedList[0][1], "utf-8");
+            if (En_Emblem1.equals(".")) {
+                Glide.with(getApplicationContext()).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .into(Main_Ranking_ImageView_Emblem1);
+            } else {
+                Glide.with(getApplicationContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Emblem1 + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(Main_Ranking_ImageView_Emblem1);
+            }
+            String En_Emblem2 = URLEncoder.encode(RankingParsedList[1][1], "utf-8");
+            if (En_Emblem2.equals(".")) {
+                Glide.with(getApplicationContext()).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .into(Main_Ranking_ImageView_Emblem2);
+            } else {
+                Glide.with(getApplicationContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Emblem2 + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(Main_Ranking_ImageView_Emblem2);
+            }
+            String En_Emblem3 = URLEncoder.encode(RankingParsedList[2][1], "utf-8");
+            if (En_Emblem3.equals(".")) {
+                Glide.with(getApplicationContext()).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .into(Main_Ranking_ImageView_Emblem3);
+            } else {
+                Glide.with(getApplicationContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Emblem3 + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(Main_Ranking_ImageView_Emblem3);
+            }
+            String En_Emblem4 = URLEncoder.encode(RankingParsedList[3][1], "utf-8");
+            if (En_Emblem4.equals(".")) {
+                Glide.with(getApplicationContext()).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .into(Main_Ranking_ImageView_Emblem4);
+            } else {
+                Glide.with(getApplicationContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Emblem4 + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(Main_Ranking_ImageView_Emblem4);
+            }
+        }catch (UnsupportedEncodingException e){
+
+        }
+        //메인 랭킹 -각 팀 클릭시 팀 정보로 넘어가는 이벤트
+        Main_Ranking_ImageView_Emblem1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this,TeamSearch_Focus.class);
+                intent1.putExtra("TeamName", RankingParsedList[0][2]);
+                intent1.putExtra("User_Pk", Pk);
+                intent1.putExtra("Team_Pk",RankingParsedList[0][0]);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        Main_Ranking_ImageView_Emblem2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this,TeamSearch_Focus.class);
+                intent1.putExtra("TeamName", RankingParsedList[1][2]);
+                intent1.putExtra("User_Pk", Pk);
+                intent1.putExtra("Team_Pk",RankingParsedList[0][0]);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        Main_Ranking_ImageView_Emblem3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this,TeamSearch_Focus.class);
+                intent1.putExtra("TeamName", RankingParsedList[2][2]);
+                intent1.putExtra("User_Pk", Pk);
+                intent1.putExtra("Team_Pk",RankingParsedList[2][0]);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        Main_Ranking_ImageView_Emblem4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this,TeamSearch_Focus.class);
+                intent1.putExtra("TeamName", RankingParsedList[3][2]);
+                intent1.putExtra("User_Pk", Pk);
+                intent1.putExtra("Team_Pk",RankingParsedList[3][0]);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
     }
-
     private String[][] jsonParserList_getContestList(String pRecvServerPage) {
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"_Pk", "_Title", "_Image", "_currentNum", "_maxNum", "_Payment", "_Host", "_Management", "_Support", "_ContestDate", "_RecruitStartDate", "_RecruitFinishDate", "_DetailInfo", "_Place"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7", "msg8"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
@@ -424,7 +650,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1", "msg2", "msg3", "msg4"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);
@@ -478,7 +704,25 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
+    public String[][] jsonParserList_Ranking(String pRecvServerPage) {
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try {
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for (int i = 0; i < jArr.length(); i++) {
+                json = jArr.getJSONObject(i);
+                for (int j = 0; j < jsonName.length; j++) {
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         try {
             //인텐트에 데이터가 담겨 왔다면
@@ -593,6 +837,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Test", "exception " + e.getMessage());
         }
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
@@ -600,12 +845,52 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-      //  super.onBackPressed();
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        //  super.onBackPressed();
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawers();
-        }
-        else{
+        } else {
             finish();
+        }
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            // return PlaceholderFragment.newInstance(position + 1);
+            Fragment fragment = null;
+            Bundle args = null;
+            switch (position) {
+                case 0:
+                    fragment = new MainActivity_VierPage1();
+                    args = new Bundle();
+                    break;
+                case 1:
+                    fragment = new MainActivity_VierPage2();
+                    args = new Bundle();
+                    break;
+                case 2:
+                    fragment = new MainActivity_VierPage3();
+                    args = new Bundle();
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return null;
         }
     }
 }

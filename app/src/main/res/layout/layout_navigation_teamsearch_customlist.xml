@@ -14,6 +14,18 @@
         android:layout_marginBottom="5dp"
         android:layout_marginRight="10dp">
 
+        <TextView
+            android:text="1"
+            android:id="@+id/Layout_Navigation_TeamSearch_TextView_Number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textSize="13dp"
+            android:textColor="@color/MainColor1"
+            android:textStyle="normal|bold"
+            android:layout_weight="3.2" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,7 +33,7 @@
             android:id="@+id/Layout_Navigation_TeamSearch_ImageView_Emblem"
             android:scaleType="fitCenter"
             android:layout_margin="5dp"
-            android:layout_weight="5"/>
+            android:layout_weight="3"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -50,6 +62,18 @@
                 android:textColor="@color/Black"
                 android:textStyle="normal|bold"/>
         </LinearLayout>
+
+        <TextView
+            android:text="1000"
+            android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamRanking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textSize="13dp"
+            android:textColor="@color/Black"
+            android:textStyle="normal|bold"/>
     </LinearLayout>
 
 </LinearLayout>

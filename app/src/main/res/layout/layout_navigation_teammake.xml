@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Contest_Detail_Back"
+            android:id="@+id/Teammake_ImageView_Back"
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>

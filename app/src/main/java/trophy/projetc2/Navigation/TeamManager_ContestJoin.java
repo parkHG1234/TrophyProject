@@ -79,7 +79,7 @@ public class TeamManager_ContestJoin extends Fragment {
         };
         Contestjoin_timer = new Timer();
         //timer.schedule(myTask, 5000);  // 5초후 실행하고 종료
-        Contestjoin_timer.schedule(myTask, 500, 2000); // 5초후 첫실행, 3초마다 계속실행
+        Contestjoin_timer.schedule(myTask, 100, 2000); // 5초후 첫실행, 3초마다 계속실행
         return rootView;
     }
 

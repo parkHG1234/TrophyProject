@@ -46,6 +46,7 @@ public class TeamMake extends AppCompatActivity{
     EditText Layout_Navigation_TeamMake_EditText_HomeCourt;
     EditText Layout_Navigation_TeamMake_EditText_TeamIntro;
     Button Layout_Navigation_TeamMake_Button_TeamMake;
+    ImageView Teammake_ImageView_Back;
     private trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
     private ArrayAdapter<CharSequence> adspin1, adspin2;
     @Override
@@ -55,6 +56,7 @@ public class TeamMake extends AppCompatActivity{
         Intent intent1 = getIntent();
         Pk = intent1.getStringExtra("Pk");
 
+        Teammake_ImageView_Back = (ImageView)findViewById(R.id.Teammake_ImageView_Back);
         Layout_Navigation_TeamMake_EditText_TeamName = (EditText)findViewById(R.id.Layout_Navigation_TeamMake_EditText_TeamName);
         Layout_Navigation_TeamMake_Spinner_AddressDo = (Spinner)findViewById(R.id.Layout_Navigation_TeamMake_Spinner_AddressDo);
         Layout_Navigation_TeamMake_Spinner_AddressSi= (Spinner)findViewById(R.id.Layout_Navigation_TeamMake_Spinner_AddressSi);
@@ -151,7 +153,13 @@ public class TeamMake extends AppCompatActivity{
                 }
             }
         });
-
+        Teammake_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
     }
     public String[][] jsonParserList_TeamMake(String pRecvServerPage){
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
@@ -179,5 +187,10 @@ public class TeamMake extends AppCompatActivity{
                 break;
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

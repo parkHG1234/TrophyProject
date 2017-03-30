@@ -76,7 +76,7 @@
                         <Button
                             android:layout_width="51dp"
                             android:id="@+id/Main_Navigation_Button_SportChoice"
-                            android:background="@drawable/basketball_a"
+                            android:background="@drawable/basketball"
                             android:layout_height="51dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginBottom="10dp" />
@@ -191,9 +191,17 @@
                     android:text="공지사항"
                     android:textSize="13dp"
                     android:textColor="@color/DarkGray"
-                    android:layout_marginBottom="50dp"
                     android:id="@+id/Main_Navigation_Button_Notice"
                     android:gravity="center_vertical" />
+
+                <TextView
+                    android:text="팀랭킹"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_Ranking"
+                    android:layout_marginBottom="50dp"/>
             </LinearLayout>
 
             <TextView

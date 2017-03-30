@@ -4,20 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import trophy.projetc2.Http.HttpClient;
-import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
 
 /**
@@ -26,6 +24,7 @@ import trophy.projetc2.R;
 
 public class ChangePersonalInfoActivity extends AppCompatActivity {
     TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone;
+    ImageView User_Change_Personalinfo_ImageView_Back;
     Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal;
     SharedPreferences preferences;
     String Pk, TeamName;
@@ -34,7 +33,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_change_personalinfo);
+        setContentView(R.layout.layout_user_change_personalinfo);
         activity = ChangePersonalInfoActivity.this;
 
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
@@ -52,6 +51,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             parsedData[0][1] = "남자";
         }
 
+        User_Change_Personalinfo_ImageView_Back = (ImageView)findViewById(R.id.User_Change_Personalinfo_ImageView_Back);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
         tv_birth = (TextView) findViewById(R.id.tv_birth);
@@ -103,11 +103,22 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        User_Change_Personalinfo_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
 
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
 
     private String[][] jsonParserListgetInfo(String pRecvServerPage) {
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);

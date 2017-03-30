@@ -47,6 +47,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
     private ArrayList<TeamManager_PlayerManager_Customlist_MyData_Player> arrData;
     private LayoutInflater inflater;
     ImageView FirstProfile, SecondProfile, ThirdProfile, FourthProfile;
+    ImageView FirstDuty, SecondDuty, ThirdDuty, FourthDuty;
     TextView FirstName, SecondName, ThirdName, FourthName;
     LinearLayout Player1, Player2, Player3, Player4;
     String[][] parsedData_Player_Focus,parsedData_Joiner_Refuse,parsedData_Player_Out,parsedData_ChangeRepresent;
@@ -75,12 +76,16 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         }
         FirstProfile = (ImageView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile);
         FirstName = (TextView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_FirstName);
+        FirstDuty = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstRepresent);
         SecondProfile = (ImageView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile);
         SecondName = (TextView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_SecondName);
+        SecondDuty = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondRepresent);
         ThirdProfile = (ImageView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile);
         ThirdName = (TextView) convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_ThirdName);
+        ThirdDuty = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdRepresent);
         FourthProfile = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile);
         FourthName = (TextView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_TextView_FourthName);
+        FourthDuty = (ImageView)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthRepresent);
         Player1 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player1);
         Player2 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player2);
         Player3 = (LinearLayout)convertView.findViewById(R.id.TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player3);
@@ -135,6 +140,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
             }
             FirstName.setText(arrData.get(position).getFirst_Name());
+            if(arrData.get(position).getFirst_Duty().equals("팀대표")){
+                FirstDuty.setVisibility(View.VISIBLE);
+            }else{
+                FirstDuty.setVisibility(View.GONE);
+            }
             FirstProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -151,7 +161,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
                     final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
-
+                    if(arrData.get(position).getFirst_Duty().equals("팀대표")){
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out.setVisibility(View.GONE);
+                    }
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
                         if(arrData.get(position).getFirst_Profile().equals("."))
@@ -287,6 +301,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
             }
             SecondName.setText(arrData.get(position).getSecond_Name());
+            if(arrData.get(position).getSecond_Duty().equals("팀대표")){
+                SecondDuty.setVisibility(View.VISIBLE);
+            }else{
+                SecondDuty.setVisibility(View.GONE);
+            }
             SecondProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -303,6 +322,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
                     final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
+                    if(arrData.get(position).getSecond_Duty().equals("팀대표")){
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out.setVisibility(View.GONE);
+                    }
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
                         if(arrData.get(position).getSecond_Profile().equals("."))
@@ -438,6 +462,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
             }
             ThirdName.setText(arrData.get(position).getThird_Name());
+            if(arrData.get(position).getThird_Duty().equals("팀대표")){
+                ThirdDuty.setVisibility(View.VISIBLE);
+            }else{
+                ThirdDuty.setVisibility(View.GONE);
+            }
         ThirdProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -454,6 +483,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
                 final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
                 Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
+                if(arrData.get(position).getThird_Duty().equals("팀대표")){
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setVisibility(View.GONE);
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setVisibility(View.GONE);
+                    Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out.setVisibility(View.GONE);
+                }
                 try{
                     String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
                     if(En_Profile.equals("."))
@@ -589,6 +623,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
 
             }
             FourthName.setText(arrData.get(position).getFourth_Name());
+            if(arrData.get(position).getFourth_Duty().equals("팀대표")){
+                FourthDuty.setVisibility(View.VISIBLE);
+            }else{
+                FourthDuty.setVisibility(View.GONE);
+            }
             FourthProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -605,6 +644,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     final ImageView Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out);
                     final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice = (LinearLayout)layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice);
                     Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Choice.setVisibility(View.GONE);
+                    if(arrData.get(position).getFourth_Duty().equals("팀대표")){
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Phone.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_leader.setVisibility(View.GONE);
+                        Layout_CustomDialog_TeamManager_PlayerManager_ImageView_Button_out.setVisibility(View.GONE);
+                    }
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
                         if(En_Profile.equals("."))

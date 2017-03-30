@@ -54,7 +54,7 @@ public class MyFcmListenerService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.baseball_a)
+                .setSmallIcon(R.drawable.baseball)
                 .setContentTitle("트로피")
                 .setContentText(messageBody)
                 .setAutoCancel(true)

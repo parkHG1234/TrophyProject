@@ -3,6 +3,7 @@ package trophy.projetc2.User;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import trophy.projetc2.Get_Spinner_Si;
@@ -22,6 +24,7 @@ import trophy.projetc2.R;
  */
 
 public class ChangeAreaActivity extends AppCompatActivity {
+    ImageView User_Chage_Area_ImageView_Back;
     Spinner ChangeArea_Spinner_Do, ChangeArea_Spinner_Si;
     Button btn_changeAreaCommit;
     trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
@@ -30,17 +33,18 @@ public class ChangeAreaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_change_area);
+        setContentView(R.layout.layout_user_change_area);
 
+        User_Chage_Area_ImageView_Back = (ImageView)findViewById(R.id.User_Chage_Area_ImageView_Back);
         ChangeArea_Spinner_Do = (Spinner) findViewById(R.id.ChangeArea_Spinner_Do);
         ChangeArea_Spinner_Si = (Spinner) findViewById(R.id.ChangeArea_Spinner_Si);
         btn_changeAreaCommit = (Button) findViewById(R.id.btn_changeAreaCommit);
 
-        adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do, android.R.layout.simple_spinner_item);
-        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do, R.layout.spinner_style);
+        adspin1.setDropDownViewResource(R.layout.spinner_style);
         ChangeArea_Spinner_Do.setAdapter(adspin1);
-        adspin2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do_seoul, android.R.layout.simple_spinner_item);
-        adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adspin2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do_seoul, R.layout.spinner_style);
+        adspin2.setDropDownViewResource(R.layout.spinner_style);
         ChangeArea_Spinner_Si.setAdapter(adspin2);
 
         ChangeArea_Spinner_Do.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -65,7 +69,7 @@ public class ChangeAreaActivity extends AppCompatActivity {
                 String Pk = preferences.getString("Pk", ".");
 
                 HttpClient changeArea = new HttpClient();
-                String result = changeArea.HttpClient("Trophy_part3", "Change_Area.jsp", addressDo, addressSi, Pk);
+                String result = changeArea.HttpClient("Trophy_part1", "User_ChangeArea.jsp", addressDo, addressSi, Pk);
                 if (result.equals("succed")) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(ChangeAreaActivity.this);
                     alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -86,5 +90,18 @@ public class ChangeAreaActivity extends AppCompatActivity {
                 }
             }
         });
+        User_Chage_Area_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

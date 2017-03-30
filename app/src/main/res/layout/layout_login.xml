@@ -18,7 +18,7 @@
 
             <ImageView
                 android:layout_width="250dp"
-                app:srcCompat="@drawable/basketball_a"
+                app:srcCompat="@drawable/basketball"
                 android:id="@+id/imageView5"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"

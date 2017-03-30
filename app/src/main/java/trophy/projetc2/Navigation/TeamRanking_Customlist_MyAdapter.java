@@ -2,8 +2,6 @@ package trophy.projetc2.Navigation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,29 +15,27 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import trophy.projetc2.R;
 
 /**
- * Created by 박효근 on 2016-12-02.
+ * Created by 박효근 on 2017-03-23.
  */
 
-public class TeamSearch_CustomList_Adapter extends BaseAdapter{
+public class TeamRanking_Customlist_MyAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<TeamSearch_CustomList_MyData> test1 = null;
-    private ArrayList<TeamSearch_CustomList_MyData> arrData;
+    private List<TeamRanking_Customlist_MyData> test1 = null;
+    private ArrayList<TeamRanking_Customlist_MyData> arrData;
     ImageView Layout_Navigation_TeamSearch_ImageView_Emblem;
-    public TeamSearch_CustomList_Adapter(Context c, ArrayList<TeamSearch_CustomList_MyData> arr) {
+    public TeamRanking_Customlist_MyAdapter(Context c, ArrayList<TeamRanking_Customlist_MyData> arr) {
         this.context = c;
         this.arrData = arr;
         inflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.test1 = new ArrayList<TeamSearch_CustomList_MyData>();
+        this.test1 = new ArrayList<TeamRanking_Customlist_MyData>();
         this.test1.addAll(arr);
     }
 
@@ -65,8 +61,9 @@ public class TeamSearch_CustomList_Adapter extends BaseAdapter{
         TextView Layout_Navigation_TeamSearch_TextView_Number = (TextView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_Number);
         Layout_Navigation_TeamSearch_ImageView_Emblem = (ImageView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_ImageView_Emblem);
         Layout_Navigation_TeamSearch_TextView_TeamName.setText(arrData.get(position).getTeamName());
-        Layout_Navigation_TeamSearch_TextView_TeamRanking.setVisibility(View.INVISIBLE);
-        Layout_Navigation_TeamSearch_TextView_Number.setVisibility(View.GONE);
+        Layout_Navigation_TeamSearch_TextView_TeamRanking.setVisibility(View.VISIBLE);
+        Layout_Navigation_TeamSearch_TextView_TeamRanking.setText(arrData.get(position).getTeam_Ranking());
+        Layout_Navigation_TeamSearch_TextView_Number.setText(Integer.toString(position+1));
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
             if (arrData.get(position).getEmblem().equals(".")) {
@@ -102,7 +99,7 @@ public class TeamSearch_CustomList_Adapter extends BaseAdapter{
         }
         else
         {
-            for (TeamSearch_CustomList_MyData wp : test1)
+            for (TeamRanking_Customlist_MyData wp : test1)
             {
                 if (wp.getTeamName().toLowerCase(Locale.getDefault()).contains(charText))
                 {

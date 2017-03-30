@@ -109,6 +109,7 @@ public class TeamInfo extends AppCompatActivity {
                     .skipMemoryCache(true)
                     .into(TeamInfo_ImageView_Emblem);
         }
+        TeamInfo_TextView_TeamName.setText(parseredData_teamInfo[0][0]);
         TeamInfo_TextView_TeamAddress_Do.setText(TeamAddress_Do);
         TeamInfo_TextView_TeamAddress_Si.setText(TeamAddress_Si);
         TeamInfo_TextView_HomeCourt.setText(HomeCourt);
