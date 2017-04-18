@@ -71,7 +71,7 @@ public class Navigation_Contest_Customlist_Adapter extends BaseAdapter {
             String Contest_Payment = arrData.get(position).getContest_Payment();
             String Contest_RecruitFinishData = arrData.get(position).getRecruitFinishDate();
             String Contest_Place = arrData.get(position).getContest_Place();
-
+            Log.i("title", Contest_Title);
             ImageView viewContest_Image = (ImageView)convertView.findViewById(R.id.Contest_logoImage);
             TextView viewContest_Title = (TextView)convertView.findViewById(R.id.contest_title);
             TextView viewContest_Date = (TextView)convertView.findViewById(R.id.contest_date);

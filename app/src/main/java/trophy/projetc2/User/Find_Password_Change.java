@@ -19,22 +19,24 @@ import org.json.JSONObject;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.User.Find_Password.activity_findpassword;
 
 /**
- * Created by ldong on 2017-01-24.
+ * Created by 박효근 on 2017-04-03.
  */
 
-public class ChangePw2Activity extends AppCompatActivity {
-    String Approach;
+public class Find_Password_Change extends AppCompatActivity {
+    String Phone;
     EditText edt_confirmPw1, edt_confirmPw2;
     Button btn_confirmPw2;
 
-
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_user_change_pw2);
 
+        Intent intent = getIntent();
+        Phone = intent.getStringExtra("Phone");
 
         edt_confirmPw1 = (EditText) findViewById(R.id.edt_confirmPw1);
         edt_confirmPw2 = (EditText) findViewById(R.id.edt_confirmPw2);
@@ -49,18 +51,15 @@ public class ChangePw2Activity extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("trophy", MODE_PRIVATE);
                 if(pw1.equals(pw2)) {
                     HttpClient changePw = new HttpClient();
-                    String result = changePw.HttpClient("Trophy_part1", "User_ChangePassword.jsp", pw1, preferences.getString("Pk", "."));
+                    String result = changePw.HttpClient("Trophy_part1", "User_FindPassword_Chnage.jsp", pw1, Phone);
 
                     if(jsonParserListgetChangePwIsOk(result)[0][0].equals("isOk")) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(ChangePw2Activity.this);
+                        AlertDialog.Builder alert = new AlertDialog.Builder(Find_Password_Change.this);
                         alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(ChangePw2Activity.this, ChangePersonalInfoActivity.class);
                                 finish();
-                                ChangePersonalInfoActivity CA = (ChangePersonalInfoActivity) ChangePersonalInfoActivity.activity;
-                                CA.finish();
-                                startActivity(intent);
+                                activity_findpassword.finish();
                                 dialog.dismiss();     //닫기
                             }
                         });
@@ -75,14 +74,13 @@ public class ChangePw2Activity extends AppCompatActivity {
             }
         });
     }
-
     private String[][] jsonParserListgetChangePwIsOk(String pRecvServerPage) {
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"isOk"};
+            String[] jsonName = {"msg1"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
@@ -99,5 +97,4 @@ public class ChangePw2Activity extends AppCompatActivity {
             return null;
         }
     }
-
 }

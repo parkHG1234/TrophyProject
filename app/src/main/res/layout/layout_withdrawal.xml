@@ -2,29 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/DarkGray">
-
-    <LinearLayout
-        android:orientation="horizontal"
+    android:background="@color/backColor">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/White"
-        android:gravity="center_vertical"
-        android:layout_height="50dp"
-        android:layout_marginTop="1dp">
-
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
         <TextView
-            android:text="※ 회원탈퇴를 하기 전에 안내 사항을 꼭 확인해 주세요"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:background="@color/White"
-            android:textSize="15sp"
+            android:text="회원탈퇴"
             android:textColor="@color/Black"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1" />
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/User_withdrawal_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
 
-    </LinearLayout>
+    <TextView
+        android:text="※ 회원탈퇴를 하기 전에 안내 사항을 꼭 확인해 주세요"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:background="@color/MainColor1_White"
+        android:textSize="15sp"
+        android:textColor="@color/White"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -38,9 +55,9 @@
             android:text="회원정보 삭제 및 팀 탈퇴"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView6"
+            android:id="@+id/textView62"
             android:background="@color/White"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/Black"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp" />
@@ -59,9 +76,9 @@
             android:text="사용하고 계신 계정을 탈퇴하시면 개인정보가 삭제되고 팀에 소속되어 있는 경우 팀에서 즉각적으로 탈퇴되오니 신중하게 선택하시기 바랍니다."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView7"
+            android:id="@+id/textView71"
             android:background="@color/White"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="@color/BlackGray"
             android:gravity="center_vertical"
             android:layout_weight="1"
@@ -83,7 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView6"
             android:background="@color/White"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/Black"
             android:gravity="center_vertical"
             android:layout_marginLeft="10dp" />
@@ -104,7 +121,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView7"
             android:background="@color/White"
-            android:textSize="15sp"
+            android:textSize="14sp"
             android:textColor="@color/BlackGray"
             android:gravity="center_vertical"
             android:layout_weight="1"
@@ -119,15 +136,6 @@
         android:gravity="center_vertical"
         android:layout_height="wrap_content">
 
-        <Button
-            android:text="바로가기"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_goTeamManage"
-            android:background="@color/Gray"
-            android:textColor="@color/White"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -148,7 +156,7 @@
         android:text="회원탈퇴"
         android:layout_height="wrap_content"
         android:id="@+id/btn_commit_withdrawal"
-        android:background="@color/Gray"
+        android:background="@color/MainColor1"
         android:textColor="@color/White"
         android:layout_margin="5dp"
         android:layout_gravity="center_horizontal"

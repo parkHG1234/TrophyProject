@@ -76,6 +76,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ChangePersonalInfoActivity.this, ChangeAreaActivity.class));
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
 
@@ -83,6 +84,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ChangePersonalInfoActivity.this, ChangePhoneActivity.class));
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
 
@@ -92,6 +94,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 Intent changePw_intent = new Intent(ChangePersonalInfoActivity.this, ChangePw1Activity.class);
                 changePw_intent.putExtra("Pw", parsedData[0][6]);
                 startActivity(changePw_intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
 
@@ -101,6 +104,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChangePersonalInfoActivity.this, Withdrawal.class);
                 intent.putExtra("TeamName", TeamName);
                 startActivity(intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         User_Change_Personalinfo_ImageView_Back.setOnClickListener(new View.OnClickListener() {

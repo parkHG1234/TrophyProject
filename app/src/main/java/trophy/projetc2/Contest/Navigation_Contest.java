@@ -1,5 +1,6 @@
 package trophy.projetc2.Contest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class Navigation_Contest extends AppCompatActivity {
         Navigation_Contest_ListView_List = (ListView)findViewById(R.id.Navigation_Contest_ListView_List);
         //리스트뷰
         HttpClient ContestHttp = new HttpClient();
-        String result = ContestHttp.HttpClient("Trophy_part3", "Contest_Customlist.jsp");
+        String result = ContestHttp.HttpClient("Trophy_part1", "Contest.jsp");
         String[][] ContestsParsedList = jsonParserList_getContestList(result);
 
         ArrayList<Navigation_Contest_Customlist_MyData> Navigation_Contest_Customlist_MyData;
@@ -45,6 +46,7 @@ public class Navigation_Contest extends AppCompatActivity {
                     ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i][8], ContestsParsedList[i][9],
                     ContestsParsedList[i][10], ContestsParsedList[i][11], ContestsParsedList[i][12], this, ContestsParsedList[i][13]));
         }
+        Log.i("length", Integer.toString(ContestsParsedList.length));
         Navigation_Contest_Customlist_Adapter Adapter = new Navigation_Contest_Customlist_Adapter(this, Navigation_Contest_Customlist_MyData);
         Navigation_Contest_ListView_List.setAdapter(Adapter);
         Navigation_Contest_ImageView_Back.setOnClickListener(new View.OnClickListener() {

@@ -30,12 +30,12 @@
             android:layout_centerVertical="true"/>
 
         <ImageView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/management"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:id="@+id/TeamInfo_ImageVIew_TeamManger"/>
+            android:id="@+id/TeamInfo_ImageVIew_TeamManger"
+            android:layout_width="50dp" />
     </RelativeLayout>
     <Button
         android:layout_width="match_parent"

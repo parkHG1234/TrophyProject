@@ -41,6 +41,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -64,6 +65,8 @@ import trophy.projetc2.Main.MainActivity_VierPage2;
 import trophy.projetc2.Main.MainActivity_VierPage3;
 import trophy.projetc2.Contest.Navigation_Contest;
 import trophy.projetc2.Navigation.Last_Contest;
+import trophy.projetc2.Navigation.Match;
+import trophy.projetc2.Navigation.MyMatch;
 import trophy.projetc2.Navigation.Notice;
 import trophy.projetc2.Navigation.Suggest;
 import trophy.projetc2.Navigation.TeamInfo;
@@ -121,12 +124,6 @@ public class MainActivity extends AppCompatActivity {
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
         Pk = preferences.getString("Pk", ".");
 
-        //gcm 데이터 등록
-        Token = FirebaseInstanceId.getInstance().getToken();
-        Log.i("token", Token);
-        HttpClient http_addtoken = new HttpClient();
-        String result12 = http_addtoken.HttpClient("Trophy_part1", "Fcm_Add.jsp", Pk, Token);
-        parseredData_AddToken = jsonParserList_AddToken(result12);
 
         //네비게이션 메뉴 선언 및 연결
         final View aa = navigationView.inflateHeaderView(R.layout.layout_navigationbar);
@@ -142,7 +139,8 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_Button_Suggest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
         final TextView Main_Navigation_Button_Logout = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Logout);
         final TextView Main_Navigation_Button_Ranking = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
-
+        final TextView Main_Navigation_Button_Match = (TextView)aa.findViewById(R.id.Main_Navigation_Button_Match);
+        final TextView Main_Navigation_Button_MyMatch = (TextView)aa.findViewById(R.id.Main_Navigation_Button_MyMatch);
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
                     .skipMemoryCache(true)
@@ -164,9 +162,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         } else { ///////////////////////////로그인시
+            //gcm 데이터 등록
+            Token = FirebaseInstanceId.getInstance().getToken();
+            Log.i("token", Token);
+            HttpClient http_addtoken = new HttpClient();
+            String result12 = http_addtoken.HttpClient("Trophy_part1", "Fcm_Add.jsp", Pk, Token);
+            parseredData_AddToken = jsonParserList_AddToken(result12);
+            
             HttpClient user = new HttpClient();
             String result1 = user.HttpClient("Trophy_part1", "User.jsp", Pk);
-            Log.i("결과", result1);
+            Log.i("UserPk", Pk);
             parseredData_user = jsonParserList_User(result1);
             Name = parseredData_user[0][0];
             Team = parseredData_user[0][1];
@@ -392,6 +397,30 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent_Suggest);
                     overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
+            }
+        });
+        //시합요청
+        Main_Navigation_Button_Match.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, Match.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Team_Pk", Team_Pk);
+                intent_Match.putExtra("Team_Duty", Team_Duty);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        //나의 시합요청
+        Main_Navigation_Button_MyMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, MyMatch.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Team_Pk", Team_Pk);
+                intent_Match.putExtra("Team_Duty", Team_Duty);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         //로그아웃

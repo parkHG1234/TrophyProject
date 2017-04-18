@@ -50,7 +50,7 @@ public class TeamRanking extends AppCompatActivity {
         ArrayList<TeamRanking_Customlist_MyData> TeamRanking_Customlist_MyData;
         TeamRanking_Customlist_MyData = new ArrayList<TeamRanking_Customlist_MyData>();
         for (int i = 0; i < parsedData_TeamSearch.length; i++) {
-            TeamRanking_Customlist_MyData.add(new TeamRanking_Customlist_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2],parsedData_TeamSearch[i][3]));
+            TeamRanking_Customlist_MyData.add(new TeamRanking_Customlist_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2],parsedData_TeamSearch[i][3],i+1));
         }
         adapter = new TeamRanking_Customlist_MyAdapter(this, TeamRanking_Customlist_MyData);
         Layout_Navigation_TeamSearch_ListView_TeamSearch.setAdapter(adapter);

@@ -1,5 +1,6 @@
 package trophy.projetc2.User;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -27,11 +28,12 @@ public class Terms extends BaseActivity {
     ImageView User_Terms_ImageView_Agree1, User_Terms_ImageView_Agree2, User_Terms_ImageView_Agree3;
     Button User_Terms_Button_Allagree;
     String Agree1 = "disagree", Agree2 = "disagree", Agree3 = "disagree";
+    static Activity activity_terms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_terms);
-
+        activity_terms = Terms.this;
         Terms_ImageView_Back  = (ImageView)findViewById(R.id.Terms_ImageView_Back);
         User_Terms_ImageView_Agree1 = (ImageView)findViewById(R.id.User_Terms_ImageView_Agree1);
         User_Terms_ImageView_Agree2 = (ImageView)findViewById(R.id.User_Terms_ImageView_Agree2);

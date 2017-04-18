@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/backColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시합요청 상세보기"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Match_Focus_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_height="wrap_content"
+            android:src="@drawable/recruiting"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/Match_Focus_ImageView_Status"
+            android:layout_width="60dp" />
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_height="match_parent"
+                        android:background="@color/White"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_width="match_parent"
+                        android:layout_weight="5"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            app:srcCompat="@drawable/agree"
+                            android:id="@+id/Match_Focus_ImageView_Emblem"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp" />
+
+                        <TextView
+                            android:text="마동쿠스브라디서"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_TextView_TeamName"
+                            android:textColor="@color/Black"
+                            android:textSize="9dp"
+                            android:gravity="center" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Match_Focus_TextView_Title"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingLeft="15dp"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="일정"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Me"
+                    android:layout_weight="5"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Date"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="시간"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView291"
+                    android:layout_weight="5"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Time"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="장소"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView292"
+                    android:layout_weight="5"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Place"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="비용"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Cost1"
+                    android:layout_weight="5"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Pay"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="유니폼 색"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView296"
+                    android:layout_weight="5"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Color"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        >
+
+                        <TextView
+                            android:text="기타사항"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/textView2925"
+                            android:background="@color/White"
+                            android:layout_marginLeft="1dp"
+                            android:layout_marginRight="1dp"
+                            android:layout_marginTop="1dp"
+                            android:layout_gravity="top"
+                            android:gravity="center"
+                            android:layout_marginBottom="1dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_TextView_Extra1"
+                            android:background="@color/White"
+                            android:layout_marginLeft="1dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Match_Focus_TextView_Extra"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="15dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_height="120dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginTop="1dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <CheckBox
+                            android:text="주차 x"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Not"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                        <CheckBox
+                            android:text="무료 주차"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Free"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                        <CheckBox
+                            android:text="유료 주차"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Charge"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <CheckBox
+                            android:text="전광판"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Display"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                        <CheckBox
+                            android:text="샤워 가능"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Shower"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                        <CheckBox
+                            android:text="냉/난방"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_ColdHot"
+                            android:layout_weight="1"
+                            android:textSize="12sp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/MyMatch_Focus_LinerLayout_Joining"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TextView
+                    android:text="시합 요청 팀 목록"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Match_Focus_TextView_Color123"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:paddingLeft="15dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MyMatch_Focus_ListView_JoinerList"
+                    android:layout_weight="1"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="1dp" />
+            </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/MyMatch_Focus_LinerLayout_Joined"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/DarkGray"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:text="상대팀 정보"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Match_Focus_TextView_Color1234"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:paddingLeft="15dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:background="@color/DarkGray"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:background="@color/White"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="1dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="70dp">
+
+                            <ImageView
+                                app:srcCompat="@drawable/agree"
+                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_ImageView_Emblem"
+                                android:scaleType="fitXY"
+                                android:layout_gravity="center"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:text="마동쿠스브라디서"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_TextView_TeamName"
+                                android:textColor="@color/Black"
+                                android:textSize="9dp"
+                                android:gravity="center" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:text="TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_TextView_Title"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"/>
+
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_Button_Agree"
+                                android:textColor="@color/White"
+                                android:background="@color/MainColor1"
+                                android:layout_width="30dp"
+                                android:layout_marginRight="10dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

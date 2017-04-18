@@ -62,8 +62,8 @@ public class TeamRanking_Customlist_MyAdapter extends BaseAdapter {
         Layout_Navigation_TeamSearch_ImageView_Emblem = (ImageView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_ImageView_Emblem);
         Layout_Navigation_TeamSearch_TextView_TeamName.setText(arrData.get(position).getTeamName());
         Layout_Navigation_TeamSearch_TextView_TeamRanking.setVisibility(View.VISIBLE);
-        Layout_Navigation_TeamSearch_TextView_TeamRanking.setText(arrData.get(position).getTeam_Ranking());
-        Layout_Navigation_TeamSearch_TextView_Number.setText(Integer.toString(position+1));
+        Layout_Navigation_TeamSearch_TextView_TeamRanking.setText(arrData.get(position).getTeam_Point());
+        Layout_Navigation_TeamSearch_TextView_Number.setText(Integer.toString(arrData.get(position).getTeam_Ranking()));
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
             if (arrData.get(position).getEmblem().equals(".")) {

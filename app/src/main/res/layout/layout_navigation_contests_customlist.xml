@@ -69,7 +69,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:background="@color/soso"
+                android:background="@color/backColor"
                 android:gravity="center_vertical|fill_horizontal"
                 android:padding="2dp"
                 android:layout_height="match_parent"

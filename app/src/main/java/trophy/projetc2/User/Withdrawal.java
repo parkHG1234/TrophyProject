@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +33,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
  */
 
 public class Withdrawal extends AppCompatActivity {
+    ImageView User_withdrawal_ImageView_Back;
     Button btn_goTeamManage, btn_commit_withdrawal;
     CheckBox chk_withdraw_agreement;
     SharedPreferences preferences;
@@ -43,7 +45,7 @@ public class Withdrawal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_withdrawal);
 
-        btn_goTeamManage = (Button) findViewById(R.id.btn_goTeamManage);
+        User_withdrawal_ImageView_Back = (ImageView)findViewById(R.id.User_withdrawal_ImageView_Back);
         btn_commit_withdrawal = (Button) findViewById(R.id.btn_commit_withdrawal);
         chk_withdraw_agreement = (CheckBox) findViewById(R.id.chk_withdraw_agreement);
         preferences = getSharedPreferences("trophy", MODE_PRIVATE);
@@ -51,23 +53,17 @@ public class Withdrawal extends AppCompatActivity {
         Intent intent = getIntent();
         TeamName = intent.getStringExtra("TeamName");
 
-        btn_goTeamManage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btn_commit_withdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (chk_withdraw_agreement.isChecked()) {
                     HttpClient isTeamChief = new HttpClient();
-                    String result = isTeamChief.HttpClient("Trophy_part3", "isTeamChief.jsp", Pk);
+                    String result = isTeamChief.HttpClient("Trophy_part1", "User_IsTeamChief.jsp", Pk);
                     String[][] parsedData = jsonParserListisTeamChief(result);
                     if (parsedData[0][0].equals("true")) { //팀대표가 아닌 경우 회원탈퇴
                         HttpClient Withdrawal = new HttpClient();
-                        String result1 = Withdrawal.HttpClient("Trophy_part3", "Withdrawal.jsp", Pk);
+                        String result1 = Withdrawal.HttpClient("Trophy_part1", "User_Withdrawal.jsp", Pk);
                         String[][] parsedData1 = jsonParserListWithdrawal(result1);
                         if (parsedData1[0][0].equals("true")) { //회원탈퇴 완료
                             AlertDialog.Builder alert = new AlertDialog.Builder(Withdrawal.this);
@@ -104,7 +100,13 @@ public class Withdrawal extends AppCompatActivity {
                 }
             }
         });
-
+        User_withdrawal_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
     }
 
     private String[][] jsonParserListisTeamChief(String pRecvServerPage) {
@@ -153,5 +155,11 @@ public class Withdrawal extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }

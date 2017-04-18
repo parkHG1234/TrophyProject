@@ -79,7 +79,13 @@ public class Login extends AppCompatActivity {
                 Log.i("Aaa",parseData[0][0]);
             }
         }});
-
+        Login_TextView_FindPW.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Login.this, Find_Password.class));
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         Login_TextView_Join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

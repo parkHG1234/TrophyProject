@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,19 +38,21 @@ import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
 import static android.view.View.GONE;
+import static trophy.projetc2.User.Terms.activity_terms;
 
 /**
  * Created by ldong on 2017-02-01.
  */
 
 public class Join extends BaseActivity {
+    ImageView User_Join_ImageView_Back;
     EditText Join_EditText_Name, Join_EditText_Password, Join_EditText_Password_Confirm, Join_EditText_Birth_Year, Join_EditText_Birth_Month, Join_EditText_Birth_Day, Join_EditText_Phone, Join_EditText_Phone_Confirm;
     CheckBox Join_CheckBox_SexM, Join_CheckBox_SexW;
     Button Join_Button_Phone, Join_Button_Phone_Confirm;
     LinearLayout Join_LinearLayout_Join;
     Spinner Join_Spinner_AddressDo, Join_Spinner_AddressSi;
     TextView Join_TextView_Name_Warning, Join_TextView_Password_Warning, Join_TextView_Password_Confirm_Warning, Join_TextView_Birth_Warning, Join_TextView_Sex_Warning, Join_TextView_Phone_Warning;
-    String Year, Month, Day, Name, Password, Birth, Address_Do, Address_Si, Sex, Phone;
+    String Year, Month, Day, Name, Password, Birth, Address_Do, Address_Si, Sex="남자", Phone;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
     int rnd;
@@ -67,8 +69,9 @@ public class Join extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_join);
+        setContentView(R.layout.layout_user_join);
 
+        User_Join_ImageView_Back = (ImageView)findViewById(R.id.User_Join_ImageView_Back);
         Join_EditText_Name = (EditText) findViewById(R.id.Join_EditText_Name);
         Join_EditText_Password = (EditText) findViewById(R.id.Join_EditText_Password);
         Join_EditText_Password_Confirm = (EditText) findViewById(R.id.Join_EditText_Password_Confirm);
@@ -104,11 +107,11 @@ public class Join extends BaseActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do, R.layout.spinner_item);
-        adspin1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adspin1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do,R.layout.spinner_style);
+        adspin1.setDropDownViewResource(R.layout.spinner_style);
         Join_Spinner_AddressDo.setAdapter(adspin1);
-        adspin2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do_seoul, R.layout.spinner_item);
-        adspin2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adspin2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.spinner_do_seoul, R.layout.spinner_style);
+        adspin2.setDropDownViewResource(R.layout.spinner_style);
         Join_Spinner_AddressSi.setAdapter(adspin2);
 
 
@@ -238,6 +241,9 @@ public class Join extends BaseActivity {
                         Month_flag = true;
                         Join_TextView_Birth_Warning.setVisibility(GONE);
                         Month = Join_EditText_Birth_Month.getText().toString();
+                        if(Month.length() == 1){
+                            Month = "0"+Month;
+                        }
                     } else {
                         Month_flag = false;
                         Join_TextView_Birth_Warning.setVisibility(View.VISIBLE);
@@ -304,7 +310,7 @@ public class Join extends BaseActivity {
                 if (isChecked) {
                     Join_CheckBox_SexW.setChecked(false);
                     Join_TextView_Sex_Warning.setVisibility(GONE);
-                    Sex = "M";
+                    Sex = "남자";
                     Sex_flag = true;
                     Log.i("Sex : ", Sex);
                 } else if (!Join_CheckBox_SexW.isChecked()) {
@@ -322,7 +328,7 @@ public class Join extends BaseActivity {
                 if (isChecked) {
                     Join_CheckBox_SexM.setChecked(false);
                     Join_TextView_Sex_Warning.setVisibility(GONE);
-                    Sex = "W";
+                    Sex = "여자";
                     Sex_flag = true;
                     Log.i("Sex : ", Sex);
                 } else if (!Join_CheckBox_SexM.isChecked()) {
@@ -391,10 +397,11 @@ public class Join extends BaseActivity {
             public void onClick(View v) {
                 Address_Do = Join_Spinner_AddressDo.getSelectedItem().toString();
                 Address_Si = Join_Spinner_AddressSi.getSelectedItem().toString();
+                Birth = Year + " / " + Month + " / " + Day;
                 if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag) {
                     HttpClient user = new HttpClient();
-                    user.HttpClient("Trophy_part3", "MemberShip.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
-                    final MaterialDialog TeamPlayerDialog = new MaterialDialog(getApplicationContext());
+                    user.HttpClient("Trophy_part1", "User_Join.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
+                    final MaterialDialog TeamPlayerDialog = new MaterialDialog(Join.this);
                     TeamPlayerDialog
                             .setTitle("확인")
                             .setMessage("회원가입이 완료되었습니다.")
@@ -403,6 +410,8 @@ public class Join extends BaseActivity {
                                 @Override
                                 public void onClick(View v) {
                                     finish();
+                                    activity_terms.finish();
+                                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                                 }
                             });
                     TeamPlayerDialog.show();
@@ -411,9 +420,14 @@ public class Join extends BaseActivity {
                 }
             }
         });
-
+        User_Join_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            }
+        });
     }
-
     private String[][] jsonParserList(String pRecvServerPage) {
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try {

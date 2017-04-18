@@ -1,6 +1,5 @@
 package trophy.projetc2.User;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -29,7 +28,7 @@ public class ChangePw1Activity extends AppCompatActivity {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_change_pw1);
+        setContentView(R.layout.layout_user_change_pw1);
 
         Intent intent = getIntent();
         Pw = intent.getStringExtra("Pw");
@@ -44,7 +43,9 @@ public class ChangePw1Activity extends AppCompatActivity {
                 String result = encodePw.HttpClient("Trophy_part3", "Encode_Password.jsp", edt_confromPw.getText().toString());
                 String[][] currentPw = jsonParserListgetgetPW(result);
                 if (currentPw[0][0].equals(Pw)) {
-                    startActivity(new Intent(ChangePw1Activity.this, ChangePw2Activity.class));
+                    Intent intent1 = new Intent(ChangePw1Activity.this, ChangePw2Activity.class);
+                    intent1.putExtra("Approach", "user");
+                    startActivity(intent1);
                     finish();
                 } else {
                     Snackbar.make(v, "비밀번호를 확인해 주세요.", Snackbar.LENGTH_LONG)
@@ -76,5 +77,11 @@ public class ChangePw1Activity extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
 }
