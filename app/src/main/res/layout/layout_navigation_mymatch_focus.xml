@@ -496,7 +496,7 @@
 
                             <ImageView
                                 app:srcCompat="@drawable/agree"
-                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_ImageView_Emblem"
+                                android:id="@+id/MyMatch_Focus_Joined_ImageView_Emblem"
                                 android:scaleType="fitXY"
                                 android:layout_gravity="center"
                                 android:layout_width="30dp"
@@ -506,7 +506,7 @@
                                 android:text="마동쿠스브라디서"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_TextView_TeamName"
+                                android:id="@+id/MyMatch_Focus_Joined_TextView_TeamName"
                                 android:textColor="@color/Black"
                                 android:textSize="9dp"
                                 android:gravity="center" />
@@ -521,13 +521,13 @@
                                 android:text="TextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_TextView_Title"
+                                android:id="@+id/MyMatch_Focus_Joined_TextView_Title"
                                 android:gravity="center_vertical"
                                 android:layout_weight="1"/>
 
                             <ImageView
                                 android:layout_height="30dp"
-                                android:id="@+id/MyMatch_Focus_Joiner_CustomList_Button_Agree"
+                                android:id="@+id/MyMatch_Focus_Joined_ImageView_Phone"
                                 android:textColor="@color/White"
                                 android:background="@color/MainColor1"
                                 android:layout_width="30dp"

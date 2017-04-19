@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
@@ -38,7 +42,7 @@ public class Match_Focus extends AppCompatActivity {
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
     Button Match_Focus_Button_TeamInfo, Match_Focus_Button_Apply;
 
-    String Match_Pk, Team_Pk, User_Pk, Time, Title, MatchTime, MatchPlace,Emblem,TeamName, Match_User_Pk,
+    String Match_Pk, Team_Pk, User_Pk, Time, Title, MatchTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date,
             Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
     String[][] parsedData_Match_Focus, parsedData_Match_Focus_Join, parsedData_Match_Focus_Overlap;
     @Override
@@ -61,6 +65,7 @@ public class Match_Focus extends AppCompatActivity {
         ColdHot = parsedData_Match_Focus[0][12];Status = parsedData_Match_Focus[0][13];
         Emblem = parsedData_Match_Focus[0][14]; TeamName = parsedData_Match_Focus[0][15];
         Pay = parsedData_Match_Focus[0][16]; Color = parsedData_Match_Focus[0][17]; Extra = parsedData_Match_Focus[0][18];
+        Match_Date = parsedData_Match_Focus[0][19];
 
         Match_Focus_ImageView_Back = (ImageView)findViewById(R.id.Match_Focus_ImageView_Back);
         Match_Focus_ImageView_Status = (ImageView)findViewById(R.id.Match_Focus_ImageView_Status);
@@ -111,7 +116,7 @@ public class Match_Focus extends AppCompatActivity {
 
         Match_Focus_TextView_TeamName.setText(TeamName);
         Match_Focus_TextView_Title.setText(Title);
-        Match_Focus_TextView_Date.setText(Time);
+        Match_Focus_TextView_Date.setText(Match_Date);
         Match_Focus_TextView_Time.setText(MatchTime);
         Match_Focus_TextView_Place.setText(MatchPlace);
         Match_Focus_TextView_Pay.setText(Pay);
@@ -171,15 +176,39 @@ public class Match_Focus extends AppCompatActivity {
                 }
                 else{
                     if(Status.equals("recruiting")){
-                        HttpClient http_match_focus_overlap = new HttpClient();
-                        String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, Time);
-                        parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
-                        if(parsedData_Match_Focus_Join[0][0].equals("succed")){
-                            Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Snackbar.make(view,"잠시 후 다시 시도해주세요.",Snackbar.LENGTH_SHORT).show();
-                        }
+                        LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+                        final View layout = inflater.inflate(R.layout.layout_navigation_match_focus_customdialog_memo, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
+                        final TextView TeamInfo_Customdialog_1_Title = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Title);
+                        final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
+                        final EditText TeamInfo_Customdialog_1_Content = (EditText)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
+                        final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
+                        TeamInfo_Customdialog_1_Title.setText("시합 신청");
+                        final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
+                        TeamInfo_Dialog
+                                .setContentView(layout)
+                                .setCanceledOnTouchOutside(true);
+                        TeamInfo_Dialog.show();
+                        TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TeamInfo_Dialog.dismiss();
+                            }
+                        });
+                        TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                HttpClient http_match_focus_overlap = new HttpClient();
+                                String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, Time, TeamInfo_Customdialog_1_Content.getText().toString());
+                                parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
+                                if(parsedData_Match_Focus_Join[0][0].equals("succed")){
+                                    Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_SHORT).show();
+                                    TeamInfo_Dialog.dismiss();
+                                }
+                                else{
+                                    Snackbar.make(view,"잠시 후 다시 시도해주세요.",Snackbar.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     }
                     else if(Status.equals("deadline")){
                         Snackbar.make(view,"신청이 마감되었습니다.",Snackbar.LENGTH_SHORT).show();
@@ -207,7 +236,7 @@ public class Match_Focus extends AppCompatActivity {
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10","msg11","msg12","msg13","msg14","msg15","msg16","msg17","msg18","msg19"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10","msg11","msg12","msg13","msg14","msg15","msg16","msg17","msg18","msg19", "msg20"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);

@@ -90,6 +90,23 @@ public class Match extends AppCompatActivity{
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        HttpClient http_match = new HttpClient();
+        String result = http_match.HttpClient("Trophy_part1","Match.jsp");
+        parsedData_Match = jsonParserList_Match(result);
+
+        final ArrayList<Match_MyData> Match_MyData;
+        Match_MyData = new ArrayList<Match_MyData>();
+        for (int i = 0; i < parsedData_Match.length; i++) {
+            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk));
+        }
+        Match_MyAdapter adapter = new Match_MyAdapter(this, Match_MyData);
+        Match_ListView_List.setAdapter(adapter);
+    }
+
     public String[][] jsonParserList_Match(String pRecvServerPage){
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try{

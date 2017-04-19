@@ -75,13 +75,23 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@color/DarkGray"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
-
+                <TextView
+                    android:text="시합 일정"
+                    android:layout_height="match_parent"
+                    android:id="@+id/textView17"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:background="@color/White"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="100dp" />
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -95,8 +105,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="50dp">
+                        android:layout_marginLeft="10dp">
+
                         <EditText
                             android:text="1111"
                             android:layout_width="match_parent"
@@ -166,7 +176,7 @@
                         android:id="@+id/Match_Write_EditText_Time"
                         android:layout_weight="1"
                         android:background="@color/White"
-                        android:hint="일정 ex) 오후 9시 ~ 11시 "
+                        android:hint="시간 ex) 오후 9시 ~ 11시 "
                         android:layout_marginLeft="1dp"
                         android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp"

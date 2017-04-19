@@ -35,8 +35,8 @@ public class Match_Write extends AppCompatActivity {
     CheckBox Match_Write_CheckBox_Parking_Not, Match_Write_CheckBox_Parking_Free, Match_Write_CheckBox_Parking_Charge,
             Match_Write_CheckBox_Display,Match_Write_CheckBox_Shower,Match_Write_CheckBox_ColdHot;
     Button Match_Write_Button_Write;
-    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday;
-    String Title, Time, Place, Pay, Color, Extra,
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
+    String Title, MatchTime, MatchPlace, Pay, Color, Extra, MatchDate,
             Parking_Not="false", Parking_Free="false", Parking_Charge="false", Display="false", Shower="false", ColdHot="false";
     String[][] parsedData_Match;
     String Team_Pk, Team_Duty, User_Pk;
@@ -197,16 +197,22 @@ public class Match_Write extends AppCompatActivity {
                 String result_null = button_EditText_NotNull(view);
                 if(result_null.equals("succed")){
                     Title = Match_Write_EditText_Title.getText().toString();
-                    Time = Match_Write_EditText_Time.getText().toString();
-                    Place = Match_Write_EditText_Place.getText().toString();
+                    MatchTime = Match_Write_EditText_Time.getText().toString();
+                    MatchPlace = Match_Write_EditText_Place.getText().toString();
                     Pay = Match_Write_EditText_Pay.getText().toString();
                     Color = Match_Write_EditText_Color.getText().toString();
                     Extra = Match_Write_EditText_Extra.getText().toString();
+                    MatchDate = Match_Write_EditText_Year.getText().toString() +" / "+ Match_Write_EditText_Month.getText().toString() +" / "+ Match_Write_EditText_Day.getText().toString();
+                    Log.i("MatchDate", MatchDate);
                     checkbox_IsChecked();
                     HttpClient http_match_write = new HttpClient();
                     String result = http_match_write.HttpClient("Trophy_part1","Match_Write.jsp",
-                            User_Pk, Team_Pk, strCurToday,Title, Time, Place, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot);
+                            User_Pk, Team_Pk, strCurToday +" "+strCurTime, Title, MatchTime, MatchPlace, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, MatchDate);
                     parsedData_Match = jsonParserList_Match_Write(result);
+                    if(parsedData_Match[0][0].equals("succed")){
+                        finish();
+                        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                    }
                 }
             }
         });
@@ -313,15 +319,15 @@ public class Match_Write extends AppCompatActivity {
                             return "failed";
                         }else{
                             if(Match_Write_EditText_Year.getText().toString().equals("")){
-                                Snackbar.make(view,"운동일시를 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(view,"시합 일정을 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
                                 return "failed";
                             }else{
                                 if(Match_Write_EditText_Month.getText().toString().equals("")){
-                                    Snackbar.make(view,"운동일시를 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                    Snackbar.make(view,"시합 일정을 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
                                     return "failed";
                                 }else{
                                     if(Match_Write_EditText_Day.getText().toString().equals("")){
-                                        Snackbar.make(view,"운동일시를 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                        Snackbar.make(view,"시합 일정를 입력해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
                                         return "failed";
                                     }else{
                                         return "succed";
@@ -340,7 +346,7 @@ public class Match_Write extends AppCompatActivity {
         Date date = new Date(now);
 // 시간 포맷 지정
         SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
-        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH시 mm분");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
         SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
         SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
@@ -348,6 +354,7 @@ public class Match_Write extends AppCompatActivity {
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
 // 지정된 포맷으로 String 타입 리턴
         strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
         strCurYear = CurYearFormat.format(date);
         strCurYear = CurYearFormat.format(date);
         strCurMonth = CurMonthFormat.format(date);
