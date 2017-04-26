@@ -17,7 +17,8 @@ public class MyMatch_MyData{
         private String Status;
         private android.app.Activity Activity;
         private String User_Pk;
-        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk){
+        private String JoinerCount;
+        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String JoinerCount){
             this.Match_Pk = Match_Pk;
             this.Emblem = Emblem;
             this.TeamName = TeamName;
@@ -28,6 +29,7 @@ public class MyMatch_MyData{
             this.Status = Status;
             this.Activity = Activity;
             this.User_Pk = User_Pk;
+            this.JoinerCount = JoinerCount;
         }
         public String getEmblem() {
             return Emblem;
@@ -56,5 +58,8 @@ public class MyMatch_MyData{
         }
         public String getUser_Pk(){
             return User_Pk;
+        }
+        public String getJoinerCount(){
+            return JoinerCount;
         }
 }

@@ -24,6 +24,8 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
@@ -42,6 +44,7 @@ public class Match_Focus extends AppCompatActivity {
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
     Button Match_Focus_Button_TeamInfo, Match_Focus_Button_Apply;
 
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String Match_Pk, Team_Pk, User_Pk, Time, Title, MatchTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date,
             Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
     String[][] parsedData_Match_Focus, parsedData_Match_Focus_Join, parsedData_Match_Focus_Overlap;
@@ -198,7 +201,7 @@ public class Match_Focus extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 HttpClient http_match_focus_overlap = new HttpClient();
-                                String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, Time, TeamInfo_Customdialog_1_Content.getText().toString());
+                                String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, strCurToday +":::"+strCurTime, TeamInfo_Customdialog_1_Content.getText().toString());
                                 parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
                                 if(parsedData_Match_Focus_Join[0][0].equals("succed")){
                                     Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_SHORT).show();
@@ -287,5 +290,27 @@ public class Match_Focus extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
     }
 }

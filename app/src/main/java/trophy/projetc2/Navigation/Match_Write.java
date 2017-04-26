@@ -202,12 +202,12 @@ public class Match_Write extends AppCompatActivity {
                     Pay = Match_Write_EditText_Pay.getText().toString();
                     Color = Match_Write_EditText_Color.getText().toString();
                     Extra = Match_Write_EditText_Extra.getText().toString();
-                    MatchDate = Match_Write_EditText_Year.getText().toString() +" / "+ Match_Write_EditText_Month.getText().toString() +" / "+ Match_Write_EditText_Day.getText().toString();
+                    MatchDate = Match_Write_EditText_Year.getText().toString() +":::"+ Match_Write_EditText_Month.getText().toString() +" / "+ Match_Write_EditText_Day.getText().toString();
                     Log.i("MatchDate", MatchDate);
                     checkbox_IsChecked();
                     HttpClient http_match_write = new HttpClient();
                     String result = http_match_write.HttpClient("Trophy_part1","Match_Write.jsp",
-                            User_Pk, Team_Pk, strCurToday +" "+strCurTime, Title, MatchTime, MatchPlace, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, MatchDate);
+                            User_Pk, Team_Pk, strCurToday +"|"+strCurTime, Title, MatchTime, MatchPlace, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, MatchDate);
                     parsedData_Match = jsonParserList_Match_Write(result);
                     if(parsedData_Match[0][0].equals("succed")){
                         finish();

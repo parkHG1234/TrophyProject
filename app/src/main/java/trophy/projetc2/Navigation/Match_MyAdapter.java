@@ -14,7 +14,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.R;
@@ -27,6 +29,7 @@ public class Match_MyAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Match_MyData> arrData;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     ImageView Match_CustomList_ImageView_Status, Match_CustomList_ImageView_Emblem;
     TextView Match_CustomList_TextView_Time, Match_CustomList_TextView_TeamName,
             Match_CustomList_TextView_Title, Match_CustomList_TextView_MatchTime, Match_CustomList_TextView_MatchPlace;
@@ -60,8 +63,17 @@ public class Match_MyAdapter extends BaseAdapter {
         Match_CustomList_TextView_Title = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_Title);
         Match_CustomList_TextView_MatchTime = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_MatchTime);
         Match_CustomList_TextView_MatchPlace = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_MatchPlace);
-
-        Match_CustomList_TextView_Time.setText("10:20");
+        String str = arrData.get(position).getTime();
+        String[] data = str.split(":::");
+        currentTime();
+        if(data[0].equals(strCurToday)){
+            Match_CustomList_TextView_Time.setText(data[1]);
+        }
+        else{
+            String str1 = data[0];
+            String[] data1 = str1.split(" / ");
+            Match_CustomList_TextView_Time.setText(data1[1] + " / " + data1[2]);
+        }
         Match_CustomList_TextView_TeamName.setText(arrData.get(position).getTeamName());
         Match_CustomList_TextView_Title.setText(arrData.get(position).getTitle());
         Match_CustomList_TextView_MatchTime.setText(arrData.get(position).getMatchTime());
@@ -98,5 +110,26 @@ public class Match_MyAdapter extends BaseAdapter {
         });
         return convertView;
     }
-
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
+    }
 }
