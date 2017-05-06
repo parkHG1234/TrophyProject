@@ -42,6 +42,9 @@
         <activity android:name=".Navigation.Match_Focus"></activity>
         <activity android:name=".Navigation.MyMatch"></activity>
         <activity android:name=".Navigation.MyMatch_Focus"></activity>
+        <activity android:name=".Navigation.OutCourt_Address"></activity>
+        <activity android:name=".Navigation.OutCourt_CourtInfo"></activity>
+        <activity android:name=".Navigation.OutCourt_CourtInfo_Focus"></activity>
 
         <activity android:name=".User.Login"></activity>
         <activity android:name=".User.ChangePersonalInfoActivity"></activity>

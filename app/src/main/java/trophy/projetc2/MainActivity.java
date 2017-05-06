@@ -41,7 +41,6 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -68,6 +67,7 @@ import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Navigation.Match;
 import trophy.projetc2.Navigation.MyMatch;
 import trophy.projetc2.Navigation.Notice;
+import trophy.projetc2.Navigation.OutCourt_Address;
 import trophy.projetc2.Navigation.Suggest;
 import trophy.projetc2.Navigation.TeamInfo;
 import trophy.projetc2.Navigation.TeamMake;
@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_Button_Ranking = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
         final TextView Main_Navigation_Button_Match = (TextView)aa.findViewById(R.id.Main_Navigation_Button_Match);
         final TextView Main_Navigation_Button_MyMatch = (TextView)aa.findViewById(R.id.Main_Navigation_Button_MyMatch);
+        final TextView Main_Navigation_Button_OutCourt = (TextView)aa.findViewById(R.id.Main_Navigation_Button_OutCourt);
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
                     .skipMemoryCache(true)
@@ -438,6 +439,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         /////////////////////////////////////////////
+        Main_Navigation_Button_OutCourt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, OutCourt_Address.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Team_Pk", Team_Pk);
+                intent_Match.putExtra("Team_Duty", Team_Duty);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         //슬라이딩
         //프래그먼트 정의
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

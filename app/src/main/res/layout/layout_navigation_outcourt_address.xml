@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지역"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/OutCourt_Address_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1sp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2.2"
+            android:background="@color/WhiteGray"
+            android:layout_marginRight="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_Seoul"
+                    android:text="서울"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"
+                    android:background="@color/White"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button101" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_Gyeonggido"
+                    android:text="경기"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button102" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_Incheon"
+                    android:text="인천"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button103" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_GangWon"
+                    android:text="강원"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button104" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_DeaJeon"
+                    android:text="대전"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button105" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_ChungBuk"
+                    android:text="충북"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button106" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_ChungNam"
+                    android:text="충남"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button107" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_Busan"
+                    android:text="부산"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button108" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_Ulsan"
+                    android:text="울산"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button109" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_GyeongNam"
+                    android:text="경남"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button11" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_DeaGu"
+                    android:text="대구"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button122" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_GyeongBuk"
+                    android:text="경북"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button123" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_GangJu"
+                    android:text="광주"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button124" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_JeoNam"
+                    android:text="전남"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button1245" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_JeoBuk"
+                    android:text="전북"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button125" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/Layout_Navigation_OutCourt_Address_JeJu"
+                    android:text="제주"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:background="@color/DarkGray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:id="@+id/button12" />
+            </LinearLayout>
+        </ScrollView>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:id="@+id/Layout_Navigation_OutCourt_Address_ListView"
+            android:paddingLeft="20dp"></ListView>
+
+    </LinearLayout>
+</LinearLayout>

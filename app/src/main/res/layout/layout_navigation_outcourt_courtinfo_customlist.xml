@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@drawable/court_basic"
+            android:id="@+id/imageView3"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:layout_height="150dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_CourtName"
+                android:textColor="@color/White"/>
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_CourtAddress"
+                android:textColor="@color/White"
+               />
+        </LinearLayout>
+
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_TodayWrite"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/White"/>
+    </RelativeLayout>
+
+</LinearLayout>

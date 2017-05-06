@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/Layout_Navigation_OutCourt_Address_Se"
+        android:text="강남/서초"
+        android:textSize="15dp"
+        android:textColor="@color/Black"
+        android:gravity="center_vertical"
+        android:background="@color/White"/>
+    <TextView
+        android:background="@color/DarkGray"
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:id="@+id/button1012" />
+</LinearLayout>

@@ -210,12 +210,20 @@
                     android:id="@+id/Main_Navigation_Button_Match"
                     android:layout_marginBottom="50dp"/>
                 <TextView
-                    android:text="나의 시합요청"
+                android:text="나의 시합요청"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="13dp"
+                android:textColor="@color/DarkGray"
+                android:id="@+id/Main_Navigation_Button_MyMatch"
+                android:layout_marginBottom="50dp"/>
+                <TextView
+                    android:text="실시간 야외코트"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:textSize="13dp"
                     android:textColor="@color/DarkGray"
-                    android:id="@+id/Main_Navigation_Button_MyMatch"
+                    android:id="@+id/Main_Navigation_Button_OutCourt"
                     android:layout_marginBottom="50dp"/>
             </LinearLayout>
 
