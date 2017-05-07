@@ -14,7 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import trophy.projetc2.Http.HttpClient;
@@ -32,6 +34,7 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
     ListView OutCourt_CourtInfo_ListView_Court;
     static String Address_Si = "";static String Address_Do = "";static String User_Pk = "";
     String[][] parsedData_Match;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,8 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
         Address_Si = intent1.getStringExtra("Address_Si");
         Address_Do = intent1.getStringExtra("Address_Do");
         User_Pk = intent1.getStringExtra("User_Pk");
+        currentTime();
+
         OutCourt_CourtInfo_TextView_Title = (TextView)findViewById(R.id.OutCourt_CourtInfo_TextView_Title);
         OutCourt_CourtInfo_ImageView_Back = (ImageView)findViewById(R.id.OutCourt_CourtInfo_ImageView_Back);
         OutCourt_CourtInfo_ListView_Court = (ListView)findViewById(R.id.OutCourt_CourtInfo_ListView_Court);
@@ -52,12 +57,12 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
         for(int i=0; i<data.length; i++)
         {
             HttpClient http_match = new HttpClient();
-            String result = http_match.HttpClient("Trophy_part1","OutCourt.jsp", Address_Do,data[i]);
+            String result = http_match.HttpClient("Trophy_part1","OutCourt.jsp", Address_Do,data[i], strCurToday);
             parsedData_Match = jsonParserList_Match(result);
             if(parsedData_Match[0][0] == "."){
             }else{
                 for (int j = 0; j < parsedData_Match.length; j++) {
-                    OutCourt_CourtInfo_MyData.add(new OutCourt_CourtInfo_MyData(parsedData_Match[j][0], parsedData_Match[j][1] + parsedData_Match[j][2],"3",OutCourt_CourtInfo.this,User_Pk));
+                    OutCourt_CourtInfo_MyData.add(new OutCourt_CourtInfo_MyData(parsedData_Match[j][0], parsedData_Match[j][1] + parsedData_Match[j][2],parsedData_Match[j][5],OutCourt_CourtInfo.this,User_Pk,parsedData_Match[j][3],parsedData_Match[j][4]));
                 }
             }
         }
@@ -83,7 +88,7 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6"};
 
             if(jArr.length()==0){
                 String[][] parseredData = new String[1][1];
@@ -103,5 +108,27 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
             e.printStackTrace();
             return null;
         }
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
     }
 }

@@ -9,7 +9,7 @@
         <ImageView
             android:layout_width="match_parent"
             app:srcCompat="@drawable/court_basic"
-            android:id="@+id/imageView3"
+            android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_ImageView_CourtImage"
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:layout_height="150dp" />
@@ -17,7 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp">
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
@@ -41,7 +43,9 @@
             android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_TodayWrite"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:textColor="@color/White"/>
+            android:textColor="@color/White"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp" />
     </RelativeLayout>
 
 </LinearLayout>

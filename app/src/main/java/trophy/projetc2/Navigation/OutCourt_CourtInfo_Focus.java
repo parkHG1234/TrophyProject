@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +25,10 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
@@ -37,9 +42,13 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     ImageView OutCourt_CourtInfo_Focus_ImageView_Court, OutCourt_CourtInfo_Focus_ImageView_Back, OutCourt_CourtInfo_Focus_ImageView_CourtIntro_Modify;
     TextView OutCourt_CourtInfo_Focus_TextView_CourtName, OutCourt_CourtInfo_Focus_TextView_Title, OutCourt_CourtInfo_Focus_TextView_CourtAddress, OutCourt_CourtInfo_Focus_TextView_CourtIntro;
     TextView OutCourt_CourtInfo_Focus_TextView_Modifer_Date, OutCourt_CourtInfo_Focus_TextView_Modifer;
+    TextView OutCourt_CourtInfo_Focus_TextView_TodayWrite;
     ImageView OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile;
-    String CourtName, CourtIntro, User_Pk, Modifier, Modifier_Profile, Modifier_Date;
-    String[][] parsedData_OutCourt; String[][] parsedData_Modify;
+    EditText OutCourt_CourtInfo_Focus_EditText_Write;
+    ListView OutCourt_CourtInfo_Focus_ListView_Content;
+    ScrollView ScrollView;
+    String CourtName, CourtIntro, User_Pk, Modifier, Modifier_Profile, Modifier_Date, Court_Pk, Today_Content;
+    String[][] parsedData_OutCourt, parsedData_OutCourt_Content; String[][] parsedData_Modify;
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +57,11 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         Intent intent1 = getIntent();
         CourtName = intent1.getStringExtra("CourtName");
         User_Pk = intent1.getStringExtra("User_Pk");
+        Court_Pk = intent1.getStringExtra("Court_Pk");
+        Today_Content = intent1.getStringExtra("Today_Content");
+
         currentTime();
+        ScrollView = (ScrollView)findViewById(R.id.ScrollView);
         OutCourt_CourtInfo_Focus_TextView_Title = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_Title);
         OutCourt_CourtInfo_Focus_ImageView_Back = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_ImageView_Back);
         OutCourt_CourtInfo_Focus_ImageView_Court = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_ImageView_Court);
@@ -59,6 +72,9 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         OutCourt_CourtInfo_Focus_TextView_Modifer_Date = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_Modifer_Date);
         OutCourt_CourtInfo_Focus_TextView_Modifer = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_Modifer);
         OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile);
+        OutCourt_CourtInfo_Focus_EditText_Write = (EditText)findViewById(R.id.OutCourt_CourtInfo_Focus_EditText_Write);
+        OutCourt_CourtInfo_Focus_ListView_Content = (ListView)findViewById(R.id.OutCourt_CourtInfo_Focus_ListView_Content);
+        OutCourt_CourtInfo_Focus_TextView_TodayWrite = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_TodayWrite);
 
         HttpClient http_match_focus = new HttpClient();
         String result = http_match_focus.HttpClient("Trophy_part1","OutCourt_Focus.jsp",CourtName);
@@ -68,7 +84,23 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         Modifier = parsedData_OutCourt[0][6];
         Modifier_Date = parsedData_OutCourt[0][7];
 
+        try{
+            String En_Profile = URLEncoder.encode(parsedData_OutCourt[0][3], "utf-8");
+            if(En_Profile.equals("."))
+            {
+                Glide.with(OutCourt_CourtInfo_Focus.this).load(R.drawable.court_basic).into(OutCourt_CourtInfo_Focus_ImageView_Court);
+            }
+            else
+            {
+                Glide.with(OutCourt_CourtInfo_Focus.this).load("http://210.122.7.193:8080/Trophy_img/court/"+En_Profile+".jpg")
+                        .into(OutCourt_CourtInfo_Focus_ImageView_Court);
+            }
+        }
+        catch (UnsupportedEncodingException e){
+        }
+
         OutCourt_CourtInfo_Focus_TextView_Title.setText(CourtName);
+        OutCourt_CourtInfo_Focus_TextView_TodayWrite.setText("오늘의 게시글 : " + Today_Content);
         OutCourt_CourtInfo_Focus_TextView_CourtName.setText(CourtName);
         OutCourt_CourtInfo_Focus_TextView_CourtIntro.setText(CourtIntro);
 
@@ -85,7 +117,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 }
                 else
                 {
-                    Glide.with(OutCourt_CourtInfo_Focus.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(OutCourt_CourtInfo_Focus.this).getBitmapPool(),1,1))
+                    Glide.with(OutCourt_CourtInfo_Focus.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(OutCourt_CourtInfo_Focus.this).getBitmapPool()))
                             .into(OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile);
                 }
             }
@@ -94,6 +126,19 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             OutCourt_CourtInfo_Focus_TextView_Modifer.setText(Modifier);
             OutCourt_CourtInfo_Focus_TextView_Modifer_Date.setText(Modifier_Date);
         }
+
+        HttpClient http_match_focus_Content = new HttpClient();
+        String result1 = http_match_focus_Content.HttpClient("Trophy_part1","OutCourt_Focus_Content.jsp",Court_Pk);
+        parsedData_OutCourt_Content = jsonParserList_OurtCourt_Content(result1);
+
+        final ArrayList<OutCourt_CourtInfo_Focus_MyData> OutCourt_CourtInfo_Focus_MyData;
+        OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
+        for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this));
+        }
+        final OutCourt_CourtInfo_Focus_MyAdapter adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
+        OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
 
         OutCourt_CourtInfo_Focus_ImageView_CourtIntro_Modify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +207,17 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 });
             }
         });
+        OutCourt_CourtInfo_Focus_EditText_Write.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(OutCourt_CourtInfo_Focus.this, OutCourt_CourtInfo_Focus_Write.class);
+                intent1.putExtra("CourtName", CourtName);
+                intent1.putExtra("User_Pk", User_Pk);
+                intent1.putExtra("Court_Pk", Court_Pk);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_bottom, R.anim.anim_slide_out_top);
+            }
+        });
         OutCourt_CourtInfo_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -169,8 +225,30 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
             }
         });
-    }
+        ScrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                ScrollView.scrollTo(0,0);
+            }
+        });
 
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        HttpClient http_match_focus_Content = new HttpClient();
+        String result1 = http_match_focus_Content.HttpClient("Trophy_part1","OutCourt_Focus_Content.jsp",Court_Pk);
+        parsedData_OutCourt_Content = jsonParserList_OurtCourt_Content(result1);
+
+        final ArrayList<OutCourt_CourtInfo_Focus_MyData> OutCourt_CourtInfo_Focus_MyData;
+        OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
+        for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this));
+        }
+        final OutCourt_CourtInfo_Focus_MyAdapter adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
+        OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+    }
     @Override
     public void onBackPressed() {
         finish();
@@ -214,6 +292,25 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             return null;
         }
     }
+    public String[][] jsonParserList_OurtCourt_Content(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     public void currentTime(){
         long now = System.currentTimeMillis();
 // 현재 시간을 저장 한다.
@@ -235,5 +332,26 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+    }
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
+
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
     }
 }

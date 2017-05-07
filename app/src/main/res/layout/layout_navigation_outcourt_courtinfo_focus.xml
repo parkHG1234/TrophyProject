@@ -28,10 +28,16 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/ScrollView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,7 +80,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:textColor="@color/White"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_marginRight="15dp"/>
             </RelativeLayout>
             <TextView
@@ -178,7 +184,8 @@
                     android:textSize="12dp"
                     android:background="@color/White"
                     android:layout_margin="1dp"
-                    android:id="@+id/OutCourt_CourtInfo_Focus_EditText_Write"/>
+                    android:id="@+id/OutCourt_CourtInfo_Focus_EditText_Write"
+                    android:focusable="false"/>
 
                 <TextView
                     android:text="올리기"
@@ -193,6 +200,10 @@
                     android:layout_marginBottom="1dp" />
 
             </LinearLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/OutCourt_CourtInfo_Focus_ListView_Content"></ListView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
