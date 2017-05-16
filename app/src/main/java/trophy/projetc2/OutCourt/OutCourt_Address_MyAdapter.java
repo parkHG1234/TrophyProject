@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.content.Context;
 import android.content.Intent;

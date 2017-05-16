@@ -1,7 +1,6 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +29,9 @@ import java.util.Date;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.Navigation.TeamSearch_Focus;
 import trophy.projetc2.R;
+import trophy.projetc2.User.Login;
 
 /**
  * Created by 박효근 on 2017-04-13.
@@ -53,7 +54,7 @@ public class Match_Focus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_match_focus);
 
-        Intent intent1 = getIntent();
+        final Intent intent1 = getIntent();
         Match_Pk = intent1.getStringExtra("Match_Pk");
         User_Pk = intent1.getStringExtra("User_Pk");
 
@@ -69,7 +70,9 @@ public class Match_Focus extends AppCompatActivity {
         Emblem = parsedData_Match_Focus[0][14]; TeamName = parsedData_Match_Focus[0][15];
         Pay = parsedData_Match_Focus[0][16]; Color = parsedData_Match_Focus[0][17]; Extra = parsedData_Match_Focus[0][18];
         Match_Date = parsedData_Match_Focus[0][19];
-
+        String str = parsedData_Match_Focus[0][19];
+        String[] data = str.split(":::");
+        Match_Date = data[0] + " / " + data[1];
         Match_Focus_ImageView_Back = (ImageView)findViewById(R.id.Match_Focus_ImageView_Back);
         Match_Focus_ImageView_Status = (ImageView)findViewById(R.id.Match_Focus_ImageView_Status);
         Match_Focus_ImageView_Emblem = (ImageView)findViewById(R.id.Match_Focus_ImageView_Emblem);
@@ -89,7 +92,8 @@ public class Match_Focus extends AppCompatActivity {
         Match_Focus_CheckBox_ColdHot = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_ColdHot);
         Match_Focus_Button_TeamInfo = (Button)findViewById(R.id.Match_Focus_Button_TeamInfo);
         Match_Focus_Button_Apply = (Button)findViewById(R.id.Match_Focus_Button_Apply);
-
+        Match_Focus_CheckBox_Parking_Not.setClickable(false);Match_Focus_CheckBox_Parking_Free.setClickable(false);Match_Focus_CheckBox_Parking_Charge.setClickable(false);
+        Match_Focus_CheckBox_Display.setClickable(false);Match_Focus_CheckBox_Shower.setClickable(false);Match_Focus_CheckBox_ColdHot.setClickable(false);
         if(Status.equals("recruiting")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.recruiting);
             Match_Focus_Button_Apply.setBackgroundColor(getResources().getColor(R.color.MainColor1));
@@ -171,50 +175,62 @@ public class Match_Focus extends AppCompatActivity {
         Match_Focus_Button_Apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HttpClient http_match_focus = new HttpClient();
-                String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus_Overlap.jsp",User_Pk,Match_Pk);
-                parsedData_Match_Focus_Overlap = jsonParserList_Match_Focus_Overlap(result);
-                if(parsedData_Match_Focus_Overlap[0][0].equals("overlap")){
-                    Snackbar.make(view,"이미 신청하셨습니다.",Snackbar.LENGTH_SHORT).show();
+                if(User_Pk.equals(".")){
+                    Intent intent_login = new Intent(Match_Focus.this, Login.class);
+                    startActivity(intent_login);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
                 else{
-                    if(Status.equals("recruiting")){
-                        LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-                        final View layout = inflater.inflate(R.layout.layout_navigation_match_focus_customdialog_memo, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
-                        final TextView TeamInfo_Customdialog_1_Title = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Title);
-                        final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
-                        final EditText TeamInfo_Customdialog_1_Content = (EditText)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
-                        final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
-                        TeamInfo_Customdialog_1_Title.setText("시합 신청");
-                        final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
-                        TeamInfo_Dialog
-                                .setContentView(layout)
-                                .setCanceledOnTouchOutside(true);
-                        TeamInfo_Dialog.show();
-                        TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                TeamInfo_Dialog.dismiss();
-                            }
-                        });
-                        TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                HttpClient http_match_focus_overlap = new HttpClient();
-                                String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, strCurToday +":::"+strCurTime, TeamInfo_Customdialog_1_Content.getText().toString());
-                                parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
-                                if(parsedData_Match_Focus_Join[0][0].equals("succed")){
-                                    Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_SHORT).show();
+                    HttpClient http_match_focus = new HttpClient();
+                    String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus_Overlap.jsp",User_Pk,Match_Pk);
+                    parsedData_Match_Focus_Overlap = jsonParserList_Match_Focus_Overlap(result);
+                    if(parsedData_Match_Focus_Overlap[0][0].equals("overlap")){
+                        Snackbar.make(view,"이미 신청하셨습니다.",Snackbar.LENGTH_SHORT).show();
+                    }
+                    else{
+                        if(Status.equals("recruiting")){
+                            LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+                            final View layout = inflater.inflate(R.layout.layout_navigation_match_focus_customdialog_memo, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
+                            final TextView TeamInfo_Customdialog_1_Title = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Title);
+                            final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
+                            final EditText TeamInfo_Customdialog_1_Content = (EditText)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
+                            final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
+                            TeamInfo_Customdialog_1_Title.setText("시합 신청");
+                            final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
+                            TeamInfo_Dialog
+                                    .setContentView(layout)
+                                    .setCanceledOnTouchOutside(true);
+                            TeamInfo_Dialog.show();
+                            TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
                                     TeamInfo_Dialog.dismiss();
                                 }
-                                else{
-                                    Snackbar.make(view,"잠시 후 다시 시도해주세요.",Snackbar.LENGTH_SHORT).show();
+                            });
+                            TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    HttpClient http_match_focus_overlap = new HttpClient();
+                                    String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, strCurToday +":::"+strCurTime, TeamInfo_Customdialog_1_Content.getText().toString());
+                                    parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
+                                    if(parsedData_Match_Focus_Join[0][0].equals("succed")){
+                                        Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                TeamInfo_Dialog.dismiss();
+                                            }
+                                        })
+                                                .show();
+                                    }
+                                    else{
+                                        Snackbar.make(view,"잠시 후 다시 시도해주세요.",Snackbar.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
-                    }
-                    else if(Status.equals("deadline")){
-                        Snackbar.make(view,"신청이 마감되었습니다.",Snackbar.LENGTH_SHORT).show();
+                            });
+                        }
+                        else if(Status.equals("deadline")){
+                            Snackbar.make(view,"신청이 마감되었습니다.",Snackbar.LENGTH_SHORT).show();
+                        }
                     }
                 }
             }

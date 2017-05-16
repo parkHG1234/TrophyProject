@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,12 +32,16 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Contest.Contest_Detail;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.Http.HttpClient_SSL;
 import trophy.projetc2.R;
 import trophy.projetc2.User.Login;
 
@@ -97,46 +102,55 @@ public class TeamSearch_Focus extends AppCompatActivity {
         Image2 = parseredData_teamInfo[0][7];
         Image3 = parseredData_teamInfo[0][8];
 
-        if(Emblem.equals(".")) {
-            Glide.with(TeamSearch_Focus.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Emblem);
-        }else {
-            Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Emblem);
-        }
         TeamInfo_TextView_TeamName.setText(parseredData_teamInfo[0][0]);
         TeamInfo_TextView_TeamAddress_Do.setText(TeamAddress_Do);
         TeamInfo_TextView_TeamAddress_Si.setText(TeamAddress_Si);
         TeamInfo_TextView_HomeCourt.setText(HomeCourt);
         TeamInfo_TextView_TeamIntro.setText(Introduce);
 
-        if(Image1.equals(".")) {
-            TeamInfo_ImageView_Image1.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image1 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image1);
+        try {
+            String En_Emblem = URLEncoder.encode(Emblem, "utf-8");
+            String En_Image1 = URLEncoder.encode(Image1, "utf-8");
+            String En_Image2 = URLEncoder.encode(Image2, "utf-8");
+            String En_Image3 = URLEncoder.encode(Image3, "utf-8");
+            if (En_Emblem.equals(".")) {
+                Glide.with(TeamSearch_Focus.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Emblem);
+            } else {
+                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Emblem + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(TeamSearch_Focus.this).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Emblem);
+            }
+            if(En_Image1.equals(".")) {
+                TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+            }else{
+                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image1 + ".jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Image1);
+            }
+            if(En_Image2.equals(".")){
+                TeamInfo_ImageView_Image2.setVisibility(View.GONE);
+            }else{
+                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image2 + ".jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Image2);
+            }
+            if(En_Image3.equals(".")){
+                TeamInfo_ImageView_Image3.setVisibility(View.GONE);
+            }else{
+                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image3 + ".jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Image3);
+            }
+        } catch (UnsupportedEncodingException e) {
+
         }
-        if(Image2.equals(".")){
-            TeamInfo_ImageView_Image2.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image2 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image2);
-        }
-        if(Image3.equals(".")){
-            TeamInfo_ImageView_Image3.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image3 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image3);
-        }
+
 
         //팀원 정보
         //팀원 리스트
@@ -167,12 +181,57 @@ public class TeamSearch_Focus extends AppCompatActivity {
                 }
                 else{
                     HttpClient TeamInfo = new HttpClient();
-                    String result =TeamInfo.HttpClient("Trophy_part1","TeamSearch_Focus_TeamJoin_OverLap.jsp",User_Pk);
+                    String result =TeamInfo.HttpClient("Trophy_part1","TeamSearch_Focus_TeamJoin_OverLap.jsp",User_Pk,Team_Pk);
 
                     parseredData_teamOverlap = jsonParserList_teamOverlap(result);
-                    if(parseredData_teamOverlap[0][0].equals("overLap")){
+                    if(parseredData_teamOverlap[0][0].equals("Joined")){
                         Snackbar.make(view,"이미 다른 팀에 가입 중 이십니다.", Snackbar.LENGTH_SHORT).show();
-                    }else{
+                    }
+                    else if(parseredData_teamOverlap[0][0].equals("ThisJoining")){
+                        Snackbar.make(view,"이미 가입 신청하셨습니다.", Snackbar.LENGTH_SHORT).show();
+                    }
+                    else if(parseredData_teamOverlap[0][0].equals("Joining")){
+                        LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+                        final View layout = inflater.inflate(R.layout.layout_customdialog_2choice, (ViewGroup) view.findViewById(R.id.Customdialog_2Choice_Root));
+                        final TextView Customdialog_2Choice_Title = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Title);
+                        final ImageView Customdialog_2Choice_Back = (ImageView)layout.findViewById(R.id.Customdialog_2Choice_Back);
+                        final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
+                        final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
+                        final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
+                        Customdialog_2Choice_Title.setText("팀 가입");
+                        Customdialog_2Choice_Content.setText("이전 가입신청을 취소합니다.");
+                        Customdialog_2Choice_First.setText("확 인");
+                        Customdialog_2Choice_Second.setText("취 소");
+                        final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
+                        TeamInfo_Dialog
+                                .setContentView(layout)
+                                .setCanceledOnTouchOutside(true);
+                        TeamInfo_Dialog.show();
+                        Customdialog_2Choice_Back.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TeamInfo_Dialog.dismiss();
+                            }
+                        });
+                        Customdialog_2Choice_First.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                HttpClient TeamJoin = new HttpClient();
+                                String result_join =TeamJoin.HttpClient("Trophy_part1","TeamSearch_Focus_Join.jsp",User_Pk,Team_Pk);
+                                parseredData_teamJoin = jsonParserList_teamJoin(result_join);
+                                if(parseredData_teamJoin[0][0].equals("succed")){
+                                    TeamInfo_Dialog.dismiss();
+                                }
+                            }
+                        });
+                        Customdialog_2Choice_Second.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TeamInfo_Dialog.dismiss();
+                            }
+                        });
+                    }
+                    else{
                         HttpClient TeamJoin = new HttpClient();
                         String result_join =TeamJoin.HttpClient("Trophy_part1","TeamSearch_Focus_Join.jsp",User_Pk,Team_Pk);
                         parseredData_teamJoin = jsonParserList_teamJoin(result_join);

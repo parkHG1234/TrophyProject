@@ -8,69 +8,72 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
         <activity
             android:name=".SportChoiceActivity"
             android:noHistory="true">
 
+        </activity>
+        <activity android:name=".MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Navigation.TeamFocus"></activity>
-        <activity android:name=".Navigation.User_Focus"></activity>
-        <activity android:name=".Navigation.TeamMake"></activity>
-        <activity android:name=".Navigation.TeamInfo"></activity>
-        <activity android:name=".Navigation.TeamSearch" android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".Navigation.TeamRanking"></activity>
-        <activity android:name=".Navigation.Last_Contest"></activity>
-        <activity android:name=".Navigation.Last_Contest_Detail"></activity>
-        <activity android:name=".Navigation.Notice"></activity>
-        <activity android:name=".Navigation.Suggest"></activity>
-        <activity android:name=".Navigation.TeamSearch_Focus"></activity>
-        <activity android:name=".Navigation.TeamManager"></activity>
-        <activity android:name=".Contest.Navigation_Contest"></activity>
-        <activity android:name=".Navigation.TeamManager_ContestJoin_ContestFocus"></activity>
-        <activity android:name=".Contest.Contest_Detail"></activity>
-        <activity android:name=".Contest.Contest_Detail_Form"></activity>
-        <activity android:name=".Navigation.Last_Contest_ViewPager"></activity>
-        <activity android:name=".Navigation.Match"></activity>
-        <activity android:name=".Navigation.Match_Write"></activity>
-        <activity android:name=".Navigation.Match_Focus"></activity>
-        <activity android:name=".Navigation.MyMatch"></activity>
-        <activity android:name=".Navigation.MyMatch_Focus"></activity>
-        <activity android:name=".Navigation.OutCourt_Address"></activity>
-        <activity android:name=".Navigation.OutCourt_CourtInfo"></activity>
-        <activity android:name=".Navigation.OutCourt_CourtInfo_Focus"></activity>
-        <activity android:name=".Navigation.OutCourt_CourtInfo_Focus_Write"></activity>
+        <activity android:name=".Navigation.TeamFocus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.User_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamMake" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamInfo" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamSearch" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamRanking" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.Last_Contest" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.Last_Contest_Detail" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.Notice" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.Suggest" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamSearch_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Contest.Navigation_Contest" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager_ContestJoin_ContestFocus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Contest.Contest_Detail" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Contest.Contest_Detail_Form" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.Last_Contest_ViewPager" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.Match" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.Match_Write" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.Match_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.MyMatch" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.MyMatch_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutCourt.OutCourt_Address" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write" android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".User.Login"></activity>
-        <activity android:name=".User.ChangePersonalInfoActivity"></activity>
-        <activity android:name=".User.ChangePw1Activity"></activity>
-        <activity android:name=".User.ChangePw2Activity"></activity>
-        <activity android:name=".User.Withdrawal"></activity>
-        <activity android:name=".User.Find_Password"></activity>
-        <activity android:name=".User.Find_Password_Change"></activity>
-        <activity android:name=".User.ChangePhoneActivity"></activity>
-        <activity android:name=".User.ChangeAreaActivity"></activity>
-        <activity android:name=".User.Terms"></activity>
-        <activity android:name=".User.Join"></activity>
+        <activity android:name=".User.Login" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangePersonalInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangePw1Activity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangePw2Activity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.Withdrawal" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.Find_Password" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.Find_Password_Change" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangePhoneActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangeAreaActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.Terms" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.Join" android:screenOrientation="portrait"></activity>
 
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
         App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <service
-            android:name=".User.MyInstanceIDListenerService">
+            android:name=".User.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
+
         <service
-            android:name=".User.MyFcmListenerService">
+            android:name=".User.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
     </application>

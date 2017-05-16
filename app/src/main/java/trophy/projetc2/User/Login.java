@@ -68,6 +68,7 @@ public class Login extends AppCompatActivity {
                     editor.commit();
 
                     Intent MainActivityintent =  new Intent(Login.this, MainActivity.class);
+                    MainActivityintent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(MainActivityintent);
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                     finish();

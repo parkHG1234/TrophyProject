@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.app.Activity;
 
@@ -17,7 +17,8 @@ public class Match_MyData {
     private String Status;
     private Activity Activity;
     private String User_Pk;
-    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk){
+    private String Match_Date;
+    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String Match_Date){
         this.Match_Pk = Match_Pk;
         this.Emblem = Emblem;
         this.TeamName = TeamName;
@@ -28,6 +29,7 @@ public class Match_MyData {
         this.Status = Status;
         this.Activity = Activity;
         this.User_Pk = User_Pk;
+        this.Match_Date = Match_Date;
     }
     public String getEmblem() {
         return Emblem;
@@ -57,4 +59,5 @@ public class Match_MyData {
     public String getUser_Pk(){
         return User_Pk;
     }
+    public String getMatch_Date(){return Match_Date;}
 }

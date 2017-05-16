@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import trophy.projetc2.ImageDownload;
 import trophy.projetc2.Navigation.Last_Contest_ImageView.Last_Contest_ImageView1;
@@ -72,7 +71,6 @@ public class Last_Contest_ViewPager extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

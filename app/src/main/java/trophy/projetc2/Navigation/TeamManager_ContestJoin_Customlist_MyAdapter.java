@@ -2,14 +2,11 @@ package trophy.projetc2.Navigation;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,16 +20,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import me.drakeet.materialdialog.MaterialDialog;
-import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
-
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_joiner;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_player;
 
 /**
  * Created by 박효근 on 2017-01-24.

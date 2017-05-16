@@ -25,14 +25,12 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
 import static trophy.projetc2.Navigation.TeamManager.TeamManager_Activity;
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
 import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
 import static trophy.projetc2.Navigation.TeamManager_ContestJoin.Contestjoin_timer;
 import static trophy.projetc2.Navigation.TeamManager_PlayerManager.PlayerManager_timer;
@@ -94,7 +92,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         if(arrData.get(position).getSecond_Name().equals("null")){
             SecondProfile.setVisibility(View.INVISIBLE);
             SecondName.setVisibility(View.INVISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             SecondProfile.setVisibility(View.VISIBLE);
@@ -104,7 +102,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
             ThirdName.setVisibility(View.INVISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
@@ -114,7 +112,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
             FourthName.setVisibility(View.INVISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             FourthProfile.setVisibility(View.VISIBLE);

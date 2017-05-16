@@ -39,6 +39,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
@@ -109,7 +110,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
         }else {
-            Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][5] + ".jpg")
+            Glide.with(getContext()).load("http://210.122.7.193:8080/Trophy_img/team/" + parseredData[0][5] + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getContext()).getBitmapPool()))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
@@ -194,7 +195,6 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
                 final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
                 final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
-                aDialog.setTitle("이미지 변경");
                 aDialog.setView(layout);
                 final AlertDialog ad = aDialog.create();
                 ad.show();
@@ -249,7 +249,6 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
                 final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
                 final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
-                aDialog.setTitle("이미지 변경");
                 aDialog.setView(layout);
                 final AlertDialog ad = aDialog.create();
                 ad.show();
@@ -303,7 +302,6 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
                 final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
                 final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
-                aDialog.setTitle("이미지 변경");
                 aDialog.setView(layout);
                 final AlertDialog ad = aDialog.create();
                 ad.show();
@@ -357,7 +355,6 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 final Button Layout_CustomDialog_Album_AlbumImage = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_AlbumImage);
                 final Button Layout_CustomDialog_Album_Cancel = (Button) layout.findViewById(R.id.Layout_CustomDialog_Album_Cancel);
                 final AlertDialog.Builder aDialog = new AlertDialog.Builder(view.getContext());
-                aDialog.setTitle("이미지 변경");
                 aDialog.setView(layout);
                 final AlertDialog ad = aDialog.create();
                 ad.show();

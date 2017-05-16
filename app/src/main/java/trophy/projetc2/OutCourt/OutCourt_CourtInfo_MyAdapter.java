@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.R;
 
 /**

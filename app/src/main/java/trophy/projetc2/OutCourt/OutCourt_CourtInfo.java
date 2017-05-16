@@ -1,9 +1,8 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,12 +16,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
-
-import static java.sql.Types.NULL;
 
 /**
  * Created by 박효근 on 2017-05-01.

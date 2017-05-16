@@ -1,7 +1,6 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,10 +22,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
+
 
 /**
  * Created by 박효근 on 2017-05-07.
@@ -38,6 +37,7 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
     private ArrayList<OutCourt_CourtInfo_Focus_MyData> arrData;
     TextView Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name, Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date,Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Content;
     ImageView Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Profile;
+    ImageView Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete;
     String Content_Date; String Content_Time;
     String[][] parsedData_Content_Delete;
     public OutCourt_CourtInfo_Focus_MyAdapter(Context c, ArrayList<OutCourt_CourtInfo_Focus_MyData> arr) {
@@ -66,6 +66,7 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name= (TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date= (TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Content =(TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Content);
+        Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete = (ImageView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete);
 
         try{
             String En_Profile = URLEncoder.encode(arrData.get(position).getUser_Profile(), "utf-8");
@@ -81,6 +82,14 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
         }
         catch (UnsupportedEncodingException e){
         }
+        if(arrData.get(position).getContent_User_Pk().equals(arrData.get(position).getUser_Pk())){
+            Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete.setVisibility(View.VISIBLE);
+            Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete.setEnabled(true);
+        }
+        else{
+            Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete.setVisibility(View.INVISIBLE);
+            Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete.setEnabled(false);
+        }
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name.setText(arrData.get(position).getUser_Name());
 
         String str = arrData.get(position).getDate();
@@ -92,7 +101,7 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
             Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date.setText(data[0].substring(2));
         }
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Content.setText(arrData.get(position).getOutCourt_Content());
-        convertView.setOnClickListener(new View.OnClickListener() {
+        Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);

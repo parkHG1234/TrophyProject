@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:id="@+id/Layout_CustomDialog_Album_Root"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    >
+    android:background="@color/White">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TeamInfo_Customdialog_1_Title"
+            android:text="이미지 변경"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/TeamInfo_Customdialog_1_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="2dp" />
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -16,20 +44,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="기본 이미지로 변경"
-            android:id="@+id/Layout_CustomDialog_Album_BasicImage" />
+            android:id="@+id/Layout_CustomDialog_Album_BasicImage"
+            android:textColor="@color/MainColor1"
+            android:background="@color/White"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="앨범에서 이미지 선택"
-            android:id="@+id/Layout_CustomDialog_Album_AlbumImage" />
+            android:id="@+id/Layout_CustomDialog_Album_AlbumImage"
+            android:textColor="@color/MainColor1"
+            android:background="@color/White"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="취소"
             android:id="@+id/Layout_CustomDialog_Album_Cancel"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/MainColor1"
+            android:background="@color/White"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </LinearLayout>

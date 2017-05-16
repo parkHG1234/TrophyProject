@@ -86,7 +86,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         if(arrData.get(position).getSecond_Name().equals("null")){
             SecondProfile.setVisibility(View.INVISIBLE);
             SecondName.setVisibility(View.INVISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             SecondProfile.setVisibility(View.VISIBLE);
@@ -96,7 +96,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
             ThirdName.setVisibility(View.INVISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
@@ -106,7 +106,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
             FourthName.setVisibility(View.INVISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             FourthProfile.setVisibility(View.VISIBLE);
@@ -180,7 +180,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -196,7 +196,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFirst_Pk(),TeamManager_TeamName);
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -275,7 +275,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -291,7 +291,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getSecond_Pk(),TeamManager_TeamName);
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -370,7 +370,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -386,7 +386,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getThird_Pk(),TeamManager_TeamName);
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -465,7 +465,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -481,7 +481,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFourth_Pk(),TeamManager_TeamName);
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();

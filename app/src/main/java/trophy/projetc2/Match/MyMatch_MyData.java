@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.app.Activity;
 

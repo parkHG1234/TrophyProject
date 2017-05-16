@@ -71,7 +71,7 @@ public class Navigation_Contest_Customlist_Adapter extends BaseAdapter {
             String Contest_Payment = arrData.get(position).getContest_Payment();
             String Contest_RecruitFinishData = arrData.get(position).getRecruitFinishDate();
             String Contest_Place = arrData.get(position).getContest_Place();
-            Log.i("title", Contest_Title);
+
             ImageView viewContest_Image = (ImageView)convertView.findViewById(R.id.Contest_logoImage);
             TextView viewContest_Title = (TextView)convertView.findViewById(R.id.contest_title);
             TextView viewContest_Date = (TextView)convertView.findViewById(R.id.contest_date);
@@ -86,14 +86,14 @@ public class Navigation_Contest_Customlist_Adapter extends BaseAdapter {
             viewContest_Title.setText(Contest_Title);
             viewContest_Date.setText(Contest_Date);
             viewContest_Place.setText(Contest_Place);
-            viewContest_Num.setText("참가팀 "+Contest_currentNum + " / " + Contest_maxNum);
+            viewContest_Num.setText("참가팀 외부 / " + Contest_maxNum);
             Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/"+Contest_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(viewContest_Image);
 
             //남은 일 계산
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yy / MM / dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy / MM / dd");
             try {
                 Date date = dateFormat.parse(Contest_RecruitFinishData);
                 Date currentDay = new Date();
@@ -109,6 +109,7 @@ public class Navigation_Contest_Customlist_Adapter extends BaseAdapter {
                     else{
                         Da = " 일";
                     }
+                    Log.i("test123", diffday+Da);
                     remainder.setText(diffday+Da);
                 }
                 else {

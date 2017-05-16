@@ -15,27 +15,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
-import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
-
-import static trophy.projetc2.MainActivity.activity;
-import static trophy.projetc2.Navigation.TeamManager_ContestJoin.Contestjoin_timer;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.PlayerManager_timer;
 
 /**
  * Created by 박효근 on 2017-01-10.
@@ -106,8 +98,8 @@ public class TeamManager extends AppCompatActivity {
         Teammanager_ImageVIew_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Contestjoin_timer.cancel();
-                PlayerManager_timer.cancel();
+                TeamManager_ContestJoin.Contestjoin_timer.cancel();
+                TeamManager_PlayerManager.PlayerManager_timer.cancel();
                 TeamManager.this.finish();
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
             }
@@ -235,8 +227,8 @@ public class TeamManager extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Contestjoin_timer.cancel();
-        PlayerManager_timer.cancel();
+        TeamManager_ContestJoin.Contestjoin_timer.cancel();
+        TeamManager_PlayerManager.PlayerManager_timer.cancel();
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
     }

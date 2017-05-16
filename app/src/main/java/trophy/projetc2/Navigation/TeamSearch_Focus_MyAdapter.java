@@ -80,7 +80,7 @@ public class TeamSearch_Focus_MyAdapter extends BaseAdapter {
         if(arrData.get(position).getSecond_Name().equals("null")){
             SecondProfile.setVisibility(View.INVISIBLE);
             SecondName.setVisibility(View.INVISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             SecondProfile.setVisibility(View.VISIBLE);
@@ -90,7 +90,7 @@ public class TeamSearch_Focus_MyAdapter extends BaseAdapter {
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
             ThirdName.setVisibility(View.INVISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
@@ -100,7 +100,7 @@ public class TeamSearch_Focus_MyAdapter extends BaseAdapter {
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
             FourthName.setVisibility(View.INVISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             FourthProfile.setVisibility(View.VISIBLE);

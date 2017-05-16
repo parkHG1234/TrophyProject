@@ -1,7 +1,8 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,14 +27,17 @@ import java.util.ArrayList;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.Navigation.TeamFocus;
 import trophy.projetc2.R;
 
-import static trophy.projetc2.Navigation.MyMatch_Focus.Match_Focus_ImageView_Status;
-import static trophy.projetc2.Navigation.MyMatch_Focus.MyMatch_Focus_Joined_ImageView_Emblem;
-import static trophy.projetc2.Navigation.MyMatch_Focus.MyMatch_Focus_Joined_TextView_TeamName;
-import static trophy.projetc2.Navigation.MyMatch_Focus.MyMatch_Focus_Joined_TextView_Title;
-import static trophy.projetc2.Navigation.MyMatch_Focus.MyMatch_Focus_LinerLayout_Joined;
-import static trophy.projetc2.Navigation.MyMatch_Focus.MyMatch_Focus_LinerLayout_Joining;
+import static trophy.projetc2.Match.MyMatch_Focus.Match_Focus_ImageView_Status;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_Joined_ImageView_Emblem;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_Joined_ImageView_Phone;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_Joined_TextView_TeamName;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_Joined_TextView_Title;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_LinerLayout_Joined;
+import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_LinerLayout_Joining;
+import static trophy.projetc2.Match.MyMatch_Focus.OtherTeam_Phone;
 
 
 /**
@@ -98,25 +102,28 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-                final View layout = inflater.inflate(R.layout.layout_customdialog_1, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
-                final TextView TeamInfo_Customdialog_1_Title = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Title);
-                final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
-                final TextView TeamInfo_Customdialog_1_Content = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
-                final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
-                TeamInfo_Customdialog_1_Title.setText("시합 요청");
-                TeamInfo_Customdialog_1_Content.setText("수락시 시합 요청이 마감되며, 다른 신청팀은 자동 취소됩니다.");
+                final View layout = inflater.inflate(R.layout.layout_customdialog_2choice, (ViewGroup) view.findViewById(R.id.Customdialog_2Choice_Root));
+                final TextView Customdialog_2Choice_Title = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Title);
+                final ImageView Customdialog_2Choice_Back = (ImageView)layout.findViewById(R.id.Customdialog_2Choice_Back);
+                final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
+                final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
+                final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
+                Customdialog_2Choice_Title.setText("시합 요청");
+                Customdialog_2Choice_Content.setText("수락시 시합 요청이 마감되며, 다른 신청팀은 자동 취소됩니다.");
+                Customdialog_2Choice_First.setText("수 락");
+                Customdialog_2Choice_Second.setText("취 소");
                 final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
                 TeamInfo_Dialog
                         .setContentView(layout)
                         .setCanceledOnTouchOutside(true);
                 TeamInfo_Dialog.show();
-                TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
+                Customdialog_2Choice_Back.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         TeamInfo_Dialog.dismiss();
                     }
                 });
-                TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
+                Customdialog_2Choice_First.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         HttpClient http_mymatch_focus_joiner = new HttpClient();
@@ -127,6 +134,7 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                             MyMatch_Focus_LinerLayout_Joined.setVisibility(View.VISIBLE);
                             MyMatch_Focus_LinerLayout_Joining.setVisibility(View.GONE);
                             Match_Focus_ImageView_Status.setImageResource(R.drawable.deadline);
+                            OtherTeam_Phone = arrData.get(position).getPhone();
                             try {
                                 String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
                                 if (arrData.get(position).getEmblem().equals(".")) {
@@ -147,6 +155,12 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                         else{
                             Snackbar.make(view,"잠시 후 다시 시도해주세요.", Snackbar.LENGTH_SHORT).show();
                         }
+                    }
+                });
+                Customdialog_2Choice_Second.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TeamInfo_Dialog.dismiss();
                     }
                 });
 

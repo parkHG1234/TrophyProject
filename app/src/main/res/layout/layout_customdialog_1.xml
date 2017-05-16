@@ -30,7 +30,7 @@
     <Button
         android:layout_width="match_parent"
         android:id="@+id/button16"
-        android:background="@color/MainColor1"
+        android:background="@color/WhiteGray"
         android:layout_height="2dp" />
 
     <TextView

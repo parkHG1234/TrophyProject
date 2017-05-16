@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.MainActivity;
@@ -104,7 +105,7 @@ public class TeamInfo extends AppCompatActivity {
                     .skipMemoryCache(true)
                     .into(TeamInfo_ImageView_Emblem);
         }else {
-            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg")
+            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(TeamInfo.this).getBitmapPool()))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamInfo_ImageView_Emblem);

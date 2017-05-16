@@ -29,12 +29,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.matthewtamlin.sliding_intro_screen_library.DotIndicator;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -51,7 +53,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,22 +67,29 @@ import trophy.projetc2.Main.MainActivity_VierPage1;
 import trophy.projetc2.Main.MainActivity_VierPage2;
 import trophy.projetc2.Main.MainActivity_VierPage3;
 import trophy.projetc2.Contest.Navigation_Contest;
+import trophy.projetc2.Match.Match_MyAdapter;
+import trophy.projetc2.Match.Match_MyData;
 import trophy.projetc2.Navigation.Last_Contest;
-import trophy.projetc2.Navigation.Match;
-import trophy.projetc2.Navigation.MyMatch;
+import trophy.projetc2.Match.Match;
+import trophy.projetc2.Match.MyMatch;
 import trophy.projetc2.Navigation.Notice;
-import trophy.projetc2.Navigation.OutCourt_Address;
+import trophy.projetc2.OutCourt.OutCourt_Address;
 import trophy.projetc2.Navigation.Suggest;
 import trophy.projetc2.Navigation.TeamInfo;
 import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamRanking;
 import trophy.projetc2.Navigation.TeamSearch;
 import trophy.projetc2.Navigation.TeamSearch_Focus;
+import trophy.projetc2.OutCourt.OutCourt_CourtInfo;
+import trophy.projetc2.OutCourt.OutCourt_CourtInfo_MyAdapter;
+import trophy.projetc2.OutCourt.OutCourt_CourtInfo_MyData;
 import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
-    String Pk, Name, Team, Profile, Token = "hh", Team_Pk, Team_Duty;
+    String Name, Team, Profile, Token = "hh", Team_Pk, Team_Duty, Address_Do, Address_Si;
+    static String Pk;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String[][] parseredData_AddToken, parseredData_user, parseredData_teammake,RankingParsedList;
     public static Activity activity;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -102,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         inflater = getLayoutInflater();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar123);
         setSupportActionBar(toolbar);
+        currentTime();
         ImageView MainActivity_ActionBar_Drawer = (ImageView) toolbar.findViewById(R.id.MainActivity_ActionBar_Drawer);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         MainActivity_ActionBar_Drawer.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 drawer.openDrawer(Gravity.LEFT);
             }
         });
-
+//추가한 라인
 
         ListView listView = (ListView) findViewById(R.id.Contest_ListView_contest);
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -134,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView Main_Navigation_Button_TeamMake = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
         final TextView Main_Navigation_Button_TeamManager = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
         final TextView Main_Navigation_Button_TeamSearch = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
+        final TextView Main_Navigation_Button_Contest = (TextView)aa.findViewById(R.id.Main_Navigation_Button_Contest);
         final TextView Main_Navigation_Button_LastContest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
         final TextView Main_Navigation_Button_Notice = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Notice);
         final TextView Main_Navigation_Button_Suggest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
@@ -152,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             Main_Navigation_Button_Logout.setVisibility(View.GONE);
             Main_Navigation_Button_TeamMake.setVisibility(View.GONE);
             Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
-
+            Main_Navigation_Button_MyMatch.setVisibility(View.GONE);
             Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -172,13 +185,15 @@ public class MainActivity extends AppCompatActivity {
             
             HttpClient user = new HttpClient();
             String result1 = user.HttpClient("Trophy_part1", "User.jsp", Pk);
-            Log.i("UserPk", Pk);
             parseredData_user = jsonParserList_User(result1);
             Name = parseredData_user[0][0];
             Team = parseredData_user[0][1];
+            Log.i("UserTeam", Team);
             Profile = parseredData_user[0][2];
             Team_Pk = parseredData_user[0][3];
             Team_Duty = parseredData_user[0][4];
+            Address_Do = parseredData_user[0][5];
+            Address_Si = parseredData_user[0][6];
             //프로필 관리
             try {
                 String Profile1 = URLEncoder.encode(Profile, "utf-8");
@@ -219,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (Profile.equals(".")) {
                         HttpClient user = new HttpClient();
-                        String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, Pk);
+                        String result = user.HttpClient("Trophy_part1", "Profile_Image.jsp", Pk, Pk);
                         Profile = "exist";
                         //사진 읽어오기위한 uri 작성하기.
                         Uri uri = Uri.parse("content://media/external/images/media");
@@ -255,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
                                         .skipMemoryCache(true)
                                         .into(Main_Navigation_ImageView_Profile);
                                 HttpClient user = new HttpClient();
-                                user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, ".");
+                                user.HttpClient("Trophy_part1", "Profile_Image.jsp", Pk, ".");
 //                            Main_Navigation_ImageView_Profile.setImageResource(R.drawable.profile_basic_image);
                                 ad.dismiss();
                                 Profile = ".";
@@ -266,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(View view) {
 
                                 HttpClient user = new HttpClient();
-                                String result = user.HttpClient("Trophy_part2", "Profile_Image.jsp", Pk, Pk);
+                                String result = user.HttpClient("Trophy_part1", "Profile_Image.jsp", Pk, Pk);
                                 //사진 읽어오기위한 uri 작성하기.
                                 Uri uri = Uri.parse("content://media/external/images/media");
                                 //무언가 보여달라는 암시적 인텐트 객체 생성하기.
@@ -285,45 +300,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball);
 
-        //스포츠 버튼 이미지 변경
-        preferences = getSharedPreferences("trophy", MODE_PRIVATE);
-        String sport = preferences.getString("sportType", "");
-        if (sport.equals("basketball")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball);
-        } else if (sport.equals("baseball")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball);
-        } else if (sport.equals("Coach")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.badminton);
-        } else if (sport.equals("balling")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.baseball);
-        } else if (sport.equals("soccer")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.soccer);
-        } else if (sport.equals("football")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.football);
-        } else if (sport.equals("golf")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.golf);
-        } else if (sport.equals("volleyball")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.volleyball);
-        } else if (sport.equals("billiards")) {
-            Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.billiards);
-        }
-
-
-        //스포츠 변경 버튼 이벤트
-        Main_Navigation_Button_SportChoice.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                preferences = getSharedPreferences("trophy", MODE_PRIVATE);
-                editor = preferences.edit();
-                editor.remove("sportType");
-                editor.commit();
-
-                Intent intent_SportChoice = new Intent(MainActivity.this, SportChoiceActivity.class);
-                startActivity(intent_SportChoice);
-                finish();
-            }
-        });
         //팀 만들기 이벤트
         Main_Navigation_Button_TeamMake.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -350,6 +328,15 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
+        Main_Navigation_Button_Contest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Suggest = new Intent(MainActivity.this, Navigation_Contest.class);
+                intent_Suggest.putExtra("Pk", Pk);
+                startActivity(intent_Suggest);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         Main_Navigation_Button_LastContest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -361,12 +348,17 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_TeamSearch = new Intent(MainActivity.this, TeamInfo.class);
-                intent_TeamSearch.putExtra("User_Pk", Pk);
-                intent_TeamSearch.putExtra("Team_Pk", Team_Pk);
-                intent_TeamSearch.putExtra("TeamName", Team);
-                startActivity(intent_TeamSearch);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(Team.equals(".")){
+                    Snackbar.make(view,"팀 가입 후 이용 가능합니다.",Snackbar.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent_TeamSearch = new Intent(MainActivity.this, TeamInfo.class);
+                    intent_TeamSearch.putExtra("User_Pk", Pk);
+                    intent_TeamSearch.putExtra("Team_Pk", Team_Pk);
+                    intent_TeamSearch.putExtra("TeamName", Team);
+                    startActivity(intent_TeamSearch);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
             }
         });
         Main_Navigation_Button_Ranking.setOnClickListener(new View.OnClickListener() {
@@ -391,7 +383,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (Pk.equals(".")) {
-                    Snackbar.make(view, "로그인을 해주세요", Snackbar.LENGTH_LONG).show();
+                    Intent intent_login = new Intent(MainActivity.this, Login.class);
+                    startActivity(intent_login);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 } else {
                     Intent intent_Suggest = new Intent(MainActivity.this, Suggest.class);
                     intent_Suggest.putExtra("Pk", Pk);
@@ -537,7 +531,71 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
+        ListView Contest_ListView_Match = (ListView)findViewById(R.id.Contest_ListView_Match);
+        TextView Main_Contest_TextView_Match_Focus = (TextView)findViewById(R.id.Main_Contest_TextView_Match_Focus);
+        //매치 리스트뷰
+        HttpClient http_match = new HttpClient();
+        String result1 = http_match.HttpClient("Trophy_part1","Match.jsp");
+        String[][] parsedData_Match = jsonParserList_Match(result1);
 
+        final ArrayList<Match_MyData> Match_MyData;
+        Match_MyData = new ArrayList<Match_MyData>();
+        if(parsedData_Match.length <= 5){
+            for (int i = 0; i < parsedData_Match.length; i++) {
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9]));
+            }
+        }
+        else{
+            for (int i = 0; i < 5; i++) {
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9]));
+            }
+        }
+        Match_MyAdapter adapter = new Match_MyAdapter(this, Match_MyData);
+        Contest_ListView_Match.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(Contest_ListView_Match);
+        Main_Contest_TextView_Match_Focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, Match.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Team_Pk", Team_Pk);
+                intent_Match.putExtra("Team_Duty", Team_Duty);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+
+        //실시간 야외코트
+        ListView Contest_ListView_OutCourt = (ListView)findViewById(R.id.Contest_ListView_OutCourt);
+        TextView Main_Contest_TextView_OutCourt_Focus = (TextView)findViewById(R.id.Main_Contest_TextView_OutCourt_Focus);
+        final ArrayList<OutCourt_CourtInfo_MyData> OutCourt_CourtInfo_MyData;
+        OutCourt_CourtInfo_MyData = new ArrayList<OutCourt_CourtInfo_MyData>();
+        HttpClient http_outcourt = new HttpClient();
+        String result2 = http_outcourt.HttpClient("Trophy_part1","OutCourt.jsp", Address_Do,Address_Si, strCurToday);
+        Log.i("strCurToday",strCurToday);
+        String[][] parsedData_outcourt = jsonParserList_OutCourt(result2);
+        if(parsedData_outcourt[0][0] == "."){
+        }else{
+            for (int j = 0; j < parsedData_outcourt.length; j++) {
+                OutCourt_CourtInfo_MyData.add(new OutCourt_CourtInfo_MyData(parsedData_outcourt[j][0], parsedData_outcourt[j][1] + parsedData_outcourt[j][2],parsedData_outcourt[j][5],this,Pk,parsedData_outcourt[j][3],parsedData_outcourt[j][4]));
+            }
+        }
+        final OutCourt_CourtInfo_MyAdapter adapter_outcourt = new OutCourt_CourtInfo_MyAdapter(this, OutCourt_CourtInfo_MyData);
+        Contest_ListView_OutCourt.setAdapter(adapter_outcourt);
+        setListViewHeightBasedOnChildren(Contest_ListView_OutCourt);
+
+        Main_Contest_TextView_OutCourt_Focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, OutCourt_CourtInfo.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Address_Do", Address_Do);
+                intent_Match.putExtra("Address_Si", Address_Si);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+////////////////////////////////////////////////////////////////////////////
         //메인 랭킹 -xml연결
         TextView Main_Ranking_TextView_Ranking1 = (TextView)findViewById(R.id.Main_Ranking_TextView_Ranking1);
         ImageView Main_Ranking_ImageView_Emblem1 = (ImageView)findViewById(R.id.Main_Ranking_ImageView_Emblem1);
@@ -691,7 +749,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);
@@ -760,6 +818,52 @@ public class MainActivity extends AppCompatActivity {
             }
             return parseredData;
         } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String[][] jsonParserList_Match(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8", "msg9", "msg10"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String[][] jsonParserList_OutCourt(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6"};
+
+            if(jArr.length()==0){
+                String[][] parseredData = new String[1][1];
+                parseredData[0][0] = ".";
+                return parseredData;
+            }else{
+                String[][] parseredData = new String[jArr.length()][jsonName.length];
+                for(int i = 0; i<jArr.length();i++){
+                    json = jArr.getJSONObject(i);
+                    for (int j=0;j<jsonName.length; j++){
+                        parseredData[i][j] = json.getString(jsonName[j]);
+                    }
+                }
+                return parseredData;
+            }
+        }catch (JSONException e){
             e.printStackTrace();
             return null;
         }
@@ -878,7 +982,49 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Test", "exception " + e.getMessage());
         }
     }
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null) {
+            // pre-condition
+            return;
+        }
 
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+            totalHeight += listItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
+    }
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
@@ -933,5 +1079,6 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return null;
         }
+
     }
 }

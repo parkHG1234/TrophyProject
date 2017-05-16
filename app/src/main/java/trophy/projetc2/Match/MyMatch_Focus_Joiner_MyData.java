@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.app.Activity;
 
@@ -16,7 +16,8 @@ public class MyMatch_Focus_Joiner_MyData {
     private String TeamName;
     private String Team_Pk;
     private Activity activity;
-    public MyMatch_Focus_Joiner_MyData(String Match_Joiner_Pk, String User_Pk, String Match_Pk, String Time, String Memo,String Emblem, String TeamName, String Team_Pk, Activity activity){
+    private String Phone;
+    public MyMatch_Focus_Joiner_MyData(String Match_Joiner_Pk, String User_Pk, String Match_Pk, String Time, String Memo,String Emblem, String TeamName, String Team_Pk, Activity activity,String Phone){
         this.Match_Joiner_Pk = Match_Joiner_Pk;
         this.User_Pk = User_Pk;
         this.Match_Pk = Match_Pk;
@@ -26,6 +27,7 @@ public class MyMatch_Focus_Joiner_MyData {
         this.Time = Time;
         this.Team_Pk = Team_Pk;
         this.activity = activity;
+        this.Phone = Phone;
     }
     public String getMatch_Joiner_Pk() {
         return Match_Joiner_Pk;
@@ -44,5 +46,6 @@ public class MyMatch_Focus_Joiner_MyData {
     public String getMatch_Pk(){return Match_Pk;}
     public String getTeam_Pk(){return Team_Pk;}
     public Activity getActivity(){return activity;}
+    public String getPhone(){return Phone;}
 }
 

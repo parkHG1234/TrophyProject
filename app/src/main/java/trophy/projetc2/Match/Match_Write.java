@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.Match;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -207,7 +207,7 @@ public class Match_Write extends AppCompatActivity {
                     checkbox_IsChecked();
                     HttpClient http_match_write = new HttpClient();
                     String result = http_match_write.HttpClient("Trophy_part1","Match_Write.jsp",
-                            User_Pk, Team_Pk, strCurToday +"|"+strCurTime, Title, MatchTime, MatchPlace, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, MatchDate);
+                            User_Pk, Team_Pk, strCurToday +":::"+strCurTime, Title, MatchTime, MatchPlace, Pay, Color, Extra, Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, MatchDate);
                     parsedData_Match = jsonParserList_Match_Write(result);
                     if(parsedData_Match[0][0].equals("succed")){
                         finish();

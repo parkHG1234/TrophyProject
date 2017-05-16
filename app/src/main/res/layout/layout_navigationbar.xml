@@ -148,6 +148,14 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:text="대회보기"
+                    android:textSize="13dp"
+                    android:textColor="@color/DarkGray"
+                    android:id="@+id/Main_Navigation_Button_Contest"
+                    android:gravity="center_vertical" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     android:text="지난 대회보기"
                     android:textSize="13dp"
                     android:textColor="@color/DarkGray"

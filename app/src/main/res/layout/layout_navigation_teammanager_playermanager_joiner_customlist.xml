@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/WhiteGray">
+    android:background="@color/White">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -11,14 +11,15 @@
         android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_Root"
         android:layout_height="200dp"
         android:paddingTop="30dp"
-        android:paddingBottom="30dp">
+        android:paddingBottom="30dp"
+        android:background="@color/White">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/backColor"
+            android:background="@color/White"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player1">
@@ -67,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/backColor"
+            android:background="@color/White"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player2">
@@ -114,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/backColor"
+            android:background="@color/White"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player3">
@@ -161,7 +162,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/backColor"
+            android:background="@color/White"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_LinearLayout_Player4">

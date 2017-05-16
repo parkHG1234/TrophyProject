@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.app.Activity;
 import android.location.Address;

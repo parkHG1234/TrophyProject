@@ -1,4 +1,4 @@
-package trophy.projetc2.Navigation;
+package trophy.projetc2.OutCourt;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,6 @@ import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Http.HttpClient;
-import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
 
 /**
@@ -47,7 +46,6 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_outcourt_courtinfo_focus_write);
         Intent intent1 = getIntent();
-        CourtName = intent1.getStringExtra("CourtName");
         User_Pk = intent1.getStringExtra("User_Pk");
         Court_Pk = intent1.getStringExtra("Court_Pk");
         currentTime();

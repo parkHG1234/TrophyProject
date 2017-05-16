@@ -20,11 +20,10 @@
                 android:layout_height="wrap_content"
                 android:text="선수 정보"
                 android:textColor="@color/Black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                 android:layout_centerVertical="true"
                 android:layout_centerInParent="true"
-                android:padding="3dp"
-                android:textStyle="normal|bold" />
+                android:padding="3dp" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,8 +35,8 @@
         <Button
             android:layout_width="match_parent"
             android:id="@+id/button16"
-            android:background="@color/MainColor1"
-            android:layout_height="2dp" />
+            android:background="@color/WhiteGray"
+            android:layout_height="1dp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_margin="10dp"

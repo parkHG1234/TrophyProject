@@ -8,7 +8,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="250dp"
+        android:background="@color/White">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -18,11 +19,10 @@
                 android:layout_height="wrap_content"
                 android:text="팀원 정보"
                 android:textColor="@color/Black"
-                android:textSize="16dp"
+                android:textSize="14sp"
                 android:layout_centerVertical="true"
                 android:layout_centerInParent="true"
-                android:padding="3dp"
-                android:textStyle="normal|bold" />
+                android:padding="3dp" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,8 +34,8 @@
         <Button
             android:layout_width="match_parent"
             android:id="@+id/button16"
-            android:background="@color/MainColor1"
-            android:layout_height="2dp" />
+            android:background="@color/WhiteGray"
+            android:layout_height="1dp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_height="match_parent"
@@ -69,7 +69,7 @@
                     android:background="@color/MainColor1"
                     android:id="@+id/Layout_CustomDialog_TeamInfo_Player_Focus_TeamName"
                     android:layout_weight="1"
-                    android:layout_marginBottom="3dp" />
+                    android:layout_marginBottom="3dp"/>
 
                 <Button
                     android:layout_width="match_parent"

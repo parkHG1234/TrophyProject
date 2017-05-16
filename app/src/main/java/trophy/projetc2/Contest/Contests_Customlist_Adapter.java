@@ -104,14 +104,14 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             Contest1_TextView_Title.setText(Contest1_Title);
             Contest1_TextView_Date.setText(Contest1_Date);
             Contest1_TextView_Place.setText(Contest1_Place);
-            Contest1_TextView_Num.setText("참가팀 "+Contest1_currentNum + " / " + Contest1_maxNum);
+            Contest1_TextView_Num.setText("참가팀 외부 / " + Contest1_maxNum);
             Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/"+Contest1_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(Contest1_ImageView_Image);
 
             //남은 일 계산
-            SimpleDateFormat dateFormat1 = new SimpleDateFormat("yy / MM / dd");
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy / MM / dd");
             try {
                 Date date = dateFormat1.parse(Contest1_RecruitFinishData);
                 Date currentDay = new Date();
@@ -152,16 +152,16 @@ public class Contests_Customlist_Adapter extends BaseAdapter {
             Contest2_TextView_Title.setText(Contest2_Title);
             Contest2_TextView_Date.setText(Contest2_Date);
             Contest2_TextView_Place.setText(Contest2_Place);
-            Contest2_TextView_Num.setText("참가팀 "+Contest2_currentNum + " / " + Contest2_maxNum);
+            Contest2_TextView_Num.setText("참가팀 외부 / " + Contest2_maxNum);
             Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/contest/"+Contest2_Image+".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(Contest2_ImageView_Image);
 
             //남은 일 계산
-            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yy / MM / dd");
+            SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy / MM / dd");
             try {
-                Date date = dateFormat2.parse(Contest1_RecruitFinishData);
+                Date date = dateFormat2.parse(Contest2_RecruitFinishData);
                 Date currentDay = new Date();
                 Long FinishTime = date.getTime()+86400000;
                 if(currentDay.getTime() < FinishTime) {
