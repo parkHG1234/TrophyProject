@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -26,10 +28,11 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
     TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone;
     ImageView User_Change_Personalinfo_ImageView_Back;
     Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal;
+    Switch switch_push;
     SharedPreferences preferences;
     String Pk, TeamName;
     public static Activity activity;
-
+    String[][] parsedData, parsedData_Alarm_Off;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,8 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         TeamName = intent.getStringExtra("TeamName");
 
         HttpClient getInfo = new HttpClient();
-        String result = getInfo.HttpClient("Trophy_part3", "ChangePersonalInfo.jsp", Pk);
-        final String[][] parsedData = jsonParserListgetInfo(result);
+        String result = getInfo.HttpClient("Trophy_part1", "ChangePersonalInfo.jsp", Pk);
+        parsedData = jsonParserListgetInfo(result);
         if(parsedData[0][1].equals("W")) {
             parsedData[0][1] = "여자";
         }else if(parsedData[0][1].equals("M")) {
@@ -62,7 +65,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         btn_change_pw = (Button) findViewById(R.id.btn_change_pw);
         btn_change_phone = (Button) findViewById(R.id.btn_change_phone);
         btn_withdrawal = (Button) findViewById(R.id.btn_withdrawal);
-
+        switch_push = (Switch)findViewById(R.id.switch_push);
 
 
         tv_name.setText(parsedData[0][0]);
@@ -71,7 +74,12 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         tv_do.setText(parsedData[0][3]);
         tv_si.setText(parsedData[0][4]);
         tv_phone.setText(parsedData[0][5]);
-
+        if(parsedData[0][8].equals("on")){
+            switch_push.setChecked(true);
+        }
+        else if(parsedData[0][8].equals("off")){
+            switch_push.setChecked(false);
+        }
         btn_change_area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +105,20 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-
+        switch_push.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked == true){
+                    HttpClient http_alarm_on = new HttpClient();
+                    String result = http_alarm_on.HttpClient("Trophy_part1", "User_Alarm_On.jsp", Pk);
+                }
+                else{
+                    HttpClient http_alarm_off = new HttpClient();
+                    String result = http_alarm_off.HttpClient("Trophy_part1", "User_Alarm_Off.jsp", Pk);
+                    //parsedData_Alarm_Off = jsonParserList_Alarm_Off(result);
+                }
+            }
+        });
         btn_withdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +151,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"Name", "Sex", "Birth", "Do", "Si", "Phone", "Pw"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7", "msg8", "msg9"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);
@@ -147,5 +168,27 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             return null;
         }
     }
+    private String[][] jsonParserList_Alarm_Off(String pRecvServerPage) {
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try {
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jarr = json.getJSONArray("List");
 
+            String[] jsonName = {"msg1"};
+            String[][] parseredData = new String[jarr.length()][jsonName.length];
+            for (int i = 0; i < jarr.length(); i++) {
+                json = jarr.getJSONObject(i);
+                for (int j = 0; j < jsonName.length; j++) {
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            for (int i = 0; i < parseredData.length; i++) {
+                Log.i("JSON을 분석한 데이터" + i + ":", parseredData[i][0]);
+            }
+            return parseredData;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -53,11 +53,12 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     TextView OutCourt_CourtInfo_Focus_TextView_Modifer_Date, OutCourt_CourtInfo_Focus_TextView_Modifer;
     TextView OutCourt_CourtInfo_Focus_TextView_TodayWrite;
     ImageView OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile;
+    ImageView OutCourt_CourtInfo_Focus_ImageView_Profile;
     EditText OutCourt_CourtInfo_Focus_EditText_Write;
     ListView OutCourt_CourtInfo_Focus_ListView_Content;
     ScrollView ScrollView;
     String CourtName, CourtIntro, User_Pk, Modifier, Modifier_Profile, Modifier_Date, Court_Pk, Today_Content;
-    String[][] parsedData_OutCourt, parsedData_OutCourt_Content; String[][] parsedData_Modify;
+    String[][] parsedData_OutCourt, parsedData_OutCourt_Content; String[][] parsedData_Modify;String[][] parsedData_User;
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     ArrayList<OutCourt_CourtInfo_Focus_MyData> OutCourt_CourtInfo_Focus_MyData;
     boolean lastitemVisibleFlag = false;
@@ -91,10 +92,16 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         OutCourt_CourtInfo_Focus_EditText_Write = (EditText)findViewById(R.id.OutCourt_CourtInfo_Focus_EditText_Write);
         OutCourt_CourtInfo_Focus_ListView_Content = (ListView)findViewById(R.id.OutCourt_CourtInfo_Focus_ListView_Content);
         OutCourt_CourtInfo_Focus_TextView_TodayWrite = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_TodayWrite);
+        OutCourt_CourtInfo_Focus_ImageView_Profile = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_ImageView_Profile);
+
+        HttpClient http_user = new HttpClient();
+        String result2 = http_user.HttpClient("Trophy_part1","OutCourt_Focus_User.jsp",User_Pk);
+        parsedData_User = jsonParserList_User(result2);
 
         HttpClient http_match_focus = new HttpClient();
         String result = http_match_focus.HttpClient("Trophy_part1","OutCourt_Focus.jsp",CourtName);
         parsedData_OutCourt = jsonParserList_OurtCourt(result);
+
         CourtIntro = parsedData_OutCourt[0][4];
         Modifier_Profile = parsedData_OutCourt[0][5];
         Modifier = parsedData_OutCourt[0][6];
@@ -114,7 +121,20 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         }
         catch (UnsupportedEncodingException e){
         }
-
+        try{
+            String En_Profile = URLEncoder.encode(parsedData_User[0][0], "utf-8");
+            if(En_Profile.equals("."))
+            {
+                Glide.with(OutCourt_CourtInfo_Focus.this).load(R.drawable.profile_basic_image).into(OutCourt_CourtInfo_Focus_ImageView_Profile);
+            }
+            else
+            {
+                Glide.with(OutCourt_CourtInfo_Focus.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
+                        .into(OutCourt_CourtInfo_Focus_ImageView_Profile);
+            }
+        }
+        catch (UnsupportedEncodingException e){
+        }
         OutCourt_CourtInfo_Focus_TextView_Title.setText(CourtName);
         OutCourt_CourtInfo_Focus_TextView_TodayWrite.setText("오늘의 게시글 : " + Today_Content);
         OutCourt_CourtInfo_Focus_TextView_CourtName.setText(CourtName);
@@ -314,6 +334,25 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
             String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6", "msg7", "msg8"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String[][] jsonParserList_User(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
