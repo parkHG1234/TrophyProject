@@ -18,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,10 +35,12 @@ public class Flash extends AppCompatActivity{
     static TimerTask myTask;
     static Timer timer;
     String[][] ParsedData_Setting;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flash);
+        currentTime();
         HttpClient http_setting = new HttpClient();
         String result = http_setting.HttpClient("Trophy_part1","Setting.jsp");
         ParsedData_Setting = jsonParserList_Setting(result);
@@ -60,7 +64,7 @@ public class Flash extends AppCompatActivity{
         }
         else{
             myTask = new TimerTask() {
-                int i = 2;
+                int i = 1;
 
                 public void run() {
                     runOnUiThread(new Runnable() {
@@ -68,6 +72,8 @@ public class Flash extends AppCompatActivity{
                         public void run() {
                             // 해당 작업을 처리함
                             if (i <= 0) {
+                                HttpClient http_count = new HttpClient();
+                                http_count.HttpClient("Trophy_manager","Today_Counting.jsp", strCurToday);
                                 timer.cancel();
                                 Intent intent = new Intent(Flash.this, MainActivity.class);
                                 startActivity(intent);
@@ -104,5 +110,27 @@ public class Flash extends AppCompatActivity{
             e.printStackTrace();
             return null;
         }
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
     }
 }

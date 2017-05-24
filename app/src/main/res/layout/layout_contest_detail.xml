@@ -134,9 +134,9 @@
 
                 <Button
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
                     android:id="@+id/button17"
-                    android:background="@color/MainColor1"/>
+                    android:background="@color/MainColor1"
+                    android:layout_height="1sp" />
 
                 <LinearLayout
                     android:orientation="vertical"

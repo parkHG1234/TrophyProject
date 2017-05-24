@@ -90,33 +90,24 @@
                     android:layout_height="match_parent"
                     android:background="@color/White"
                     android:layout_margin="1dp">
-
-                    <TextView
-                        android:text="a\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\na"
-                        android:textColor="@color/Black"
-                        android:textSize="15dp"
-                        android:textStyle="normal|bold"
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/textView15" />
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:text=""
+                                android:textColor="@color/Gray"
+                                android:textSize="12dp"
+                                android:textStyle="normal|bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/User_Terms_TextView_Agree1" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:id="@+id/button18"
-                        android:background="@color/MainColor1" />
-
-                    <Button
-                        android:text="자세히 보기 》"
-                        android:textColor="@color/MainColor1"
-                        android:textStyle="normal|bold"
-                        android:background="@color/White"
-                        android:layout_width="match_parent"
-                        android:id="@+id/button20"
-                        android:gravity="right|center_vertical|center_horizontal"
-                        android:layout_height="30dp"
-                        android:paddingRight="10dp" />
+                        </LinearLayout>
+                    </ScrollView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -171,32 +162,24 @@
                     android:background="@color/White"
                     android:layout_margin="1dp">
 
-                    <TextView
-                        android:text="a\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\na"
-                        android:textColor="@color/Black"
-                        android:textSize="15dp"
-                        android:textStyle="normal|bold"
+                    <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/textView152" />
+                        android:layout_weight="1">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <TextView
+                                android:text=""
+                                android:textColor="@color/Gray"
+                                android:textSize="12dp"
+                                android:textStyle="normal|bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/User_Terms_TextView_Agree2" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:id="@+id/button181"
-                        android:background="@color/MainColor1" />
-
-                    <Button
-                        android:text="자세히 보기 》"
-                        android:textColor="@color/MainColor1"
-                        android:textStyle="normal|bold"
-                        android:background="@color/White"
-                        android:layout_width="match_parent"
-                        android:id="@+id/button202"
-                        android:gravity="right|center_vertical|center_horizontal"
-                        android:layout_height="30dp"
-                        android:paddingRight="10dp" />
+                        </LinearLayout>
+                    </ScrollView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -243,41 +226,31 @@
                 android:layout_height="match_parent"
                 android:background="@color/Black"
                 android:layout_weight="1">
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/White"
                     android:layout_margin="1dp">
-
-                    <TextView
-                        android:text="a\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\naa\na\na\na\na\na\na\na\na\na\na\na\na"
-                        android:textColor="@color/Black"
-                        android:textSize="15dp"
-                        android:textStyle="normal|bold"
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:id="@+id/textView151" />
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text=""
+                            android:textColor="@color/Gray"
+                            android:textSize="12dp"
+                            android:textStyle="normal|bold"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/User_Terms_TextView_Agree3" />
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:id="@+id/button128"
-                        android:background="@color/MainColor1" />
-
-                    <Button
-                        android:text="자세히 보기 》"
-                        android:textColor="@color/MainColor1"
-                        android:textStyle="normal|bold"
-                        android:background="@color/White"
-                        android:layout_width="match_parent"
-                        android:id="@+id/button210"
-                        android:gravity="right|center_vertical|center_horizontal"
-                        android:layout_height="30dp"
-                        android:paddingRight="10dp" />
-                </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+                    </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

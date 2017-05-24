@@ -2,10 +2,15 @@ package trophy.projetc2.OutCourt;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -23,16 +28,25 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -40,6 +54,7 @@ import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.Match.MyMatch;
 import trophy.projetc2.Match.MyMatch_MyData;
+import trophy.projetc2.Navigation.TeamManager_TeamIntroduce;
 import trophy.projetc2.R;
 import trophy.projetc2.User.Login;
 
@@ -52,6 +67,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     TextView OutCourt_CourtInfo_Focus_TextView_CourtName, OutCourt_CourtInfo_Focus_TextView_Title, OutCourt_CourtInfo_Focus_TextView_CourtAddress, OutCourt_CourtInfo_Focus_TextView_CourtIntro;
     TextView OutCourt_CourtInfo_Focus_TextView_Modifer_Date, OutCourt_CourtInfo_Focus_TextView_Modifer;
     TextView OutCourt_CourtInfo_Focus_TextView_TodayWrite;
+    ImageView OutCourt_CourtInfo_Focus_TextView_menu;
     ImageView OutCourt_CourtInfo_Focus_ImageView_Modifer_Profile;
     ImageView OutCourt_CourtInfo_Focus_ImageView_Profile;
     EditText OutCourt_CourtInfo_Focus_EditText_Write;
@@ -59,14 +75,18 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     ScrollView ScrollView;
     String CourtName, CourtIntro, User_Pk, Modifier, Modifier_Profile, Modifier_Date, Court_Pk, Today_Content;
     String[][] parsedData_OutCourt, parsedData_OutCourt_Content; String[][] parsedData_Modify;String[][] parsedData_User;
-    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
+    String strCurAll, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     ArrayList<OutCourt_CourtInfo_Focus_MyData> OutCourt_CourtInfo_Focus_MyData;
+    MaterialDialog Court_Menu_Dialog;
     boolean lastitemVisibleFlag = false;
     int ContentCount = 100000;
     OutCourt_CourtInfo_Focus_MyAdapter adapter;
     int int_scrollViewPos;
     int int_TextView_lines;
     static int scrollHeight = 0;
+    static int contentCount=0;
+    String Content = "exist";
+    View dialogview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +113,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         OutCourt_CourtInfo_Focus_ListView_Content = (ListView)findViewById(R.id.OutCourt_CourtInfo_Focus_ListView_Content);
         OutCourt_CourtInfo_Focus_TextView_TodayWrite = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_TodayWrite);
         OutCourt_CourtInfo_Focus_ImageView_Profile = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_ImageView_Profile);
-
+        OutCourt_CourtInfo_Focus_TextView_menu = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_menu);
         HttpClient http_user = new HttpClient();
         String result2 = http_user.HttpClient("Trophy_part1","OutCourt_Focus_User.jsp",User_Pk);
         parsedData_User = jsonParserList_User(result2);
@@ -106,7 +126,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         Modifier_Profile = parsedData_OutCourt[0][5];
         Modifier = parsedData_OutCourt[0][6];
         Modifier_Date = parsedData_OutCourt[0][7];
-
+        OutCourt_CourtInfo_Focus_TextView_CourtAddress.setText(parsedData_OutCourt[0][2]);
         try{
             String En_Profile = URLEncoder.encode(parsedData_OutCourt[0][3], "utf-8");
             if(En_Profile.equals("."))
@@ -175,6 +195,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
         OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
         setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+
         OutCourt_CourtInfo_Focus_ListView_Content.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -299,13 +320,48 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             public void onScrollChanged() {
                 int_scrollViewPos = ScrollView.getScrollY();
                 int_TextView_lines = ScrollView.getChildAt(0).getBottom() - ScrollView.getHeight();
-                if(int_TextView_lines == int_scrollViewPos){
-                    OutCourt_Scroll OutCourt_Scroll = new OutCourt_Scroll();
-                    OutCourt_Scroll.execute();
-                }
+
+                    if(int_TextView_lines == int_scrollViewPos){
+                        if(Content.equals("exist")){
+                            OutCourt_Scroll OutCourt_Scroll = new OutCourt_Scroll();
+                            OutCourt_Scroll.execute();
+                        }
+                        else if(Content.equals("noexist")){
+
+                        }
+                    }
+
             }
         });
-
+        OutCourt_CourtInfo_Focus_TextView_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogview = view;
+                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+                final View layout = inflater.inflate(R.layout.layout_customdialog_menu, (ViewGroup) view.findViewById(R.id.Customdialog_Menu_Root));
+                final Button Customdialog_Menu_Button_Menu1 = (Button)layout.findViewById(R.id.Customdialog_Menu_Button_Menu1);
+                Court_Menu_Dialog = new MaterialDialog(view.getContext());
+                Court_Menu_Dialog
+                        .setContentView(layout)
+                        .setCanceledOnTouchOutside(true);
+                Court_Menu_Dialog.show();
+                Customdialog_Menu_Button_Menu1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //사진 읽어오기위한 uri 작성하기.
+                        Uri uri = Uri.parse("content://media/external/images/media");
+                        //무언가 보여달라는 암시적 인텐트 객체 생성하기.
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        //인텐트에 요청을 덛붙인다.
+                        intent.setAction(Intent.ACTION_PICK);
+                        //모든 이미지
+                        intent.setType("image/*");
+                        //결과값을 받아오는 액티비티를 실행한다.
+                        startActivityForResult(intent, 0);
+                    }
+                });
+            }
+        });
     }
     @Override
     protected void onRestart() {
@@ -411,7 +467,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 // 시간 포맷 지정
         SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd");
         SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
-        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurAllFormat = new SimpleDateFormat("MM_dd_HH_mm");
         SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
@@ -419,12 +475,10 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 // 지정된 포맷으로 String 타입 리턴
         strCurToday = CurDateFormat.format(date);
         strCurTime = CurTimeFormat.format(date);
-        strCurYear = CurYearFormat.format(date);
-        strCurYear = CurYearFormat.format(date);
         strCurMonth = CurMonthFormat.format(date);
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
-        strCurMinute = CurMinuteFormat.format(date);
+        strCurAll = CurAllFormat.format(date);
     }
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -440,8 +494,9 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
             totalHeight += listItem.getMeasuredHeight();
+            contentCount++;
         }
-
+        Log.i("Content123",Integer.toString(contentCount));
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
@@ -454,8 +509,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             // pre-condition
             return;
         }
-
-        int totalHeight = scrollHeight;
+        int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
 
         for (int i = 0; i < listAdapter.getCount(); i++) {
@@ -466,6 +520,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        Log.i("ttt","t1");
         listView.setLayoutParams(params);
         listView.requestLayout();
         scrollHeight= params.height;
@@ -494,9 +549,11 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                     OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk));
                     ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
                 }
-                Log.i("ttt","ttt");
-                adapter.notifyDataSetChanged();
-                setListViewHeightBasedOnChildren_scroll(OutCourt_CourtInfo_Focus_ListView_Content);
+                if(parsedData_OutCourt_Content.length == 0){
+                    Content = "noexist";
+                }
+                adapter = new OutCourt_CourtInfo_Focus_MyAdapter(OutCourt_CourtInfo_Focus.this, OutCourt_CourtInfo_Focus_MyData);
+
                 return "succed";
             } catch (Exception e) {
                 e.printStackTrace();
@@ -507,8 +564,126 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             //OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
+            OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
+//                setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+//                adapter.notifyDataSetChanged();
+            setListViewHeightBasedOnChildren_scroll(OutCourt_CourtInfo_Focus_ListView_Content);
             asyncDialog.dismiss();
             super.onPostExecute(result);
+        }
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        try {
+            //인텐트에 데이터가 담겨 왔다면
+            if (!intent.getData().equals(null)) {
+                //해당경로의 이미지를 intent에 담긴 이미지 uri를 이용해서 Bitmap형태로 읽어온다.
+                Bitmap selPhoto = MediaStore.Images.Media.getBitmap(getContentResolver(), intent.getData());
+                //이미지의 크기 조절하기.
+                selPhoto = Bitmap.createScaledBitmap(selPhoto, 100, 100, true);
+                //image_bt.setImageBitmap(selPhoto);//썸네일
+                //화면에 출력해본다.
+                //Profile_ImageVIew_Profile.setImageBitmap(selPhoto);
+                Log.e("선택 된 이미지 ", "selPhoto : " + selPhoto);
+
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                //선택한 이미지의 uri를 읽어온다.
+                Uri selPhotoUri = intent.getData();
+                Log.e("전송", "시~~작 ~~~~~!");
+                //업로드할 서버의 url 주소
+                String urlString = "";
+                urlString = "http://210.122.7.193:8080/Trophy_part1/Court_Image_Upload.jsp";
+                //절대경로를 획득한다!!! 중요~
+                Cursor c = getContentResolver().query(Uri.parse(selPhotoUri.toString()), null, null, null, null);
+                c.moveToNext();
+                //업로드할 파일의 절대경로 얻어오기("_data") 로 해도 된다.
+                String absolutePath = c.getString(c.getColumnIndex(MediaStore.MediaColumns.DATA));
+                Log.e("###파일의 절대 경로###", absolutePath);
+                //파일 업로드 시작!
+                HttpFileUpload(urlString, "", absolutePath);
+                Snackbar.make(dialogview,"사진 신청되었습니다.", Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Court_Menu_Dialog.dismiss();
+                    }
+                }).show();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+
+        }
+
+    }
+
+    String lineEnd = "\r\n";
+    String twoHyphens = "--";
+    String boundary = "*****";
+
+    public void HttpFileUpload(String urlString, String params, String fileName) {
+        // fileName=TeamName;
+        try {
+            //선택한 파일의 절대 경로를 이용해서 파일 입력 스트림 객체를 얻어온다.
+            FileInputStream mFileInputStream = new FileInputStream(fileName);
+            //파일을 업로드할 서버의 url 주소를이용해서 URL 객체 생성하기.
+            URL connectUrl = new URL(urlString);
+            //Connection 객체 얻어오기.
+            HttpURLConnection conn = (HttpURLConnection) connectUrl.openConnection();
+            conn.setDoInput(true);//입력할수 있도록
+            conn.setDoOutput(true); //출력할수 있도록
+            conn.setUseCaches(false);  //캐쉬 사용하지 않음
+
+            //post 전송
+            conn.setRequestMethod("POST");
+            //파일 업로드 할수 있도록 설정하기.
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+            //DataOutputStream 객체 생성하기.
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            //전송할 데이터의 시작임을 알린다.
+            //String En_TeamName = URLEncoder.encode(TeamName, "utf-8");
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\"" + URLEncoder.encode(Court_Pk+"_"+strCurAll, "utf-8") + ".jpg" + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            //한번에 읽어들일수있는 스트림의 크기를 얻어온다.
+            int bytesAvailable = mFileInputStream.available();
+            //byte단위로 읽어오기 위하여 byte 배열 객체를 준비한다.
+            byte[] buffer = new byte[bytesAvailable];
+            int bytesRead = 0;
+            // read image
+            while (bytesRead != -1) {
+                //파일에서 바이트단위로 읽어온다.
+                bytesRead = mFileInputStream.read(buffer);
+                if (bytesRead == -1) break; //더이상 읽을 데이터가 없다면 빠저나온다.
+                Log.d("Test", "image byte is " + bytesRead);
+                //읽은만큼 출력한다.
+                dos.write(buffer, 0, bytesRead);
+                //출력한 데이터 밀어내기
+                dos.flush();
+            }
+            //전송할 데이터의 끝임을 알린다.
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+            //flush() 타이밍??
+            //dos.flush();
+            dos.close();//스트림 닫아주기
+            mFileInputStream.close();//스트림 닫아주기.
+            // get response
+            int ch;
+            //입력 스트림 객체를 얻어온다.
+            InputStream is = conn.getInputStream();
+            StringBuffer b = new StringBuffer();
+            while ((ch = is.read()) != -1) {
+                b.append((char) ch);
+            }
+            String s = b.toString();
+            Log.e("Test", "result = " + s);
+
+        } catch (Exception e) {
+            Log.d("Test", "exception " + e.getMessage());
         }
     }
 }

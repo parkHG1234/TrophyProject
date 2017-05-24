@@ -340,9 +340,10 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_Button_LastContest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_LastContest = new Intent(MainActivity.this, Last_Contest.class);
-                startActivity(intent_LastContest);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+//                Intent intent_LastContest = new Intent(MainActivity.this, Last_Contest.class);
+//                startActivity(intent_LastContest);
+//                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                Snackbar.make(v,"준비 중입니다.",Snackbar.LENGTH_SHORT).show();
             }
         });
         Main_Navigation_Button_TeamManager.setOnClickListener(new View.OnClickListener() {

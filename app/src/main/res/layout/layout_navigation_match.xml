@@ -28,7 +28,7 @@
             android:layout_centerVertical="true"/>
         <ImageView
             android:layout_height="wrap_content"
-            android:src="@drawable/team_disperse"
+            android:src="@drawable/write"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:id="@+id/Match_ImageView_Write"

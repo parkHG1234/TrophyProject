@@ -28,6 +28,13 @@
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:id="@+id/OutCourt_CourtInfo_Focus_TextView_menu"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/court_focus_menu"
+            android:layout_height="50dp" />
     </RelativeLayout>
     <Button
         android:layout_width="match_parent"
@@ -90,9 +97,9 @@
                 android:layout_width="match_parent"
                 android:id="@+id/OutCourt_CourtInfo_Focus_TextView_CourtAddress"
                 android:textColor="@color/Black"
-                android:layout_marginLeft="10dp"
                 android:layout_height="40dp"
-                android:background="@color/White"/>
+                android:background="@color/White"
+                android:paddingLeft="10dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,22 +111,22 @@
                     android:textSize="16dp"
                     android:layout_width="match_parent"
                     android:textColor="@color/Black"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_height="40dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp" />
 
                 <TextView
                     android:text="17.5.20"
                     android:textSize="12dp"
                     android:layout_width="match_parent"
                     android:textColor="@color/Black"
-                    android:layout_marginTop="10dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/OutCourt_CourtInfo_Focus_TextView_Modifer_Date"/>
+                    android:id="@+id/OutCourt_CourtInfo_Focus_TextView_Modifer_Date"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -143,7 +150,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/OutCourt_CourtInfo_Focus_TextView_Modifer"
                         android:layout_weight="1"
-                        android:layout_marginLeft="10dp" />
+                        android:paddingLeft="10dp" />
                 </LinearLayout>
 
                 <ImageView
@@ -162,17 +169,15 @@
                 android:textColor="@color/Black"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/OutCourt_CourtInfo_Focus_TextView_CourtIntro"/>
+                android:id="@+id/OutCourt_CourtInfo_Focus_TextView_CourtIntro"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/White"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
                 <ImageView

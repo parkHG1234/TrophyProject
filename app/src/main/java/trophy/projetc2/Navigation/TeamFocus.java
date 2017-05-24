@@ -84,7 +84,7 @@ public class TeamFocus  extends AppCompatActivity {
         Image3 = parseredData_teamInfo[0][8];
 
         if(Emblem.equals(".")) {
-            Glide.with(TeamFocus.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
+            Glide.with(TeamFocus.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamInfo_ImageView_Emblem);
         }else {

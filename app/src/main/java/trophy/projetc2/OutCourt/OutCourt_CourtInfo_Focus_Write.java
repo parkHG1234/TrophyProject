@@ -106,7 +106,7 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
                 }
                 else{
                     HttpClient user = new HttpClient();
-                    String result1 = user.HttpClient("Trophy_part1", "OutCourt_Focus_Write.jsp", User_Pk, Court_Pk, strCurToday, OutCourt_CourtInfo_Focus_Write_EditText_Content.getText().toString());
+                    String result1 = user.HttpClient("Trophy_part1", "OutCourt_Focus_Write.jsp", User_Pk, Court_Pk, strCurToday, OutCourt_CourtInfo_Focus_Write_EditText_Content.getText().toString(), strCurYear);
                     parseredData_write = jsonParserList_Write(result1);
                     if(parseredData_write[0][0].equals("succed")){
                         finish();
@@ -177,7 +177,7 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
 // 시간 포맷 지정
         SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy / MM / dd:::HH : mm");
         SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
-        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy / MM / dd");
         SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");

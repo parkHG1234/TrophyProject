@@ -114,7 +114,7 @@ public class TeamSearch_Focus extends AppCompatActivity {
             String En_Image2 = URLEncoder.encode(Image2, "utf-8");
             String En_Image3 = URLEncoder.encode(Image3, "utf-8");
             if (En_Emblem.equals(".")) {
-                Glide.with(TeamSearch_Focus.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
+                Glide.with(TeamSearch_Focus.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(TeamInfo_ImageView_Emblem);
             } else {

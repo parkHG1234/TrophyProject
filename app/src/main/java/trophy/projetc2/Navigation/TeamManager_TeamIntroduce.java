@@ -106,7 +106,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
         TeamManager_TeamIntro_EditText_Introduce.setText(parseredData[0][4]);
 
         if(parseredData[0][5].equals(".")) {
-            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.image_plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
         }else {
@@ -116,7 +116,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                     .into(TeamManager_TeamIntro_ImageView_Emblem);
         }
         if(parseredData[0][6].equals(".")) {
-            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.plus).diskCacheStrategy(DiskCacheStrategy.NONE)
+            Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.image_plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Image1);
         }else{
@@ -126,7 +126,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 .into(TeamManager_TeamIntro_ImageView_Image1);
         }
         if(parseredData[0][7].equals(".")){
-            Glide.with(getContext()).load(R.drawable.plus)
+            Glide.with(getContext()).load(R.drawable.image_plus)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamManager_TeamIntro_ImageView_Image2);
@@ -137,7 +137,7 @@ public class TeamManager_TeamIntroduce extends Fragment {
                     .into(TeamManager_TeamIntro_ImageView_Image2);
         }
         if(parseredData[0][8].equals(".")){
-            Glide.with(getContext()).load(R.drawable.plus)
+            Glide.with(getContext()).load(R.drawable.image_plus)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
         .into(TeamManager_TeamIntro_ImageView_Image3);
