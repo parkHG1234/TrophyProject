@@ -270,7 +270,6 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    app:srcCompat="@drawable/badminton"
                     android:id="@+id/TeamInfo_ImageView_Image1"
                     android:scaleType="fitXY"
                     android:layout_marginBottom="20dp"
@@ -278,13 +277,11 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
-                    app:srcCompat="@drawable/badminton"
                     android:id="@+id/TeamInfo_ImageView_Image2"
                     android:scaleType="fitXY"
                     android:layout_marginBottom="20dp"/>
                 <ImageView
                     android:layout_width="match_parent"
-                    app:srcCompat="@drawable/badminton"
                     android:id="@+id/TeamInfo_ImageView_Image3"
                     android:scaleType="fitXY"
                     android:layout_marginBottom="20dp"

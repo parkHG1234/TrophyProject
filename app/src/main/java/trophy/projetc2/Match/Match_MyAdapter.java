@@ -109,6 +109,7 @@ public class Match_MyAdapter extends BaseAdapter {
                 Intent intent1 = new Intent(context, Match_Focus.class);
                 intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
                 intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                intent1.putExtra("MyTeam_Pk", arrData.get(position).getMyTeam_Pk());
                 context.startActivity(intent1);
                 arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }

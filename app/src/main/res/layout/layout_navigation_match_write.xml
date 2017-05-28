@@ -278,7 +278,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="150dp"
                 android:background="@color/DarkGray"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
@@ -286,23 +286,23 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="150dp">
 
                     <EditText
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType="textPersonName"
-                        android:ems="10"
+                        android:layout_height="150dp"
                         android:id="@+id/Match_Write_EditText_Extra"
                         android:layout_weight="1"
                         android:background="@color/White"
                         android:hint="기타사항"
                         android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
                         android:layout_marginRight="1dp"
                         android:paddingLeft="10dp"
                         android:textSize="14sp"
-                        android:maxLines="1" />
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:gravity="top"
+                        android:paddingTop="10dp" />
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

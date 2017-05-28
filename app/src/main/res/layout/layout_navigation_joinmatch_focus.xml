@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/backColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="교류전 상세보기"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Match_Focus_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:layout_height="wrap_content"
+            android:src="@drawable/recruiting"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/Match_Focus_ImageView_Status"
+            android:layout_width="60dp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@color/soso"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Title"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="15dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:id="@+id/Match_Focus_ImageView_Emblem"
+                    android:padding="15dp"
+                    android:layout_height="120dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    android:id="@+id/Match_Focus_TextView_TeamName"
+                    android:textSize="12dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center"
+                    android:text="abcd"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/White"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="날짜"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView151"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:text="2017 / 5 / 22"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Date"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="@color/soso"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1sp" />
+                <TextView
+                    android:text="시간"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView152"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:text="2017 / 5 / 22"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Time"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="@color/soso"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1sp" />
+                <TextView
+                    android:text="장소"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView153"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:text="2017 / 5 / 22"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Place"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="@color/soso"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1sp" />
+                <TextView
+                    android:text="비용"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView15"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:text="2017 / 5 / 22"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Pay"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="@color/soso"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1sp" />
+                <TextView
+                    android:text="유니폼색"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1523"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:text="2017 / 5 / 22"
+                    android:textSize="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Match_Focus_TextView_Color"
+                    android:textColor="@color/Black"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:background="@color/soso"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="1sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="90dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="40dp">
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="주차 금지"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Not"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Free"
+                            android:layout_weight="1"
+                            android:text="무료 주차"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/Match_Focus_CheckBox_Parking_Charge"
+                            android:text="유료 주차"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp">
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Display"
+                            android:layout_weight="1"
+                            android:text="전광판"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_Shower"
+                            android:layout_weight="1"
+                            android:text="샤워 가능"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/Match_Focus_CheckBox_ColdHot"
+                            android:layout_weight="1"
+                            android:text="냉/ 난방"
+                            android:textSize="12dp"
+                            android:textColor="@color/Black"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:text="기타사항"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView1512"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/soso"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/White"
+                        android:layout_margin="1sp"
+                        android:id="@+id/Match_Focus_TextView_Extra"
+                        android:text="sdf\nsfsf\nsdfsdf\n"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/JoinMatch_Focus_LinerLayout_Joined"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="상대팀 정보"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView152345"
+                        android:textColor="@color/Black"
+                        android:textSize="12dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"/>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:background="@color/White"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_width="70dp">
+
+                            <ImageView
+                                app:srcCompat="@drawable/agree"
+                                android:id="@+id/JoinMatch_Focus_Joined_ImageView_Emblem"
+                                android:scaleType="fitXY"
+                                android:layout_gravity="center"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <TextView
+                                android:text="마동쿠스브라디서"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/JoinMatch_Focus_Joined_TextView_TeamName"
+                                android:textColor="@color/Black"
+                                android:textSize="9dp"
+                                android:gravity="center" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:text="TextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:visibility="invisible"/>
+
+                            <ImageView
+                                android:layout_height="30dp"
+                                android:id="@+id/JoinMatch_Focus_Joined_ImageView_Phone"
+                                android:textColor="@color/White"
+                                android:src="@drawable/phone"
+                                android:layout_width="30dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_gravity="center"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:text="신청취소"
+                    android:id="@+id/Match_Focus_Button_Apply"
+                    android:background="@color/MainColor1"
+                    android:textColor="@color/White"
+                    android:textSize="12dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="35dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

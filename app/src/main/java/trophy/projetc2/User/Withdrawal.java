@@ -1,11 +1,9 @@
 package trophy.projetc2.User;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +17,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import me.drakeet.materialdialog.MaterialDialog;
+import trophy.projetc2.Flash;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
-import trophy.projetc2.SportChoiceActivity;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
-import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
 
 /**
  * Created by ldong on 2017-01-25.
@@ -75,7 +69,7 @@ public class Withdrawal extends AppCompatActivity {
                                     editor = preferences.edit();
                                     editor.clear();
                                     editor.commit();
-                                    startActivity(new Intent(Withdrawal.this, SportChoiceActivity.class));
+                                    startActivity(new Intent(Withdrawal.this, Flash.class));
                                     MainActivity MA = (MainActivity) MainActivity.activity;
                                     ChangePersonalInfoActivity CA = (ChangePersonalInfoActivity) ChangePersonalInfoActivity.activity;
                                     MA.finish();

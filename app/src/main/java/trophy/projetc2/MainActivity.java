@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,6 +68,7 @@ import trophy.projetc2.Main.MainActivity_VierPage1;
 import trophy.projetc2.Main.MainActivity_VierPage2;
 import trophy.projetc2.Main.MainActivity_VierPage3;
 import trophy.projetc2.Contest.Navigation_Contest;
+import trophy.projetc2.Match.JoinMatch;
 import trophy.projetc2.Match.Match_MyAdapter;
 import trophy.projetc2.Match.Match_MyData;
 import trophy.projetc2.Navigation.Last_Contest;
@@ -142,19 +144,23 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_ImageView_Profile = (ImageView) aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
         final TextView Main_Navigation_TextView_Name = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Name);
         final TextView Main_Navigation_TextView_Team = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Team);
-        final Button Main_Navigation_Button_SportChoice = (Button) aa.findViewById(R.id.Main_Navigation_Button_SportChoice);
-        final TextView Main_Navigation_Button_TeamMake = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
-        final TextView Main_Navigation_Button_TeamManager = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
-        final TextView Main_Navigation_Button_TeamSearch = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
-        final TextView Main_Navigation_Button_Contest = (TextView)aa.findViewById(R.id.Main_Navigation_Button_Contest);
-        final TextView Main_Navigation_Button_LastContest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
-        final TextView Main_Navigation_Button_Notice = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Notice);
-        final TextView Main_Navigation_Button_Suggest = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
-        final TextView Main_Navigation_Button_Logout = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Logout);
-        final TextView Main_Navigation_Button_Ranking = (TextView) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
-        final TextView Main_Navigation_Button_Match = (TextView)aa.findViewById(R.id.Main_Navigation_Button_Match);
-        final TextView Main_Navigation_Button_MyMatch = (TextView)aa.findViewById(R.id.Main_Navigation_Button_MyMatch);
-        final TextView Main_Navigation_Button_OutCourt = (TextView)aa.findViewById(R.id.Main_Navigation_Button_OutCourt);
+        final LinearLayout Main_Navigation_Button_TeamMake = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_TeamMake);
+        final LinearLayout Main_Navigation_Button_TeamManager = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
+        final LinearLayout Main_Navigation_Button_TeamSearch = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_TeamSearch);
+        final LinearLayout Main_Navigation_Button_Contest = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Contest);
+        final LinearLayout Main_Navigation_Button_LastContest = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
+        final LinearLayout Main_Navigation_Button_Notice = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Notice);
+        final LinearLayout Main_Navigation_Button_Suggest = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Suggest);
+        final LinearLayout Main_Navigation_Button_Logout = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Logout);
+        final LinearLayout Main_Navigation_Button_Ranking = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
+        final LinearLayout Main_Navigation_Button_Match = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Match);
+        final LinearLayout Main_Navigation_Button_MyMatch = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_MyMatch);
+        final LinearLayout Main_Navigation_Button_OutCourt = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_OutCourt);
+        final TextView Main_Navigation_Line_MyMatch = (TextView)aa.findViewById(R.id.Main_Navigation_Line_MyMatch);
+        final TextView Main_Navigation_Line_TeamAdd = (TextView)aa.findViewById(R.id.Main_Navigation_Line_TeamAdd);
+        final TextView Main_Navigation_Line_TeamInfo = (TextView)aa.findViewById(R.id.Main_Navigation_Line_TeamInfo);
+        final TextView Main_Navigation_Line_Logout = (TextView)aa.findViewById(R.id.Main_Navigation_Line_Logout);
+        final LinearLayout Main_Navigation_Button_JoinMatch = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_JoinMatch);
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
                     .skipMemoryCache(true)
@@ -162,10 +168,11 @@ public class MainActivity extends AppCompatActivity {
 
             Main_Navigation_TextView_Name.setText("로그인을 해주세요");
             Main_Navigation_TextView_Team.setVisibility(View.GONE);
-            Main_Navigation_Button_Logout.setVisibility(View.GONE);
-            Main_Navigation_Button_TeamMake.setVisibility(View.GONE);
-            Main_Navigation_Button_TeamManager.setVisibility(View.GONE);
-            Main_Navigation_Button_MyMatch.setVisibility(View.GONE);
+            Main_Navigation_Button_Logout.setVisibility(View.GONE);Main_Navigation_Line_Logout.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamMake.setVisibility(View.GONE);Main_Navigation_Line_TeamAdd.setVisibility(View.GONE);
+            Main_Navigation_Button_TeamManager.setVisibility(View.GONE);Main_Navigation_Line_TeamInfo.setVisibility(View.GONE);
+            Main_Navigation_Button_MyMatch.setVisibility(View.GONE);Main_Navigation_Line_MyMatch.setVisibility(View.GONE);
+            Main_Navigation_Button_JoinMatch.setVisibility(View.GONE);
             Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -300,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        Main_Navigation_Button_SportChoice.setBackgroundResource(R.drawable.basketball);
 
         //팀 만들기 이벤트
         Main_Navigation_Button_TeamMake.setOnClickListener(new View.OnClickListener() {
@@ -407,11 +413,23 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-        //나의 시합요청
+        //등록한 교류전
         Main_Navigation_Button_MyMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent_Match = new Intent(MainActivity.this, MyMatch.class);
+                intent_Match.putExtra("User_Pk", Pk);
+                intent_Match.putExtra("Team_Pk", Team_Pk);
+                intent_Match.putExtra("Team_Duty", Team_Duty);
+                startActivity(intent_Match);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+        //신청한 교류전
+        Main_Navigation_Button_JoinMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_Match = new Intent(MainActivity.this, JoinMatch.class);
                 intent_Match.putExtra("User_Pk", Pk);
                 intent_Match.putExtra("Team_Pk", Team_Pk);
                 intent_Match.putExtra("Team_Duty", Team_Duty);
@@ -543,12 +561,12 @@ public class MainActivity extends AppCompatActivity {
         Match_MyData = new ArrayList<Match_MyData>();
         if(parsedData_Match.length <= 5){
             for (int i = 0; i < parsedData_Match.length; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9]));
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk));
             }
         }
         else{
             for (int i = 0; i < 5; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9]));
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk));
             }
         }
         Match_MyAdapter adapter = new Match_MyAdapter(this, Match_MyData);

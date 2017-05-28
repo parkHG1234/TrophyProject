@@ -15,7 +15,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
+import trophy.projetc2.User.Login;
 
 /**
  * Created by 박효근 on 2017-05-02.
@@ -74,13 +76,19 @@ public class OutCourt_CourtInfo_MyAdapter extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(context, OutCourt_CourtInfo_Focus.class);
-                intent1.putExtra("CourtName", arrData.get(position).getCourtName());
-                intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
-                intent1.putExtra("Court_Pk", arrData.get(position).getCourt_Pk());
-                intent1.putExtra("Today_Content", arrData.get(position).getTodayWrite());
-                context.startActivity(intent1);
-                arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(arrData.get(position).getUser_Pk().equals(".")){
+                    Intent intent_login = new Intent(arrData.get(position).getActivity(), Login.class);
+                    context.startActivity(intent_login);
+                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }else{
+                    Intent intent1 = new Intent(context, OutCourt_CourtInfo_Focus.class);
+                    intent1.putExtra("CourtName", arrData.get(position).getCourtName());
+                    intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                    intent1.putExtra("Court_Pk", arrData.get(position).getCourt_Pk());
+                    intent1.putExtra("Today_Content", arrData.get(position).getTodayWrite());
+                    context.startActivity(intent1);
+                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
             }
         });
 

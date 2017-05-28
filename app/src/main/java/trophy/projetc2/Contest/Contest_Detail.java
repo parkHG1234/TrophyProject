@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,6 +49,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;

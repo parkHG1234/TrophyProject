@@ -43,11 +43,11 @@ public class Match_Focus extends AppCompatActivity {
             Match_Focus_TextView_Place, Match_Focus_TextView_Pay, Match_Focus_TextView_Color, Match_Focus_TextView_Extra;
     CheckBox Match_Focus_CheckBox_Parking_Not, Match_Focus_CheckBox_Parking_Free, Match_Focus_CheckBox_Parking_Charge,
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
-    Button Match_Focus_Button_TeamInfo, Match_Focus_Button_Apply;
+    Button Match_Focus_Button_Apply;
 
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String Match_Pk, Team_Pk, User_Pk, Time, Title, MatchTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date,
-            Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
+            Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra, MyTeam_Pk;
     String[][] parsedData_Match_Focus, parsedData_Match_Focus_Join, parsedData_Match_Focus_Overlap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class Match_Focus extends AppCompatActivity {
         final Intent intent1 = getIntent();
         Match_Pk = intent1.getStringExtra("Match_Pk");
         User_Pk = intent1.getStringExtra("User_Pk");
+        MyTeam_Pk = intent1.getStringExtra("MyTeam_Pk");
 
         HttpClient http_match_focus = new HttpClient();
         String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus.jsp",Match_Pk);
@@ -90,7 +91,6 @@ public class Match_Focus extends AppCompatActivity {
         Match_Focus_CheckBox_Display = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_Display);
         Match_Focus_CheckBox_Shower = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_Shower);
         Match_Focus_CheckBox_ColdHot = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_ColdHot);
-        Match_Focus_Button_TeamInfo = (Button)findViewById(R.id.Match_Focus_Button_TeamInfo);
         Match_Focus_Button_Apply = (Button)findViewById(R.id.Match_Focus_Button_Apply);
         Match_Focus_CheckBox_Parking_Not.setClickable(false);Match_Focus_CheckBox_Parking_Free.setClickable(false);Match_Focus_CheckBox_Parking_Charge.setClickable(false);
         Match_Focus_CheckBox_Display.setClickable(false);Match_Focus_CheckBox_Shower.setClickable(false);Match_Focus_CheckBox_ColdHot.setClickable(false);
@@ -120,7 +120,17 @@ public class Match_Focus extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
 
         }
-
+        Match_Focus_ImageView_Emblem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Match_Focus.this,TeamSearch_Focus.class);
+                intent.putExtra("TeamName", TeamName);
+                intent.putExtra("User_Pk",User_Pk);
+                intent.putExtra("Team_Pk",Team_Pk);
+                startActivity(intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         Match_Focus_TextView_TeamName.setText(TeamName);
         Match_Focus_TextView_Title.setText(Title);
         Match_Focus_TextView_Date.setText(Match_Date);
@@ -161,17 +171,6 @@ public class Match_Focus extends AppCompatActivity {
             Match_Focus_CheckBox_ColdHot.setChecked(false);
         }
 
-        Match_Focus_Button_TeamInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Match_Focus.this,TeamSearch_Focus.class);
-                intent.putExtra("TeamName", TeamName);
-                intent.putExtra("User_Pk",User_Pk);
-                intent.putExtra("Team_Pk",Team_Pk);
-                startActivity(intent);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-            }
-        });
         Match_Focus_Button_Apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +178,9 @@ public class Match_Focus extends AppCompatActivity {
                     Intent intent_login = new Intent(Match_Focus.this, Login.class);
                     startActivity(intent_login);
                     overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
+                else if(MyTeam_Pk.equals(".")){
+                    Snackbar.make(view,"팀 가입 후 이용해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
                 }
                 else{
                     HttpClient http_match_focus = new HttpClient();

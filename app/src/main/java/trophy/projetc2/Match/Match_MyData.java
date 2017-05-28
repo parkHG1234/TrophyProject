@@ -18,7 +18,8 @@ public class Match_MyData {
     private Activity Activity;
     private String User_Pk;
     private String Match_Date;
-    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String Match_Date){
+    private String MyTeam_Pk;
+    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String Match_Date,String MyTeam_Pk){
         this.Match_Pk = Match_Pk;
         this.Emblem = Emblem;
         this.TeamName = TeamName;
@@ -30,6 +31,7 @@ public class Match_MyData {
         this.Activity = Activity;
         this.User_Pk = User_Pk;
         this.Match_Date = Match_Date;
+        this.MyTeam_Pk = MyTeam_Pk;
     }
     public String getEmblem() {
         return Emblem;
@@ -60,4 +62,5 @@ public class Match_MyData {
         return User_Pk;
     }
     public String getMatch_Date(){return Match_Date;}
+    public String getMyTeam_Pk(){return MyTeam_Pk;}
 }

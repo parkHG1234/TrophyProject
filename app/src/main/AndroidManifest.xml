@@ -5,16 +5,11 @@
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait">
-        <activity
-            android:name=".SportChoiceActivity"
-            android:noHistory="true">
-
-        </activity>
         <activity android:name=".Flash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +41,8 @@
         <activity android:name=".Match.Match_Focus" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.MyMatch" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.MyMatch_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.JoinMatch" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.JoinMatch_Focus" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_Address" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus" android:screenOrientation="portrait"></activity>

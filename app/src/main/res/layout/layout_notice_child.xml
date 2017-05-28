@@ -18,7 +18,6 @@
         android:layout_height="250dp"
         android:id="@+id/notice_Child_ImageView"
         android:textSize="15dp"
-        android:src="@drawable/basic_image"
         android:visibility="gone"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"/>

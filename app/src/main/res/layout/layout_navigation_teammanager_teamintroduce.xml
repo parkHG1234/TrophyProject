@@ -42,7 +42,8 @@
                             android:layout_gravity="center"
                             android:scaleType="fitXY"
                             android:layout_width="100dp"
-                            android:layout_height="100dp" />
+                            android:layout_height="100dp"
+                            android:padding="15dp" />
                     </LinearLayout>
                     <LinearLayout
                         android:orientation="vertical"
@@ -250,7 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/TeamManager_TeamIntro_ImageView_Image1"
-                        android:src="@drawable/basic_image"
+                        android:src="@drawable/image_plus"
                         android:scaleType="fitXY"
                         android:layout_weight="1"
                         android:layout_margin="5dp" />
@@ -259,7 +260,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/TeamManager_TeamIntro_ImageView_Image2"
-                        android:src="@drawable/basic_image"
+                        android:src="@drawable/image_plus"
                         android:scaleType="fitXY"
                         android:layout_weight="1"
                         android:layout_margin="5dp" />
@@ -268,7 +269,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/TeamManager_TeamIntro_ImageView_Image3"
-                        android:src="@drawable/basic_image"
+                        android:src="@drawable/image_plus"
                         android:scaleType="fitXY"
                         android:layout_weight="1"
                         android:layout_margin="5dp" />

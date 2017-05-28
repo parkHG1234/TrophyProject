@@ -55,7 +55,7 @@ public class Match extends AppCompatActivity{
 
         Match_MyData = new ArrayList<Match_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9]));
+            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9],Team_Pk));
             ContentCount = Integer.parseInt(parsedData_Match[i][8]);
         }
         Log.i("tt123", Integer.toString(ContentCount));
@@ -128,7 +128,7 @@ public class Match extends AppCompatActivity{
         final ArrayList<Match_MyData> Match_MyData;
         Match_MyData = new ArrayList<Match_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9]));
+            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9],Team_Pk));
         }
         Match_MyAdapter adapter = new Match_MyAdapter(this, Match_MyData);
         Match_ListView_List.setAdapter(adapter);
@@ -174,7 +174,7 @@ public class Match extends AppCompatActivity{
                 parsedData_Match = jsonParserList_Match(result);
 
                 for (int j = 0; j < parsedData_Match.length; j++) {
-                    Match_MyData.add(new Match_MyData(parsedData_Match[j][0], parsedData_Match[j][1], parsedData_Match[j][2],parsedData_Match[j][3],parsedData_Match[j][4],parsedData_Match[j][5],parsedData_Match[j][6],parsedData_Match[j][7],Match.this,User_Pk,parsedData_Match[j][9]));
+                    Match_MyData.add(new Match_MyData(parsedData_Match[j][0], parsedData_Match[j][1], parsedData_Match[j][2],parsedData_Match[j][3],parsedData_Match[j][4],parsedData_Match[j][5],parsedData_Match[j][6],parsedData_Match[j][7],Match.this,User_Pk,parsedData_Match[j][9],Team_Pk));
                     ContentCount = Integer.parseInt(parsedData_Match[j][8]);
                 }
                 adapter.notifyDataSetChanged();
