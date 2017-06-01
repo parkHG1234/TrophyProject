@@ -96,7 +96,7 @@ public class Match_Focus extends AppCompatActivity {
         Match_Focus_CheckBox_Display.setClickable(false);Match_Focus_CheckBox_Shower.setClickable(false);Match_Focus_CheckBox_ColdHot.setClickable(false);
         if(Status.equals("recruiting")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.recruiting);
-            Match_Focus_Button_Apply.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+            Match_Focus_Button_Apply.setBackgroundColor(getResources().getColor(R.color.main1color));
             Match_Focus_Button_Apply.setTextColor(getResources().getColor(R.color.White));
         }
         else if(Status.equals("deadline")){
@@ -184,10 +184,13 @@ public class Match_Focus extends AppCompatActivity {
                 }
                 else{
                     HttpClient http_match_focus = new HttpClient();
-                    String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus_Overlap.jsp",User_Pk,Match_Pk);
+                    String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus_Overlap.jsp",User_Pk,Match_Pk,MyTeam_Pk);
                     parsedData_Match_Focus_Overlap = jsonParserList_Match_Focus_Overlap(result);
                     if(parsedData_Match_Focus_Overlap[0][0].equals("overlap")){
                         Snackbar.make(view,"이미 신청하셨습니다.",Snackbar.LENGTH_SHORT).show();
+                    }
+                    else if(parsedData_Match_Focus_Overlap[0][0].equals("sameteam")){
+                        Snackbar.make(view,"소속된 팀의 게시글입니다.",Snackbar.LENGTH_SHORT).show();
                     }
                     else{
                         if(Status.equals("recruiting")){
@@ -216,6 +219,7 @@ public class Match_Focus extends AppCompatActivity {
                                     String result1 = http_match_focus_overlap.HttpClient("Trophy_part1","Match_Focus_Join.jsp", User_Pk, Match_Pk, strCurToday +":::"+strCurTime, TeamInfo_Customdialog_1_Content.getText().toString());
                                     parsedData_Match_Focus_Join = jsonParserList_Match_Focus_Join(result1);
                                     if(parsedData_Match_Focus_Join[0][0].equals("succed")){
+                                        TeamInfo_Dialog.setCanceledOnTouchOutside(false);
                                         Snackbar.make(view,"신청되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {

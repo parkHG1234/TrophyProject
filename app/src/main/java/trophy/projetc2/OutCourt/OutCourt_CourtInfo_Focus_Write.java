@@ -1,5 +1,6 @@
 package trophy.projetc2.OutCourt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,4 +194,5 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
     }
+
 }

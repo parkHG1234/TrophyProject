@@ -1,5 +1,6 @@
 package trophy.projetc2.User;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import trophy.projetc2.Get_Spinner_Si;
 import trophy.projetc2.Http.HttpClient;
@@ -103,5 +106,9 @@ public class ChangeAreaActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

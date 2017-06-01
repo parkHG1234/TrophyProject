@@ -1,5 +1,6 @@
 package trophy.projetc2;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -39,6 +41,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.matthewtamlin.sliding_intro_screen_library.DotIndicator;
+import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
@@ -104,11 +107,26 @@ public class MainActivity extends AppCompatActivity {
     static TimerTask myTask;
     static Timer timer;
     private LayoutInflater inflater;
+    protected boolean shouldAskPermissions() {
+        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+    }
 
+    @TargetApi(23)
+    protected void askPermissions() {
+        String[] permissions = {
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+        };
+        int requestCode = 200;
+        requestPermissions(permissions, requestCode);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (shouldAskPermissions()) {
+            askPermissions();
+        }
         activity = MainActivity.this;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -179,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent_Login = new Intent(MainActivity.this, Login.class);
                     startActivity(intent_Login);
                     overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-
                 }
             });
         } else { ///////////////////////////로그인시
@@ -494,7 +511,7 @@ public class MainActivity extends AppCompatActivity {
         };
         timer = new Timer();
         //timer.schedule(myTask, 5000);  // 5초후 실행하고 종료
-        timer.schedule(myTask, 500, 6000); // 5초후 첫실행, 3초마다 계속실행
+       // timer.schedule(myTask, 500, 6000); // 5초후 첫실행, 3초마다 계속실행
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -590,8 +607,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<OutCourt_CourtInfo_MyData> OutCourt_CourtInfo_MyData;
         OutCourt_CourtInfo_MyData = new ArrayList<OutCourt_CourtInfo_MyData>();
         HttpClient http_outcourt = new HttpClient();
-        String result2 = http_outcourt.HttpClient("Trophy_part1","OutCourt.jsp", Address_Do,Address_Si, strCurToday);
-        Log.i("strCurToday",strCurToday);
+        String result2 = http_outcourt.HttpClient("Trophy_part1","OutCourt_Main.jsp", Address_Do,Address_Si, strCurToday);
         String[][] parsedData_outcourt = jsonParserList_OutCourt(result2);
         if(parsedData_outcourt[0][0] == "."){
         }else{
@@ -924,11 +940,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } catch (FileNotFoundException e) {
+            Log.e("tt",e.toString());
             e.printStackTrace();
         } catch (IOException e) {
+            Log.e("tt",e.toString());
             e.printStackTrace();
         } catch (NullPointerException e) {
-
+            Log.e("tt",e.toString());
         }
 
     }
@@ -1100,4 +1118,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 }

@@ -98,9 +98,9 @@
         <Button
             android:text="확인"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:id="@+id/btn_confirmPw"
-            android:background="@color/MainColor1"
+            android:background="@color/main1color"
             android:textColor="@color/White"
             android:layout_margin="5dp" />
     </LinearLayout>

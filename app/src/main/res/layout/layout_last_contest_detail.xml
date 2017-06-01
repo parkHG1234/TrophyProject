@@ -57,7 +57,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/textView18"
                     android:layout_weight="1"
-                    android:textColor="@color/MainColor1"
+                    android:textColor="@color/main1color"
                     android:textSize="15dp"
                     android:textStyle="normal|bold"
                     />
@@ -84,7 +84,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/textView181"
                     android:layout_weight="1"
-                    android:textColor="@color/MainColor1"
+                    android:textColor="@color/main1color"
                     android:textSize="15dp"
                     android:textStyle="normal|bold"
                     />

@@ -20,12 +20,12 @@
             android:focusableInTouchMode="true">
 
             <ImageView
-                android:layout_width="250dp"
-                app:srcCompat="@drawable/basketball"
+                app:srcCompat="@drawable/main_title"
                 android:id="@+id/imageView5"
-                android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="30dp" />
+                android:layout_margin="30dp"
+                android:layout_width="150dp"
+                android:layout_height="40dp" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -33,7 +33,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/DarkGray"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -131,17 +132,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="15dp"
-                android:paddingTop="15dp">
+                android:paddingTop="15dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:layout_weight="1"
                     android:layout_margin="5dp"
                     android:gravity="center_vertical"
-                    android:id="@+id/Login_LinearLayout_Login">
+                    android:id="@+id/Login_LinearLayout_Login"
+                    android:layout_height="40dp">
 
                     <TextView
                         android:text="로그인"

@@ -1,6 +1,7 @@
 package trophy.projetc2.OutCourt;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -143,14 +145,17 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         }
         try{
             String En_Profile = URLEncoder.encode(parsedData_User[0][0], "utf-8");
+            Log.i("test", parsedData_User[0][0]);
             if(En_Profile.equals("."))
             {
-                Glide.with(OutCourt_CourtInfo_Focus.this).load(R.drawable.profile_basic_image).into(OutCourt_CourtInfo_Focus_ImageView_Profile);
+                Glide.with(OutCourt_CourtInfo_Focus.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(OutCourt_CourtInfo_Focus.this).getBitmapPool()))
+                        .skipMemoryCache(true)
+                        .into(OutCourt_CourtInfo_Focus_ImageView_Profile);
             }
             else
             {
                 Glide.with(OutCourt_CourtInfo_Focus.this).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(getApplicationContext()).getBitmapPool()))
-                        .into(OutCourt_CourtInfo_Focus_ImageView_Profile);
+                        .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).into(OutCourt_CourtInfo_Focus_ImageView_Profile);
             }
         }
         catch (UnsupportedEncodingException e){
@@ -686,4 +691,5 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             Log.d("Test", "exception " + e.getMessage());
         }
     }
+
 }

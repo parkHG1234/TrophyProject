@@ -1,5 +1,6 @@
 package trophy.projetc2.Navigation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -51,7 +53,7 @@ import trophy.projetc2.User.Login;
 
 public class TeamSearch_Focus extends AppCompatActivity {
     TextView TeamInfo_TextView_caution;
-    ImageView TeamInfo_ImageView_Emblem, TeamInfo_ImageView_Image1, TeamInfo_ImageView_Image2, TeamInfo_ImageView_Image3;
+    ImageView TeamInfo_ImageView_Emblem, TeamInfo_ImageView_Image1;
     ImageView TeamInfo_ImageVIew_Back, TeamInfo_ImageVIew_TeamManger;
     TextView TeamInfo_TextView_TeamName, TeamInfo_TextView_TeamAddress_Do, TeamInfo_TextView_TeamAddress_Si, TeamInfo_TextView_HomeCourt;
     TextView TeamInfo_TextView_TeamIntro;
@@ -73,8 +75,6 @@ public class TeamSearch_Focus extends AppCompatActivity {
         TeamInfo_TextView_caution = (TextView)findViewById(R.id.TeamInfo_TextView_caution);
         TeamInfo_ImageView_Emblem = (ImageView)findViewById(R.id.TeamInfo_ImageView_Emblem);
         TeamInfo_ImageView_Image1 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image1);
-        TeamInfo_ImageView_Image2 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image2);
-        TeamInfo_ImageView_Image3 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image3);
         TeamInfo_TextView_TeamName = (TextView)findViewById(R.id.TeamInfo_TextView_TeamName);
         TeamInfo_TextView_TeamAddress_Do = (TextView)findViewById(R.id.TeamInfo_TextView_TeamAddress_Do);
         TeamInfo_TextView_TeamAddress_Si = (TextView)findViewById(R.id.TeamInfo_TextView_TeamAddress_Si);
@@ -131,22 +131,7 @@ public class TeamSearch_Focus extends AppCompatActivity {
                         .skipMemoryCache(true)
                         .into(TeamInfo_ImageView_Image1);
             }
-            if(En_Image2.equals(".")){
-                TeamInfo_ImageView_Image2.setVisibility(View.GONE);
-            }else{
-                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image2 + ".jpg")
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(TeamInfo_ImageView_Image2);
-            }
-            if(En_Image3.equals(".")){
-                TeamInfo_ImageView_Image3.setVisibility(View.GONE);
-            }else{
-                Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image3 + ".jpg")
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(TeamInfo_ImageView_Image3);
-            }
+
         } catch (UnsupportedEncodingException e) {
 
         }
@@ -408,5 +393,9 @@ public class TeamSearch_Focus extends AppCompatActivity {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

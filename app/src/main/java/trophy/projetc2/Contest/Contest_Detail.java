@@ -99,77 +99,83 @@ public class Contest_Detail extends AppCompatActivity {
         String result = http_contest_detail.HttpClient("Trophy_part1","Contest_Detail.jsp", Contest_Pk);
         ContestsDetailParsedData = jsonParserList_getContestDetail(result);
         Support_Image = ContestsDetailParsedData[0][14]; Support_Url = ContestsDetailParsedData[0][15];
-        String Da = " 일";
-////다이얼로그 광고
-        final View layout = inflater.inflate(R.layout.layout_customdialog_contest_ad, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Contest_AD_Root));
-        final ImageView Layout_CustomDialog_Contest_AD_ImageView = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_Contest_AD_ImageView);
-        final LinearLayout aaa= (LinearLayout)layout.findViewById(R.id.aaa);
-        final TextView Layout_CustomDialog_Contest_AD_TextView = (TextView) layout.findViewById(R.id.Layout_CustomDialog_Contest_AD_TextView);
-        final Button foucs = (Button)layout.findViewById(R.id.focus);
-        final Button close = (Button)layout.findViewById(R.id.close);
-        //프로필 관리
-        try {
-            String Profile1 = URLEncoder.encode(Support_Image, "utf-8");
-            Log.i("Profile1 : ", Profile1);
-            if (Profile1.equals(".")) {
-                Glide.with(Contest_Detail.this).load(R.drawable.ad1).diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(Layout_CustomDialog_Contest_AD_ImageView);
-            } else {
-                Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Trophy_img/contest/" + Profile1 + ".jpg").diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .into(Layout_CustomDialog_Contest_AD_ImageView);
-            }
-        } catch (UnsupportedEncodingException e) {
+        if(Support_Image.equals(".")){
 
         }
-        foucs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Support_Url.equals(".")){
+        else{
 
+////다이얼로그 광고
+            final View layout = inflater.inflate(R.layout.layout_customdialog_contest_ad, (ViewGroup) findViewById(R.id.Layout_CustomDialog_Contest_AD_Root));
+            final ImageView Layout_CustomDialog_Contest_AD_ImageView = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_Contest_AD_ImageView);
+            final LinearLayout aaa= (LinearLayout)layout.findViewById(R.id.aaa);
+            final TextView Layout_CustomDialog_Contest_AD_TextView = (TextView) layout.findViewById(R.id.Layout_CustomDialog_Contest_AD_TextView);
+            final Button foucs = (Button)layout.findViewById(R.id.focus);
+            final Button close = (Button)layout.findViewById(R.id.close);
+            //프로필 관리
+            try {
+                String Profile1 = URLEncoder.encode(Support_Image, "utf-8");
+                Log.i("Profile1 : ", Profile1);
+                if (Profile1.equals(".")) {
+                    Glide.with(Contest_Detail.this).load(R.drawable.ad1).diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(Layout_CustomDialog_Contest_AD_ImageView);
+                } else {
+                    Glide.with(Contest_Detail.this).load("http://210.122.7.193:8080/Trophy_img/contest/" + Profile1 + ".jpg").diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(Layout_CustomDialog_Contest_AD_ImageView);
                 }
-                else{
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Support_Url));
-                    startActivity(intent);
-                }
+            } catch (UnsupportedEncodingException e) {
+
             }
-        });
-        final Dialog DutyDialog = new Dialog(Contest_Detail.this);
-        DutyDialog
-                .setContentView(layout);
-        myTask = new TimerTask() {
-            int i = 3;
+            foucs.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Support_Url.equals(".")){
 
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 해당 작업을 처리함
-                        Layout_CustomDialog_Contest_AD_TextView.setText(+i+"초 후 종료..     ");
-                        if (i <= 0) {
-                            timer.cancel();
-                            Layout_CustomDialog_Contest_AD_TextView.setVisibility(View.GONE);
-                            aaa.setVisibility(View.VISIBLE);
-                            close.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    DutyDialog.dismiss();
-                                }
-                            });
-                            DutyDialog.setCancelable(true);
-                        }
                     }
-                });
-                i--;
-                //시간이 초과된 경우 game 내 데이터 삭제 및 초기화.
+                    else{
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Support_Url));
+                        startActivity(intent);
+                    }
+                }
+            });
+            final Dialog DutyDialog = new Dialog(Contest_Detail.this);
+            DutyDialog
+                    .setContentView(layout);
+            myTask = new TimerTask() {
+                int i = 3;
 
-            }
-        };
-        timer = new Timer();
-        timer.schedule(myTask, 1000, 1000); // 5초후 첫실행, 1초마다 계속실행
-        DutyDialog.show();
-        DutyDialog.setCancelable(false);
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // 해당 작업을 처리함
+                            Layout_CustomDialog_Contest_AD_TextView.setText(+i+"초 후 종료..     ");
+                            if (i <= 0) {
+                                timer.cancel();
+                                Layout_CustomDialog_Contest_AD_TextView.setVisibility(View.GONE);
+                                aaa.setVisibility(View.VISIBLE);
+                                close.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        DutyDialog.dismiss();
+                                    }
+                                });
+                                DutyDialog.setCancelable(true);
+                            }
+                        }
+                    });
+                    i--;
+                    //시간이 초과된 경우 game 내 데이터 삭제 및 초기화.
+
+                }
+            };
+            timer = new Timer();
+            timer.schedule(myTask, 1000, 1000); // 5초후 첫실행, 1초마다 계속실행
+            DutyDialog.show();
+            DutyDialog.setCancelable(false);
+        }
+        String Da = " 일";
         ////////////////////////////////////
         TextView layout_contest_detail_caution = (TextView)findViewById(R.id.layout_contest_detail_caution);
         TextView title = (TextView) findViewById(R.id.layout_contest_detail_title);

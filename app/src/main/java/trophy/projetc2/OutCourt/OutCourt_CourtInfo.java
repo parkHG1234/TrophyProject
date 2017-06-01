@@ -1,5 +1,6 @@
 package trophy.projetc2.OutCourt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -127,4 +130,5 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
     }
+
 }

@@ -25,8 +25,8 @@
                 android:layout_centerInParent="true"
                 android:padding="3dp" />
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Back"
                 android:src="@drawable/back"
                 android:layout_alignParentLeft="true"
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_TeamName"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp" />
@@ -72,7 +72,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Age"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -82,7 +82,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Sex"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -92,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:text="New Button"
                     android:textColor="@color/White"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_Button_Address"
                     android:layout_weight="1"
                     android:layout_marginBottom="3dp"/>
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Joiner_Agree"
                 android:layout_weight="1"
-                android:background="@color/MainColor1"
+                android:background="@color/colorPrimaryDark"
                 android:textColor="@color/White"/>
 
             <Button

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +47,7 @@ import static trophy.projetc2.User.Terms.activity_terms;
  * Created by ldong on 2017-02-01.
  */
 
-public class Join extends BaseActivity {
+public class Join extends AppCompatActivity {
     ImageView User_Join_ImageView_Back;
     EditText Join_EditText_Name, Join_EditText_Password, Join_EditText_Password_Confirm, Join_EditText_Birth_Year, Join_EditText_Birth_Month, Join_EditText_Birth_Day, Join_EditText_Phone, Join_EditText_Phone_Confirm;
     CheckBox Join_CheckBox_SexM, Join_CheckBox_SexW;
@@ -354,7 +357,7 @@ public class Join extends BaseActivity {
                         Random random = new Random();
                         rnd = Math.abs(random.nextInt(899999) + 100000);
                         Log.i("aaaabb",String.valueOf(rnd));
-                        String msg = "바스켓북 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
+                        String msg = "오늘의농구 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
                         Date d = new Date();
                         String date = dateFormat.format(d);
@@ -521,5 +524,9 @@ public class Join extends BaseActivity {
         super.onBackPressed();
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

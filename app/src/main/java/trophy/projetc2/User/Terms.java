@@ -1,9 +1,11 @@
 package trophy.projetc2.User;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.tsengvn.typekit.TypekitContextWrapper;
+
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.BaseActivity;
 import trophy.projetc2.Http.HttpClient;
@@ -24,7 +28,7 @@ import trophy.projetc2.R;
  * Created by ldong on 2017-02-01.
  */
 
-public class Terms extends BaseActivity {
+public class Terms extends AppCompatActivity {
     ImageView Terms_ImageView_Back;
     ImageView User_Terms_ImageView_Agree1, User_Terms_ImageView_Agree2, User_Terms_ImageView_Agree3;
     TextView User_Terms_TextView_Agree1,User_Terms_TextView_Agree2,User_Terms_TextView_Agree3;
@@ -529,5 +533,9 @@ public class Terms extends BaseActivity {
         super.onBackPressed();
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

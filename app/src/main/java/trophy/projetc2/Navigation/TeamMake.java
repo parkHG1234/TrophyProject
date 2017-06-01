@@ -124,7 +124,7 @@ public class TeamMake extends AppCompatActivity{
                             parsedData_TeamMake = jsonParserList_TeamMake(result);
                             if(parsedData_TeamMake[0][0].equals("succed"))
                             {
-                                dlg = new AlertDialog.Builder(TeamMake.this).setTitle("트로피")
+                                dlg = new AlertDialog.Builder(TeamMake.this).setTitle("오늘의 농구")
                                         .setMessage("팀이 생성되었습니다.")
                                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                             @Override

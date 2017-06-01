@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#e94538</color>
-    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorPrimaryDark">#f5a73c</color>
     <color name="colorAccent">#FF4081</color>
     <color name="Red">#ff0101</color>
     <color name = "White">#ffffff</color>
@@ -20,4 +20,6 @@
     <color name="soso">#dfdfdf</color>
     <color name="softWhite">#fcfcfc</color>
     <color name="backColor">#f7f7f7</color>
+    <color name="flash">#f99c1c</color>
+    <color name="main1color">#f5a73c</color>
 </resources>

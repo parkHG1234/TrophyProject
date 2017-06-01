@@ -24,6 +24,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
@@ -80,7 +81,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
         if(arrData.get(position).getSecond_Name().equals("null")){
             SecondProfile.setVisibility(View.INVISIBLE);
             SecondName.setVisibility(View.INVISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             SecondProfile.setVisibility(View.VISIBLE);
@@ -90,7 +91,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
             ThirdName.setVisibility(View.INVISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
@@ -100,7 +101,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
             FourthName.setVisibility(View.INVISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.WhiteGray));
+            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.White));
         }
         else{
             FourthProfile.setVisibility(View.VISIBLE);
@@ -117,7 +118,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(FirstProfile);
                 }
             }
@@ -145,7 +146,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }
@@ -192,7 +193,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(SecondProfile);
                 }
             }
@@ -220,7 +221,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }

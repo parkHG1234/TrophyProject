@@ -229,7 +229,7 @@
         android:layout_width="match_parent"
         android:id="@+id/Contest_Detail_Form_Input"
         android:layout_weight="1.03"
-        android:background="@color/MainColor1"
+        android:background="@color/colorPrimaryDark"
         android:textColor="@color/White"
         android:textSize="15dp"
         android:textStyle="normal|bold"

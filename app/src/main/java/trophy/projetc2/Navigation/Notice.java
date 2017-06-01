@@ -12,12 +12,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
@@ -29,7 +33,7 @@ public class Notice extends AppCompatActivity {
 
     TextView Notice_TextView_MainTitle, Notice_TextView_MainContent;
     ListView Notice_ListView;
-    ImageView Notice_ImageView_ListTop, Notice_ImageView_ListBottom, Notice_ImageVIew_Back;
+    ImageView Notice_ImageView_ListTop, Notice_ImageView_ListBottom, Notice_ImageVIew_Back,Notice_ImageView_Image;
     Notice_Adapter Notice_Adapter;
     ArrayList<Notice_Setting> Notice_arrData;
     String[][] ContestsParsedList;
@@ -44,6 +48,7 @@ public class Notice extends AppCompatActivity {
         Notice_TextView_MainContent = (TextView)findViewById(R.id.Notice_TextView_MainContent);
         Notice_ImageView_ListTop = (ImageView) findViewById(R.id.Notice_ImageView_ListTop);
         Notice_ImageView_ListBottom = (ImageView) findViewById(R.id.Notice_ImageView_ListBottom);
+        Notice_ImageView_Image = (ImageView)findViewById(R.id.Notice_ImageView_Image);
 
         HttpClient ContestHttp = new HttpClient();
         String result = ContestHttp.HttpClient("Trophy_part1", "Notice.jsp");
@@ -53,17 +58,28 @@ public class Notice extends AppCompatActivity {
         for (int i = 0; i < ContestsParsedList.length; i++) {
             Notice_arrData.add(new Notice_Setting(ContestsParsedList[i][0], ContestsParsedList[i][1], ContestsParsedList[i][2],ContestsParsedList[i][3]));
         }
+
         Notice_Adapter = new Notice_Adapter(this, Notice_arrData);
         Notice_ListView.setAdapter(Notice_Adapter);
         Notice_TextView_MainTitle.setText(ContestsParsedList[0][1]);
         Notice_TextView_MainContent.setText(ContestsParsedList[0][2]);
+        if(ContestsParsedList[0][3].equals(".")) {
+            Glide.with(Notice.this).load(R.drawable.back_white).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(Notice_ImageView_Image);
+        }else {
+            Glide.with(Notice.this).load("http://210.122.7.193:8080/Trophy_img/notice/1.jpg")
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(Notice_ImageView_Image);
+        }
         Notice_ListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Notice_TextView_MainTitle.setText(ContestsParsedList[i][1]);
                 Notice_TextView_MainContent.setText(ContestsParsedList[i][2]);
-                view.setBackgroundColor(getResources().getColor(R.color.MainColor1));
-                Log.i("test", "test123213");
+                view.setBackgroundColor(getResources().getColor(R.color.main1color));
+
             }
 
             @Override
@@ -80,8 +96,16 @@ public class Notice extends AppCompatActivity {
                     Notice_Num_Position--;
                     Notice_TextView_MainTitle.setText(ContestsParsedList[Notice_Num_Position][1]);
                     Notice_TextView_MainContent.setText(ContestsParsedList[Notice_Num_Position][2]);
-                    Notice_Adapter.notifyDataSetChanged();
-                    Notice_ListView.setSelection(Notice_Num_Position);
+                    if(ContestsParsedList[Notice_Num_Position][3].equals(".")) {
+                        Glide.with(Notice.this).load(R.drawable.back_white).diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(Notice_ImageView_Image);
+                    }else {
+                        Glide.with(Notice.this).load("http://210.122.7.193:8080/Trophy_img/notice/"+ContestsParsedList[Notice_Num_Position][3]+".jpg")
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(Notice_ImageView_Image);
+                    }
                 }
             }
         });
@@ -92,6 +116,16 @@ public class Notice extends AppCompatActivity {
 
                 }else{
                     Notice_Num_Position++;
+                    if(ContestsParsedList[Notice_Num_Position][3].equals(".")) {
+                        Glide.with(Notice.this).load(R.drawable.back_white).diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(Notice_ImageView_Image);
+                    }else {
+                        Glide.with(Notice.this).load("http://210.122.7.193:8080/Trophy_img/notice/"+ContestsParsedList[Notice_Num_Position][3]+".jpg")
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(Notice_ImageView_Image);
+                    }
                     Notice_TextView_MainTitle.setText(ContestsParsedList[Notice_Num_Position][1]);
                     Notice_TextView_MainContent.setText(ContestsParsedList[Notice_Num_Position][2]);
                     Notice_Adapter.notifyDataSetChanged();

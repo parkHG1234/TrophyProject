@@ -29,6 +29,7 @@ dependencies {
     //material
     //color
     // 커스텀 폰트 적용 라이브러리
+    compile 'com.tsengvn:Typekit:1.0.0'
     // 슬라이드 도트
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
@@ -44,6 +45,7 @@ dependencies {
     compile 'com.tsengvn:Typekit:1.0.0'
     compile 'com.matthew-tamlin:sliding-intro-screen:2.1.2'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
     testCompile 'junit:junit:4.12'
     provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }

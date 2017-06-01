@@ -32,7 +32,7 @@ import trophy.projetc2.User.Login;
 
 public class TeamFocus  extends AppCompatActivity {
     TextView TeamInfo_TextView_caution;
-    ImageView TeamInfo_ImageView_Emblem, TeamInfo_ImageView_Image1, TeamInfo_ImageView_Image2, TeamInfo_ImageView_Image3;
+    ImageView TeamInfo_ImageView_Emblem, TeamInfo_ImageView_Image1;
     ImageView TeamInfo_ImageVIew_Back, TeamInfo_ImageVIew_TeamManger;
     TextView TeamInfo_TextView_TeamName, TeamInfo_TextView_TeamAddress_Do, TeamInfo_TextView_TeamAddress_Si, TeamInfo_TextView_HomeCourt;
     TextView TeamInfo_TextView_TeamIntro;
@@ -54,8 +54,6 @@ public class TeamFocus  extends AppCompatActivity {
         TeamInfo_TextView_caution = (TextView)findViewById(R.id.TeamInfo_TextView_caution);
         TeamInfo_ImageView_Emblem = (ImageView)findViewById(R.id.TeamInfo_ImageView_Emblem);
         TeamInfo_ImageView_Image1 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image1);
-        TeamInfo_ImageView_Image2 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image2);
-        TeamInfo_ImageView_Image3 = (ImageView)findViewById(R.id.TeamInfo_ImageView_Image3);
         TeamInfo_TextView_TeamName = (TextView)findViewById(R.id.TeamInfo_TextView_TeamName);
         TeamInfo_TextView_TeamAddress_Do = (TextView)findViewById(R.id.TeamInfo_TextView_TeamAddress_Do);
         TeamInfo_TextView_TeamAddress_Si = (TextView)findViewById(R.id.TeamInfo_TextView_TeamAddress_Si);
@@ -106,22 +104,6 @@ public class TeamFocus  extends AppCompatActivity {
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .into(TeamInfo_ImageView_Image1);
-        }
-        if(Image2.equals(".")){
-            TeamInfo_ImageView_Image2.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamFocus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image2 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image2);
-        }
-        if(Image3.equals(".")){
-            TeamInfo_ImageView_Image3.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamFocus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image3 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image3);
         }
 
         //팀원 정보

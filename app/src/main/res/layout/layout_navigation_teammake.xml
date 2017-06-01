@@ -253,7 +253,7 @@
                     android:textColor="@color/White"
                     android:textSize="15dp"
                     android:textStyle="normal|bold"
-                    android:background="@color/MainColor1"
+                    android:background="@color/colorPrimaryDark"
                     android:id="@+id/Layout_Navigation_TeamMake_Button_TeamMake"
                     android:layout_marginBottom="30dp" />
             </LinearLayout>

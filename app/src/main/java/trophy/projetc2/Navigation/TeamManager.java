@@ -64,22 +64,22 @@ public class TeamManager extends AppCompatActivity {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.teammanager),Color.WHITE
-                )
-                        .build()
-        );
-        models.add(
-                new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.teammanager_player),
+                        getResources().getDrawable(R.drawable.teammanager_introduce),
                         Color.WHITE
-                )
+                ).title("팀 소개관리").badgeTitle("팀 소개관리")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.teammanager),
                         Color.WHITE
-                )
+                ).title("팀원 관리").badgeTitle("팀원 관리")
+                        .build()
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.teammanager_contest),Color.WHITE
+                ).title("대회 관리").badgeTitle("대회 관리")
                         .build()
         );
         navigationTabBar.setModels(models);
@@ -88,17 +88,20 @@ public class TeamManager extends AppCompatActivity {
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);
         navigationTabBar.setBadgePosition(NavigationTabBar.BadgePosition.CENTER);
-//        navigationTabBar.setIsBadged(true);
-//        navigationTabBar.setIsTitled(true);
-//        navigationTabBar.setIsTinted(true);
+        navigationTabBar.setIsBadged(true);
+        navigationTabBar.setIsTitled(true);
+        navigationTabBar.setIsTinted(true);
 //        navigationTabBar.setIsBadgeUseTypeface(true);
 //        navigationTabBar.setIsSwiped(true);
-//        navigationTabBar.setBadgeSize(10);
-        //navigationTabBar.setTitleSize(10);
+        navigationTabBar.setBadgeSize(10);
+        navigationTabBar.setTitleSize(12);
         Teammanager_ImageVIew_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TeamManager_ContestJoin.Contestjoin_timer.purge();
+                TeamManager_ContestJoin.myTask.cancel();
                 TeamManager_ContestJoin.Contestjoin_timer.cancel();
+                TeamManager_PlayerManager.PlayerManager_timer.purge();
                 TeamManager_PlayerManager.PlayerManager_timer.cancel();
                 TeamManager.this.finish();
                 overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
@@ -132,6 +135,7 @@ public class TeamManager extends AppCompatActivity {
                                 HttpClient http_TeamDisperse= new HttpClient();
                                 String result12 = http_TeamDisperse.HttpClient("Trophy_part1","TeamManager_TeamDisperse.jsp",User_Pk,TeamManager_Team_Pk);
                                 parseredData_teamdisperse = jsonParserList_teamDisperse(result12);
+                                Log.i("test123", User_Pk);
                                 if(parseredData_teamdisperse[0][0].equals("Exist_Player"))
                                 {
                                     Snackbar.make(view,"팀 대표 외 팀원이 존재합니다.",Snackbar.LENGTH_SHORT).show();
@@ -144,8 +148,20 @@ public class TeamManager extends AppCompatActivity {
                                 {
                                     Snackbar.make(view,"가입 신청 중 인원이 있습니다.",Snackbar.LENGTH_SHORT).show();
                                 }
-                                else{
+                                else if(parseredData_teamdisperse[0][0].equals("Failed")){
                                     Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Snackbar.make(view,"팀이 해산되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            TeamInfo_Dialog.dismiss();
+                                            TeamManager_ContestJoin.Contestjoin_timer.cancel();
+                                            TeamManager_PlayerManager.PlayerManager_timer.cancel();
+                                            TeamManager.this.finish();
+                                            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                                        }
+                                    }).show();
                                 }
                     }
                 });
@@ -199,7 +215,7 @@ public class TeamManager extends AppCompatActivity {
             Bundle args = null;
             switch (position) {
                 case 0:
-                    fragment = new TeamManager_ContestJoin();
+                    fragment = new TeamManager_TeamIntroduce();
                     args = new Bundle();
                     break;
                 case 1:
@@ -207,7 +223,7 @@ public class TeamManager extends AppCompatActivity {
                     args = new Bundle();
                     break;
                 case 2:
-                    fragment = new TeamManager_TeamIntroduce();
+                    fragment = new TeamManager_ContestJoin();
                     args = new Bundle();
                     break;
             }
@@ -227,7 +243,10 @@ public class TeamManager extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
+        TeamManager_ContestJoin.Contestjoin_timer.purge();
+        TeamManager_ContestJoin.myTask.cancel();
         TeamManager_ContestJoin.Contestjoin_timer.cancel();
+        TeamManager_PlayerManager.PlayerManager_timer.purge();
         TeamManager_PlayerManager.PlayerManager_timer.cancel();
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);

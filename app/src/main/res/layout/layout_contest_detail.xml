@@ -21,12 +21,12 @@
                     android:padding="3dp"
                     android:textStyle="normal|bold" />
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/Contest_Detail_Back"
                     android:src="@drawable/back"
                     android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
             </RelativeLayout>
     <Button
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         android:text="TextView"
         android:layout_width="match_parent"
         android:id="@+id/layout_contest_detail_caution"
-        android:background="@color/MainColor1_White"
+        android:background="@color/main1color"
         android:textColor="@color/White"
         android:paddingLeft="2dp"
         android:textStyle="normal|bold"
@@ -151,7 +151,7 @@
                         android:id="@+id/textView24"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginTop="15dp"
                         android:layout_marginBottom="4dp"
@@ -177,7 +177,7 @@
                         android:id="@+id/textView241"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -201,7 +201,7 @@
                         android:id="@+id/textView2412"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -225,7 +225,7 @@
                         android:id="@+id/textView24123"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -249,7 +249,7 @@
                         android:id="@+id/textView241234"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -273,7 +273,7 @@
                         android:id="@+id/textView2412345"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -297,7 +297,7 @@
                         android:id="@+id/textView24123456"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -321,7 +321,7 @@
                         android:id="@+id/textView241234567"
                         android:layout_weight="2"
                         android:gravity="center_vertical"
-                        android:textColor="@color/MainColor1"
+                        android:textColor="@color/main1color"
                         android:textSize="12sp"
                         android:layout_marginBottom="4dp"
                         android:textStyle="normal|bold" />
@@ -329,15 +329,15 @@
                     <TextView
                         android:text="TextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/layout_contest_detailInfo"
                         android:layout_weight="1"
-                        android:gravity="center_vertical"
                         android:textColor="@color/Gray"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:layout_marginBottom="15dp"
                         android:textStyle="normal|bold"
-                        android:layout_marginLeft="20dp" />
+                        android:layout_marginLeft="20dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="top" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -356,7 +356,7 @@
             android:layout_width="match_parent"
             android:id="@+id/layout_contest_submit"
             android:textColor="@color/White"
-            android:background="@color/MainColor1"
+            android:background="@color/colorPrimaryDark"
             android:layout_weight="1"
             android:layout_height="match_parent" />
     </LinearLayout>

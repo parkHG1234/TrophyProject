@@ -82,7 +82,7 @@ public class Match_Write extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String result_null = edittext_EditText_NotNull();
                 if(result_null.equals("succed")){
-                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.main1color));
                     Match_Write_Button_Write.setTextColor(getResources().getColor(R.color.White));
                 }
                 else{
@@ -106,7 +106,7 @@ public class Match_Write extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String result_null = edittext_EditText_NotNull();
                 if(result_null.equals("succed")){
-                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.main1color));
                     Match_Write_Button_Write.setTextColor(getResources().getColor(R.color.White));
                 }
                 else{
@@ -129,7 +129,7 @@ public class Match_Write extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String result_null = edittext_EditText_NotNull();
                 if(result_null.equals("succed")){
-                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.main1color));
                     Match_Write_Button_Write.setTextColor(getResources().getColor(R.color.White));
                 }
                 else{
@@ -177,7 +177,7 @@ public class Match_Write extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String result_null = edittext_EditText_NotNull();
                 if(result_null.equals("succed")){
-                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                    Match_Write_Button_Write.setBackgroundColor(getResources().getColor(R.color.main1color));
                     Match_Write_Button_Write.setTextColor(getResources().getColor(R.color.White));
                 }
                 else{

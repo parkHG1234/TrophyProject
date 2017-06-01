@@ -207,12 +207,12 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(TeamManager_TeamIntro_ImageView_Emblem);
                         HttpClient user = new HttpClient();
                         user.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce_Image.jsp", TeamManager_TeamName.toString(), ".", "Emblem");
-                        TeamManager_TeamIntro_ImageView_Emblem.setImageResource(R.drawable.profile_basic_image);
+                        TeamManager_TeamIntro_ImageView_Emblem.setImageResource(R.drawable.emblem);
                         ad.dismiss();
                     }
                 });
@@ -261,12 +261,12 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.image_plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(TeamManager_TeamIntro_ImageView_Image1);
                         HttpClient user = new HttpClient();
                         user.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce_Image.jsp", TeamManager_TeamName.toString(), ".", "Image1");
-                        TeamManager_TeamIntro_ImageView_Image1.setImageResource(R.drawable.profile_basic_image);
+                        TeamManager_TeamIntro_ImageView_Image1.setImageResource(R.drawable.image_plus);
                         ad.dismiss();
                     }
                 });
@@ -314,12 +314,12 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.image_plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(TeamManager_TeamIntro_ImageView_Image2);
                         HttpClient user = new HttpClient();
                         user.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce_Image.jsp", TeamManager_TeamName.toString(), ".", "Image2");
-                        TeamManager_TeamIntro_ImageView_Image2.setImageResource(R.drawable.profile_basic_image);
+                        TeamManager_TeamIntro_ImageView_Image2.setImageResource(R.drawable.image_plus);
                         ad.dismiss();
                     }
                 });
@@ -367,12 +367,12 @@ public class TeamManager_TeamIntroduce extends Fragment {
                 Layout_CustomDialog_Album_BasicImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        Glide.with(TeamManager_TeamIntroduce.this).load(R.drawable.image_plus).diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(TeamManager_TeamIntro_ImageView_Image3);
                         HttpClient user = new HttpClient();
                         user.HttpClient("Trophy_part2", "TeamManager_TeamIntroduce_Image.jsp", TeamManager_TeamName.toString(), ".", "Image3");
-                        TeamManager_TeamIntro_ImageView_Image3.setImageResource(R.drawable.profile_basic_image);
+                        TeamManager_TeamIntro_ImageView_Image3.setImageResource(R.drawable.image_plus);
                         ad.dismiss();
                     }
                 });

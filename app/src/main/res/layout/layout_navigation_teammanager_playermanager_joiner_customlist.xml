@@ -30,14 +30,16 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/White"
                     app:srcCompat="@drawable/teammanager_player"
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstProfile"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:layout_margin="1dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
                 <ImageView
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FirstRepresent"
                     android:src="@drawable/represent"
@@ -79,14 +81,16 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/White"
                     app:srcCompat="@drawable/teammanager_player"
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondProfile"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:layout_margin="1dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
                 <ImageView
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_SecondRepresent"
                     android:src="@drawable/represent"
@@ -126,14 +130,16 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/White"
                     app:srcCompat="@drawable/teammanager_player"
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdProfile"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:layout_margin="1dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
                 <ImageView
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_ThirdRepresent"
                     android:src="@drawable/represent"
@@ -173,14 +179,16 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:background="@color/White"
                     app:srcCompat="@drawable/teammanager_player"
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthProfile"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:layout_margin="1dp"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" />
                 <ImageView
                     android:id="@+id/TeamManager_PlayerManager_Joiner_CustomList_ImageView_FourthRepresent"
                     android:src="@drawable/represent"

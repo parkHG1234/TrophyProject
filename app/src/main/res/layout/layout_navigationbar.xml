@@ -10,20 +10,30 @@
         android:orientation="horizontal"
         android:layout_height="100dp"
         android:layout_marginTop="20dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:id="@+id/Main_Navigation_ImageView_Profile"
-            android:background="@color/soso"
-            android:padding="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.5"
-            />
+        <RelativeLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:id="@+id/Main_Navigation_ImageView_Profile"
+                android:background="@color/soso"
+                android:padding="20dp"
+                android:layout_height="100dp"
+                android:layout_width="100dp" />
+            <ImageView
+                android:src="@drawable/camera"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="17dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+        </RelativeLayout>
+
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="100dp"
             android:background="@color/soso"
             android:paddingTop="20dp"
             android:paddingBottom="20dp">

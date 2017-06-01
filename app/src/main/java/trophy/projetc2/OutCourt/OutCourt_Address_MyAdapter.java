@@ -58,5 +58,6 @@ public class OutCourt_Address_MyAdapter extends BaseAdapter {
         });
         return convertView;
     }
+
 }
 

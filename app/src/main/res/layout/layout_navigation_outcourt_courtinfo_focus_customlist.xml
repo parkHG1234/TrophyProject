@@ -58,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp" />
     </LinearLayout>
     <ImageView
         app:srcCompat="@drawable/delete"

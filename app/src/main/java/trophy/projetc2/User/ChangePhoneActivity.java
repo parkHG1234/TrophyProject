@@ -1,5 +1,6 @@
 package trophy.projetc2.User;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +70,7 @@ public class ChangePhoneActivity extends AppCompatActivity {
                         Random random = new Random();
                         rnd = Math.abs(random.nextInt(899999) + 100000);
                         Log.i("인증번호 : ",String.valueOf(rnd));
-                        String msg = "바스켓북 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
+                        String msg = "오늘의농구 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
                         Date d = new Date();
                         String date = dateFormat.format(d);
@@ -160,5 +163,9 @@ public class ChangePhoneActivity extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+    }
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 }

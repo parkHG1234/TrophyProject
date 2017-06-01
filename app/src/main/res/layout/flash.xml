@@ -2,9 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <ImageView
+    android:orientation="vertical"
+    android:backgroundTint="@color/flash">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/flash"></ImageView>
+        android:gravity="center"
+        android:background="@color/flash">
+
+        <ImageView
+            android:layout_width="306dp"
+            android:src="@drawable/flash"
+            android:layout_height="360dp"></ImageView>
+    </LinearLayout>
 </LinearLayout>
