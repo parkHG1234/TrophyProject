@@ -31,7 +31,7 @@ import trophy.projetc2.Http.HttpClient;
  */
 
 public class Flash extends AppCompatActivity{
-    static String Project_version = "1";
+    static String Project_version = "3";
     static TimerTask myTask;
     static Timer timer;
     String[][] ParsedData_Setting;
@@ -56,7 +56,7 @@ public class Flash extends AppCompatActivity{
             Customdialog_Update_Button_Ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.mysports.basketbook"));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=trophy.projetc2"));
                     startActivity(intent);
                     finish();
                 }

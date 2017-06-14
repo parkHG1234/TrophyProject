@@ -31,33 +31,50 @@
 
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@color/soso"
             android:paddingTop="20dp"
-            android:paddingBottom="20dp">
-            <TextView
-                android:text="TextView"
+            android:paddingBottom="20dp"
+            android:id="@+id/Main_Navigation_UserInfo">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/Main_Navigation_TextView_Name"
-                android:textColor="@color/Black"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:textSize="15sp" />
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Main_Navigation_TextView_Name"
+                    android:textColor="@color/Black"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:text="TextView"
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/Main_Navigation_TextView_Team"
+                    android:textColor="@color/Black"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/Main_Navigation_TextView_Team"
-                android:textColor="@color/Black"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:textSize="15sp" />
+                android:layout_weight="2"
+                android:gravity="center_vertical">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/modify" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -85,7 +102,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="진행중인대회"
+                android:text="접수중인 대회"
                 android:textColor="@color/Black"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
@@ -114,7 +131,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="지난대회보기"
+                android:text="대회 결과보기"
                 android:textColor="@color/Black"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
@@ -156,64 +173,7 @@
             android:background="@color/soso"
             android:layout_marginLeft="10dp"
             android:id="@+id/Main_Navigation_Line_Match"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_JoinMatch">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/navigation_match"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="신청한 교류전"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/soso"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/Main_Navigation_Line_JoinMatch"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_MyMatch">
-
-            <ImageView
-                android:src="@drawable/navigation_match"
-                android:layout_gravity="center"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="등록한 교류전"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/soso"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/Main_Navigation_Line_MyMatch"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -243,35 +203,7 @@
             android:background="@color/soso"
             android:layout_marginLeft="10dp"
             android:id="@+id/Main_Navigation_Line_OutCourt"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_TeamMake">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/navigation_teamadd"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="팀 생성"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/soso"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/Main_Navigation_Line_TeamAdd"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -301,35 +233,7 @@
             android:background="@color/soso"
             android:layout_marginLeft="10dp"
             android:id="@+id/Main_Navigation_Line_TeamInfo"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_TeamSearch">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/navigation_teamsearch"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="팀 찾기"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/soso"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/Main_Navigation_Line_TeamSearch"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"

@@ -2,27 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
     android:orientation="vertical"
     android:background="@color/backColor"
-    android:id="@+id/MyMatch_Focus_Joiner_CustomList_Root">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/White"
-        android:gravity="right">
-
-        <TextView
-            android:text="04.04"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/MyMatch_Focus_Joiner_CustomList_TextView_Time"
-            android:gravity="bottom|right"
-            android:textSize="10dp"
-            android:layout_marginRight="10dp" />
-    </LinearLayout>
+    android:id="@+id/MyMatch_Focus_Joiner_CustomList_Root"
+    android:layout_height="60dp">
 
     <LinearLayout
         android:orientation="horizontal"

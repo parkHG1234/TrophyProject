@@ -30,8 +30,6 @@ import trophy.projetc2.Contest.Contest_Detail_Form_Customlist_MyData;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
 import static trophy.projetc2.Navigation.TeamManager_ContestJoin.refresh_contestjoin;
 
 /**
@@ -68,133 +66,133 @@ public class TeamManager_ContestJoin_ContestFocus extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_teammanager_contestjoin_contestfocus);
-
-        Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back = (ImageView)findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back);
-        Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete = (ImageView)findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete);
-        TeamManager_ContestJoin_ContestFocus_Scroll = (ScrollView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_Scroll);
-        TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage = (ImageView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle);
-        TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus);
-        TeamManager_ContestJoin_ContestFocus_TextView_AcountName = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_AcountName);
-        TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber);
-        TeamManager_ContestJoin_ContestFocus_TextView_JoinDate = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_JoinDate);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDate = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDate);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetailTitle = (TextView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDetailTitle);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail);
-        TeamManager_ContestJoin_ContestFocus_TextView_TeamName = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_TeamName);
-        TeamManager_ContestJoin_ContestFocus_TextView_Represent = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_Represent);
-        TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone);
-        TeamManager_ContestJoin_ContestFocus_ListView_Player = (ListView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_ListView_Player);
-
-        Intent intent = getIntent();
-        Contest_Pk = intent.getStringExtra("Contest_Pk");
-        Contest_Image = intent.getStringExtra("Contest_Image");
-        Contest_Title = intent.getStringExtra("Contest_Title");
-        Contest_Status = intent.getStringExtra("Contest_Status");
-        AcountName = intent.getStringExtra("AcountName");
-        AcountNumber = intent.getStringExtra("AcountNumber");
-        HttpClient http_contestinfo= new HttpClient();
-        String result = http_contestinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_ContestInfo.jsp",Contest_Pk);
-        String[][] parsedData_contestinfo = jsonParserList_ContestInfo(result);
-
-        HttpClient http_representinfo= new HttpClient();
-        String result1 = http_representinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Represent.jsp",TeamManager_Team_Pk);
-        String[][] parsedData_representinfo = jsonParserList_represent(result1);
-
-        HttpClient http_joinerinfo = new HttpClient();
-        String result2 = http_joinerinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Joiner.jsp",TeamManager_Team_Pk,Contest_Pk);
-        parsedData_joinerinfo = jsonParserList_joiner(result2);
-
-        //대회이미지 로드
-        Glide.with(TeamManager_ContestJoin_ContestFocus.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+Contest_Image+".jpg")
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage);
-        //대회간략정보 로드
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle.setText(Contest_Title);
-        TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus.setText(Contest_Status);
-        TeamManager_ContestJoin_ContestFocus_TextView_AcountName.setText(AcountName);
-        TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber.setText(AcountNumber);
-        TeamManager_ContestJoin_ContestFocus_TextView_JoinDate.setText(parsedData_contestinfo[0][0]+" ~ "+parsedData_contestinfo[0][1]);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDate.setText(parsedData_contestinfo[0][2]);
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail.setText(parsedData_contestinfo[0][3]);
-        TeamManager_ContestJoin_ContestFocus_TextView_TeamName.setText(TeamManager_TeamName);
-        TeamManager_ContestJoin_ContestFocus_TextView_Represent.setText(parsedData_representinfo[0][0]);
-        TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone.setText(parsedData_representinfo[0][1]);
-
-        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail.setVisibility(View.VISIBLE);
-
-        setData_Player();
-        Contest_Detail_Form_Customlist_Adapter = new Contest_Detail_Form_Customlist_Adapter(TeamManager_ContestJoin_ContestFocus.this, Contest_Detail_Form_Customlist_MyData);
-        //리스트뷰에 어댑터 연결
-        TeamManager_ContestJoin_ContestFocus_ListView_Player.setAdapter(Contest_Detail_Form_Customlist_Adapter);
-        setListViewHeightBasedOnChildren(TeamManager_ContestJoin_ContestFocus_ListView_Player);
-        Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-            }
-        });
-        Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-                final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_contestjoin_contestfocus_delete, (ViewGroup) view.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Root));
-                final ImageView Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back = (ImageView)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back);
-                final TextView Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content = (TextView)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content);
-                final Button Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete = (Button)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete);
-                final Button Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call = (Button)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call);
-                if(Contest_Status.equals("입금대기")){
-                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setBackgroundColor(getResources().getColor(R.color.MainColor1));
-                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setTextColor(getResources().getColor(R.color.White));
-                }
-                else{
-                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call.setBackgroundColor(getResources().getColor(R.color.MainColor1));
-                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call.setTextColor(getResources().getColor(R.color.White));
-                }
-
-                HttpClient http_Delete_content = new HttpClient();
-                String result2 = http_Delete_content.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Delete_Content.jsp");
-                parsedData_ContestDelete_Content = jsonParserList_ContentDelete_Content(result2);
-                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content.setText(parsedData_ContestDelete_Content[0][0]);
-                final MaterialDialog Contest_Delete_Dialog = new MaterialDialog(view.getContext());
-                Contest_Delete_Dialog
-                        .setContentView(layout)
-                        .setCanceledOnTouchOutside(true);
-                Contest_Delete_Dialog.show();
-                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Contest_Delete_Dialog.dismiss();
-                    }
-                });
-                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if(Contest_Status.equals("입금대기")){
-                            delete_Player();
-                            HttpClient http_contest_delete = new HttpClient();
-                            String result2 = http_contest_delete.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Delete.jsp",TeamManager_Team_Pk,Contest_Pk);
-                            parsedData_ContestDelete = jsonParserList_ContestDelete(result2);
-                            if(parsedData_ContestDelete[0][0].equals("succed")){
-                                Snackbar.make(view,"대회가 취소되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        refresh_contestjoin = "refresh";
-                                        Contest_Delete_Dialog.dismiss();
-                                        finish();
-                                    }
-                                }).show();
-                            }
-                        }
-                        else{
-                            Snackbar.make(view,"고객센터로 문의주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
+//
+//        Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back = (ImageView)findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back);
+//        Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete = (ImageView)findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete);
+//        TeamManager_ContestJoin_ContestFocus_Scroll = (ScrollView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_Scroll);
+//        TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage = (ImageView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle);
+//        TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus);
+//        TeamManager_ContestJoin_ContestFocus_TextView_AcountName = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_AcountName);
+//        TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber);
+//        TeamManager_ContestJoin_ContestFocus_TextView_JoinDate = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_JoinDate);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDate = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDate);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetailTitle = (TextView)findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDetailTitle);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail);
+//        TeamManager_ContestJoin_ContestFocus_TextView_TeamName = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_TeamName);
+//        TeamManager_ContestJoin_ContestFocus_TextView_Represent = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_Represent);
+//        TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone = (TextView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone);
+//        TeamManager_ContestJoin_ContestFocus_ListView_Player = (ListView) findViewById(R.id.TeamManager_ContestJoin_ContestFocus_ListView_Player);
+//
+//        Intent intent = getIntent();
+//        Contest_Pk = intent.getStringExtra("Contest_Pk");
+//        Contest_Image = intent.getStringExtra("Contest_Image");
+//        Contest_Title = intent.getStringExtra("Contest_Title");
+//        Contest_Status = intent.getStringExtra("Contest_Status");
+//        AcountName = intent.getStringExtra("AcountName");
+//        AcountNumber = intent.getStringExtra("AcountNumber");
+//        HttpClient http_contestinfo= new HttpClient();
+//        String result = http_contestinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_ContestInfo.jsp",Contest_Pk);
+//        String[][] parsedData_contestinfo = jsonParserList_ContestInfo(result);
+//
+//        HttpClient http_representinfo= new HttpClient();
+//        String result1 = http_representinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Represent.jsp",TeamManager_Team_Pk);
+//        String[][] parsedData_representinfo = jsonParserList_represent(result1);
+//
+//        HttpClient http_joinerinfo = new HttpClient();
+//        String result2 = http_joinerinfo.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Joiner.jsp",TeamManager_Team_Pk,Contest_Pk);
+//        parsedData_joinerinfo = jsonParserList_joiner(result2);
+//
+//        //대회이미지 로드
+//        Glide.with(TeamManager_ContestJoin_ContestFocus.this).load("http://210.122.7.193:8080/Web_basket/imgs1/Contest/"+Contest_Image+".jpg")
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .skipMemoryCache(true)
+//                .into(TeamManager_ContestJoin_ContestFocus_ImageView_ContestImage);
+//        //대회간략정보 로드
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestTitle.setText(Contest_Title);
+//        TeamManager_ContestJoin_ContestFocus_TextView_JoinStatus.setText(Contest_Status);
+//        TeamManager_ContestJoin_ContestFocus_TextView_AcountName.setText(AcountName);
+//        TeamManager_ContestJoin_ContestFocus_TextView_AcountNumber.setText(AcountNumber);
+//        TeamManager_ContestJoin_ContestFocus_TextView_JoinDate.setText(parsedData_contestinfo[0][0]+" ~ "+parsedData_contestinfo[0][1]);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDate.setText(parsedData_contestinfo[0][2]);
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail.setText(parsedData_contestinfo[0][3]);
+//        TeamManager_ContestJoin_ContestFocus_TextView_TeamName.setText(TeamManager_TeamName);
+//        TeamManager_ContestJoin_ContestFocus_TextView_Represent.setText(parsedData_representinfo[0][0]);
+//        TeamManager_ContestJoin_ContestFocus_TextView_RepresentPhone.setText(parsedData_representinfo[0][1]);
+//
+//        TeamManager_ContestJoin_ContestFocus_TextView_ContestDetail.setVisibility(View.VISIBLE);
+//
+//        setData_Player();
+//        Contest_Detail_Form_Customlist_Adapter = new Contest_Detail_Form_Customlist_Adapter(TeamManager_ContestJoin_ContestFocus.this, Contest_Detail_Form_Customlist_MyData);
+//        //리스트뷰에 어댑터 연결
+//        TeamManager_ContestJoin_ContestFocus_ListView_Player.setAdapter(Contest_Detail_Form_Customlist_Adapter);
+//        setListViewHeightBasedOnChildren(TeamManager_ContestJoin_ContestFocus_ListView_Player);
+//        Layout_Navigation_TeamManager_ContestJoin_ContestFocus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+//            }
+//        });
+//        Layout_Navigation_TeamManager_ContestJoin_ImageView_Delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+//                final View layout = inflater.inflate(R.layout.layout_customdialog_teammanager_contestjoin_contestfocus_delete, (ViewGroup) view.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Root));
+//                final ImageView Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back = (ImageView)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back);
+//                final TextView Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content = (TextView)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content);
+//                final Button Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete = (Button)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete);
+//                final Button Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call = (Button)layout.findViewById(R.id.Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call);
+//                if(Contest_Status.equals("입금대기")){
+//                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+//                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setTextColor(getResources().getColor(R.color.White));
+//                }
+//                else{
+//                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+//                    Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Call.setTextColor(getResources().getColor(R.color.White));
+//                }
+//
+//                HttpClient http_Delete_content = new HttpClient();
+//                String result2 = http_Delete_content.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Delete_Content.jsp");
+//                parsedData_ContestDelete_Content = jsonParserList_ContentDelete_Content(result2);
+//                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_TextView_Content.setText(parsedData_ContestDelete_Content[0][0]);
+//                final MaterialDialog Contest_Delete_Dialog = new MaterialDialog(view.getContext());
+//                Contest_Delete_Dialog
+//                        .setContentView(layout)
+//                        .setCanceledOnTouchOutside(true);
+//                Contest_Delete_Dialog.show();
+//                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Back.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Contest_Delete_Dialog.dismiss();
+//                    }
+//                });
+//                Customdialog_TeamManager_ContestJoin_ContestFocus_Delete_Button_Delete.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        if(Contest_Status.equals("입금대기")){
+//                            delete_Player();
+//                            HttpClient http_contest_delete = new HttpClient();
+//                            String result2 = http_contest_delete.HttpClient("Trophy_part1","TeamManager_ContestJoin_ContestFocus_Delete.jsp",TeamManager_Team_Pk,Contest_Pk);
+//                            parsedData_ContestDelete = jsonParserList_ContestDelete(result2);
+//                            if(parsedData_ContestDelete[0][0].equals("succed")){
+//                                Snackbar.make(view,"대회가 취소되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(View view) {
+//                                        refresh_contestjoin = "refresh";
+//                                        Contest_Delete_Dialog.dismiss();
+//                                        finish();
+//                                    }
+//                                }).show();
+//                            }
+//                        }
+//                        else{
+//                            Snackbar.make(view,"고객센터로 문의주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Override

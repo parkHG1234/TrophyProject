@@ -17,7 +17,9 @@ public class OutCourt_CourtInfo_Focus_MyData {
     private String Now_Date;
     private Activity activity;
     private String User_Pk;
-    public OutCourt_CourtInfo_Focus_MyData(String OutCourt_Content_Pk, String OutCourt_Pk,String Content_User_Pk, String Date, String OutCourt_Content, String User_Profile, String User_Name, String Now_Date, Activity activity,String User_Pk){
+    private String Comment_Count;
+    private String Image;
+    public OutCourt_CourtInfo_Focus_MyData(String OutCourt_Content_Pk, String OutCourt_Pk,String Content_User_Pk, String Date, String OutCourt_Content, String User_Profile, String User_Name, String Now_Date, Activity activity,String User_Pk,String Comment_Count,String Image){
         this.OutCourt_Content_Pk = OutCourt_Content_Pk;
         this.OutCourt_Pk = OutCourt_Pk;
         this.Content_User_Pk = Content_User_Pk;
@@ -28,6 +30,8 @@ public class OutCourt_CourtInfo_Focus_MyData {
         this.Now_Date = Now_Date;
         this.activity = activity;
         this.User_Pk = User_Pk;
+        this.Comment_Count = Comment_Count;
+        this.Image = Image;
     }
     public String getOutCourt_Content_Pk(){return OutCourt_Content_Pk;}
     public String getOutCourt_Pk(){return OutCourt_Pk;}
@@ -39,4 +43,6 @@ public class OutCourt_CourtInfo_Focus_MyData {
     public String getNow_Date(){return Now_Date;}
     public Activity getActivity(){return activity;}
     public String getUser_Pk(){return User_Pk;}
+    public String getComment_Count(){return Comment_Count;}
+    public String getImage(){return Image;}
 }

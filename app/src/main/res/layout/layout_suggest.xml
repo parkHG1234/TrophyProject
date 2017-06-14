@@ -21,8 +21,8 @@
             android:padding="3dp"
             android:textStyle="normal|bold" />
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/Suggest_ImageVIew_Back"
             android:src="@drawable/back"
             android:layout_alignParentLeft="true"

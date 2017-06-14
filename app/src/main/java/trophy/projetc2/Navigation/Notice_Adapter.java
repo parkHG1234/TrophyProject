@@ -51,7 +51,7 @@ public class Notice_Adapter extends BaseAdapter {
         }
         Notice_TextView_title = (TextView) convertView.findViewById(R.id.Notice_TextView_title);
         if(Notice_Num_Position == position){
-            Notice_TextView_title.setBackgroundColor(convertView.getResources().getColor(R.color.MainColor1));
+            Notice_TextView_title.setBackgroundColor(convertView.getResources().getColor(R.color.main1color));
             Notice_TextView_title.setTextColor(convertView.getResources().getColor(R.color.White));
         }
         else{

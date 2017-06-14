@@ -52,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/White">
+            android:background="@color/White"
+            android:id="@+id/view">
 
             <TextView
                 android:text="팀 대표는 대표인계 후 탈퇴가능합니다."

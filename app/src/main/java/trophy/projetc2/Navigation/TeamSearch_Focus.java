@@ -124,7 +124,8 @@ public class TeamSearch_Focus extends AppCompatActivity {
                         .into(TeamInfo_ImageView_Emblem);
             }
             if(En_Image1.equals(".")) {
-                TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+                //TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+                TeamInfo_ImageView_Image1.setBackgroundColor(getResources().getColor(R.color.main1color_back));
             }else{
                 Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image1 + ".jpg")
                         .diskCacheStrategy(DiskCacheStrategy.NONE)

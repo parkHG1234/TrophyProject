@@ -56,7 +56,8 @@
             android:id="@+id/Customdialog_2Choice_First"
             android:layout_weight="1"
             android:background="@color/White"
-            android:textColor="@color/MainColor1"/>
+            android:textColor="@color/MainColor1"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:text="취 소"
@@ -64,7 +65,8 @@
             android:layout_height="match_parent"
             android:background="@color/White"
             android:id="@+id/Customdialog_2Choice_Second"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp" />
 
     </LinearLayout>
 </LinearLayout>

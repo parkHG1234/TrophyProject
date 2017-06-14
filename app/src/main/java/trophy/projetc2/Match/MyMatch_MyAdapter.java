@@ -77,7 +77,7 @@ public class MyMatch_MyAdapter extends BaseAdapter {
         }
         Match_CustomList_TextView_TeamName.setText(arrData.get(position).getTeamName());
         Match_CustomList_TextView_Title.setText(arrData.get(position).getTitle());
-        Match_CustomList_TextView_MatchTime.setText(arrData.get(position).getMatchTime());
+        Match_CustomList_TextView_MatchTime.setText(time_changestr(arrData.get(position).getStartTime()) + " ~ " + time_changestr(arrData.get(position).getFinishTime()));
         Match_CustomList_TextView_MatchPlace.setText(arrData.get(position).getMatchPlace());
 
         try {
@@ -135,6 +135,16 @@ public class MyMatch_MyAdapter extends BaseAdapter {
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+    }
+    public String time_changestr(String time){
+        String str = time;
+        String[] data = str.split(":");
+        if(Integer.parseInt(data[0])>12){
+            return "오후 " +Integer.toString(Integer.parseInt(data[0])-12)+"시 "+Integer.parseInt(data[1])+"분";
+        }
+        else{
+            return "오전 " +Integer.toString(Integer.parseInt(data[0]))+"시 "+Integer.parseInt(data[1])+"분";
+        }
     }
 }
 

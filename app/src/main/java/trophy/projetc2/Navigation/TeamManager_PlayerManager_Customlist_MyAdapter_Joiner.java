@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +31,9 @@ import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_TeamName;
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_joiner;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_player;
+import static trophy.projetc2.Navigation.TeamManager_TeamPlayer.refresh_joiner;
+import static trophy.projetc2.Navigation.TeamManager_TeamPlayer.refresh_player;
+
 
 /**
  * Created by 박효근 on 2017-01-14.
@@ -91,7 +91,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         else{
             SecondProfile.setVisibility(View.VISIBLE);
             SecondName.setVisibility(View.VISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
@@ -101,7 +100,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
             ThirdName.setVisibility(View.VISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
@@ -111,11 +109,25 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
         else{
             FourthProfile.setVisibility(View.VISIBLE);
             FourthName.setVisibility(View.VISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
 
         //첫번째 프로필이 존재할경우
         if(FirstProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(FirstProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            .into(FirstProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             FirstName.setText(arrData.get(position).getFirst_Name());
             FirstProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,11 +149,13 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
                         if(arrData.get(position).getFirst_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -180,7 +194,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFirst_Pk(),arrData.get(position).getTeam_Pk(), arrData.get(position).getTeamName());
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -196,7 +210,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFirst_Pk(),TeamManager_TeamName);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFirst_Pk(), arrData.get(position).getTeamName());
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -211,6 +225,21 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
             });
         }
         if(SecondProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(SecondProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            .into(SecondProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             SecondName.setText(arrData.get(position).getSecond_Name());
             SecondProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -232,11 +261,13 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
                         if(arrData.get(position).getSecond_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -275,7 +306,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getSecond_Pk(),arrData.get(position).getTeam_Pk(), arrData.get(position).getTeamName());
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -291,7 +322,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getSecond_Pk(),TeamManager_TeamName);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getSecond_Pk(),arrData.get(position).getTeamName());
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -306,6 +337,21 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
             });
         }
         if(ThirdProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(ThirdProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            .into(ThirdProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             ThirdName.setText(arrData.get(position).getThird_Name());
             ThirdProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -327,11 +373,13 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
                         if(arrData.get(position).getThird_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -370,7 +418,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getThird_Pk(),arrData.get(position).getTeam_Pk(), arrData.get(position).getTeamName());
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -386,7 +434,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getThird_Pk(),TeamManager_TeamName);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getThird_Pk(),arrData.get(position).getTeamName());
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -401,6 +449,21 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
             });
         }
         if(FourthProfile.getVisibility()==View.VISIBLE){
+            try{
+                String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
+                if(En_Profile.equals("."))
+                {
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(FourthProfile);
+                }
+                else
+                {
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            .into(FourthProfile);
+                }
+            }
+            catch (UnsupportedEncodingException e){
+
+            }
             FourthName.setText(arrData.get(position).getFourth_Name());
             FourthProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -422,11 +485,13 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
                         if(arrData.get(position).getFourth_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Web_basket/imgs/Profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .skipMemoryCache(true)
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -465,7 +530,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Allow= new HttpClient();
-                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk, TeamManager_TeamName);
+                            String result = http_Joiner_Allow.HttpClient("Trophy_part1","TeamManager_Joiner_Allow.jsp",arrData.get(position).getFourth_Pk(),arrData.get(position).getTeam_Pk(), arrData.get(position).getTeamName());
                             parsedData_Joiner_Allow = jsonParserList_Joiner_Allow(result);
                             if(parsedData_Joiner_Allow[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
@@ -481,7 +546,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                         @Override
                         public void onClick(View view) {
                             HttpClient http_Joiner_Refuse= new HttpClient();
-                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFourth_Pk(),TeamManager_TeamName);
+                            String result = http_Joiner_Refuse.HttpClient("Trophy_part1","TeamManager_Joiner_Refuse.jsp",arrData.get(position).getFourth_Pk(),arrData.get(position).getTeamName());
                             parsedData_Joiner_Refuse = jsonParserList_Joiner_Refuse(result);
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();

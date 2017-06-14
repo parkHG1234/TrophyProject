@@ -21,8 +21,8 @@ public class TeamManager_PlayerManager_Customlist_MyData_Player {
     private String Fourth_Name;
     private String Fourth_Pk;
     private String Fourth_Duty;
-
-    public TeamManager_PlayerManager_Customlist_MyData_Player(String First_Profile, String First_Name, String First_Pk, String First_Duty, String Second_Profile, String Second_Name, String Second_Pk, String Second_Duty, String Third_Profile, String Third_Name, String Third_Pk, String Third_Duty, String Fourth_Profile, String Fourth_Name, String Fourth_Pk, String Fourth_Duty) {
+    private String Team_Pk;
+    public TeamManager_PlayerManager_Customlist_MyData_Player(String First_Profile, String First_Name, String First_Pk, String First_Duty, String Second_Profile, String Second_Name, String Second_Pk, String Second_Duty, String Third_Profile, String Third_Name, String Third_Pk, String Third_Duty, String Fourth_Profile, String Fourth_Name, String Fourth_Pk, String Fourth_Duty,String Team_Pk) {
         this.First_Profile = First_Profile;
         this.First_Name = First_Name;
         this.First_Pk = First_Pk;
@@ -39,6 +39,7 @@ public class TeamManager_PlayerManager_Customlist_MyData_Player {
         this.Fourth_Name = Fourth_Name;
         this.Fourth_Pk = Fourth_Pk;
         this.Fourth_Duty = Fourth_Duty;
+        this.Team_Pk = Team_Pk;
     }
 
     public String getFirst_Profile() {
@@ -105,4 +106,5 @@ public class TeamManager_PlayerManager_Customlist_MyData_Player {
         return Fourth_Duty;
     }
 
+    public String getTeam_Pk(){return Team_Pk;}
 }

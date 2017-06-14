@@ -30,9 +30,14 @@
         <activity android:name=".Navigation.Notice" android:screenOrientation="portrait"></activity>
         <activity android:name=".Navigation.Suggest" android:screenOrientation="portrait"></activity>
         <activity android:name=".Navigation.TeamSearch_Focus" android:screenOrientation="portrait"></activity>
-        <activity android:name=".Navigation.TeamManager" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager1" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager_ChangeArea" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager_ChangeHomeCourt" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager_ChangeTeamIntro" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Navigation.TeamManager_TeamPlayer" android:screenOrientation="portrait"></activity>
         <activity android:name=".Contest.Navigation_Contest" android:screenOrientation="portrait"></activity>
         <activity android:name=".Navigation.TeamManager_ContestJoin_ContestFocus" android:screenOrientation="portrait"></activity>
+
         <activity android:name=".Contest.Contest_Detail" android:screenOrientation="portrait"></activity>
         <activity android:name=".Contest.Contest_Detail_Form" android:screenOrientation="portrait"></activity>
         <activity android:name=".Navigation.Last_Contest_ViewPager" android:screenOrientation="portrait"></activity>
@@ -46,8 +51,10 @@
         <activity android:name=".OutCourt.OutCourt_Address" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus" android:screenOrientation="portrait"></activity>
-        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write" android:screenOrientation="portrait"></activity>
-
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Comment" android:screenOrientation="portrait"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write_Camera"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Main" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.Login" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.ChangePersonalInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.ChangePw1Activity" android:screenOrientation="portrait"></activity>

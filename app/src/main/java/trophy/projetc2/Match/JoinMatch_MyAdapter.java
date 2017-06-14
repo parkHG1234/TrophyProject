@@ -75,10 +75,14 @@ public class JoinMatch_MyAdapter extends BaseAdapter{
             String[] data1 = str1.split(" / ");
             JoinMatch_CustomList_TextView_Time.setText(data1[1] + " / " + data1[2]);
         }
-
-        JoinMatch_CustomList_TextView_TeamName.setText(arrData.get(position).getTeamName());
+        if(arrData.get(position).getTeamName().equals(".")){
+            JoinMatch_CustomList_TextView_TeamName.setText("삭제된 팀");
+        }
+        else{
+            JoinMatch_CustomList_TextView_TeamName.setText(arrData.get(position).getTeamName());
+        }
         JoinMatch_CustomList_TextView_Title.setText(arrData.get(position).getTitle());
-        JoinMatch_CustomList_TextView_MatchTime.setText(arrData.get(position).getMatchTime());
+        JoinMatch_CustomList_TextView_MatchTime.setText(time_changestr(arrData.get(position).getStartTime()) + " ~ "+time_changestr(arrData.get(position).getFinishTime()));
         JoinMatch_CustomList_TextView_MatchPlace.setText(arrData.get(position).getMatchPlace());
 
         try {
@@ -138,5 +142,15 @@ public class JoinMatch_MyAdapter extends BaseAdapter{
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+    }
+    public String time_changestr(String time){
+        String str = time;
+        String[] data = str.split(":");
+        if(Integer.parseInt(data[0])>12){
+            return "오후 " +Integer.toString(Integer.parseInt(data[0])-12)+"시 "+Integer.parseInt(data[1])+"분";
+        }
+        else{
+            return "오전 " +Integer.toString(Integer.parseInt(data[0]))+"시 "+Integer.parseInt(data[1])+"분";
+        }
     }
 }

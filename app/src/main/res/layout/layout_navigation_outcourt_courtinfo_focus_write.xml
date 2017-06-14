@@ -45,44 +45,82 @@
         android:id="@+id/button16"
         android:background="@color/WhiteGray"
         android:layout_height="1sp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/White"
-        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp">
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/profile_basic_image"
-                android:layout_gravity="center"
-                android:id="@+id/OutCourt_CourtInfo_Focus_Write_ImageView_Profile"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="이동석"
-                android:textSize="15dp"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:id="@+id/OutCourt_CourtInfo_Focus_Write_TextView_Name"/>
-        </LinearLayout>
-        <EditText
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:hint="몇시에 몇명이서 오시나요"
-            android:textColor="@color/Black"
-            android:textSize="17dp"
-            android:gravity="top"
-            android:id="@+id/OutCourt_CourtInfo_Focus_Write_EditText_Content"
-            />
-    </LinearLayout>
+            android:background="@color/White"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp">
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_basic_image"
+                    android:layout_gravity="center"
+                    android:id="@+id/OutCourt_CourtInfo_Focus_Write_ImageView_Profile"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="이동석"
+                    android:textSize="15dp"
+                    android:textColor="@color/Black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:id="@+id/OutCourt_CourtInfo_Focus_Write_TextView_Name"/>
+            </LinearLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:hint="몇시에 몇명이서 오시나요"
+                android:textColor="@color/Black"
+                android:textSize="17dp"
+                android:gravity="top"
+                android:id="@+id/OutCourt_CourtInfo_Focus_Write_EditText_Content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:id="@+id/OutCourt_CourtInfo_Focus_Write_Image_Camera"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:id="@+id/OutCourt_CourtInfo_Focus_Write_Image_Cancel"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/crop__ic_cancel"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:id="@+id/OutCourt_CourtInfo_Focus_Write_Button_Camera">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/camera_write"
+                    android:scaleType="fitXY"
+                    android:padding="5dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="현재 코트 모습을 사진으로 알려주세요."
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
 </LinearLayout>

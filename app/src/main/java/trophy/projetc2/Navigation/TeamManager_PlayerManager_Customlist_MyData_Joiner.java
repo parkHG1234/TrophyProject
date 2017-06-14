@@ -17,8 +17,9 @@ public class TeamManager_PlayerManager_Customlist_MyData_Joiner {
     private String Fourth_Profile;
     private String Fourth_Name;
     private String Fourth_Pk;
-
-    public TeamManager_PlayerManager_Customlist_MyData_Joiner(String First_Profile, String First_Name, String First_Pk, String Second_Profile, String Second_Name, String Second_Pk, String Third_Profile, String Third_Name, String Third_Pk, String Fourth_Profile, String Fourth_Name, String Fourth_Pk) {
+    private String Team_Pk;
+    private String TeamName;
+    public TeamManager_PlayerManager_Customlist_MyData_Joiner(String First_Profile, String First_Name, String First_Pk, String Second_Profile, String Second_Name, String Second_Pk, String Third_Profile, String Third_Name, String Third_Pk, String Fourth_Profile, String Fourth_Name, String Fourth_Pk,String Team_Pk,String TeamName) {
         this.First_Profile = First_Profile;
         this.First_Name = First_Name;
         this.First_Pk = First_Pk;
@@ -31,6 +32,8 @@ public class TeamManager_PlayerManager_Customlist_MyData_Joiner {
         this.Fourth_Profile = Fourth_Profile;
         this.Fourth_Name = Fourth_Name;
         this.Fourth_Pk = Fourth_Pk;
+        this.Team_Pk = Team_Pk;
+        this.TeamName = TeamName;
     }
 
     public String getFirst_Profile() {
@@ -80,5 +83,7 @@ public class TeamManager_PlayerManager_Customlist_MyData_Joiner {
     public String getFourth_Pk() {
         return Fourth_Pk;
     }
+    public String getTeam_Pk(){return Team_Pk;}
+    public String getTeamName(){return TeamName;}
 }
 

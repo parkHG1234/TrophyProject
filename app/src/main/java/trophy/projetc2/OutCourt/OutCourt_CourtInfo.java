@@ -61,7 +61,7 @@ public class OutCourt_CourtInfo extends AppCompatActivity {
             if(parsedData_Match[0][0] == "."){
             }else{
                 for (int j = 0; j < parsedData_Match.length; j++) {
-                    OutCourt_CourtInfo_MyData.add(new OutCourt_CourtInfo_MyData(parsedData_Match[j][0], parsedData_Match[j][1] + parsedData_Match[j][2],parsedData_Match[j][5],OutCourt_CourtInfo.this,User_Pk,parsedData_Match[j][3],parsedData_Match[j][4]));
+                    OutCourt_CourtInfo_MyData.add(new OutCourt_CourtInfo_MyData(parsedData_Match[j][0], parsedData_Match[j][1] + "  " + parsedData_Match[j][2],parsedData_Match[j][5],OutCourt_CourtInfo.this,User_Pk,parsedData_Match[j][3],parsedData_Match[j][4]));
                 }
             }
         }

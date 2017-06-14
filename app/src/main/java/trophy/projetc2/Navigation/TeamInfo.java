@@ -1,6 +1,8 @@
 package trophy.projetc2.Navigation;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -46,7 +49,8 @@ public class TeamInfo extends AppCompatActivity {
     TextView TeamInfo_TextView_TeamIntro;
     ListView TeamInfo_ListView_Player;
     Button TeamInfo_Button_Out;
-
+    LinearLayout view;
+    static Activity TeamInfo_activity;
     TeamInfo_Player_MyAdapter TeamInfo_Player_MyAdapter;
     ArrayList<TeamInfo_Player_MyData> TeamInfo_Player_MyData;
 
@@ -57,6 +61,8 @@ public class TeamInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_teaminfo);
+        TeamInfo_activity = TeamInfo.this;
+        view = (LinearLayout)findViewById(R.id.view);
         TeamInfo_ImageVIew_Back = (ImageView)findViewById(R.id.TeamInfo_ImageVIew_Back);
         TeamInfo_ImageVIew_TeamManger = (ImageView) findViewById(R.id.TeamInfo_ImageVIew_TeamManger);
         TeamInfo_TextView_caution = (TextView)findViewById(R.id.TeamInfo_TextView_caution);
@@ -75,143 +81,151 @@ public class TeamInfo extends AppCompatActivity {
         Team_Pk = intent.getStringExtra("Team_Pk");
         TeamName = intent.getStringExtra("TeamName");
 
-        final HttpClient TeamInfo = new HttpClient();
-        String result1 =TeamInfo.HttpClient("Trophy_part1","TeamInfo.jsp",TeamName);
-        parseredData_teamInfo =  jsonParserList_getTeamInfo(result1);
+        if(Team_Pk.equals(".")){
+            view.setVisibility(View.GONE);
 
-        HttpClient http_Represent= new HttpClient();
-        String result123 = http_Represent.HttpClient("Trophy_part1","TeamInfo_Represent.jsp", User_Pk,Team_Pk);
-        parsedData_Represent = jsonParserList_Represent(result123);
-        if(parsedData_Represent[0][0].equals("succed")){
-           TeamDuty = "팀대표";
-            TeamInfo_TextView_caution.setVisibility(View.VISIBLE);
-            TeamInfo_Button_Out.setBackgroundColor(getResources().getColor(R.color.DarkGray));
         }
         else{
-            TeamDuty = "팀원";
-            TeamInfo_TextView_caution.setVisibility(View.GONE);
-        }
+            final HttpClient TeamInfo = new HttpClient();
+            String result1 =TeamInfo.HttpClient("Trophy_part1","TeamInfo.jsp",TeamName);
+            parseredData_teamInfo =  jsonParserList_getTeamInfo(result1);
 
-
-        TeamAddress_Do = parseredData_teamInfo[0][1];
-        TeamAddress_Si = parseredData_teamInfo[0][2];
-        HomeCourt = parseredData_teamInfo[0][3];
-        Introduce = parseredData_teamInfo[0][4];
-        Emblem = parseredData_teamInfo[0][5];
-        Image1 = parseredData_teamInfo[0][6];
-        Image2 = parseredData_teamInfo[0][7];
-        Image3 = parseredData_teamInfo[0][8];
-
-        if(Emblem.equals(".")) {
-            Glide.with(TeamInfo.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Emblem);
-        }else {
-            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(TeamInfo.this).getBitmapPool()))
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Emblem);
-        }
-        TeamInfo_TextView_TeamName.setText(parseredData_teamInfo[0][0]);
-        TeamInfo_TextView_TeamAddress_Do.setText(TeamAddress_Do);
-        TeamInfo_TextView_TeamAddress_Si.setText(TeamAddress_Si);
-        TeamInfo_TextView_HomeCourt.setText(HomeCourt);
-        TeamInfo_TextView_TeamIntro.setText(Introduce);
-
-        if(Image1.equals(".")) {
-            TeamInfo_ImageView_Image1.setVisibility(View.GONE);
-        }else{
-            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image1 + ".jpg")
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .into(TeamInfo_ImageView_Image1);
-        }
-
-
-        //팀원 정보
-        //팀원 리스트
-        HttpClient http_Player= new HttpClient();
-        String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Player.jsp",TeamName, Team_Pk);
-        parsedData_Player = jsonParserList_Player(result12);
-        setData_Player();
-        TeamInfo_Player_MyAdapter = new TeamInfo_Player_MyAdapter(TeamInfo.this, TeamInfo_Player_MyData);
-        //리스트뷰에 어댑터 연결
-        TeamInfo_ListView_Player.setAdapter(TeamInfo_Player_MyAdapter);
-        setListViewHeightBasedOnChildren(TeamInfo_ListView_Player);
-
-        TeamInfo_ImageVIew_Back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+            HttpClient http_Represent= new HttpClient();
+            String result123 = http_Represent.HttpClient("Trophy_part1","TeamInfo_Represent.jsp", User_Pk,Team_Pk);
+            parsedData_Represent = jsonParserList_Represent(result123);
+            if(parsedData_Represent[0][0].equals("succed")){
+                TeamDuty = "팀대표";
+                TeamInfo_TextView_caution.setVisibility(View.GONE);
+                TeamInfo_Button_Out.setBackgroundColor(getResources().getColor(R.color.DarkGray));
             }
-        });
-        TeamInfo_ImageVIew_TeamManger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TeamDuty.equals("팀대표")){
-                    Intent intent1 = new Intent(TeamInfo.this,TeamManager.class);
-                    intent1.putExtra("TeamName", TeamName);
-                    intent1.putExtra("Team_Pk", Team_Pk);
-                    intent1.putExtra("User_Pk", User_Pk);
-                    startActivity(intent1);
-                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-                }
-                else{
-                    Snackbar.make(view,"팀 관리 권한이 없습니다.",Snackbar.LENGTH_SHORT).show();
-                }
+            else{
+                TeamDuty = "팀원";
+                TeamInfo_TextView_caution.setVisibility(View.GONE);
             }
-        });
-        TeamInfo_Button_Out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(TeamDuty.equals("팀대표")){
-                }
-                else{
-                    LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
-                    final View layout = inflater.inflate(R.layout.layout_customdialog_1, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
-                    final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
-                    final TextView TeamInfo_Customdialog_1_Content = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
-                    final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
 
-                    TeamInfo_Customdialog_1_Content.setText("현재 참가중인 대회가 있을 시, 참가가 제한될 수 있습니다. \n팀을 탈퇴하시겠습니까?");
-                    final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
-                    TeamInfo_Dialog
-                            .setContentView(layout)
-                            .setCanceledOnTouchOutside(true);
-                    TeamInfo_Dialog.show();
-                    TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            TeamInfo_Dialog.dismiss();
-                        }
-                    });
-                    TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            HttpClient http_Player= new HttpClient();
-                            String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Disperse.jsp",User_Pk);
-                            parseredData_disperse = jsonParserList_getDisperse(result12);
-                            if(parseredData_disperse[0][0].equals("succed")){
-                                Snackbar.make(view,"팀 탈퇴되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        TeamInfo_Dialog.dismiss();
-                                        activity.finish();
-                                        startActivity(new Intent(TeamInfo.this, MainActivity.class));
-                                        finish();
-                                        overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-                                    }
-                                }).show();
+
+            TeamAddress_Do = parseredData_teamInfo[0][1];
+            TeamAddress_Si = parseredData_teamInfo[0][2];
+            HomeCourt = parseredData_teamInfo[0][3];
+            Introduce = parseredData_teamInfo[0][4];
+            Emblem = parseredData_teamInfo[0][5];
+            Image1 = parseredData_teamInfo[0][6];
+            Image2 = parseredData_teamInfo[0][7];
+            Image3 = parseredData_teamInfo[0][8];
+
+            if(Emblem.equals(".")) {
+                Glide.with(TeamInfo.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Emblem);
+            }else {
+                Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(TeamInfo.this).getBitmapPool()))
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Emblem);
+            }
+            TeamInfo_TextView_TeamName.setText(parseredData_teamInfo[0][0]);
+            TeamInfo_TextView_TeamAddress_Do.setText(TeamAddress_Do);
+            TeamInfo_TextView_TeamAddress_Si.setText(TeamAddress_Si);
+            TeamInfo_TextView_HomeCourt.setText(HomeCourt);
+            TeamInfo_TextView_TeamIntro.setText(Introduce);
+
+            if(Image1.equals(".")) {
+                //TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+                TeamInfo_ImageView_Image1.setBackgroundColor(getResources().getColor(R.color.main1color_back));
+            }else{
+                Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image1 + ".jpg")
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .into(TeamInfo_ImageView_Image1);
+            }
+
+
+            //팀원 정보
+            //팀원 리스트
+            HttpClient http_Player= new HttpClient();
+            String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Player.jsp",TeamName, Team_Pk);
+            parsedData_Player = jsonParserList_Player(result12);
+            setData_Player();
+            TeamInfo_Player_MyAdapter = new TeamInfo_Player_MyAdapter(TeamInfo.this, TeamInfo_Player_MyData);
+            //리스트뷰에 어댑터 연결
+            TeamInfo_ListView_Player.setAdapter(TeamInfo_Player_MyAdapter);
+            setListViewHeightBasedOnChildren(TeamInfo_ListView_Player);
+
+            TeamInfo_ImageVIew_Back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                }
+            });
+            TeamInfo_ImageVIew_TeamManger.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(TeamDuty.equals("팀대표")){
+                        Intent intent1 = new Intent(TeamInfo.this,TeamManager1.class);
+                        intent1.putExtra("TeamName", TeamName);
+                        intent1.putExtra("Team_Pk", Team_Pk);
+                        intent1.putExtra("User_Pk", User_Pk);
+                        startActivity(intent1);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                    else{
+                        Snackbar.make(view,"팀 관리 권한이 없습니다.",Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            TeamInfo_Button_Out.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(TeamDuty.equals("팀대표")){
+                        Snackbar.make(view,"팀 대표는 대표인계 후 탈퇴 가능합니다.",Snackbar.LENGTH_SHORT).show();
+                    }
+                    else{
+                        LayoutInflater inflater = (LayoutInflater)view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
+                        final View layout = inflater.inflate(R.layout.layout_customdialog_1, (ViewGroup) view.findViewById(R.id.TeamInfo_Customdialog_1_Root));
+                        final ImageView TeamInfo_Customdialog_1_Back = (ImageView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Back);
+                        final TextView TeamInfo_Customdialog_1_Content = (TextView)layout.findViewById(R.id.TeamInfo_Customdialog_1_Content);
+                        final Button TeamInfo_Customdialog_1_Ok = (Button)layout.findViewById(R.id.TeamInfo_Customdialog_1_Ok);
+
+                        TeamInfo_Customdialog_1_Content.setText("현재 참가중인 대회가 있을 시, 참가가 제한될 수 있습니다. \n팀을 탈퇴하시겠습니까?");
+                        final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
+                        TeamInfo_Dialog
+                                .setContentView(layout)
+                                .setCanceledOnTouchOutside(true);
+                        TeamInfo_Dialog.show();
+                        TeamInfo_Customdialog_1_Back.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TeamInfo_Dialog.dismiss();
                             }
-                            else{
-                                Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                        });
+                        TeamInfo_Customdialog_1_Ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                HttpClient http_Player= new HttpClient();
+                                String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Disperse.jsp",User_Pk);
+                                parseredData_disperse = jsonParserList_getDisperse(result12);
+                                if(parseredData_disperse[0][0].equals("succed")){
+                                    Snackbar.make(view,"팀 탈퇴되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            TeamInfo_Dialog.dismiss();
+                                            activity.finish();
+                                            startActivity(new Intent(TeamInfo.this, MainActivity.class));
+                                            finish();
+                                            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                                        }
+                                    }).show();
+                                }
+                                else{
+                                    Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     @Override
     public void onBackPressed() {

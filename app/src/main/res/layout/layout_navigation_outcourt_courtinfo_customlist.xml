@@ -13,7 +13,12 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:layout_height="150dp" />
-        <LinearLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/Black_70">
+            <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -25,27 +30,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_CourtName"
-                android:textColor="@color/White"/>
+                android:textColor="@color/White"
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"/>
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_CourtAddress"
                 android:textColor="@color/White"
-               />
+                />
         </LinearLayout>
 
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_TodayWrite"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/White"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="5dp" />
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_TodayWrite"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/White"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

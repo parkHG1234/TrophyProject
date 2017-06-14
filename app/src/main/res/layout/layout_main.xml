@@ -67,7 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Main_Contest_TextView_ContestFocus"
-                        android:textColor="@color/BlackGray"
+                        android:textColor="@color/LinerColor"
                         android:textStyle="normal|bold"
                         android:textSize="12dp"
                         android:paddingBottom="10dp"
@@ -114,7 +114,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Main_Contest_TextView_RankingFocus"
-                        android:textColor="@color/BlackGray"
+                        android:textColor="@color/LinerColor"
                         android:textStyle="normal|bold"
                         android:textSize="12dp"
                         android:paddingBottom="10dp"
@@ -162,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Main_Contest_TextView_Match_Focus"
-                        android:textColor="@color/BlackGray"
+                        android:textColor="@color/LinerColor"
                         android:textStyle="normal|bold"
                         android:textSize="12dp"
                         android:paddingBottom="10dp"
@@ -174,9 +174,9 @@
 
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/Contest_ListView_Match"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -209,7 +209,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/Main_Contest_TextView_OutCourt_Focus"
-                        android:textColor="@color/BlackGray"
+                        android:textColor="@color/LinerColor"
                         android:textStyle="normal|bold"
                         android:textSize="12dp"
                         android:paddingBottom="10dp"

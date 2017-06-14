@@ -52,7 +52,7 @@ public class MyMatch extends AppCompatActivity{
 
         MyMatch_MyData = new ArrayList<MyMatch_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8]));
+            MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9]));
             ContentCount = Integer.parseInt(parsedData_Match[i][0]);
         }
         adapter = new MyMatch_MyAdapter(this, MyMatch_MyData);
@@ -92,7 +92,7 @@ public class MyMatch extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -127,7 +127,7 @@ public class MyMatch extends AppCompatActivity{
                 parsedData_Match = jsonParserList_Match(result);
 
                 for (int i = 0; i < parsedData_Match.length; i++) {
-                    MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8]));
+                    MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9]));
                     ContentCount = Integer.parseInt(parsedData_Match[i][0]);
                 }
                 adapter.notifyDataSetChanged();
@@ -155,7 +155,7 @@ public class MyMatch extends AppCompatActivity{
 
         MyMatch_MyData = new ArrayList<MyMatch_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8]));
+            MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9]));
             ContentCount = Integer.parseInt(parsedData_Match[i][0]);
         }
         adapter = new MyMatch_MyAdapter(this, MyMatch_MyData);

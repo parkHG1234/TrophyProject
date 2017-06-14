@@ -25,16 +25,17 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_Activity;
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
 import static trophy.projetc2.Navigation.TeamManager_ContestJoin.Contestjoin_timer;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.PlayerManager_timer;
-import static trophy.projetc2.Navigation.TeamManager_PlayerManager.refresh_player;
+import static trophy.projetc2.Navigation.TeamManager_TeamPlayer.PlayerManager_timer;
+import static trophy.projetc2.Navigation.TeamManager_TeamPlayer.activity_TeamManager_TeamPlayer;
+import static trophy.projetc2.Navigation.TeamManager_TeamPlayer.refresh_player;
+
 
 /**
  * Created by 박효근 on 2017-01-23.
@@ -97,7 +98,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         else{
             SecondProfile.setVisibility(View.VISIBLE);
             SecondName.setVisibility(View.VISIBLE);
-            Player2.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
         if(arrData.get(position).getThird_Name().equals("null")){
             ThirdProfile.setVisibility(View.INVISIBLE);
@@ -107,7 +107,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         else{
             ThirdProfile.setVisibility(View.VISIBLE);
             ThirdName.setVisibility(View.VISIBLE);
-            Player3.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
         if(arrData.get(position).getFourth_Name().equals("null")){
             FourthProfile.setVisibility(View.INVISIBLE);
@@ -117,7 +116,6 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
         else{
             FourthProfile.setVisibility(View.VISIBLE);
             FourthName.setVisibility(View.VISIBLE);
-            Player4.setBackgroundColor(convertView.getResources().getColor(R.color.DarkGray));
         }
 
         //첫번째 프로필이 존재할경우
@@ -126,11 +124,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
                 if(En_Profile.equals("."))
                 {
-                    Glide.with(context).load(R.drawable.teammanager_player).into(FirstProfile);
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(FirstProfile);
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(FirstProfile);
                 }
             }
@@ -168,11 +166,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
                         if(arrData.get(position).getFirst_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -221,7 +219,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFirst_Pk(),TeamManager_Team_Pk);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFirst_Pk(),arrData.get(position).getTeam_Pk());
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
                                         Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
@@ -231,7 +229,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                                 PlayerManager_timer.cancel();
                                                 ChangeRepresentDialog.dismiss();
                                                 TeamPlayerDialog.dismiss();
-                                                TeamManager_Activity.finish();
+                                                activity_TeamManager_TeamPlayer.finish();
                                             }
                                         }).show();
                                     }
@@ -287,11 +285,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
                 if(En_Profile.equals("."))
                 {
-                    Glide.with(context).load(R.drawable.teammanager_player).into(SecondProfile);
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(SecondProfile);
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(SecondProfile);
                 }
             }
@@ -329,11 +327,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
                         if(arrData.get(position).getSecond_Profile().equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -382,7 +380,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getSecond_Pk(),TeamManager_Team_Pk);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getSecond_Pk(),arrData.get(position).getTeam_Pk());
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
                                         Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
@@ -392,7 +390,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                                 PlayerManager_timer.cancel();
                                                 ChangeRepresentDialog.dismiss();
                                                 TeamPlayerDialog.dismiss();
-                                                TeamManager_Activity.finish();
+                                                activity_TeamManager_TeamPlayer.finish();
                                             }
                                         }).show();
                                     }
@@ -448,11 +446,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 Log.i("eeeee",En_Profile);
                 if(En_Profile.equals("."))
                 {
-                   //Glide.with(context).load(R.drawable.teammanager_player).into(ThirdProfile);
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(ThirdProfile);
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(ThirdProfile);
                 }
             }
@@ -490,11 +488,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                     String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
                     if(En_Profile.equals("."))
                     {
-                        Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                        Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                     }
                     else
                     {
-                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                 .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                     }
                 }
@@ -543,7 +541,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                             @Override
                             public void onClick(View view) {
                                 HttpClient http_ChangeRepresent= new HttpClient();
-                                String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getThird_Pk(),TeamManager_Team_Pk);
+                                String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getThird_Pk(),arrData.get(position).getTeam_Pk());
                                 parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                 if(parsedData_ChangeRepresent[0][0].equals("succed")){
                                     Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
@@ -553,7 +551,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                             PlayerManager_timer.cancel();
                                             ChangeRepresentDialog.dismiss();
                                             TeamPlayerDialog.dismiss();
-                                            TeamManager_Activity.finish();
+                                            activity_TeamManager_TeamPlayer.finish();
                                         }
                                     }).show();
                                 }
@@ -609,11 +607,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                 Log.i("eeeee",En_Profile);
                 if(En_Profile.equals("."))
                 {
-                    //Glide.with(context).load(R.drawable.teammanager_player).into(ThirdProfile);
+                    Glide.with(context).load(R.drawable.profile_basic_image).into(FourthProfile);
                 }
                 else
                 {
-                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                    Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                             .into(FourthProfile);
                 }
             }
@@ -651,11 +649,11 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
                         if(En_Profile.equals("."))
                         {
-                            Glide.with(context).load(R.drawable.teammanager_player).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
+                            Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFourth_Profile()+".jpg").bitmapTransform(new RoundedCornersTransformation(Glide.get(context).getBitmapPool(),1,1))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFourth_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamManager_PlayerManager_Focus_ImageView_Profile);
                         }
                     }
@@ -704,7 +702,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                 @Override
                                 public void onClick(View view) {
                                     HttpClient http_ChangeRepresent= new HttpClient();
-                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFourth_Pk(),TeamManager_Team_Pk);
+                                    String result = http_ChangeRepresent.HttpClient("Trophy_part1","TeamManager_ChangeRepresent.jsp",arrData.get(position).getFourth_Pk(),arrData.get(position).getTeam_Pk());
                                     parsedData_ChangeRepresent = jsonParserList_ChangeRepresent(result);
                                     if(parsedData_ChangeRepresent[0][0].equals("succed")){
                                         Snackbar.make(view,"팀 대표가 위임되었습니다.",Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
@@ -714,7 +712,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Player extends BaseA
                                                 PlayerManager_timer.cancel();
                                                 ChangeRepresentDialog.dismiss();
                                                 TeamPlayerDialog.dismiss();
-                                                TeamManager_Activity.finish();
+                                                activity_TeamManager_TeamPlayer.finish();
                                             }
                                         }).show();
                                     }

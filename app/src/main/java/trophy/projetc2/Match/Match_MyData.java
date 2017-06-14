@@ -11,7 +11,7 @@ public class Match_MyData {
     private String Emblem;
     private String TeamName;
     private String Title;
-    private String MatchTime;
+    private String StartTime;
     private String MatchPlace;
     private String Time;
     private String Status;
@@ -19,12 +19,13 @@ public class Match_MyData {
     private String User_Pk;
     private String Match_Date;
     private String MyTeam_Pk;
-    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String Match_Date,String MyTeam_Pk){
+    private String FinishTime;
+    public Match_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String Match_Date,String MyTeam_Pk,String FinishTime){
         this.Match_Pk = Match_Pk;
         this.Emblem = Emblem;
         this.TeamName = TeamName;
         this.Title = Title;
-        this.MatchTime = MatchTime;
+        this.StartTime = StartTime;
         this.MatchPlace = MatchPlace;
         this.Time = Time;
         this.Status = Status;
@@ -32,6 +33,7 @@ public class Match_MyData {
         this.User_Pk = User_Pk;
         this.Match_Date = Match_Date;
         this.MyTeam_Pk = MyTeam_Pk;
+        this.FinishTime = FinishTime;
     }
     public String getEmblem() {
         return Emblem;
@@ -40,8 +42,8 @@ public class Match_MyData {
         return TeamName;
     }
     public String getTitle(){return Title;}
-    public String getMatchTime(){
-        return MatchTime;
+    public String getStartTime(){
+        return StartTime;
     }
     public String getMatchPlace(){
         return MatchPlace;
@@ -63,4 +65,5 @@ public class Match_MyData {
     }
     public String getMatch_Date(){return Match_Date;}
     public String getMyTeam_Pk(){return MyTeam_Pk;}
+    public String getFinishTime(){return FinishTime;}
 }

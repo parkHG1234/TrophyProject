@@ -48,7 +48,7 @@ public class JoinMatch extends AppCompatActivity{
 
         JoinMatch_MyData = new ArrayList<JoinMatch_MyData>();
         for (int i = 0; i < parsedData_JoinMatch.length; i++) {
-            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk));
+            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8]));
         }
         Log.i("tt123", Integer.toString(ContentCount));
         adapter = new JoinMatch_MyAdapter(this, JoinMatch_MyData);
@@ -118,7 +118,7 @@ public class JoinMatch extends AppCompatActivity{
 
         JoinMatch_MyData = new ArrayList<JoinMatch_MyData>();
         for (int i = 0; i < parsedData_JoinMatch.length; i++) {
-            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk));
+            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8]));
         }
         Log.i("tt123", Integer.toString(ContentCount));
         adapter = new JoinMatch_MyAdapter(this, JoinMatch_MyData);
@@ -130,7 +130,7 @@ public class JoinMatch extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);

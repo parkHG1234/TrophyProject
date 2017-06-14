@@ -9,7 +9,8 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -22,7 +23,7 @@
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/back_button"
+                android:src="@drawable/back"
                 android:id="@+id/Layout_Navigation_TeamSearch_Button_Back"
                 android:scaleType="centerInside"
                 android:padding="5dp" />
@@ -53,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/textView19"
-                android:layout_weight="4"
+                android:layout_weight="3"
                 android:textSize="15dp"
                 android:gravity="center"
                 android:layout_marginRight="5dp" />
@@ -72,7 +73,7 @@
             android:layout_weight="1"
             android:id="@+id/Layout_Navigation_TeamSearch_ListView_TeamSearch"
             android:background="@color/White"
-            android:paddingRight="30dp"
+            android:paddingRight="10dp"
             android:paddingBottom="50dp"
             android:paddingLeft="10dp" />
     </LinearLayout>

@@ -6,9 +6,10 @@
     <color name="Red">#ff0101</color>
     <color name = "White">#ffffff</color>
     <color name = "Black">#000000</color>
+    <color name="Black_70">#70000000</color>
     <color name="WhiteGray">#fafafd</color>
     <color name="DarkGray">#b3b2b2</color>
-    <color name="BlackGray">#5f5e5e</color>
+    <color name="BlackGray">#b3b2b2</color>
     <color name="LinerColor">#8f8e8e</color>
     <color name="Gray">#4b4b4b</color>
     <color name="MainColor_Navy">#2e3140</color>
@@ -22,4 +23,5 @@
     <color name="backColor">#f7f7f7</color>
     <color name="flash">#f99c1c</color>
     <color name="main1color">#f5a73c</color>
+    <color name="main1color_back">#96641e</color>
 </resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/Customdialog_2Choice_Root"
+    android:background="@color/White">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Customdialog_2Choice_Title"
+            android:text="팀 탈퇴"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/Customdialog_2Choice_Back"
+            android:src="@drawable/clear"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1sp" />
+
+    <TextView
+        android:text="게시글을 삭제하시겠습니까?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Customdialog_2Choice_Content"
+        android:textColor="@color/Black"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <Button
+            android:text="삭 제"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/Customdialog_2Choice_First"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:textColor="@color/MainColor1"
+            android:layout_marginRight="5dp" />
+
+        <Button
+            android:text="취 소"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/White"
+            android:id="@+id/Customdialog_2Choice_Second"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
+</LinearLayout>

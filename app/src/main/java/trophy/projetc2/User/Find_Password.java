@@ -73,7 +73,7 @@ public class Find_Password extends AppCompatActivity{
                         Random random = new Random();
                         rnd = Math.abs(random.nextInt(899999) + 100000);
                         Log.i("aaaabb",String.valueOf(rnd));
-                        String msg = "바스켓북 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
+                        String msg = "오늘의농구 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
                         Date d = new Date();
                         String date = dateFormat.format(d);
@@ -97,7 +97,7 @@ public class Find_Password extends AppCompatActivity{
                     if (User_Find_Password_EditText_Confirm.getText().toString().equals(String.valueOf(rnd))) {
                         Snackbar.make(getCurrentFocus(), "인증번호가 확인되었습니다", Snackbar.LENGTH_SHORT).show();
                         Phone_Confirm_flag = true;
-                        User_Find_Password_Button_Next.setBackgroundColor(getResources().getColor(R.color.MainColor1));
+                        User_Find_Password_Button_Next.setBackgroundColor(getResources().getColor(R.color.main1color));
                         User_Find_Password_Button_Next.setTextColor(getResources().getColor(R.color.White));
                     }else {
                         Snackbar.make(getCurrentFocus(), "인증번호를 확인해 주세요", Snackbar.LENGTH_SHORT).show();

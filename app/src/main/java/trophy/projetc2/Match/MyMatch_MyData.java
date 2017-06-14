@@ -2,6 +2,8 @@ package trophy.projetc2.Match;
 
 import android.app.Activity;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+
 /**
  * Created by 박효근 on 2017-04-17.
  */
@@ -11,25 +13,27 @@ public class MyMatch_MyData{
         private String Emblem;
         private String TeamName;
         private String Title;
-        private String MatchTime;
+        private String StartTime;
         private String MatchPlace;
         private String Time;
         private String Status;
         private android.app.Activity Activity;
         private String User_Pk;
         private String JoinerCount;
-        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String MatchTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String JoinerCount){
+        private String FinishTime;
+        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String JoinerCount,String FinishTime){
             this.Match_Pk = Match_Pk;
             this.Emblem = Emblem;
             this.TeamName = TeamName;
             this.Title = Title;
-            this.MatchTime = MatchTime;
+            this.StartTime = StartTime;
             this.MatchPlace = MatchPlace;
             this.Time = Time;
             this.Status = Status;
             this.Activity = Activity;
             this.User_Pk = User_Pk;
             this.JoinerCount = JoinerCount;
+            this.FinishTime = FinishTime;
         }
         public String getEmblem() {
             return Emblem;
@@ -38,8 +42,8 @@ public class MyMatch_MyData{
             return TeamName;
         }
         public String getTitle(){return Title;}
-        public String getMatchTime(){
-            return MatchTime;
+        public String getStartTime(){
+            return StartTime;
         }
         public String getMatchPlace(){
             return MatchPlace;
@@ -62,4 +66,5 @@ public class MyMatch_MyData{
         public String getJoinerCount(){
             return JoinerCount;
         }
+        public String getFinishTime(){return FinishTime;}
 }

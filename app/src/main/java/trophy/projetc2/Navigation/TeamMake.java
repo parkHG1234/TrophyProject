@@ -137,16 +137,12 @@ public class TeamMake extends AppCompatActivity{
                                             }
                                         }).show();
                             }
+                            else if(parsedData_TeamMake[0][0].equals("already")){
+                                Snackbar.make(view,"중복된 팀명입니다.",Snackbar.LENGTH_SHORT).show();
+                            }
                             else
                             {
-                                dlg = new AlertDialog.Builder(TeamMake.this).setTitle("트로피")
-                                        .setMessage("잠시 후 다시 시도해주세요.")
-                                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                dlg.dismiss();
-                                            }
-                                        }).show();
+                                Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
                             }
                         }
                     }

@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="시합요청 글쓰기"
+            android:text="교류전 글쓰기"
             android:textColor="@color/Black"
             android:textSize="16dp"
             android:layout_centerVertical="true"
@@ -37,378 +37,330 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/White"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/Match_Write_EditText_Title"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="제목"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:maxLines="1" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:background="@color/soso">
+                <ImageView
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/emblem"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/Match_Write_ImageView_Emblem"/>
                 <TextView
-                    android:text="시합 일정"
-                    android:layout_height="match_parent"
-                    android:id="@+id/textView17"
-                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="경기날짜"
                     android:textSize="14dp"
-                    android:background="@color/White"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginBottom="1dp"
-                    android:layout_width="100dp" />
-                <LinearLayout
-                    android:orientation="horizontal"
+                    android:textColor="@color/Black"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/Match_Write_ImageView_TeamName"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/White"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginBottom="1dp">
-                    <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:text="경기날짜"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title1"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="14dp"
+                    android:hint="경기 날짜"
+                    android:layout_marginLeft="10dp"
+                    android:background ="@null"
+                    android:id="@+id/Match_Write_EditText_Date"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="경기시간"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title2"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal">
+                    <EditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_marginLeft="10dp">
-
-                        <EditText
-                            android:text="1111"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/Match_Write_EditText_Year"
-                            android:inputType="date"
-                            android:layout_weight="1"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:text=" / "
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/textView14"
-                            android:layout_weight="1.3"
-                            android:textSize="14sp"
-                            android:gravity="center"/>
-                            <EditText
-                                android:text="01"
-                                android:textSize="14sp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:inputType="date"
-                                android:ems="10"
-                                android:id="@+id/Match_Write_EditText_Month"
-                                android:layout_weight="1"/>
-                        <TextView
-                            android:text=" / "
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/textView25"
-                            android:layout_weight="1.3"
-                            android:textSize="14sp"
-                            android:gravity="center"/>
-                            <EditText
-                                android:text="01"
-                                android:textSize="14sp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:inputType="date"
-                                android:ems="10"
-                                android:id="@+id/Match_Write_EditText_Day"
-                                android:layout_weight="1"
-                                />
-                    </LinearLayout>
+                        android:layout_height="30dp"
+                        android:textSize="14dp"
+                        android:hint="경기 시작시간"
+                        android:layout_marginLeft="10dp"
+                        android:background ="@null"
+                        android:id="@+id/Match_Write_EditText_StartTime"
+                        android:layout_weight="1"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textSize="14dp"
+                        android:hint="경기 종료시간"
+                        android:layout_marginLeft="10dp"
+                        android:background ="@null"
+                        android:id="@+id/Match_Write_EditText_FinishTime"
+                        android:layout_weight="1"/>
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso"/>
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="5dp">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/Match_Write_EditText_Time"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="시간 ex) 오후 9시 ~ 11시 "
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:maxLines="1" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="경기장소"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title3"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="14dp"
+                    android:hint="경기 장소"
+                    android:layout_marginLeft="10dp"
+                    android:background ="@null"
+                    android:id="@+id/Match_Write_EditText_Place"
+                    android:maxLength="20"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso"/>
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="5dp">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType= "textPersonName"
-                        android:ems="10"
-                        android:id="@+id/Match_Write_EditText_Place"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="장소 ex) 서울시 강남구 ＊＊체육센터"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:maxLines="1" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="비용"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title4"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="14dp"
+                    android:hint="비용"
+                    android:layout_marginLeft="10dp"
+                    android:background ="@null"
+                    android:id="@+id/Match_Write_EditText_Pay"
+                    android:maxLength="20"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso"/>
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="5dp">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/Match_Write_EditText_Pay"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="비용 ex) 생수 3통 음료 3통"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:maxLines="1" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:text="유니폼"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title5"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:textSize="14dp"
+                    android:hint="유니폼"
+                    android:layout_marginLeft="10dp"
+                    android:background ="@null"
+                    android:id="@+id/Match_Write_EditText_Color"
+                    android:maxLength="20"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso"/>
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/Match_Write_EditText_Color"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="유니폼색 ex) 흰색"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:maxLines="1" />
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
-
+                    android:layout_height="wrap_content"
+                    android:text="기타사항"
+                    android:textColor="@color/Black"
+                    android:textSize="12dp"
+                    android:id="@+id/title6"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
                     <EditText
-                        android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:layout_marginLeft="10dp"
+                        android:background ="@null"
                         android:id="@+id/Match_Write_EditText_Extra"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:hint="기타사항"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp"
-                        android:paddingLeft="10dp"
-                        android:textSize="14sp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginBottom="1dp"
                         android:gravity="top"
-                        android:paddingTop="10dp" />
+                        android:maxLength="200"
+                        android:layout_marginTop="2dp" />
                 </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/soso" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0/100"
+                    android:id="@+id/Match_Write_TextView_ExtraCount"
+                    android:gravity="right"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_height="80dp">
+                android:background="@color/White"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="100dp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/White"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp">
+                    android:layout_marginTop="10dp">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
                         <CheckBox
-                            android:text="주차 x"
-                            android:layout_width="match_parent"
+                            android:text=" 주차 x"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_Parking_Not"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"/>
+
                         <CheckBox
-                            android:text="무료 주차"
-                            android:layout_width="match_parent"
+                            android:text=" 무료 주차"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_Parking_Free"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:layout_gravity="center"
+                            android:layout_centerVertical="true"
+                            android:layout_centerInParent="true"
+                            />
+
                         <CheckBox
-                            android:text="유료 주차"
-                            android:layout_width="match_parent"
+                            android:text=" 유료 주차"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_Parking_Charge"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
-                    </LinearLayout>
+                            android:textSize="12sp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
                         <CheckBox
-                            android:text="전광판"
-                            android:layout_width="match_parent"
+                            android:text=" 전광판"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_Display"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"/>
                         <CheckBox
-                            android:text="샤워 가능"
-                            android:layout_width="match_parent"
+                            android:text=" 샤워 가능"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_Shower"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:layout_centerVertical="true"
+                            android:layout_centerInParent="true"/>
                         <CheckBox
-                            android:text="냉/난방"
-                            android:layout_width="match_parent"
+                            android:text="  냉 / 난방"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:id="@+id/Match_Write_CheckBox_ColdHot"
-                            android:layout_weight="1"
-                            android:textSize="12sp"/>
-                    </LinearLayout>
+                            android:textSize="12sp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"/>
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/DarkGray"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="1dp">
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:text="작성하기"
-                        android:id="@+id/Match_Write_Button_Write"
-                        android:layout_weight="1"
-                        android:background="@color/White"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:textSize="14sp"
-                        />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_height="40dp"
+                android:text="올리기"
+                android:id="@+id/Match_Write_Button_Write"
+                android:background="@color/soso"
+                android:textColor="@color/White"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

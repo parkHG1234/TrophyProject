@@ -1,6 +1,7 @@
 package trophy.projetc2.Match;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -25,7 +26,10 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -40,18 +44,18 @@ import trophy.projetc2.User.Login;
  */
 
 public class JoinMatch_Focus extends AppCompatActivity{
-    ImageView Match_Focus_ImageView_Back, Match_Focus_ImageView_Status, Match_Focus_ImageView_Emblem;
+    TextView title1,title2,title3,title4,title5, title6, vs;
+    ImageView Match_Focus_ImageView_Back, Match_Focus_ImageView_Status, Match_Focus_ImageView_Emblem, Match_Focus_ImageView_OpponentEmblem;
     TextView Match_Focus_TextView_TeamName, Match_Focus_TextView_Title, Match_Focus_TextView_Date, Match_Focus_TextView_Time,
-            Match_Focus_TextView_Place, Match_Focus_TextView_Pay, Match_Focus_TextView_Color, Match_Focus_TextView_Extra;
+            Match_Focus_TextView_Place, Match_Focus_TextView_Pay, Match_Focus_TextView_Color, Match_Focus_TextView_Extra, Match_Focus_TextView_OpponentTeamName;
     CheckBox Match_Focus_CheckBox_Parking_Not, Match_Focus_CheckBox_Parking_Free, Match_Focus_CheckBox_Parking_Charge,
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
     Button Match_Focus_Button_Apply;
-    LinearLayout JoinMatch_Focus_LinerLayout_Joined;
-    ImageView JoinMatch_Focus_Joined_ImageView_Emblem, JoinMatch_Focus_Joined_ImageView_Phone;
-    TextView JoinMatch_Focus_Joined_TextView_TeamName;
+    Button JoinMatch_Focus_Joined_ImageView_Phone;
+    LinearLayout home, away;
 
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
-    String Match_Pk, User_Pk,Team_Pk, Time, Title, MatchTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date,
+    String Match_Pk, User_Pk,Team_Pk, Time, Title, StartTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date, FinishTime,
             Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
     String[][] parsedData_Match_Focus, parsedData_succed, parsedData_JoinMatch_Focus_Joined;
     String OtherTeam_Phone="";
@@ -70,21 +74,24 @@ public class JoinMatch_Focus extends AppCompatActivity{
         parsedData_Match_Focus = jsonParserList_Match(result);
 
         Match_Pk = parsedData_Match_Focus[0][0];Match_User_Pk = parsedData_Match_Focus[0][1];Team_Pk = parsedData_Match_Focus[0][2];
-        Time = parsedData_Match_Focus[0][3];Title = parsedData_Match_Focus[0][4];MatchTime = parsedData_Match_Focus[0][5];
+        Time = parsedData_Match_Focus[0][3];Title = parsedData_Match_Focus[0][4];StartTime = parsedData_Match_Focus[0][5];
         MatchPlace = parsedData_Match_Focus[0][6];Parking_Not = parsedData_Match_Focus[0][7];Parking_Free = parsedData_Match_Focus[0][8];
         Parking_Charge = parsedData_Match_Focus[0][9];Display = parsedData_Match_Focus[0][10];Shower = parsedData_Match_Focus[0][11];
         ColdHot = parsedData_Match_Focus[0][12];
         Emblem = parsedData_Match_Focus[0][14]; TeamName = parsedData_Match_Focus[0][15];
         Pay = parsedData_Match_Focus[0][16]; Color = parsedData_Match_Focus[0][17]; Extra = parsedData_Match_Focus[0][18];
-        Match_Date = parsedData_Match_Focus[0][19];
+        Match_Date = parsedData_Match_Focus[0][19];FinishTime = parsedData_Match_Focus[0][20];
         String str = parsedData_Match_Focus[0][19];
         String[] data = str.split(":::");
-        Match_Date = data[0] + " / " + data[1];
+        String str1 = data[1];
+        String[] MatchDate = str1.split(" / ");
 
         Match_Focus_ImageView_Back = (ImageView)findViewById(R.id.Match_Focus_ImageView_Back);
         Match_Focus_ImageView_Status = (ImageView)findViewById(R.id.Match_Focus_ImageView_Status);
         Match_Focus_ImageView_Emblem = (ImageView)findViewById(R.id.Match_Focus_ImageView_Emblem);
+        Match_Focus_ImageView_OpponentEmblem = (ImageView)findViewById(R.id.Match_Focus_ImageView_OpponentEmblem);
         Match_Focus_TextView_TeamName = (TextView)findViewById(R.id.Match_Focus_TextView_TeamName);
+        Match_Focus_TextView_OpponentTeamName = (TextView)findViewById(R.id.Match_Focus_TextView_OpponentTeamName);
         Match_Focus_TextView_Title = (TextView)findViewById(R.id.Match_Focus_TextView_Title);
         Match_Focus_TextView_Date = (TextView)findViewById(R.id.Match_Focus_TextView_Date);
         Match_Focus_TextView_Time = (TextView)findViewById(R.id.Match_Focus_TextView_Time);
@@ -99,23 +106,38 @@ public class JoinMatch_Focus extends AppCompatActivity{
         Match_Focus_CheckBox_Shower = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_Shower);
         Match_Focus_CheckBox_ColdHot = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_ColdHot);
         Match_Focus_Button_Apply = (Button)findViewById(R.id.Match_Focus_Button_Apply);
-        JoinMatch_Focus_LinerLayout_Joined = (LinearLayout)findViewById(R.id.JoinMatch_Focus_LinerLayout_Joined);
-        JoinMatch_Focus_Joined_ImageView_Emblem = (ImageView)findViewById(R.id.JoinMatch_Focus_Joined_ImageView_Emblem);
-        JoinMatch_Focus_Joined_TextView_TeamName = (TextView)findViewById(R.id.JoinMatch_Focus_Joined_TextView_TeamName);
-        JoinMatch_Focus_Joined_ImageView_Phone = (ImageView)findViewById(R.id.JoinMatch_Focus_Joined_ImageView_Phone);
+        JoinMatch_Focus_Joined_ImageView_Phone = (Button)findViewById(R.id.JoinMatch_Focus_Joined_ImageView_Phone);
+        home = (LinearLayout)findViewById(R.id.home);away = (LinearLayout)findViewById(R.id.away);
 
+        title1 = (TextView)findViewById(R.id.title1);title2 = (TextView)findViewById(R.id.title2);title3 = (TextView)findViewById(R.id.title3);
+        title4 = (TextView)findViewById(R.id.title4);title5 = (TextView)findViewById(R.id.title5);title6= (TextView)findViewById(R.id.title6);
+        vs = (TextView)findViewById(R.id.vs);
+        title1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        title2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        title3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        title4.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        title5.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        title6.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        vs.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        Match_Focus_TextView_Title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        Match_Focus_TextView_TeamName.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        Match_Focus_TextView_OpponentTeamName.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
+        JoinMatch_Focus_Joined_ImageView_Phone.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_Focus_CheckBox_Parking_Not.setClickable(false);Match_Focus_CheckBox_Parking_Free.setClickable(false);Match_Focus_CheckBox_Parking_Charge.setClickable(false);
         Match_Focus_CheckBox_Display.setClickable(false);Match_Focus_CheckBox_Shower.setClickable(false);Match_Focus_CheckBox_ColdHot.setClickable(false);
-
 
         if(Status.equals("Joining")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_joining);
             Match_Focus_Button_Apply.setText("신청취소");
-            JoinMatch_Focus_LinerLayout_Joined.setVisibility(View.GONE);
+            away.setVisibility(View.GONE);
+            vs.setVisibility(View.GONE);
+            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.GONE);
         }
         else if(Status.equals("refuse")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_refuse);
-            JoinMatch_Focus_LinerLayout_Joined.setVisibility(View.GONE);
+            away.setVisibility(View.GONE);
+            vs.setVisibility(View.GONE);
+            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.GONE);
             Match_Focus_Button_Apply.setText("게시글 삭제");
 //            Match_Focus_Button_Apply.setBackgroundColor(getResources().getColor(R.color.White));
 //            Match_Focus_Button_Apply.setTextColor(getResources().getColor(R.color.Black));
@@ -123,27 +145,30 @@ public class JoinMatch_Focus extends AppCompatActivity{
         }
         else if(Status.equals("allow")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_allow);
-            JoinMatch_Focus_LinerLayout_Joined.setVisibility(View.VISIBLE);
+            away.setVisibility(View.VISIBLE);
+            vs.setVisibility(View.VISIBLE);
+            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.VISIBLE);
             Match_Focus_Button_Apply.setVisibility(View.GONE);
             HttpClient http_joinmatch_focus_joined = new HttpClient();
             String result1 = http_joinmatch_focus_joined.HttpClient("Trophy_part1","JoinMatch_Focus_Joined.jsp", Match_Pk);
             parsedData_JoinMatch_Focus_Joined = jsonParserList_JoinMatch_Focus_Joined(result1);
             OtherTeam_Phone = parsedData_JoinMatch_Focus_Joined[0][4];
+
             try {
                 String En_Profile = URLEncoder.encode(parsedData_JoinMatch_Focus_Joined[0][1], "utf-8");
                 if (En_Profile.equals(".")) {
                     Glide.with(JoinMatch_Focus.this).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(JoinMatch_Focus.this).getBitmapPool()))
-                            .into(JoinMatch_Focus_Joined_ImageView_Emblem);
+                            .into(Match_Focus_ImageView_OpponentEmblem);
                 } else {
                     Glide.with(JoinMatch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(JoinMatch_Focus.this).getBitmapPool()))
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true)
-                            .into(JoinMatch_Focus_Joined_ImageView_Emblem);
+                            .into(Match_Focus_ImageView_OpponentEmblem);
                 }
             } catch (UnsupportedEncodingException e) {
 
             }
-            JoinMatch_Focus_Joined_TextView_TeamName.setText(parsedData_JoinMatch_Focus_Joined[0][2]);
+            Match_Focus_TextView_OpponentTeamName.setText(parsedData_JoinMatch_Focus_Joined[0][2]);
 
         }
         JoinMatch_Focus_Joined_ImageView_Phone.setOnClickListener(new View.OnClickListener() {
@@ -181,8 +206,8 @@ public class JoinMatch_Focus extends AppCompatActivity{
 
         Match_Focus_TextView_TeamName.setText(TeamName);
         Match_Focus_TextView_Title.setText(Title);
-        Match_Focus_TextView_Date.setText(Match_Date);
-        Match_Focus_TextView_Time.setText(MatchTime);
+        Match_Focus_TextView_Date.setText(MatchDate[0] + "월  " + MatchDate[1] + "일(" + DayoftheWeek(data[0]+MatchDate[0]+MatchDate[1]) + ")");
+        Match_Focus_TextView_Time.setText(time_changestr(StartTime) + " ~ " + time_changestr(FinishTime));
         Match_Focus_TextView_Place.setText(MatchPlace);
         Match_Focus_TextView_Pay.setText(Pay);
         Match_Focus_TextView_Color.setText(Color);
@@ -278,7 +303,7 @@ public class JoinMatch_Focus extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10","msg11","msg12","msg13","msg14","msg15","msg16","msg17","msg18","msg19", "msg20"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10","msg11","msg12","msg13","msg14","msg15","msg16","msg17","msg18","msg19", "msg20","msg21"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -351,6 +376,53 @@ public class JoinMatch_Focus extends AppCompatActivity{
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+    }
+    public String time_changestr(String time){
+        String str = time;
+        String[] data = str.split(":");
+        if(Integer.parseInt(data[0])>12){
+            return "오후 " +Integer.toString(Integer.parseInt(data[0])-12)+"시 "+Integer.parseInt(data[1])+"분";
+        }
+        else{
+            return "오전 " +Integer.toString(Integer.parseInt(data[0]))+"시 "+Integer.parseInt(data[1])+"분";
+        }
+    }
+    public String DayoftheWeek(String date){
+        String day="월";
+        try{
+            String inputDate = date;
+            DateFormat df =new SimpleDateFormat("yyyyMMDD");
+            Date date1 = df.parse(inputDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date1);
+            switch (calendar.get(Calendar.DAY_OF_WEEK)) {
+                case 1:
+                    day = "목";
+                    break;
+                case 2:
+                    day = "금";
+                    break;
+                case 3:
+                    day = "토";
+                    break;
+                case 4:
+                    day = "일";
+                    break;
+                case 5:
+                    day = "월";
+                    break;
+                case 6:
+                    day = "화";
+                    break;
+                case 7:
+                    day = "수";
+                    break;
+
+            }
+        }catch (ParseException e){
+
+        }
+        return day;
     }
 }
 

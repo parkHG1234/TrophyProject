@@ -33,6 +33,7 @@ public class ChangeAreaActivity extends AppCompatActivity {
     trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     SharedPreferences preferences;
+    String Team_Pk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

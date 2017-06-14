@@ -1,11 +1,9 @@
 package trophy.projetc2.OutCourt;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +28,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,15 +45,11 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
-import trophy.projetc2.Match.MyMatch;
-import trophy.projetc2.Match.MyMatch_MyData;
-import trophy.projetc2.Navigation.TeamManager_TeamIntroduce;
 import trophy.projetc2.R;
 import trophy.projetc2.User.Login;
 
@@ -89,6 +82,8 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     static int contentCount=0;
     String Content = "exist";
     View dialogview;
+    static int Content_Total_ImageH = 0;
+    int width;static int imageH=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +93,8 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         User_Pk = intent1.getStringExtra("User_Pk");
         Court_Pk = intent1.getStringExtra("Court_Pk");
         Today_Content = intent1.getStringExtra("Today_Content");
-
+        int width = getWindowManager().getDefaultDisplay().getWidth();
+        imageH = getWindowManager().getDefaultDisplay().getWidth();
         currentTime();
         ScrollView = (ScrollView)findViewById(R.id.ScrollView);
         OutCourt_CourtInfo_Focus_TextView_Title = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_TextView_Title);
@@ -194,12 +190,14 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
         for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
-            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk));
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8]));
             ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
+            Log.i("Content123",Integer.toString(ContentCount));
         }
         adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
         OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
         setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+
 
         OutCourt_CourtInfo_Focus_ListView_Content.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -208,7 +206,6 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                     OutCourt_Scroll OutCourt_Scroll = new OutCourt_Scroll();
                     OutCourt_Scroll.execute();
                 }
-                Log.i("tt123", Integer.toString(ContentCount));
             }
 
             @Override
@@ -290,6 +287,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 }
             }
         });
+
         OutCourt_CourtInfo_Focus_EditText_Write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -377,7 +375,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
         for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
-            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk));
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8]));
             ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
         }
         adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
@@ -388,7 +386,27 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     public void onBackPressed() {
         finish();
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+       // setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+    }
+
     public String[][] jsonParserList_OurtCourt(String pRecvServerPage){
         Log.i("서버에서 받은 전체 내용", pRecvServerPage);
         try{
@@ -451,7 +469,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -494,19 +512,18 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
-
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
             totalHeight += listItem.getMeasuredHeight();
-            contentCount++;
         }
-        Log.i("Content123",Integer.toString(contentCount));
+
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1))-(imageH*9);
         listView.setLayoutParams(params);
         listView.requestLayout();
         scrollHeight= params.height;
+        Log.i("test123", Integer.toString(scrollHeight));
     }
     public static void setListViewHeightBasedOnChildren_scroll(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -516,7 +533,6 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         }
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
-
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, listView);
             listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
@@ -525,10 +541,10 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        Log.i("ttt","t1");
         listView.setLayoutParams(params);
         listView.requestLayout();
         scrollHeight= params.height;
+        Log.i("test123", Integer.toString(scrollHeight));
     }
     public class OutCourt_Scroll extends AsyncTask<String, Void, String> {
         ProgressDialog asyncDialog = new ProgressDialog(OutCourt_CourtInfo_Focus.this);
@@ -548,16 +564,27 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
             try {
                 HttpClient http_match_focus_Content = new HttpClient();
                 String result1 = http_match_focus_Content.HttpClient("Trophy_part1","OutCourt_Focus_Content_Scroll.jsp",Court_Pk,Integer.toString(ContentCount));
-                parsedData_OutCourt_Content = jsonParserList_OurtCourt_Content(result1);
-
-                for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
-                    OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk));
-                    ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
+                parsedData = jsonParserList_OurtCourt_Content(result1);
+                for (int j = 0; j < parsedData.length; j++) {
+                    OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData[j][0], parsedData[j][1], parsedData[j][2], parsedData[j][3], parsedData[j][4], parsedData[j][5], parsedData[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData[j][7], parsedData[j][8]));
+                    ContentCount = Integer.parseInt(parsedData[j][0]);
                 }
-                if(parsedData_OutCourt_Content.length == 0){
+                if(parsedData.length == 0){
                     Content = "noexist";
                 }
                 adapter = new OutCourt_CourtInfo_Focus_MyAdapter(OutCourt_CourtInfo_Focus.this, OutCourt_CourtInfo_Focus_MyData);
+
+                new Thread(new Runnable() { @Override public void run() {
+                    // 현재 UI 스레드가 아니기 때문에 메시지 큐에 Runnable을 등록 함
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+
+
+                        } });
+                }
+                }).start();
+
+                    출처: http://itmining.tistory.com/6 [IT 마이닝]
 
                 return "succed";
             } catch (Exception e) {
@@ -568,10 +595,8 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            //OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
+            // 메시지 큐에 저장될 메시지의 내용
             OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
-//                setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
-//                adapter.notifyDataSetChanged();
             setListViewHeightBasedOnChildren_scroll(OutCourt_CourtInfo_Focus_ListView_Content);
             asyncDialog.dismiss();
             super.onPostExecute(result);

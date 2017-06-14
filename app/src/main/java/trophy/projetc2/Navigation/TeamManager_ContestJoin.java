@@ -20,7 +20,6 @@ import java.util.TimerTask;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
-import static trophy.projetc2.Navigation.TeamManager.TeamManager_Team_Pk;
 
 /**
  * Created by 박효근 on 2017-01-10.
@@ -35,50 +34,50 @@ public class TeamManager_ContestJoin extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.layout_navigation_teammanager_contestjoin, container, false);
-        Layout_Navigation_TeamManager_ContestJoin_ListView = (ListView)rootView.findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ListView);
-        HttpClient http_contestjoin = new HttpClient();
-        String result = http_contestjoin.HttpClient("Trophy_part1", "TeamManager_ContestJoin.jsp",TeamManager_Team_Pk);
-        String[][] ContestJoin = jsonParserList_ContestJoin(result);
-
-        ArrayList<TeamManager_ContestJoin_Customlist_MyData> TeamManager_ContestJoin_Customlist_MyData;
-        TeamManager_ContestJoin_Customlist_MyData = new ArrayList<TeamManager_ContestJoin_Customlist_MyData>();
-        for (int i = 0; i < ContestJoin.length; i++) {
-            TeamManager_ContestJoin_Customlist_MyData.add(new TeamManager_ContestJoin_Customlist_MyData(ContestJoin[i][0], ContestJoin[i][1],
-                    ContestJoin[i][2], ContestJoin[i][3],ContestJoin[i][4],ContestJoin[i][5],getActivity()));
-        }
-        TeamManager_ContestJoin_Customlist_MyAdapter Adapter = new TeamManager_ContestJoin_Customlist_MyAdapter(getContext(), TeamManager_ContestJoin_Customlist_MyData);
-        Layout_Navigation_TeamManager_ContestJoin_ListView.setAdapter(Adapter);
-        //팀 신청자 및 팀원 새로고침 타이머
-        myTask = new TimerTask() {
-            public void run() {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(refresh_contestjoin.equals("refresh")){
-                            HttpClient http_contestjoin = new HttpClient();
-                            String result = http_contestjoin.HttpClient("Trophy_part1", "TeamManager_ContestJoin.jsp",TeamManager_Team_Pk);
-                            String[][] ContestJoin = jsonParserList_ContestJoin(result);
-
-                            ArrayList<TeamManager_ContestJoin_Customlist_MyData> TeamManager_ContestJoin_Customlist_MyData;
-                            TeamManager_ContestJoin_Customlist_MyData = new ArrayList<TeamManager_ContestJoin_Customlist_MyData>();
-                            for (int i = 0; i < ContestJoin.length; i++) {
-                                TeamManager_ContestJoin_Customlist_MyData.add(new TeamManager_ContestJoin_Customlist_MyData(ContestJoin[i][0], ContestJoin[i][1],
-                                        ContestJoin[i][2], ContestJoin[i][3],ContestJoin[i][4],ContestJoin[i][5],getActivity()));
-                            }
-                            TeamManager_ContestJoin_Customlist_MyAdapter Adapter = new TeamManager_ContestJoin_Customlist_MyAdapter(getContext(), TeamManager_ContestJoin_Customlist_MyData);
-                            Layout_Navigation_TeamManager_ContestJoin_ListView.setAdapter(Adapter);
-                            refresh_contestjoin = "stop";
-                        }
-                        else{
-
-                        }
-                    }
-                });
-            }
-        };
-        Contestjoin_timer = new Timer();
-        //timer.schedule(myTask, 5000);  // 5초후 실행하고 종료
-        Contestjoin_timer.schedule(myTask, 100, 2000); // 5초후 첫실행, 3초마다 계속실행
+//        Layout_Navigation_TeamManager_ContestJoin_ListView = (ListView)rootView.findViewById(R.id.Layout_Navigation_TeamManager_ContestJoin_ListView);
+//        HttpClient http_contestjoin = new HttpClient();
+//        String result = http_contestjoin.HttpClient("Trophy_part1", "TeamManager_ContestJoin.jsp",TeamManager_Team_Pk);
+//        String[][] ContestJoin = jsonParserList_ContestJoin(result);
+//
+//        ArrayList<TeamManager_ContestJoin_Customlist_MyData> TeamManager_ContestJoin_Customlist_MyData;
+//        TeamManager_ContestJoin_Customlist_MyData = new ArrayList<TeamManager_ContestJoin_Customlist_MyData>();
+//        for (int i = 0; i < ContestJoin.length; i++) {
+//            TeamManager_ContestJoin_Customlist_MyData.add(new TeamManager_ContestJoin_Customlist_MyData(ContestJoin[i][0], ContestJoin[i][1],
+//                    ContestJoin[i][2], ContestJoin[i][3],ContestJoin[i][4],ContestJoin[i][5],getActivity()));
+//        }
+//        TeamManager_ContestJoin_Customlist_MyAdapter Adapter = new TeamManager_ContestJoin_Customlist_MyAdapter(getContext(), TeamManager_ContestJoin_Customlist_MyData);
+//        Layout_Navigation_TeamManager_ContestJoin_ListView.setAdapter(Adapter);
+//        //팀 신청자 및 팀원 새로고침 타이머
+//        myTask = new TimerTask() {
+//            public void run() {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if(refresh_contestjoin.equals("refresh")){
+//                            HttpClient http_contestjoin = new HttpClient();
+//                            String result = http_contestjoin.HttpClient("Trophy_part1", "TeamManager_ContestJoin.jsp",TeamManager_Team_Pk);
+//                            String[][] ContestJoin = jsonParserList_ContestJoin(result);
+//
+//                            ArrayList<TeamManager_ContestJoin_Customlist_MyData> TeamManager_ContestJoin_Customlist_MyData;
+//                            TeamManager_ContestJoin_Customlist_MyData = new ArrayList<TeamManager_ContestJoin_Customlist_MyData>();
+//                            for (int i = 0; i < ContestJoin.length; i++) {
+//                                TeamManager_ContestJoin_Customlist_MyData.add(new TeamManager_ContestJoin_Customlist_MyData(ContestJoin[i][0], ContestJoin[i][1],
+//                                        ContestJoin[i][2], ContestJoin[i][3],ContestJoin[i][4],ContestJoin[i][5],getActivity()));
+//                            }
+//                            TeamManager_ContestJoin_Customlist_MyAdapter Adapter = new TeamManager_ContestJoin_Customlist_MyAdapter(getContext(), TeamManager_ContestJoin_Customlist_MyData);
+//                            Layout_Navigation_TeamManager_ContestJoin_ListView.setAdapter(Adapter);
+//                            refresh_contestjoin = "stop";
+//                        }
+//                        else{
+//
+//                        }
+//                    }
+//                });
+//            }
+//        };
+//        Contestjoin_timer = new Timer();
+//        //timer.schedule(myTask, 5000);  // 5초후 실행하고 종료
+//        Contestjoin_timer.schedule(myTask, 100, 2000); // 5초후 첫실행, 3초마다 계속실행
         return rootView;
     }
 
