@@ -75,7 +75,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
     MaterialDialog Court_Menu_Dialog;
     boolean lastitemVisibleFlag = false;
     int ContentCount = 100000;
-    OutCourt_CourtInfo_Focus_MyAdapter adapter;
+    static OutCourt_CourtInfo_Focus_MyAdapter adapter;
     int int_scrollViewPos;
     int int_TextView_lines;
     static int scrollHeight = 0;
@@ -304,6 +304,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 }
             }
         });
+
         OutCourt_CourtInfo_Focus_ImageView_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -380,7 +381,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         }
         adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
         OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
-        setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+        //setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
     }
     @Override
     public void onBackPressed() {

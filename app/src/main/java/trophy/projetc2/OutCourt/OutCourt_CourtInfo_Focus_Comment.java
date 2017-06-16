@@ -121,7 +121,7 @@ public class OutCourt_CourtInfo_Focus_Comment extends AppCompatActivity{
                 switch (index) {
                     case 0:
                         ///내 댓글인 경우
-                        if(User_Pk.equals(OutCourt_CourtInfo_Focus_Comment_MyData.get(index).getUser_Pk())){
+                        if(User_Pk.equals(OutCourt_CourtInfo_Focus_Comment_MyData.get(position).getUser_Pk())){
                             HttpClient http_delete = new HttpClient();
                             String result1 = http_delete.HttpClient("Trophy_part1","OutCourt_Focus_Content_Comment_Delete.jsp",OutCourt_CourtInfo_Focus_Comment_MyData.get(position).getOutCourt_Content_Comment_Pk());
                             parsedData_Delete = jsonParserList_Succed(result1);

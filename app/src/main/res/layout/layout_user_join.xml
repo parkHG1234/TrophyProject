@@ -211,11 +211,10 @@
 
                     <TextView
                         android:text="생일"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:id="@+id/textView21"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp" />
+                        android:gravity="center" />
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -308,20 +307,20 @@
 
                     <TextView
                         android:text="주소"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:id="@+id/textView2"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"/>
 
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/White"
-                        android:layout_marginLeft="1dp"
-                        android:layout_marginRight="1dp">
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="1dp"
+                        android:layout_marginBottom="1dp">
 
                         <Spinner
                             android:layout_width="match_parent"
@@ -356,7 +355,86 @@
                     android:paddingTop="2dp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <TextView
+                            android:text="신장"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/textView212"
+                            android:gravity="center"
+                            />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/White"
+                            android:layout_marginTop="1dp"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:id="@+id/Join_EditText_Height"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="cm"
+                            android:gravity="center_vertical"
+                            android:background="@color/White"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <TextView
+                            android:text="체중"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/textView2123"
+                            android:gravity="center"
+                            />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/White"
+                            android:layout_marginTop="1dp"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:id="@+id/Join_EditText_Weight"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="kg"
+                            android:gravity="center_vertical"
+                            android:background="@color/White"
+                            android:layout_marginTop="1dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -413,6 +491,82 @@
                     android:layout_marginBottom="1dp"></LinearLayout>
             </LinearLayout>
 
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/DarkGray"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp">
+
+                    <CheckBox
+                        android:text="PG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_Position_PG"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:gravity="center_vertical" />
+
+                    <CheckBox
+                        android:text="SG"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_Position_SG"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:gravity="center_vertical" />
+                    <CheckBox
+                        android:text="SF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_Position_SF"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:gravity="center_vertical" />
+                    <CheckBox
+                        android:text="PF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_Position_PF"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:gravity="center_vertical" />
+                    <CheckBox
+                        android:text="C"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/Join_CheckBox_Position_C"
+                        android:layout_weight="1"
+                        android:background="@color/White"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Join_TextView_Sex_Warning2"
+                    android:background="@color/White"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:textColor="@color/Red"
+                    android:text="필수 입력 항목입니다"
+                    android:paddingLeft="10dp"
+                    android:textSize="12sp"
+                    android:paddingBottom="5dp" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1dp"></LinearLayout>
+            </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"

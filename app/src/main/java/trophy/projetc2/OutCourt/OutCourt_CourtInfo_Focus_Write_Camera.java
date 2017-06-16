@@ -1,12 +1,18 @@
 package trophy.projetc2.OutCourt;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,36 +54,56 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
     android.hardware.Camera camera;
     SurfaceView Camera_SurfaceView;
     SurfaceHolder surfaceHolder;
-    Button Camera_Button;
+    ImageView Camera_Button;
     ImageView NewsFeed_Camera_Image;
     private static String ImageFile, ImageURL;
     static int rout= 0;
+    MediaPlayer mShootSound;
     @SuppressWarnings("deprecation")
     android.hardware.Camera.PictureCallback jpegCallback;
-
+    android.hardware.Camera.ShutterCallback shutterCallback;
     final int MY_PERMISSON_REQUEST_CODE = 100;
     int APIVersion = Build.VERSION.SDK_INT;
+    int width=0;
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_outcourt_courtinfo_focus_write_camera);
+        width = getWindowManager().getDefaultDisplay().getWidth();
 
-
-        Camera_Button = (Button) findViewById(R.id.Camera_Button);
+        Camera_Button = (ImageView) findViewById(R.id.Camera_Button);
         Camera_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 view = v;
-                camera.takePicture(null, null, jpegCallback);
-
+                camera.takePicture(shutterCallback, null, jpegCallback);
             }
         });
         getWindow().setFormat(PixelFormat.UNKNOWN);
         Camera_SurfaceView = (SurfaceView) findViewById(R.id.Camera_SurfaceView);
         surfaceHolder = Camera_SurfaceView.getHolder();
         surfaceHolder.addCallback(this);
+        shutterCallback = new Camera.ShutterCallback() {
 
+            @Override
+            public void onShutter() {
+                try {
+                    AudioManager meng = (AudioManager) OutCourt_CourtInfo_Focus_Write_Camera.this.getSystemService(Context.AUDIO_SERVICE);
+                    int volume = meng.getStreamVolume(AudioManager.STREAM_NOTIFICATION);
+                    if (volume != 0) {
+                        if (mShootSound == null) {
+                            mShootSound = MediaPlayer.create(OutCourt_CourtInfo_Focus_Write_Camera.this, Uri.parse("file:///system/media/audio/ui/camera_click.ogg"));
+                        }
+                        if (mShootSound != null) {
+                            mShootSound.start();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.getStackTrace();
+                }
+            }
+        };
         jpegCallback = new android.hardware.Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, android.hardware.Camera camera) {
@@ -88,7 +114,22 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
                         Toast.makeText(getApplicationContext(), "Error camera image saving", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if(rout == 0){
+
+                    }
+                    Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+// 화면 회전을 위한 matrix객체 생성
+                    Matrix m = new Matrix();
+// matrix객체에 회전될 정보 입력
+                    m.setRotate(rout, (float) bmp.getWidth(), (float) bmp.getHeight());
+// 기존에 저장했던 bmp를 Matrix를 적용하여 다시 생성
+                    int a = Integer.parseInt(String.valueOf(Math.round(width*0.8)));
+                    Bitmap rotateBitmap = Bitmap.createBitmap(bmp, 0, 0, width, a, m, false);
+                   //Bitmap resize = Bitmap.createScaledBitmap(rotateBitmap, 1440, 1440, true);
+// 기존에 생성했던 bmp 자원해제
+//                   // bmp.recyle();
                     FileOutputStream fos = new FileOutputStream(pictureFile);
+                    rotateBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     fos.write(data);
                     fos.close();
                     Intent IntentURL = getIntent();
@@ -142,7 +183,6 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
         // 파일명을 적당히 생성, 여기선 시간으로 파일명 중복을 피한다
         ImageFile = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
-
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + ImageFile + ".jpg");
         ImageURL = String.valueOf(mediaStorageDir.getPath() + File.separator + "IMG_" + ImageFile + ".jpg");
 
@@ -249,6 +289,7 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
 
         }
         rout  = (90 - degrees + 360) % 360;
+        Log.i("tt", Integer.toString(rout));
     }
 
     @Override

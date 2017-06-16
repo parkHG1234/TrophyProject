@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
-        android:background="@color/MainColor1_White"
+        android:background="@color/main1color"
         android:textSize="15sp"
         android:textColor="@color/White"
         android:gravity="center_vertical"

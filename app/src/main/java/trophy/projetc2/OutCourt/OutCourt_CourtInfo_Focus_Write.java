@@ -1,5 +1,6 @@
 package trophy.projetc2.OutCourt;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.provider.MediaStore;
@@ -68,7 +70,7 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
     String[][] parseredData_user, parseredData_write;
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String ImageURL = null, ImageFile = null;Intent dataIntent = null;boolean flag = false;
-    String filename="";
+    String filename="";String content="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +128,8 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
                     OutCourt_CourtInfo_Focus_Write_TextView_Write.setTextColor(getResources().getColor(R.color.DarkGray));
                 }
                 else{
-                    OutCourt_CourtInfo_Focus_Write_TextView_Write.setTextColor(getResources().getColor(R.color.MainColor1));
+                    OutCourt_CourtInfo_Focus_Write_TextView_Write.setTextColor(getResources().getColor(R.color.main1color));
+                    content = OutCourt_CourtInfo_Focus_Write_EditText_Content.getText().toString();
                 }
             }
 
@@ -142,27 +145,9 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
                     OutCourt_CourtInfo_Focus_Write_TextView_Write.setEnabled(false);
                 }
                 else{
-                    HttpClient user = new HttpClient();
-                    String result1 = user.HttpClient("Trophy_part1", "OutCourt_Focus_Write.jsp", User_Pk, Court_Pk, strCurToday, OutCourt_CourtInfo_Focus_Write_EditText_Content.getText().toString(), strCurYear);
-                    parseredData_write = jsonParserList_Write(result1);
-                    if(parseredData_write[0][0].equals("succed")){
-                        filename = parseredData_write[0][1];
-                        if(flag){
-                            //파일 업로드 시작!
-                            String urlString = "http://210.122.7.193:8080/Trophy_part1/Content_Image_Upload.jsp";
-                            HttpFileUpload(urlString, "", ImageURL);
-                            HttpClient image = new HttpClient();
-                            image.HttpClient("Trophy_part1", "OutCourt_Focus_Write_Image.jsp", filename);
-                        }else{
+                    write_input write_input = new write_input();
+                    write_input.execute();
 
-                        }
-                        finish();
-                        overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
-                        flag = false;
-                    }
-                    else{
-                        Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.", Snackbar.LENGTH_SHORT).show();
-                    }
                 }
             }
         });
@@ -215,23 +200,23 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
             Bitmap orgImage = BitmapFactory.decodeFile(String.valueOf(ImageURL));
             Bitmap resize = Bitmap.createScaledBitmap(orgImage, 1080, 1080, true);
 
-            // 이미지를 상황에 맞게 회전시킨다
-            ExifInterface exif = new ExifInterface(ImageURL);
-            int exifOrientation = exif.getAttributeInt(
-                    ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            int exifDegree = exifOrientationToDegrees(exifOrientation);
-            resize = rotate(resize, exifDegree);
-
+//            // 이미지를 상황에 맞게 회전시킨다
+//            ExifInterface exif = new ExifInterface(ImageURL);
+//            int exifOrientation = exif.getAttributeInt(
+//                    ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+//            int exifDegree = exifOrientationToDegrees(exifOrientation);
+//            resize = rotate(resize, exifDegree);
 
             OutCourt_CourtInfo_Focus_Write_Image_Camera.setVisibility(View.VISIBLE);
             OutCourt_CourtInfo_Focus_Write_Image_Camera.setImageBitmap(resize);
             OutCourt_CourtInfo_Focus_Write_Image_Cancel.setVisibility(View.VISIBLE);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
+
         }
     }
     public int exifOrientationToDegrees(int exifOrientation)
     {
-        Log.i("tt", Integer.toString(rout));
         return rout;
     }
 
@@ -399,6 +384,57 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
 
         } catch (Exception e) {
             Log.d("Test", "exception " + e.getMessage());
+        }
+    }
+    public class write_input extends AsyncTask<String, Void, String> {
+        ProgressDialog asyncDialog = new ProgressDialog(OutCourt_CourtInfo_Focus_Write.this);
+        String[][] parsedData;
+
+        @Override
+        protected void onPreExecute() {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("게시 중입니다..");
+            // show dialog
+            asyncDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                HttpClient user = new HttpClient();
+                String result1 = user.HttpClient("Trophy_part1", "OutCourt_Focus_Write.jsp", User_Pk, Court_Pk, strCurToday, content, strCurYear);
+                parseredData_write = jsonParserList_Write(result1);
+                if(parseredData_write[0][0].equals("succed")){
+                    filename = parseredData_write[0][1];
+                    if(flag){
+                        //파일 업로드 시작!
+                        String urlString = "http://210.122.7.193:8080/Trophy_part1/Content_Image_Upload.jsp";
+                        HttpFileUpload(urlString, "", ImageURL);
+                        HttpClient image = new HttpClient();
+                        image.HttpClient("Trophy_part1", "OutCourt_Focus_Write_Image.jsp", filename);
+                    }else{
+
+                    }
+                    finish();
+                    overridePendingTransition(R.anim.anim_slide_in_top, R.anim.anim_slide_out_bottom);
+                    flag = false;
+                }
+                else{
+                    Snackbar.make(getCurrentFocus(),"잠시 후 다시 시도해주시기 바랍니다.", Snackbar.LENGTH_SHORT).show();
+                }
+                return "succed";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "failed";
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            asyncDialog.dismiss();
+            super.onPostExecute(result);
         }
     }
 }

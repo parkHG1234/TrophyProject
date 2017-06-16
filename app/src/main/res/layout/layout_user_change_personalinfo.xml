@@ -148,7 +148,68 @@
                     android:layout_marginLeft="30dp"
                     android:layout_weight="1" />
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/White"
+                android:gravity="center_vertical">
 
+                <TextView
+                    android:text="신장/체중"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView512"
+                    android:background="@color/White"
+                    android:textSize="15sp"
+                    android:textColor="@color/BlackGray"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:text="183cm / 80kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_Height_Weight"
+                    android:background="@color/White"
+                    android:textSize="15sp"
+                    android:textColor="@color/Black"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="포지션"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView91"
+                    android:background="@color/White"
+                    android:textSize="15sp"
+                    android:textColor="@color/BlackGray"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp" />
+
+                <TextView
+                    android:text="PG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_Position"
+                    android:background="@color/White"
+                    android:textSize="15sp"
+                    android:textColor="@color/Black"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1" />
+                <Button
+                    android:text="변경"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_change_HWP"
+                    android:background="@color/colorPrimaryDark"
+                    android:textColor="@color/White"
+                    android:layout_margin="5dp" />
+            </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"

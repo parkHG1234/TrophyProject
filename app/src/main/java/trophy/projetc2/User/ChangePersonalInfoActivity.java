@@ -28,9 +28,9 @@ import trophy.projetc2.R;
  */
 
 public class ChangePersonalInfoActivity extends AppCompatActivity {
-    TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone;
+    TextView tv_name, tv_sex, tv_birth, tv_do, tv_si, tv_phone, tv_Height_Weight, tv_Position;
     ImageView User_Change_Personalinfo_ImageView_Back;
-    Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal;
+    Button btn_change_area, btn_change_phone, btn_change_pw, btn_withdrawal, btn_change_HWP;
     Switch switch_push;
     SharedPreferences preferences;
     String Pk, TeamName;
@@ -64,9 +64,12 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         tv_do = (TextView) findViewById(R.id.tv_do);
         tv_si = (TextView) findViewById(R.id.tv_si);
         tv_phone = (TextView) findViewById(R.id.tv_phone);
+        tv_Height_Weight = (TextView)findViewById(R.id.tv_Height_Weight);
+        tv_Position = (TextView)findViewById(R.id.tv_Position);
         btn_change_area = (Button) findViewById(R.id.btn_change_area);
         btn_change_pw = (Button) findViewById(R.id.btn_change_pw);
         btn_change_phone = (Button) findViewById(R.id.btn_change_phone);
+        btn_change_HWP = (Button)findViewById(R.id.btn_change_HWP);
         btn_withdrawal = (Button) findViewById(R.id.btn_withdrawal);
         switch_push = (Switch)findViewById(R.id.switch_push);
 
@@ -77,6 +80,8 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
         tv_do.setText(parsedData[0][3]);
         tv_si.setText(parsedData[0][4]);
         tv_phone.setText(parsedData[0][5]);
+        tv_Height_Weight.setText(parsedData[0][9]+"cm / "+parsedData[0][10]+"kg");
+        tv_Position.setText(parsedData[0][11]);
         if(parsedData[0][8].equals("on")){
             switch_push.setChecked(true);
         }
@@ -98,7 +103,17 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-
+        btn_change_HWP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent changeHWP_intent = new Intent(ChangePersonalInfoActivity.this, ChangeHWP.class);
+                changeHWP_intent.putExtra("Height", parsedData[0][9]);
+                changeHWP_intent.putExtra("Weight", parsedData[0][10]);
+                changeHWP_intent.putExtra("Position", parsedData[0][11]);
+                startActivity(changeHWP_intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         btn_change_pw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,7 +172,7 @@ public class ChangePersonalInfoActivity extends AppCompatActivity {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jarr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7", "msg8", "msg9"};
+            String[] jsonName = {"msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7", "msg8", "msg9", "msg10", "msg11", "msg12"};
             String[][] parseredData = new String[jarr.length()][jsonName.length];
             for (int i = 0; i < jarr.length(); i++) {
                 json = jarr.getJSONObject(i);

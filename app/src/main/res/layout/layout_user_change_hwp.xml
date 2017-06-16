@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backColor"
+    android:focusableInTouchMode="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사용자정보 변경"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/User_Change_hwp_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:id="@+id/button16"
+        android:background="@color/WhiteGray"
+        android:layout_height="1dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="신장/체중 변경"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4"
+            android:background="@color/White"
+            android:textSize="16sp"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@color/White"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:id="@+id/User_Change_hwp_EditText_Height"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="cm"
+                    android:gravity="center_vertical"
+                    android:background="@color/White" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="@color/White"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:id="@+id/User_Change_hwp_EditText_Weight"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="kg"
+                    android:gravity="center_vertical"
+                    android:background="@color/White" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:text="포지션 변경"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView41"
+            android:background="@color/White"
+            android:textSize="16sp"
+            android:textColor="@color/Black"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp">
+
+        <CheckBox
+            android:text="PG"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/User_Change_hwp_CheckBox_PG"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:gravity="center_vertical" />
+
+        <CheckBox
+            android:text="SG"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/User_Change_hwp_CheckBox_SG"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:gravity="center_vertical" />
+        <CheckBox
+            android:text="SF"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/User_Change_hwp_CheckBox_SF"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:gravity="center_vertical" />
+        <CheckBox
+            android:text="PF"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/User_Change_hwp_CheckBox_PF"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:gravity="center_vertical" />
+        <CheckBox
+            android:text="C"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/User_Change_hwp_CheckBox_C"
+            android:layout_weight="1"
+            android:background="@color/White"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/White"
+        android:gravity="center_vertical">
+
+        <Button
+            android:text="변경하기"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:id="@+id/User_Change_hwp_Button_Input"
+            android:background="@color/main1color"
+            android:textColor="@color/White"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+</LinearLayout>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -33,6 +34,7 @@ import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.Content_Total_ImageH;
+import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.adapter;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.imageH;
 
 
@@ -160,17 +162,18 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
                     final Button Layout_CustomDialog_TeamInfo_Player_Focus_Sex = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Sex);
                     final Button Layout_CustomDialog_TeamInfo_Player_Focus_Address = (Button)layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Address);
                     final ImageView Layout_CustomDialog_TeamInfo_Player_Focus_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Phone);
+                    final LinearLayout Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty = (LinearLayout) layout.findViewById(R.id.Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Title.setText("선수 정보");
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getUser_Profile(), "utf-8");
-                        if(arrData.get(position).getUser_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE)
                                     .skipMemoryCache(true).into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getUser_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                                     .skipMemoryCache(true)
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
@@ -183,18 +186,12 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
                     HttpClient http_Joiner= new HttpClient();
                     String result = http_Joiner.HttpClient("Trophy_part1","OutCourt_Player_Focus.jsp",arrData.get(position).getContent_User_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][0]);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][6]+" . "+parsedData_Player_Focus[0][0]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1])+" / "+parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][4]+"cm / "+parsedData_Player_Focus[0][5]+"kg");
                     Layout_CustomDialog_TeamInfo_Player_Focus_Address.setText(parsedData_Player_Focus[0][3]);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setVisibility(View.GONE);
-//                Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+parsedData_Player_Focus[0][4]));
-//                        context.startActivity(intent);
-//                    }
-//                });
+                    Layout_CustomDialog_TeamManager_PlayerManager_Focus_LinearLayout_Duty.setVisibility(View.GONE);
                     final MaterialDialog TeamPlayerDialog = new MaterialDialog(context);
                     TeamPlayerDialog
                             .setTitle("신청자 정보")
@@ -238,6 +235,8 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
                         parsedData_Content_Delete = jsonParserList_Content_Delete(result1);
                         if(parsedData_Content_Delete[0][0].equals("succed")){
                             TeamInfo_Dialog.dismiss();
+                            arrData.remove(position);
+                            adapter.notifyDataSetChanged();
                         }
                         else{
                             Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.", Snackbar.LENGTH_SHORT).show();
@@ -302,7 +301,7 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1","msg2","msg3","msg4"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

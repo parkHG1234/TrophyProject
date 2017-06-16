@@ -121,7 +121,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
             catch (UnsupportedEncodingException e){
 
             }
-            FirstName.setText(arrData.get(position).getFirst_Name());
+            FirstName.setText(arrData.get(position).getFirst_Position()+"."+arrData.get(position).getFirst_Name());
             FirstProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -136,13 +136,13 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     final ImageView Layout_CustomDialog_TeamInfo_Player_Focus_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Phone);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFirst_Profile(), "utf-8");
-                        if(arrData.get(position).getFirst_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFirst_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }
@@ -153,9 +153,9 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     HttpClient http_Joiner= new HttpClient();
                     String result = http_Joiner.HttpClient("Trophy_part1","TeamInfo_Player_Focus.jsp",arrData.get(position).getFirst_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][0]);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][7]+" . "+parsedData_Player_Focus[0][0]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1])+" / "+parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][5]+"cm / "+parsedData_Player_Focus[0][6]+"kg");
                     Layout_CustomDialog_TeamInfo_Player_Focus_Address.setText(parsedData_Player_Focus[0][3]);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -196,7 +196,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
             catch (UnsupportedEncodingException e){
 
             }
-            SecondName.setText(arrData.get(position).getSecond_Name());
+            SecondName.setText(arrData.get(position).getSecond_Position()+"."+arrData.get(position).getSecond_Name());
             SecondProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -211,13 +211,13 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     final ImageView Layout_CustomDialog_TeamInfo_Player_Focus_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Phone);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getSecond_Profile(), "utf-8");
-                        if(arrData.get(position).getFirst_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getSecond_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }
@@ -228,9 +228,9 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     HttpClient http_Joiner= new HttpClient();
                     String result = http_Joiner.HttpClient("Trophy_part1","TeamInfo_Player_Focus.jsp",arrData.get(position).getSecond_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][0]);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][7]+" . "+parsedData_Player_Focus[0][0]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1])+" / "+parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][5]+"cm / "+parsedData_Player_Focus[0][6]+"kg");
                     Layout_CustomDialog_TeamInfo_Player_Focus_Address.setText(parsedData_Player_Focus[0][3]);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -257,7 +257,6 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
         if(ThirdProfile.getVisibility()==View.VISIBLE){
             try{
                 String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
-                Log.i("eeeee",En_Profile);
                 if(En_Profile.equals("."))
                 {
                     Glide.with(context).load(R.drawable.profile_basic_image).into(ThirdProfile);
@@ -271,7 +270,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
             catch (UnsupportedEncodingException e){
 
             }
-            ThirdName.setText(arrData.get(position).getThird_Name());
+            ThirdName.setText(arrData.get(position).getThird_Position()+"."+arrData.get(position).getThird_Name());
             ThirdProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -286,13 +285,13 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     final ImageView Layout_CustomDialog_TeamInfo_Player_Focus_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Phone);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getThird_Profile(), "utf-8");
-                        if(arrData.get(position).getThird_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getThird_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }
@@ -303,9 +302,9 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     HttpClient http_Joiner= new HttpClient();
                     String result = http_Joiner.HttpClient("Trophy_part1","TeamInfo_Player_Focus.jsp",arrData.get(position).getThird_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][0]);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][7]+" . "+parsedData_Player_Focus[0][0]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1])+" / "+parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][5]+"cm / "+parsedData_Player_Focus[0][6]+"kg");
                     Layout_CustomDialog_TeamInfo_Player_Focus_Address.setText(parsedData_Player_Focus[0][3]);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -332,7 +331,6 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
         if(FourthProfile.getVisibility()==View.VISIBLE){
             try{
                 String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
-                Log.i("eeeee",En_Profile);
                 if(En_Profile.equals("."))
                 {
                     Glide.with(context).load(R.drawable.profile_basic_image).into(FourthProfile);
@@ -346,7 +344,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
             catch (UnsupportedEncodingException e){
 
             }
-            FourthName.setText(arrData.get(position).getFourth_Name());
+            FourthName.setText(arrData.get(position).getFourth_Position()+"."+arrData.get(position).getFourth_Name());
             FourthProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -361,13 +359,13 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     final ImageView Layout_CustomDialog_TeamInfo_Player_Focus_Phone = (ImageView) layout.findViewById(R.id.Layout_CustomDialog_TeamInfo_Player_Focus_Phone);
                     try{
                         String En_Profile = URLEncoder.encode(arrData.get(position).getFourth_Profile(), "utf-8");
-                        if(arrData.get(position).getFirst_Profile().equals("."))
+                        if(En_Profile.equals("."))
                         {
                             Glide.with(context).load(R.drawable.profile_basic_image).into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                         else
                         {
-                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+arrData.get(position).getFourth_Profile()+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
+                            Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/profile/"+En_Profile+".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
                                     .into(Layout_CustomDialog_TeamInfo_Player_Focus_Profile);
                         }
                     }
@@ -378,9 +376,9 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
                     HttpClient http_Joiner= new HttpClient();
                     String result = http_Joiner.HttpClient("Trophy_part1","TeamInfo_Player_Focus.jsp",arrData.get(position).getFourth_Pk());
                     parsedData_Player_Focus = jsonParserList_Player_Focus(result);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][0]);
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1]));
-                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_TeamName.setText(parsedData_Player_Focus[0][7]+" . "+parsedData_Player_Focus[0][0]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Age.setText(ChangeAge(parsedData_Player_Focus[0][1])+" / "+parsedData_Player_Focus[0][2]);
+                    Layout_CustomDialog_TeamInfo_Player_Focus_Sex.setText(parsedData_Player_Focus[0][5]+"cm / "+parsedData_Player_Focus[0][6]+"kg");
                     Layout_CustomDialog_TeamInfo_Player_Focus_Address.setText(parsedData_Player_Focus[0][3]);
                     Layout_CustomDialog_TeamInfo_Player_Focus_Phone.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -412,7 +410,7 @@ public class TeamInfo_Player_MyAdapter extends BaseAdapter{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
 
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6", "msg7", "msg8"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

@@ -64,6 +64,7 @@
         <activity android:name=".User.Find_Password_Change" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.ChangePhoneActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.ChangeAreaActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".User.ChangeHWP" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.Terms" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.Join" android:screenOrientation="portrait"></activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />

@@ -51,11 +51,13 @@ public class Join extends AppCompatActivity {
     ImageView User_Join_ImageView_Back;
     EditText Join_EditText_Name, Join_EditText_Password, Join_EditText_Password_Confirm, Join_EditText_Birth_Year, Join_EditText_Birth_Month, Join_EditText_Birth_Day, Join_EditText_Phone, Join_EditText_Phone_Confirm;
     CheckBox Join_CheckBox_SexM, Join_CheckBox_SexW;
+    EditText Join_EditText_Height, Join_EditText_Weight;
+    CheckBox Join_CheckBox_Position_PG, Join_CheckBox_Position_SG, Join_CheckBox_Position_SF, Join_CheckBox_Position_PF, Join_CheckBox_Position_C;
     Button Join_Button_Phone, Join_Button_Phone_Confirm;
     LinearLayout Join_LinearLayout_Join;
     Spinner Join_Spinner_AddressDo, Join_Spinner_AddressSi;
-    TextView Join_TextView_Name_Warning, Join_TextView_Password_Warning, Join_TextView_Password_Confirm_Warning, Join_TextView_Birth_Warning, Join_TextView_Sex_Warning, Join_TextView_Phone_Warning;
-    String Year, Month, Day, Name, Password, Birth, Address_Do, Address_Si, Sex="남자", Phone;
+    TextView Join_TextView_Name_Warning, Join_TextView_Password_Warning, Join_TextView_Password_Confirm_Warning, Join_TextView_Birth_Warning, Join_TextView_Sex_Warning, Join_TextView_Phone_Warning,Join_TextView_Sex_Warning2;
+    String Year, Month, Day, Name, Password, Birth, Address_Do, Address_Si, Sex="남자", Phone, Position="PG", Height, Weight;
     ArrayAdapter<CharSequence> adspin1, adspin2;
     trophy.projetc2.Get_Spinner_Si Get_Spinner_Si;
     int rnd;
@@ -68,7 +70,9 @@ public class Join extends AppCompatActivity {
     boolean Sex_flag = true;
     boolean Phone_flag = false;
     boolean Phone_Confirm_flag = false;
-
+    boolean Posion_flag = true;
+    boolean Height_flag = false;
+    boolean Weight_flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +87,18 @@ public class Join extends AppCompatActivity {
         Join_EditText_Birth_Day = (EditText) findViewById(R.id.Join_EditText_Birth_Day);
         Join_EditText_Phone = (EditText) findViewById(R.id.Join_EditText_Phone);
         Join_EditText_Phone_Confirm = (EditText) findViewById(R.id.Join_EditText_Phone_Confirm);
+        Join_EditText_Height = (EditText)findViewById(R.id.Join_EditText_Height);
+        Join_EditText_Weight = (EditText)findViewById(R.id.Join_EditText_Weight);
+
         Join_CheckBox_SexM = (CheckBox) findViewById(R.id.Join_CheckBox_SexM);
         Join_CheckBox_SexW = (CheckBox) findViewById(R.id.Join_CheckBox_SexW);
+
+        Join_CheckBox_Position_PG = (CheckBox) findViewById(R.id.Join_CheckBox_Position_PG);
+        Join_CheckBox_Position_SG = (CheckBox) findViewById(R.id.Join_CheckBox_Position_SG);
+        Join_CheckBox_Position_SF = (CheckBox) findViewById(R.id.Join_CheckBox_Position_SF);
+        Join_CheckBox_Position_PF = (CheckBox) findViewById(R.id.Join_CheckBox_Position_PF);
+        Join_CheckBox_Position_C = (CheckBox) findViewById(R.id.Join_CheckBox_Position_C);
+
         Join_Button_Phone = (Button) findViewById(R.id.Join_Button_Phone);
         Join_Button_Phone_Confirm = (Button) findViewById(R.id.Join_Button_Phone_Confirm);
         Join_LinearLayout_Join = (LinearLayout) findViewById(R.id.Join_LinearLayout_Join);
@@ -96,15 +110,17 @@ public class Join extends AppCompatActivity {
         Join_TextView_Birth_Warning = (TextView)  findViewById(R.id.Join_TextView_Birth_Warning);
         Join_TextView_Sex_Warning = (TextView) findViewById(R.id.Join_TextView_Sex_Warning);
         Join_TextView_Phone_Warning = (TextView) findViewById(R.id.Join_TextView_Phone_Warning);
+        Join_TextView_Sex_Warning2 = (TextView)findViewById(R.id.Join_TextView_Sex_Warning2);
 
         Join_CheckBox_SexM.setChecked(true);
+        Join_CheckBox_Position_PG.setChecked(true);
 
         Join_TextView_Name_Warning.setVisibility(GONE);
         Join_TextView_Password_Warning.setVisibility(GONE);
         Join_TextView_Password_Confirm_Warning.setVisibility(GONE);
         Join_TextView_Sex_Warning.setVisibility(GONE);
         Join_TextView_Birth_Warning.setVisibility(GONE);
-        Join_TextView_Sex_Warning.setVisibility(GONE);
+        Join_TextView_Sex_Warning2.setVisibility(GONE);
         Join_TextView_Phone_Warning.setVisibility(GONE);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -304,8 +320,48 @@ public class Join extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        Join_EditText_Height.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (Join_EditText_Height.getText().toString().equals("")) {
+                    Height_flag = false;
+                } else {
+                    Height_flag = true;
+                    Height = Join_EditText_Height.getText().toString();
+                }
+            }
+        });
+        Join_EditText_Weight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (Join_EditText_Weight.getText().toString().equals("")) {
+                    Weight_flag = false;
+                } else {
+                    Weight_flag = true;
+                    Weight = Join_EditText_Weight.getText().toString();
+                }
+            }
+        });
 
         Join_CheckBox_SexM.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -333,16 +389,91 @@ public class Join extends AppCompatActivity {
                     Join_TextView_Sex_Warning.setVisibility(GONE);
                     Sex = "여자";
                     Sex_flag = true;
-                    Log.i("Sex : ", Sex);
                 } else if (!Join_CheckBox_SexM.isChecked()) {
                     Join_TextView_Sex_Warning.setVisibility(View.VISIBLE);
                     Sex = "false";
                     Sex_flag = false;
-                    Log.i("Sex : ", Sex);
                 }
             }
         });
 
+
+        //포지션 선택
+        Join_CheckBox_Position_PG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Join_CheckBox_Position_SG.setChecked(false);Join_CheckBox_Position_SF.setChecked(false);Join_CheckBox_Position_PF.setChecked(false);
+                    Join_CheckBox_Position_C.setChecked(false);
+                    Join_TextView_Sex_Warning2.setVisibility(GONE);
+                    Position = "PG";
+                    Posion_flag = true;
+                } else if (!Join_CheckBox_Position_SG.isChecked()&&!Join_CheckBox_Position_SF.isChecked()&&!Join_CheckBox_Position_PF.isChecked()&&!Join_CheckBox_Position_C.isChecked()) {
+                    Join_TextView_Sex_Warning2.setVisibility(View.VISIBLE);
+                    Posion_flag = false;
+                }
+            }
+        });
+        Join_CheckBox_Position_SG.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Join_CheckBox_Position_PG.setChecked(false);Join_CheckBox_Position_SF.setChecked(false);Join_CheckBox_Position_PF.setChecked(false);
+                    Join_CheckBox_Position_C.setChecked(false);
+                    Join_TextView_Sex_Warning2.setVisibility(GONE);
+                    Position = "SG";
+                    Posion_flag = true;
+                } else if (!Join_CheckBox_Position_PG.isChecked()&&!Join_CheckBox_Position_SF.isChecked()&&!Join_CheckBox_Position_PF.isChecked()&&!Join_CheckBox_Position_C.isChecked()) {
+                    Join_TextView_Sex_Warning2.setVisibility(View.VISIBLE);
+                    Posion_flag = false;
+                }
+            }
+        });
+        Join_CheckBox_Position_SF.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Join_CheckBox_Position_PG.setChecked(false);Join_CheckBox_Position_SG.setChecked(false);Join_CheckBox_Position_PF.setChecked(false);
+                    Join_CheckBox_Position_C.setChecked(false);
+                    Join_TextView_Sex_Warning2.setVisibility(GONE);
+                    Position = "SF";
+                    Posion_flag = true;
+                } else if (!Join_CheckBox_Position_PG.isChecked()&&!Join_CheckBox_Position_SG.isChecked()&&!Join_CheckBox_Position_PF.isChecked()&&!Join_CheckBox_Position_C.isChecked()) {
+                    Join_TextView_Sex_Warning2.setVisibility(View.VISIBLE);
+                    Posion_flag = false;
+                }
+            }
+        });
+        Join_CheckBox_Position_PF.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Join_CheckBox_Position_PG.setChecked(false);Join_CheckBox_Position_SG.setChecked(false);Join_CheckBox_Position_SF.setChecked(false);
+                    Join_CheckBox_Position_C.setChecked(false);
+                    Join_TextView_Sex_Warning2.setVisibility(GONE);
+                    Position = "PF";
+                    Posion_flag = true;
+                } else if (!Join_CheckBox_Position_PG.isChecked()&&!Join_CheckBox_Position_SG.isChecked()&&!Join_CheckBox_Position_SF.isChecked()&&!Join_CheckBox_Position_C.isChecked()) {
+                    Join_TextView_Sex_Warning2.setVisibility(View.VISIBLE);
+                    Posion_flag = false;
+                }
+            }
+        });
+        Join_CheckBox_Position_C.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    Join_CheckBox_Position_PG.setChecked(false);Join_CheckBox_Position_SG.setChecked(false);Join_CheckBox_Position_SF.setChecked(false);
+                    Join_CheckBox_Position_PF.setChecked(false);
+                    Join_TextView_Sex_Warning2.setVisibility(GONE);
+                    Position = "C";
+                    Posion_flag = true;
+                } else if (!Join_CheckBox_Position_PG.isChecked()&&!Join_CheckBox_Position_SG.isChecked()&&!Join_CheckBox_Position_SF.isChecked()&&!Join_CheckBox_Position_PF.isChecked()) {
+                    Join_TextView_Sex_Warning2.setVisibility(View.VISIBLE);
+                    Posion_flag = false;
+                }
+            }
+        });
         Join_Button_Phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -401,9 +532,9 @@ public class Join extends AppCompatActivity {
                 Address_Do = Join_Spinner_AddressDo.getSelectedItem().toString();
                 Address_Si = Join_Spinner_AddressSi.getSelectedItem().toString();
                 Birth = Year + " / " + Month + " / " + Day;
-                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag) {
+                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag && Posion_flag && Weight_flag && Height_flag) {
                     HttpClient user = new HttpClient();
-                    user.HttpClient("Trophy_part1", "User_Join.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone);
+                    user.HttpClient("Trophy_part1", "User_Join.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone,Position, Height, Weight);
                     final MaterialDialog TeamPlayerDialog = new MaterialDialog(Join.this);
                     TeamPlayerDialog
                             .setTitle("확인")

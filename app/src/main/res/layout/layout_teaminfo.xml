@@ -146,7 +146,8 @@
                     android:id="@+id/TeamInfo_TextView_TeamIntro"
                     android:paddingTop="10dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_horizontal"/>
 
                 <TextView
                     android:text="팀원 구성"
