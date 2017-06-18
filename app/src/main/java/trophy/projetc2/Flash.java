@@ -31,7 +31,7 @@ import trophy.projetc2.Http.HttpClient;
  */
 
 public class Flash extends AppCompatActivity{
-    static String Project_version = "7";
+    static String Project_version = "9";
     static TimerTask myTask;
     static Timer timer;
     String[][] ParsedData_Setting;

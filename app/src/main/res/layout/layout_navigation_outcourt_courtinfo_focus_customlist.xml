@@ -56,7 +56,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:id="@+id/Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content"
-            android:adjustViewBounds="true" />
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
         <TextView
             android:layout_marginLeft="20dp"
             android:text="안녕하세요."

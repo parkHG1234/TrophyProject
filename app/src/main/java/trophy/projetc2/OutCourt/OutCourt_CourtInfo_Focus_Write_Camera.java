@@ -64,14 +64,12 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
     android.hardware.Camera.ShutterCallback shutterCallback;
     final int MY_PERMISSON_REQUEST_CODE = 100;
     int APIVersion = Build.VERSION.SDK_INT;
-    int width=0;
+    static int Image_width=0;static int Image_Height=0;
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_outcourt_courtinfo_focus_write_camera);
-        width = getWindowManager().getDefaultDisplay().getWidth();
-
         Camera_Button = (ImageView) findViewById(R.id.Camera_Button);
         Camera_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,22 +112,28 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
                         Toast.makeText(getApplicationContext(), "Error camera image saving", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if(rout == 0){
-
-                    }
+                    // data[] 로 넘어온 데이터를 bitmap으로 변환
                     Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-// 화면 회전을 위한 matrix객체 생성
-                    Matrix m = new Matrix();
-// matrix객체에 회전될 정보 입력
-                    m.setRotate(rout, (float) bmp.getWidth(), (float) bmp.getHeight());
-// 기존에 저장했던 bmp를 Matrix를 적용하여 다시 생성
-                    int a = Integer.parseInt(String.valueOf(Math.round(width*0.8)));
-                    Bitmap rotateBitmap = Bitmap.createBitmap(bmp, 0, 0, width, a, m, false);
-                   //Bitmap resize = Bitmap.createScaledBitmap(rotateBitmap, 1440, 1440, true);
-// 기존에 생성했던 bmp 자원해제
-//                   // bmp.recyle();
+                    Image_width = bmp.getWidth();Image_Height = bmp.getHeight();
+//// 화면 회전을 위한 matrix객체 생성
+//                    Matrix m = new Matrix();
+//// matrix객체에 회전될 정보 입력
+//                    m.setRotate(90, (float) bmp.getWidth(), (float) bmp.getHeight());
+//// 기존에 저장했던 bmp를 Matrix를 적용하여 다시 생성
+//                    Bitmap rotateBitmap = Bitmap.createBitmap(bmp, 0, 0,   bmp.getWidth(), bmp.getHeight(),m, false);
+//// 기존에 생성했던 bmp 자원해제
+//                    bmp.recycle();
                     FileOutputStream fos = new FileOutputStream(pictureFile);
-                    rotateBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                    if(rout == 90){
+//                        Log.i("imageW",Integer.toString(bmp.getWidth()));
+//                        Log.i("imageH",Integer.toString(bmp.getHeight()));
+//                        rotateBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                    }
+//                    else{
+//                        Log.i("imageW",Integer.toString(bmp.getWidth()));
+//                        Log.i("imageH",Integer.toString(bmp.getHeight()));
+//                    }
+
                     fos.write(data);
                     fos.close();
                     Intent IntentURL = getIntent();
@@ -219,6 +223,7 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
                 }
 
                 int result  = (90 - degrees + 360) % 360;
+                rout= result;
                 camera.setDisplayOrientation(result);
                 try {
                     camera.setPreviewDisplay(surfaceHolder);
@@ -251,6 +256,7 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
             }
 
             int result  = (90 - degrees + 360) % 360;
+            rout= result;
             camera.setDisplayOrientation(result);
            // camera.setDisplayOrientation(90);
             try {
@@ -274,22 +280,32 @@ public class OutCourt_CourtInfo_Focus_Write_Camera extends AppCompatActivity imp
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int format, int width, int height) {
+//        int rotation = getWindowManager().getDefaultDisplay().getRotation();
+//        int degrees = 0;
+//        switch (rotation) {
+//
+//            case Surface.ROTATION_0: degrees = 0; break;
+//
+//            case Surface.ROTATION_90: degrees = 90; break;
+//
+//            case Surface.ROTATION_180: degrees = 180; break;
+//
+//            case Surface.ROTATION_270: degrees = 270; break;
+//
+//        }
+//        int result  = (90 - degrees + 360) % 360;
+//        rout = result;
+//        //refreshCamera();
+//        camera.setDisplayOrientation(result);
+//        // camera.setDisplayOrientation(90);
+//        try {
+//            camera.setPreviewDisplay(surfaceHolder);
+//            camera.startPreview();
+//        } catch (Exception e) {
+//            System.err.println(e);
+//            return;
+//        }
         refreshCamera();
-        int rotation = getWindowManager().getDefaultDisplay().getRotation();
-        int degrees = 0;
-        switch (rotation) {
-
-            case Surface.ROTATION_0: degrees = 0; break;
-
-            case Surface.ROTATION_90: degrees = 90; break;
-
-            case Surface.ROTATION_180: degrees = 180; break;
-
-            case Surface.ROTATION_270: degrees = 270; break;
-
-        }
-        rout  = (90 - degrees + 360) % 360;
-        Log.i("tt", Integer.toString(rout));
     }
 
     @Override

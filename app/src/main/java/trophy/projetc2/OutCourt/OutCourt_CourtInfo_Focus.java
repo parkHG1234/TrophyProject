@@ -190,7 +190,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
         for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
-            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8]));
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8], parsedData_OutCourt_Content[j][9], parsedData_OutCourt_Content[j][10]));
             ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
             Log.i("Content123",Integer.toString(ContentCount));
         }
@@ -376,12 +376,12 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
 
         OutCourt_CourtInfo_Focus_MyData = new ArrayList<OutCourt_CourtInfo_Focus_MyData>();
         for (int j = 0; j < parsedData_OutCourt_Content.length; j++) {
-            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8]));
+            OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData_OutCourt_Content[j][0], parsedData_OutCourt_Content[j][1], parsedData_OutCourt_Content[j][2], parsedData_OutCourt_Content[j][3], parsedData_OutCourt_Content[j][4], parsedData_OutCourt_Content[j][5], parsedData_OutCourt_Content[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData_OutCourt_Content[j][7], parsedData_OutCourt_Content[j][8], parsedData_OutCourt_Content[j][9], parsedData_OutCourt_Content[j][10]));
             ContentCount = Integer.parseInt(parsedData_OutCourt_Content[j][0]);
         }
         adapter = new OutCourt_CourtInfo_Focus_MyAdapter(this, OutCourt_CourtInfo_Focus_MyData);
         OutCourt_CourtInfo_Focus_ListView_Content.setAdapter(adapter);
-        //setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
+        setListViewHeightBasedOnChildren(OutCourt_CourtInfo_Focus_ListView_Content);
     }
     @Override
     public void onBackPressed() {
@@ -470,7 +470,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10","msg11"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -520,7 +520,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1))-(imageH*9);
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
         scrollHeight= params.height;
@@ -567,7 +567,7 @@ public class OutCourt_CourtInfo_Focus extends AppCompatActivity {
                 String result1 = http_match_focus_Content.HttpClient("Trophy_part1","OutCourt_Focus_Content_Scroll.jsp",Court_Pk,Integer.toString(ContentCount));
                 parsedData = jsonParserList_OurtCourt_Content(result1);
                 for (int j = 0; j < parsedData.length; j++) {
-                    OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData[j][0], parsedData[j][1], parsedData[j][2], parsedData[j][3], parsedData[j][4], parsedData[j][5], parsedData[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData[j][7], parsedData[j][8]));
+                    OutCourt_CourtInfo_Focus_MyData.add(new OutCourt_CourtInfo_Focus_MyData(parsedData[j][0], parsedData[j][1], parsedData[j][2], parsedData[j][3], parsedData[j][4], parsedData[j][5], parsedData[j][6],strCurToday,OutCourt_CourtInfo_Focus.this,User_Pk, parsedData[j][7], parsedData[j][8], parsedData[j][9], parsedData[j][10]));
                     ContentCount = Integer.parseInt(parsedData[j][0]);
                 }
                 if(parsedData.length == 0){

@@ -19,6 +19,7 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -51,6 +52,8 @@ import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
 
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.imageH;
+import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus_Write_Camera.Image_width;
+import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus_Write_Camera.Image_Height;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus_Write_Camera.rout;
 
 /**
@@ -71,6 +74,8 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String ImageURL = null, ImageFile = null;Intent dataIntent = null;boolean flag = false;
     String filename="";String content="";
+    int ratio = 0; int ratio_Height=0;
+    int Display_Weight=0, Display_Height=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +84,10 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
         User_Pk = intent1.getStringExtra("User_Pk");
         Court_Pk = intent1.getStringExtra("Court_Pk");
         currentTime();
+        Display display = ((WindowManager)getSystemService(WINDOW_SERVICE)).getDefaultDisplay() ;
+        Display_Weight = display.getWidth();
+        Display_Height = display.getHeight();
+
         OutCourt_CourtInfo_Focus_Write_TextView_Write = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_Write_TextView_Write);
         OutCourt_CourtInfo_Focus_Write_EditText_Content = (EditText) findViewById(R.id.OutCourt_CourtInfo_Focus_Write_EditText_Content);
         OutCourt_CourtInfo_Focus_Write_TextView_Back = (TextView)findViewById(R.id.OutCourt_CourtInfo_Focus_Write_TextView_Back);
@@ -88,8 +97,8 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
         OutCourt_CourtInfo_Focus_Write_Image_Camera = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_Write_Image_Camera);
         OutCourt_CourtInfo_Focus_Write_Image_Cancel = (ImageView)findViewById(R.id.OutCourt_CourtInfo_Focus_Write_Image_Cancel);
 
-        int a = Integer.parseInt(String.valueOf(Math.round(imageH)));
-        OutCourt_CourtInfo_Focus_Write_Image_Camera.getLayoutParams().height = a;
+//        int a = Integer.parseInt(String.valueOf(Math.round(imageH)));
+//        OutCourt_CourtInfo_Focus_Write_Image_Camera.getLayoutParams().height = a;
         OutCourt_CourtInfo_Focus_Write_Image_Camera.setVisibility(View.GONE);
         OutCourt_CourtInfo_Focus_Write_Image_Cancel.setVisibility(View.GONE);
 
@@ -206,9 +215,11 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
 //                    ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 //            int exifDegree = exifOrientationToDegrees(exifOrientation);
 //            resize = rotate(resize, exifDegree);
-
+            ratio = Image_width / Display_Weight;
+            ratio_Height = Image_Height / ratio;
+            OutCourt_CourtInfo_Focus_Write_Image_Camera.getLayoutParams().height = ratio_Height;
             OutCourt_CourtInfo_Focus_Write_Image_Camera.setVisibility(View.VISIBLE);
-            OutCourt_CourtInfo_Focus_Write_Image_Camera.setImageBitmap(resize);
+            OutCourt_CourtInfo_Focus_Write_Image_Camera.setImageBitmap(orgImage);
             OutCourt_CourtInfo_Focus_Write_Image_Cancel.setVisibility(View.VISIBLE);
         }
         catch (Exception e) {
@@ -412,7 +423,7 @@ public class OutCourt_CourtInfo_Focus_Write  extends AppCompatActivity {
                         String urlString = "http://210.122.7.193:8080/Trophy_part1/Content_Image_Upload.jsp";
                         HttpFileUpload(urlString, "", ImageURL);
                         HttpClient image = new HttpClient();
-                        image.HttpClient("Trophy_part1", "OutCourt_Focus_Write_Image.jsp", filename);
+                        image.HttpClient("Trophy_part1", "OutCourt_Focus_Write_Image.jsp", filename,Integer.toString(Image_width),Integer.toString(Image_Height));
                     }else{
 
                     }

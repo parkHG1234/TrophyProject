@@ -6,9 +6,11 @@ import android.media.Image;
 import android.net.Uri;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +35,8 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
+
+import static android.content.Context.WINDOW_SERVICE;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.Content_Total_ImageH;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.adapter;
 import static trophy.projetc2.OutCourt.OutCourt_CourtInfo_Focus.imageH;
@@ -54,7 +58,8 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
     String Content_Date; String Content_Time;
     String[][] parsedData_Content_Delete;
     String[][] parsedData_Player_Focus;
-
+    int ratio = 0; int ratio_Height=0;
+    int Display_Weight=0, Display_Height=0;
     public OutCourt_CourtInfo_Focus_MyAdapter(Context c, ArrayList<OutCourt_CourtInfo_Focus_MyData> arr) {
         this.context = c;
         this.arrData = arr;
@@ -77,6 +82,9 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.layout_navigation_outcourt_courtinfo_focus_customlist, parent, false);
         }
+        Display display = ((WindowManager)context.getSystemService(WINDOW_SERVICE)).getDefaultDisplay() ;
+        Display_Weight = display.getWidth();
+        Display_Height = display.getHeight();
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Profile= (ImageView) convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Profile);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name= (TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Name);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date= (TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_Date);
@@ -84,9 +92,17 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete = (ImageView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Delete);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_comment = (TextView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_TextView_comment);
         Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content = (ImageView)convertView.findViewById(R.id.Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content);
-        int a = Integer.parseInt(String.valueOf(Math.round(imageH*0.8)));
+        if(arrData.get(position).getImage_W().equals(".")){
 
-        Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content.getLayoutParams().height = a;
+        }else{
+            ratio = Integer.parseInt(arrData.get(position).getImage_W()) / Display_Weight;
+            ratio_Height = Integer.parseInt(arrData.get(position).getImage_H()) / ratio;
+            Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content.getLayoutParams().height = ratio_Height;
+            Content_Total_ImageH += ratio_Height;
+        }
+//        int a = Integer.parseInt(String.valueOf(Math.round(imageH*0.8)));
+//
+//        Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content.getLayoutParams().height = a;
         try{
             String En_Profile = URLEncoder.encode(arrData.get(position).getUser_Profile(), "utf-8");
             if(En_Profile.equals("."))
@@ -115,7 +131,6 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
                 Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/content/"+En_Profile+".jpg").diskCacheStrategy(DiskCacheStrategy.NONE)
                         .skipMemoryCache(true)
                         .into(Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content);
-                Content_Total_ImageH += Layout_Navigation_OutCourt_CourtInfo_Focus_CustomList_ImageView_Content.getHeight();
             }
         }
         catch (UnsupportedEncodingException e){

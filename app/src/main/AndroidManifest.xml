@@ -53,7 +53,7 @@
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Comment" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write_Camera"></activity>
+        <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus_Write_Camera"  android:screenOrientation="landscape"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Main" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.Login" android:screenOrientation="portrait"></activity>
         <activity android:name=".User.ChangePersonalInfoActivity" android:screenOrientation="portrait"></activity>
