@@ -52,7 +52,7 @@ public class TeamSearch extends AppCompatActivity{
         ArrayList<TeamSearch_CustomList_MyData> TeamSearch_CustomList_MyData;
         TeamSearch_CustomList_MyData = new ArrayList<TeamSearch_CustomList_MyData>();
         for (int i = 0; i < parsedData_TeamSearch.length; i++) {
-            TeamSearch_CustomList_MyData.add(new TeamSearch_CustomList_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2]));
+            TeamSearch_CustomList_MyData.add(new TeamSearch_CustomList_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2], parsedData_TeamSearch[i][3], parsedData_TeamSearch[i][4]));
         }
         adapter = new TeamSearch_CustomList_Adapter(this, TeamSearch_CustomList_MyData);
         Layout_Navigation_TeamSearch_ListView_TeamSearch.setAdapter(adapter);
@@ -93,7 +93,7 @@ public class TeamSearch extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);

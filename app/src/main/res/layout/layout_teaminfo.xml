@@ -102,56 +102,88 @@
                     android:id="@+id/TeamInfo_TextView_TeamName"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:textStyle="bold"
                     />
-
+                <TextView
+                    android:text="소속"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/TeamInfo_TextView_HomeCourt1231"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="normal|bold"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="5dp">
                     <TextView
                         android:text="서울"
-                        android:textSize="15sp"
-                        android:textColor="@color/Black"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/TeamInfo_TextView_TeamAddress_Do"
                         android:background="@color/White"
-                        android:layout_marginRight="3dp" />
+                        android:layout_marginRight="3dp"
+                        android:textColor="@color/BlackGray"/>
                     <TextView
                         android:text="서울"
-                        android:textSize="15sp"
-                        android:textColor="@color/Black"
+                        android:textSize="14sp"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/TeamInfo_TextView_TeamAddress_Si"
                         android:background="@color/White"
-                        android:layout_marginLeft="3dp" />
+                        android:layout_marginLeft="3dp"
+                        android:textColor="@color/BlackGray"/>
                 </LinearLayout>
-
+                <TextView
+                    android:text="홈코트"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/TeamInfo_TextView_HomeCourt123"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="normal|bold"
+                    />
                 <TextView
                     android:text="클린쳐"
-                    android:textColor="@color/Black"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/TeamInfo_TextView_HomeCourt"
                     android:gravity="center"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/BlackGray"/>
+                <TextView
+                    android:text="팀 소개"
+                    android:textColor="@color/Black"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/TeamInfo_TextView_HomeCourt1234"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="normal|bold"/>
                 <TextView
                     android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/TeamInfo_TextView_TeamIntro"
-                    android:paddingTop="10dp"
+                    android:textSize="14sp"
+                    android:paddingTop="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/BlackGray"/>
 
                 <TextView
                     android:text="팀원 구성"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     android:textColor="@color/Black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

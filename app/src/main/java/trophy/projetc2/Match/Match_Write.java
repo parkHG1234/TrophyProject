@@ -1,7 +1,10 @@
 package trophy.projetc2.Match;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,6 +38,7 @@ import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.Http.HttpClient;
+import trophy.projetc2.MainActivity;
 import trophy.projetc2.Navigation.TeamInfo;
 import trophy.projetc2.R;
 
@@ -141,6 +145,14 @@ public class Match_Write extends AppCompatActivity {
                 timepicker_finsih = true;
                 TimePickerDialog dialog = new TimePickerDialog(Match_Write.this, listener, 12, 00, false);
                 dialog.show();
+            }
+        });
+        Match_Write_EditText_Place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_login = new Intent(Match_Write.this, Match_Write_Place.class);
+                startActivity(intent_login);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
         Match_Write_EditText_Place.addTextChangedListener(new TextWatcher() {

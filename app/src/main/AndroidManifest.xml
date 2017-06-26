@@ -43,6 +43,7 @@
         <activity android:name=".Navigation.Last_Contest_ViewPager" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.Match" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.Match_Write" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Match.Match_Write_Place" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.Match_Focus" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.MyMatch" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.MyMatch_Focus" android:screenOrientation="portrait"></activity>
@@ -83,6 +84,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>
         </service>
+        <receiver android:name=".Match.Match_Write_Push"></receiver>
     </application>
     <uses-permission  android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -91,4 +93,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 </manifest>

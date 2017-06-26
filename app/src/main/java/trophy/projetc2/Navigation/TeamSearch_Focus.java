@@ -395,8 +395,4 @@ public class TeamSearch_Focus extends AppCompatActivity {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-    }
 }

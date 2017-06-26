@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:background="@color/White"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/back"
+            android:id="@+id/Layout_Navigation_Match_Write_Place_Back"
+            android:scaleType="centerInside"
+            android:padding="5dp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/search"
+            android:id="@+id/imageView2"
+            android:scaleType="centerInside"
+            android:padding="8dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:hint="주소를 입력해주세요."
+            android:id="@+id/Layout_Navigation_Match_Write_Place_Edit"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textSize="13sp"
+            android:textStyle="normal|bold"
+            android:paddingLeft="10dp" />
+
+        <Button
+            android:text="검 색"
+            android:textStyle="normal|bold"
+            android:textColor="@color/Black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_marginRight="5dp"
+            android:id="@+id/Layout_Navigation_Match_Write_Place_Push"/>
+     </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        </LinearLayout>
+</LinearLayout>

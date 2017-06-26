@@ -161,30 +161,40 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:text="클린쳐"
+                        android:text="홈코트"
                         android:textColor="@color/Black"
-                        android:textSize="15sp"
+                        android:textSize="17sp"
                         android:layout_height="match_parent"
-                        android:id="@+id/TeamManager_TextView_HomeCourt"
+                        android:id="@+id/TeamManager_TextView_HomeCourt1"
                         android:layout_centerVertical="true"
                         android:layout_centerInParent="true"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:layout_width="100dp" />
+                        android:textStyle="normal|bold"
+                        android:layout_width="wrap_content" />
                     <ImageView
                         android:layout_width="20dp"
                         android:src="@drawable/modify"
                         android:layout_height="20dp"
+                        android:layout_toRightOf="@+id/TeamManager_TextView_HomeCourt1"
                         android:id="@+id/TeamManager_ImageVIew_HomeCourt"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/TeamManager_TextView_HomeCourt"/>
+                        />
                 </RelativeLayout>
-
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TeamManager_TextView_HomeCourt"
+                    android:paddingTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="10dp">
                     <TextView
                         android:text="팀 소개"
                         android:textSize="17sp"
@@ -210,9 +220,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/TeamManager_TextView_TeamIntro"
-                    android:paddingTop="10dp"
+                    android:paddingTop="5dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

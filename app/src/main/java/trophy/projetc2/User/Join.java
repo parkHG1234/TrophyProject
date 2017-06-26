@@ -73,6 +73,7 @@ public class Join extends AppCompatActivity {
     boolean Posion_flag = true;
     boolean Height_flag = false;
     boolean Weight_flag = false;
+    int sms=4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -485,18 +486,24 @@ public class Join extends AppCompatActivity {
                     String result = user.HttpClient("Trophy_part2", "Phone_Confirm.jsp",Phone);
                     String[][] parseData = jsonParserList(result);
                     if (parseData[0][0].toString().equals("not existent")) {
-                        Random random = new Random();
-                        rnd = Math.abs(random.nextInt(899999) + 100000);
-                        Log.i("aaaabb",String.valueOf(rnd));
-                        String msg = "오늘의농구 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
-                        Date d = new Date();
-                        String date = dateFormat.format(d);
-                        user = new HttpClient();
-                        user.HttpClient("InetSMSExample", "example.jsp", msg, Phone, Phone, date);
-                        Phone_flag = true;
-                        Join_TextView_Phone_Warning.setText("입력한 번호로 전송된 인증번호를 입력해 주세요");
-                        Join_TextView_Phone_Warning.setVisibility(View.VISIBLE);
+                        sms--;
+                        if(sms == 0){
+                            Snackbar.make(v,"잠시 후 이용바랍니다.", Snackbar.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Random random = new Random();
+                            rnd = Math.abs(random.nextInt(899999) + 100000);
+                            Log.i("aaaabb",String.valueOf(rnd));
+                            String msg = "오늘의농구 인증번호는 [" + String.valueOf(rnd) + "] 입니다.감사합니다.";
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault());
+                            Date d = new Date();
+                            String date = dateFormat.format(d);
+                            user = new HttpClient();
+                            user.HttpClient("InetSMSExample", "example.jsp", msg, Phone, Phone, date);
+                            Phone_flag = true;
+                            Join_TextView_Phone_Warning.setText("입력한 번호로 전송된 인증번호를 입력해 주세요 "+Integer.toString(sms)+" / 3");
+                            Join_TextView_Phone_Warning.setVisibility(View.VISIBLE);
+                        }
                     } else {
                         Phone_flag = false;
                         Join_TextView_Phone_Warning.setText("이미 가입된 번호가 있습니다");

@@ -64,9 +64,11 @@ public class TeamSearch_CustomList_Adapter extends BaseAdapter{
         TextView Layout_Navigation_TeamSearch_TextView_TeamRanking = (TextView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_TeamRanking);
         TextView Layout_Navigation_TeamSearch_TextView_Number = (TextView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_Number);
         Layout_Navigation_TeamSearch_ImageView_Emblem = (ImageView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_ImageView_Emblem);
+        TextView Layout_Navigation_TeamSearch_TextView_TeamAddress = (TextView)convertView.findViewById(R.id.Layout_Navigation_TeamSearch_TextView_TeamAddress);
         Layout_Navigation_TeamSearch_TextView_TeamName.setText(arrData.get(position).getTeamName());
         Layout_Navigation_TeamSearch_TextView_TeamRanking.setVisibility(View.INVISIBLE);
         Layout_Navigation_TeamSearch_TextView_Number.setVisibility(View.GONE);
+        Layout_Navigation_TeamSearch_TextView_TeamAddress.setText(arrData.get(position).getAddress_Do()+" "+arrData.get(position).getAddress_Si());
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
             if (arrData.get(position).getEmblem().equals(".")) {

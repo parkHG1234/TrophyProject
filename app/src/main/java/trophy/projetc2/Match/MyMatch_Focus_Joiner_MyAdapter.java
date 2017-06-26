@@ -1,5 +1,7 @@
 package trophy.projetc2.Match;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,6 +25,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
@@ -163,6 +166,8 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
 
                                 }
                                 Match_Focus_TextView_OpponentTeamName.setText(arrData.get(position).getTeamName());
+                                AlarmHATT a = new AlarmHATT(context);
+                                a.Alarm();
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주세요.", Snackbar.LENGTH_SHORT).show();
@@ -208,6 +213,26 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
         }catch (JSONException e){
             e.printStackTrace();
             return null;
+        }
+    }
+    public class AlarmHATT {
+        private Context context;
+        public AlarmHATT(Context context) {
+            this.context=context;
+        }
+        public void Alarm() {
+            AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(context, Match_Write_Push.class);
+
+            PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+            Calendar calendar = Calendar.getInstance();
+            //알람시간 calendar에 set해주기
+
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 1, 11, 0);
+
+            //알람 예약
+            am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
         }
     }
 }

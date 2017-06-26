@@ -362,8 +362,71 @@ public class TeamInfo extends AppCompatActivity {
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
+
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    protected void onRestart() {
+        super.onRestart();
+        final HttpClient TeamInfo = new HttpClient();
+        String result1 =TeamInfo.HttpClient("Trophy_part1","TeamInfo.jsp",TeamName);
+        parseredData_teamInfo =  jsonParserList_getTeamInfo(result1);
+
+        HttpClient http_Represent= new HttpClient();
+        String result123 = http_Represent.HttpClient("Trophy_part1","TeamInfo_Represent.jsp", User_Pk,Team_Pk);
+        parsedData_Represent = jsonParserList_Represent(result123);
+        if(parsedData_Represent[0][0].equals("succed")){
+            TeamDuty = "팀대표";
+            TeamInfo_TextView_caution.setVisibility(View.GONE);
+            TeamInfo_Button_Out.setBackgroundColor(getResources().getColor(R.color.DarkGray));
+        }
+        else{
+            TeamDuty = "팀원";
+            TeamInfo_TextView_caution.setVisibility(View.GONE);
+        }
+
+
+        TeamAddress_Do = parseredData_teamInfo[0][1];
+        TeamAddress_Si = parseredData_teamInfo[0][2];
+        HomeCourt = parseredData_teamInfo[0][3];
+        Introduce = parseredData_teamInfo[0][4];
+        Emblem = parseredData_teamInfo[0][5];
+        Image1 = parseredData_teamInfo[0][6];
+        Image2 = parseredData_teamInfo[0][7];
+        Image3 = parseredData_teamInfo[0][8];
+
+        if(Emblem.equals(".")) {
+            Glide.with(TeamInfo.this).load(R.drawable.emblem).diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamInfo_ImageView_Emblem);
+        }else {
+            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Emblem + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(TeamInfo.this).getBitmapPool()))
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamInfo_ImageView_Emblem);
+        }
+        TeamInfo_TextView_TeamName.setText(parseredData_teamInfo[0][0]);
+        TeamInfo_TextView_TeamAddress_Do.setText(TeamAddress_Do);
+        TeamInfo_TextView_TeamAddress_Si.setText(TeamAddress_Si);
+        TeamInfo_TextView_HomeCourt.setText(HomeCourt);
+        TeamInfo_TextView_TeamIntro.setText(Introduce);
+
+        if(Image1.equals(".")) {
+            //TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+            TeamInfo_ImageView_Image1.setBackgroundColor(getResources().getColor(R.color.main1color_back));
+        }else{
+            Glide.with(TeamInfo.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image1 + ".jpg")
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(TeamInfo_ImageView_Image1);
+        }
+        //팀원 정보
+        //팀원 리스트
+        HttpClient http_Player= new HttpClient();
+        String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Player.jsp",TeamName, Team_Pk);
+        parsedData_Player = jsonParserList_Player(result12);
+        setData_Player();
+        TeamInfo_Player_MyAdapter = new TeamInfo_Player_MyAdapter(TeamInfo.this, TeamInfo_Player_MyData);
+        //리스트뷰에 어댑터 연결
+        TeamInfo_ListView_Player.setAdapter(TeamInfo_Player_MyAdapter);
+        setListViewHeightBasedOnChildren(TeamInfo_ListView_Player);
     }
 }

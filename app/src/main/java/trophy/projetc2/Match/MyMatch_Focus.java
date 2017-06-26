@@ -1,5 +1,8 @@
 package trophy.projetc2.Match;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -63,13 +66,14 @@ public class MyMatch_Focus extends AppCompatActivity {
     String Away_Emblem;
     String Away_TeamName;
     String Away_Team_Pk;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String[][] parsedData_Match_Focus, parsedData_MyMatch_Focus_Joiner, parseredData_Delete;
     static String OtherTeam_Phone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_mymatch_focus);
-
+        currentTime();
         Intent intent1 = getIntent();
         Match_Pk = intent1.getStringExtra("Match_Pk");
         User_Pk = intent1.getStringExtra("User_Pk");
@@ -241,6 +245,23 @@ public class MyMatch_Focus extends AppCompatActivity {
             vs.setVisibility(View.VISIBLE);
             MyMatch_Focus_Joined_ImageView_Phone.setVisibility(View.VISIBLE);
         }
+//        String day="";
+//        if(Integer.parseInt(MatchDate[1])<10){
+//            day = "0"+MatchDate[1];
+//        }
+//        else{
+//            day = MatchDate[1];
+//        }
+//        String str12 = FinishTime;
+//        String[] data2 = str12.split(":");
+//        String our = data2[0];
+//        int match_day_time = Integer.parseInt(data[0]+MatchDate[0]+day+our);
+//        if(Integer.parseInt(strCurToday) > match_day_time){
+//            if(parsedData_Match_Focus[0][13].equals("deadline"))
+//            {
+//                Log.i("ttt","ttt");
+//            }
+//        }
         Match_Focus_ImageView_OpponentEmblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -443,5 +464,27 @@ public class MyMatch_Focus extends AppCompatActivity {
 
         }
         return day;
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+// 현재 시간을 저장 한다.
+        Date date = new Date(now);
+// 시간 포맷 지정
+        SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyyMMddHH");
+        SimpleDateFormat CurTimeFormat = new SimpleDateFormat("HH : mm");
+        SimpleDateFormat CurYearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat CurMonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
+        SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+// 지정된 포맷으로 String 타입 리턴
+        strCurToday = CurDateFormat.format(date);
+        strCurTime = CurTimeFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurYear = CurYearFormat.format(date);
+        strCurMonth = CurMonthFormat.format(date);
+        strCurDay = CurDayFormat.format(date);
+        strCurHour = CurHourFormat.format(date);
+        strCurMinute = CurMinuteFormat.format(date);
     }
 }

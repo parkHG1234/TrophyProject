@@ -50,7 +50,7 @@ public class TeamRanking extends AppCompatActivity {
         ArrayList<TeamRanking_Customlist_MyData> TeamRanking_Customlist_MyData;
         TeamRanking_Customlist_MyData = new ArrayList<TeamRanking_Customlist_MyData>();
         for (int i = 0; i < parsedData_TeamSearch.length; i++) {
-            TeamRanking_Customlist_MyData.add(new TeamRanking_Customlist_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2],parsedData_TeamSearch[i][3],i+1));
+            TeamRanking_Customlist_MyData.add(new TeamRanking_Customlist_MyData(Pk,parsedData_TeamSearch[i][0], parsedData_TeamSearch[i][1], parsedData_TeamSearch[i][2],parsedData_TeamSearch[i][3],i+1, parsedData_TeamSearch[i][4],parsedData_TeamSearch[i][5]));
         }
         adapter = new TeamRanking_Customlist_MyAdapter(this, TeamRanking_Customlist_MyData);
         Layout_Navigation_TeamSearch_ListView_TeamSearch.setAdapter(adapter);
@@ -91,7 +91,7 @@ public class TeamRanking extends AppCompatActivity {
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
