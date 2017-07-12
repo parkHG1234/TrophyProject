@@ -34,12 +34,14 @@ import trophy.projetc2.Navigation.TeamFocus;
 import trophy.projetc2.Navigation.TeamSearch_Focus;
 import trophy.projetc2.R;
 
+import static trophy.projetc2.Match.MyMatch_Focus.MatchDate_All;
 import static trophy.projetc2.Match.MyMatch_Focus.Match_Focus_ImageView_OpponentEmblem;
 import static trophy.projetc2.Match.MyMatch_Focus.Match_Focus_ImageView_Status;
 import static trophy.projetc2.Match.MyMatch_Focus.Match_Focus_TextView_OpponentTeamName;
 import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_Joined_ImageView_Phone;
 import static trophy.projetc2.Match.MyMatch_Focus.MyMatch_Focus_LinerLayout_Joining;
 import static trophy.projetc2.Match.MyMatch_Focus.OtherTeam_Phone;
+import static trophy.projetc2.Match.MyMatch_Focus.TeamName;
 import static trophy.projetc2.Match.MyMatch_Focus.away;
 import static trophy.projetc2.Match.MyMatch_Focus.vs;
 
@@ -120,8 +122,8 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                     final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
                     final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
                     final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
-                    Customdialog_2Choice_Title.setText("시합 요청");
-                    Customdialog_2Choice_Content.setText("수락시 시합 요청이 마감되며, 다른 신청팀은 자동 취소됩니다.");
+                    Customdialog_2Choice_Title.setText("교류전");
+                    Customdialog_2Choice_Content.setText("수락시 교류전이 성사되며, 다른 신청팀은 자동 취소됩니다.\n성사된 교류전은 교류전결과에서 확인하실 수 있습니다.");
                     Customdialog_2Choice_First.setText("수 락");
                     Customdialog_2Choice_Second.setText("취 소");
                     final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
@@ -139,35 +141,16 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View view) {
                             HttpClient http_mymatch_focus_joiner = new HttpClient();
-                            String result = http_mymatch_focus_joiner.HttpClient("Trophy_part1","MyMatch_Focus_Join.jsp",arrData.get(position).getMatch_Pk(),arrData.get(position).getMatch_Joiner_Pk(),arrData.get(position).getUser_Pk());
+                            String result = http_mymatch_focus_joiner.HttpClient("Trophy_part1","MyMatch_Focus_Join.jsp",arrData.get(position).getMatch_Pk(),arrData.get(position).getMatch_Joiner_Pk(),arrData.get(position).getUser_Pk(),arrData.get(position).getOpponent_TeamPk());
                             parsedData_MyMatch_Focus_Join = jsonParserList_MyMatch_Focus_join(result);
                             if(parsedData_MyMatch_Focus_Join[0][0].equals("succed")){
-                                TeamInfo_Dialog.dismiss();
-//                            MyMatch_Focus_LinerLayout_Joined.setVisibility(View.VISIBLE);
-                                MyMatch_Focus_LinerLayout_Joining.setVisibility(View.GONE);
-                                away.setVisibility(View.VISIBLE);
-                                vs.setVisibility(View.VISIBLE);
-                                MyMatch_Focus_Joined_ImageView_Phone.setVisibility(View.VISIBLE);
-                                Match_Focus_ImageView_Status.setImageResource(R.drawable.deadline);
-
-                                OtherTeam_Phone = arrData.get(position).getPhone();
-                                try {
-                                    String En_Profile = URLEncoder.encode(arrData.get(position).getEmblem(), "utf-8");
-                                    if (arrData.get(position).getEmblem().equals(".")) {
-                                        Glide.with(context).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-                                                .into(Match_Focus_ImageView_OpponentEmblem);
-                                    } else {
-                                        Glide.with(context).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(context).getBitmapPool()))
-                                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                                .skipMemoryCache(true)
-                                                .into(Match_Focus_ImageView_OpponentEmblem);
-                                    }
-                                } catch (UnsupportedEncodingException e) {
-
-                                }
-                                Match_Focus_TextView_OpponentTeamName.setText(arrData.get(position).getTeamName());
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getUser_Pk(), TeamName+"팀 교류전 신청 수락! "+MatchDate_All[1]+"월 "+MatchDate_All[2]+"일 다른 신청은 자동 삭제됩니다");
                                 AlarmHATT a = new AlarmHATT(context);
                                 a.Alarm();
+                                TeamInfo_Dialog.dismiss();
+                                arrData.get(position).getActivity().finish();
+                                arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주세요.", Snackbar.LENGTH_SHORT).show();
@@ -228,9 +211,8 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
 
             Calendar calendar = Calendar.getInstance();
             //알람시간 calendar에 set해주기
-
-            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 1, 11, 0);
-
+           calendar.set(Integer.parseInt(MatchDate_All[0]), Integer.parseInt(MatchDate_All[1])-1, Integer.parseInt(MatchDate_All[2]), Integer.parseInt(MatchDate_All[3]), Integer.parseInt(MatchDate_All[4]), 0);
+            Log.i("test", Integer.toString(Integer.parseInt(MatchDate_All[1])-1));
             //알람 예약
             am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
         }

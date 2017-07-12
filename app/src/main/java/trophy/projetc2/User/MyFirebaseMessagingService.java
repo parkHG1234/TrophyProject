@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
+import android.view.WindowManager;
 
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -28,7 +30,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         //추가한것
-        sendNotification(remoteMessage.getData().get("message"));
+        sendNotification(remoteMessage.getNotification().getBody());
     }
 
     private void sendNotification(String messageBody) {

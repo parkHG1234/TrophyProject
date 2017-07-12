@@ -155,7 +155,7 @@ public class OutCourt_CourtInfo_Focus_Comment extends AppCompatActivity{
                 else{
                     HttpClient http_comment= new HttpClient();
                     String result = http_comment.HttpClient("Trophy_part1","OutCourt_Focus_Comment_Input.jsp",Court_Content_Pk, User_Pk, strCurToday, OutCourt_CourtInfo_Focus_Comment_EditText_Memo.getText().toString());
-                    parsedData_Comment_Input = jsonParserList_Succed(result);
+                    parsedData_Comment_Input = jsonParserList_CommentInput(result);
                     if(parsedData_Comment_Input[0][0].equals("succed")){
                         OutCourt_CourtInfo_Focus_Comment_MyData.clear();
 
@@ -169,6 +169,14 @@ public class OutCourt_CourtInfo_Focus_Comment extends AppCompatActivity{
                         adapter = new OutCourt_CourtInfo_Focus_Comment_MyAdapter(OutCourt_CourtInfo_Focus_Comment.this, OutCourt_CourtInfo_Focus_Comment_MyData);
                         OutCourt_CourtInfo_Focus_Comment_ListView_Comment.setAdapter(adapter);
                         OutCourt_CourtInfo_Focus_Comment_EditText_Memo.setText("");
+                        if(parsedData_Comment_Input[0][1].equals(User_Pk)){
+
+                        }
+                        else{
+                            HttpClient http_push = new HttpClient();
+                            http_push.HttpClient("TodayBasket_manager","push.jsp", parsedData_Comment_Input[0][1], parsedData_Comment_Input[0][2]+"님이 피드에 답글을 남겼습니다");
+
+                        }
                     }
                 }
             }
@@ -221,6 +229,25 @@ public class OutCourt_CourtInfo_Focus_Comment extends AppCompatActivity{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
             String[] jsonName = {"msg1"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for (int i = 0; i < jArr.length(); i++) {
+                json = jArr.getJSONObject(i);
+                for (int j = 0; j < jsonName.length; j++) {
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public String[][] jsonParserList_CommentInput(String pRecvServerPage) {
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try {
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for (int i = 0; i < jArr.length(); i++) {
                 json = jArr.getJSONObject(i);

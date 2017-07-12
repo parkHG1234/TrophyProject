@@ -49,7 +49,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:background="@color/soso"
+                android:background="@color/Match_Menu_Back"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
@@ -91,37 +91,8 @@
                                 android:gravity="center"
                                 android:text="abcd"/>
                         </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:id="@+id/away">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:id="@+id/Match_Focus_ImageView_OpponentEmblem"
-                                android:padding="15dp"
-                                android:layout_height="120dp"
-                                android:src="@drawable/emblem"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_alignParentBottom="true"
-                                android:id="@+id/Match_Focus_TextView_OpponentTeamName"
-                                android:textSize="14dp"
-                                android:textColor="@color/Black"
-                                android:gravity="center"
-                                android:text="abcd"/>
-                        </LinearLayout>
                     </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="vs"
-                        android:layout_centerVertical="true"
-                        android:layout_centerInParent="true"
-                        android:id="@+id/vs"
-                        android:textSize="22dp" />
+
                     <Button
                         android:text="연락하기"
                         android:textColor="@color/White"

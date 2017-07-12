@@ -29,11 +29,11 @@ public class MyMatch_MyAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<MyMatch_MyData> arrData;
-    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime,strCurAll;
     ImageView Match_CustomList_ImageView_Status, Match_CustomList_ImageView_Emblem;
     TextView Match_CustomList_TextView_Time, Match_CustomList_TextView_TeamName,
             Match_CustomList_TextView_Title, Match_CustomList_TextView_MatchTime, Match_CustomList_TextView_MatchPlace, Match_CustomList_ImageView_JoinerCount;
-
+    String Status="recruiting";
     public MyMatch_MyAdapter(Context c, ArrayList<MyMatch_MyData> arr) {
         this.context = c;
         this.arrData = arr;
@@ -75,6 +75,20 @@ public class MyMatch_MyAdapter extends BaseAdapter {
             String[] data1 = str1.split(" / ");
             Match_CustomList_TextView_Time.setText(data1[1] + " / " + data1[2]);
         }
+        //매치 시간 분할
+        String str1 = arrData.get(position).getMatchDate();
+        String[] data1 = str1.split(":::");
+        String str2 = data1[1];
+        String[] data2 = str2.split(" / ");
+        if(Integer.parseInt(data2[1]) < 10){
+            data2[1] = "0"+data2[1];
+        }
+        String str3 = arrData.get(position).getFinishTime();
+        String[] data3 = str3.split(":");
+        if(Integer.parseInt(data3[1]) < 10){
+            data3[1] = "0"+data3[1];
+        }
+        String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
         Match_CustomList_TextView_TeamName.setText(arrData.get(position).getTeamName());
         Match_CustomList_TextView_Title.setText(arrData.get(position).getTitle());
         Match_CustomList_TextView_MatchTime.setText(time_changestr(arrData.get(position).getStartTime()) + " ~ " + time_changestr(arrData.get(position).getFinishTime()));
@@ -99,7 +113,7 @@ public class MyMatch_MyAdapter extends BaseAdapter {
             Match_CustomList_ImageView_JoinerCount.setVisibility(View.VISIBLE);
             Match_CustomList_ImageView_JoinerCount.setText(arrData.get(position).getJoinerCount()+"명 신청중");
         }
-        else if(arrData.get(position).getStatus().equals("deadline")){
+        else{
             Match_CustomList_ImageView_Status.setImageResource(R.drawable.deadline);
         }
         convertView.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +122,7 @@ public class MyMatch_MyAdapter extends BaseAdapter {
                 Intent intent1 = new Intent(context, MyMatch_Focus.class);
                 intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
                 intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                intent1.putExtra("Status", arrData.get(position).getStatus());
                 context.startActivity(intent1);
                 arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
@@ -126,6 +141,7 @@ public class MyMatch_MyAdapter extends BaseAdapter {
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+        SimpleDateFormat ALLFormat = new SimpleDateFormat("yyyyMMddHHmm");
 // 지정된 포맷으로 String 타입 리턴
         strCurToday = CurDateFormat.format(date);
         strCurTime = CurTimeFormat.format(date);
@@ -135,6 +151,7 @@ public class MyMatch_MyAdapter extends BaseAdapter {
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+        strCurAll = ALLFormat.format(date);
     }
     public String time_changestr(String time){
         String str = time;

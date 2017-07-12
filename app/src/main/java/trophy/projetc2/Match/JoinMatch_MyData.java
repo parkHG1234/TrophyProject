@@ -20,7 +20,8 @@ public class JoinMatch_MyData {
     private Activity activity;
     private String User_Pk;
     private String FinishTime;
-    public JoinMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity activity,String User_Pk,String FinishTime){
+    private String DateStatus;
+    public JoinMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity activity,String User_Pk,String FinishTime,String DateStatus){
         this.Match_Pk = Match_Pk;
         this.Emblem = Emblem;
         this.TeamName = TeamName;
@@ -32,6 +33,7 @@ public class JoinMatch_MyData {
         this.activity = activity;
         this.User_Pk = User_Pk;
         this.FinishTime = FinishTime;
+        this.DateStatus = DateStatus;
     }
     public String getEmblem() {
         return Emblem;
@@ -58,4 +60,5 @@ public class JoinMatch_MyData {
     public Activity getActivity(){return activity;}
     public String getUser_Pk(){return User_Pk;}
     public String getFinishTime(){return FinishTime;}
+    public String getDateStatus(){return DateStatus;}
 }

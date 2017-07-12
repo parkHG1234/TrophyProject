@@ -74,7 +74,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="15dp"
-                    android:layout_height="220dp">
+                    android:layout_height="230dp">
                     <ImageView
                         android:layout_width="match_parent"
                         android:orientation="horizontal"
@@ -92,7 +92,34 @@
                         android:layout_centerHorizontal="true"
                         android:layout_width="120dp"
                         android:layout_height="120dp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:orientation="vertical"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:id="@+id/TeamInfo_TextView_Grade"
+                            android:gravity="center"
+                            android:textColor="@color/main1color"
+                            android:layout_height="wrap_content"
+                            android:textSize="23sp" />
+                        <RatingBar
+                            android:id="@+id/ratingBar"
+                            android:numStars="5"
+                            android:stepSize="1"
+                            android:rating="3"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:theme="@style/CustomRatingBar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:progressTint="@color/main1color" />
+                    </LinearLayout>
                 </RelativeLayout>
+
                 <TextView
                     android:text="클린쳐"
                     android:textColor="@color/Black"
@@ -104,6 +131,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     />
+
                 <TextView
                     android:text="소속"
                     android:textColor="@color/Black"

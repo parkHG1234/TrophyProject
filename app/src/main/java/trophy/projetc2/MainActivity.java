@@ -26,12 +26,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,9 +40,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.matthewtamlin.sliding_intro_screen_library.DotIndicator;
-import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import org.json.JSONArray;
@@ -75,13 +71,11 @@ import trophy.projetc2.Main.MainActivity_VierPage1;
 import trophy.projetc2.Main.MainActivity_VierPage2;
 import trophy.projetc2.Main.MainActivity_VierPage3;
 import trophy.projetc2.Contest.Navigation_Contest;
-import trophy.projetc2.Match.JoinMatch;
 import trophy.projetc2.Match.Match_MyAdapter;
 import trophy.projetc2.Match.Match_MyData;
-import trophy.projetc2.Navigation.Last_Contest;
 import trophy.projetc2.Match.Match;
-import trophy.projetc2.Match.MyMatch;
 import trophy.projetc2.Navigation.Notice;
+import trophy.projetc2.Score.Score;
 import trophy.projetc2.OutCourt.OutCourt_Address;
 import trophy.projetc2.Navigation.Suggest;
 import trophy.projetc2.Navigation.TeamInfo;
@@ -89,17 +83,17 @@ import trophy.projetc2.Navigation.TeamMake;
 import trophy.projetc2.Navigation.TeamRanking;
 import trophy.projetc2.Navigation.TeamSearch;
 import trophy.projetc2.Navigation.TeamSearch_Focus;
-import trophy.projetc2.OutCourt.OutCourt_CourtInfo;
 import trophy.projetc2.OutCourt.OutCourt_CourtInfo_Main;
 import trophy.projetc2.OutCourt.OutCourt_CourtInfo_MyAdapter;
 import trophy.projetc2.OutCourt.OutCourt_CourtInfo_MyData;
+import trophy.projetc2.Score.Score_Focus;
 import trophy.projetc2.User.ChangePersonalInfoActivity;
 import trophy.projetc2.User.Login;
 
 public class MainActivity extends AppCompatActivity {
     String Name, Team, Profile, Token = "hh", Team_Pk, Team_Duty, Address_Do, Address_Si;
     static String Pk;
-    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime, strCurAll;
     String[][] parseredData_AddToken, parseredData_user, parseredData_teammake,RankingParsedList;
     public static Activity activity;
     private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -112,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     static TimerTask myTask;
     static Timer timer;
     private LayoutInflater inflater;
+    String[][] parseredData_score;int score_count = 0;String Game_Status="";String[][] parseredData_score_away;
+
     ListView Contest_ListView_OutCourt;ArrayList<OutCourt_CourtInfo_MyData> OutCourt_CourtInfo_MyData;OutCourt_CourtInfo_MyAdapter adapter_outcourt;
     ArrayList<Match_MyData> Match_MyData;Match_MyAdapter adapter;ListView Contest_ListView_Match;
     protected boolean shouldAskPermissions() {
@@ -179,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
         final LinearLayout Main_Navigation_Button_Logout = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Logout);
         final LinearLayout Main_Navigation_Button_Ranking = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
         final LinearLayout Main_Navigation_Button_Match = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Match);
+        final LinearLayout Main_Navigation_Button_Succed_Score = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Succed_Match);
         final LinearLayout Main_Navigation_Button_OutCourt = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_OutCourt);
         final TextView Main_Navigation_Line_TeamInfo = (TextView)aa.findViewById(R.id.Main_Navigation_Line_TeamInfo);
         final TextView Main_Navigation_Line_Logout = (TextView)aa.findViewById(R.id.Main_Navigation_Line_Logout);
@@ -203,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             Token = FirebaseInstanceId.getInstance().getToken();
             Log.i("token", Token);
             HttpClient http_addtoken = new HttpClient();
-            String result12 = http_addtoken.HttpClient("Trophy_part1", "Fcm_Add.jsp", Pk, Token);
+            String result12 = http_addtoken.HttpClient("Trophy_part1", "Fcm_Add_AND.jsp", Pk, Token);
             parseredData_AddToken = jsonParserList_AddToken(result12);
             
             HttpClient user = new HttpClient();
@@ -241,12 +238,6 @@ public class MainActivity extends AppCompatActivity {
                 Main_Navigation_TextView_Team.setText(Team);
             }
 
-            Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -474,6 +465,15 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
+        Main_Navigation_Button_Succed_Score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Score.class);
+                intent.putExtra("User_Pk", Pk);
+                startActivity(intent);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
         //로그아웃
         Main_Navigation_Button_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -598,12 +598,14 @@ public class MainActivity extends AppCompatActivity {
         Match_MyData = new ArrayList<Match_MyData>();
         if(parsedData_Match.length <= 5){
             for (int i = 0; i < parsedData_Match.length; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+                String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MainActivity.this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
             }
         }
         else{
             for (int i = 0; i < 5; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+                String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MainActivity.this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
             }
         }
         adapter = new Match_MyAdapter(this, Match_MyData);
@@ -775,6 +777,109 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
+        //점수입력안된 교류전이 있는 경우
+        HttpClient score = new HttpClient();
+        String result5 = score.HttpClient("Trophy_part1", "Main_Score.jsp", Pk);
+        parseredData_score = jsonParserList_Score(result5);
+        Log.i("test", Integer.toString(parseredData_score.length));
+        for(score_count = 0 ;score_count < parseredData_score.length; score_count++)
+        {
+                Game_Status = getStatus(parseredData_score[score_count][1], parseredData_score[score_count][2],parseredData_score[score_count][3]);
+                if(Game_Status.equals("After")){
+                    LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+                    final View layout = inflater.inflate(R.layout.layout_customdialog_2choice, (ViewGroup) findViewById(R.id.Customdialog_2Choice_Root));
+                    final TextView Customdialog_2Choice_Title = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Title);
+                    final ImageView Customdialog_2Choice_Back = (ImageView)layout.findViewById(R.id.Customdialog_2Choice_Back);
+                    final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
+                    final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
+                    final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
+                    Customdialog_2Choice_Title.setText("점수입력");
+                    Customdialog_2Choice_Content.setText("점수입력되지 않은 교류전이 잇습니다");
+                    Customdialog_2Choice_First.setText("이 동");
+                    Customdialog_2Choice_Second.setText("다음에 하기");
+                    final MaterialDialog TeamInfo_Dialog = new MaterialDialog(MainActivity.this);
+                    TeamInfo_Dialog
+                            .setContentView(layout)
+                            .setCanceledOnTouchOutside(true);
+                    TeamInfo_Dialog.show();
+                    Customdialog_2Choice_Back.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TeamInfo_Dialog.dismiss();
+                        }
+                    });
+                    Customdialog_2Choice_First.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(MainActivity.this, Score_Focus.class);
+                            intent.putExtra("Match_Pk", parseredData_score[score_count][0]);
+                            intent.putExtra("User_Pk", Pk);
+                            intent.putExtra("GameStatus", Game_Status);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                            TeamInfo_Dialog.dismiss();
+                        }
+                    });
+                    Customdialog_2Choice_Second.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            TeamInfo_Dialog.dismiss();
+                        }
+                    });
+                    break;
+                }
+        }
+        //점수확인안된 교류전이 있는 경우
+        HttpClient score_away = new HttpClient();
+        String result6 = score_away.HttpClient("Trophy_part1", "Main_Score_Away.jsp", Pk);
+        parseredData_score_away = jsonParserList_Score(result6);
+        for(score_count = 0 ;score_count < parseredData_score_away.length; score_count++)
+        {
+            Game_Status = getStatus(parseredData_score_away[score_count][1], parseredData_score_away[score_count][2],parseredData_score_away[score_count][3]);
+            if(Game_Status.equals("After")){
+                LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+                final View layout = inflater.inflate(R.layout.layout_customdialog_2choice, (ViewGroup) findViewById(R.id.Customdialog_2Choice_Root));
+                final TextView Customdialog_2Choice_Title = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Title);
+                final ImageView Customdialog_2Choice_Back = (ImageView)layout.findViewById(R.id.Customdialog_2Choice_Back);
+                final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
+                final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
+                final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
+                Customdialog_2Choice_Title.setText("점수확인");
+                Customdialog_2Choice_Content.setText("점수확인되지 않은 교류전이 잇습니다");
+                Customdialog_2Choice_First.setText("이 동");
+                Customdialog_2Choice_Second.setText("다음에 하기");
+                final MaterialDialog TeamInfo_Dialog = new MaterialDialog(MainActivity.this);
+                TeamInfo_Dialog
+                        .setContentView(layout)
+                        .setCanceledOnTouchOutside(true);
+                TeamInfo_Dialog.show();
+                Customdialog_2Choice_Back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TeamInfo_Dialog.dismiss();
+                    }
+                });
+                Customdialog_2Choice_First.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TeamInfo_Dialog.dismiss();
+                        Intent intent = new Intent(MainActivity.this, Score_Focus.class);
+                        intent.putExtra("Match_Pk", parseredData_score_away[score_count][0]);
+                        intent.putExtra("User_Pk", Pk);
+                        intent.putExtra("GameStatus", Game_Status);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                });
+                Customdialog_2Choice_Second.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TeamInfo_Dialog.dismiss();
+                    }
+                });
+                break;
+            }
+        }
     }
 
     @Override
@@ -804,12 +909,14 @@ public class MainActivity extends AppCompatActivity {
         Match_MyData = new ArrayList<Match_MyData>();
         if(parsedData_Match.length <= 5){
             for (int i = 0; i < parsedData_Match.length; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+                String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MainActivity.this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
             }
         }
         else{
             for (int i = 0; i < 5; i++) {
-                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+                String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+                Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MainActivity.this,Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
             }
         }
         adapter = new Match_MyAdapter(this, Match_MyData);
@@ -966,6 +1073,25 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
+    public String[][] jsonParserList_Score(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         try {
             //인텐트에 데이터가 담겨 왔다면
@@ -1115,6 +1241,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+        SimpleDateFormat CurAllFormat = new SimpleDateFormat("yyyyMMddHHmm");
 // 지정된 포맷으로 String 타입 리턴
         strCurToday = CurDateFormat.format(date);
         strCurTime = CurTimeFormat.format(date);
@@ -1124,6 +1251,7 @@ public class MainActivity extends AppCompatActivity {
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+        strCurAll= CurAllFormat.format(date);
     }
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -1181,5 +1309,58 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+    public String getStatus(String Match_Date, String StartTime, String FinishTime){
+        String str1 = Match_Date;
+        String[] data1 = str1.split(":::");
+        String str2 = data1[1];
+        String[] data2 = str2.split(" / ");
+        if(Integer.parseInt(data2[1]) < 10){
+            data2[1] = "0"+data2[1];
+        }
+        String str3 = StartTime;
+        String[] data3 = str3.split(":");
+        if(Integer.parseInt(data3[1]) < 10){
+            data3[1] = "0"+data3[1];
+        }
+        String str4 = FinishTime;
+        String[] data4 = str4.split(":");
+        if(Integer.parseInt(data4[1]) < 10){
+            data4[1] = "0"+data4[1];
+        }
+        ////////////////////////////////////////////////////////////////////
+        String match_starttime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+        String match_finishtime = data1[0]+data2[0]+data2[1]+data4[0]+data4[1];
+        if(Long.parseLong(strCurAll) < Long.parseLong(match_starttime)){
+            return "Before";
+        }
+        else if((Long.parseLong(match_starttime) < Long.parseLong(strCurAll) &&  Long.parseLong(strCurAll) < Long.parseLong(match_finishtime))){
+            return "Gameing";
+        }
+        else{
+            return "After";
+        }
+    }
+    public String getStatus(String Match_Date, String FinishTime){
+        String str1 = Match_Date;
+        String[] data1 = str1.split(":::");
+        String str2 = data1[1];
+        String[] data2 = str2.split(" / ");
+        if(Integer.parseInt(data2[1]) < 10){
+            data2[1] = "0"+data2[1];
+        }
+        String str3 = FinishTime;
+        String[] data3 = str3.split(":");
+        if(Integer.parseInt(data3[1]) < 10){
+            data3[1] = "0"+data3[1];
+        }
+        ////////////////////////////////////////////////////////////////////
+        String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+        Log.i("test123",match_finishtime);
+        if(Long.parseLong(match_finishtime)>Long.parseLong(strCurAll)){
+            return  "recruiting";
+        }
+        else{
+            return "finish";
+        }
+    }
 }

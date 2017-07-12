@@ -200,6 +200,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                                 TeamPlayerDialog.dismiss();
                                 refresh_player= "refresh";
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getFirst_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 수락되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -215,6 +218,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getFirst_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 거절되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -312,6 +318,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                                 TeamPlayerDialog.dismiss();
                                 refresh_player= "refresh";
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getSecond_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 수락되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -327,6 +336,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getSecond_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 거절되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -424,6 +436,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                                 TeamPlayerDialog.dismiss();
                                 refresh_player= "refresh";
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getThird_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 수락되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -439,6 +454,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getThird_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 거절되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -536,6 +554,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                                 TeamPlayerDialog.dismiss();
                                 refresh_player= "refresh";
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getFourth_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 수락되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
@@ -551,6 +572,9 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
                                 refresh_joiner= "refresh";
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getFourth_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 거절되었습니다");
+
                             }
                             else{
                                 Snackbar.make(view,"잠시 후 다시 시도해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();

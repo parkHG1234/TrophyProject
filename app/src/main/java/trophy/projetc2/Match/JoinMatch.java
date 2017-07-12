@@ -12,7 +12,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
@@ -30,6 +32,7 @@ public class JoinMatch extends AppCompatActivity{
     boolean lastitemVisibleFlag = false;
     JoinMatch_MyAdapter adapter;
     ArrayList<JoinMatch_MyData> JoinMatch_MyData;
+    String strCurAll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class JoinMatch extends AppCompatActivity{
         User_Pk = intent1.getStringExtra("User_Pk");
         Team_Pk = intent1.getStringExtra("Team_Pk");
         Team_Duty = intent1.getStringExtra("Team_Duty");
-
+        currentTime();
         JoinMatch_ImageView_Back = (ImageView)findViewById(R.id.JoinMatch_ImageView_Back);
         JoinMatch_ListView_List = (ListView)findViewById(R.id.JoinMatch_ListView_List);
 
@@ -48,52 +51,12 @@ public class JoinMatch extends AppCompatActivity{
 
         JoinMatch_MyData = new ArrayList<JoinMatch_MyData>();
         for (int i = 0; i < parsedData_JoinMatch.length; i++) {
-            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8]));
+            String Status = getStatus(parsedData_JoinMatch[i][9], parsedData_JoinMatch[i][4], parsedData_JoinMatch[i][8]);
+            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8],Status));
         }
         Log.i("tt123", Integer.toString(ContentCount));
         adapter = new JoinMatch_MyAdapter(this, JoinMatch_MyData);
         JoinMatch_ListView_List.setAdapter(adapter);
-//        Match_ImageView_Write.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(User_Pk.equals(".")){
-//                    Intent intent_login = new Intent(Match.this, Login.class);
-//                    startActivity(intent_login);
-//                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-//                }
-//                else{
-//                    if(Team_Duty.equals("팀원")||Team_Duty.equals("팀대표")){
-//                        Intent intent1 = new Intent(Match.this, Match_Write.class);
-//                        intent1.putExtra("Team_Duty", Team_Duty);
-//                        intent1.putExtra("Team_Pk", Team_Pk);
-//                        intent1.putExtra("User_Pk", User_Pk);
-//                        startActivity(intent1);
-//                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-//                    }
-//                    else{
-//                        Snackbar.make(view, "팀 가입 후 이용해주세요.", Snackbar.LENGTH_LONG).show();
-//                    }
-//                }
-//            }
-//        });
-//
-//        Match_ListView_List.setOnScrollListener(new AbsListView.OnScrollListener() {
-//            @Override
-//
-//
-//            public void onScrollStateChanged(AbsListView absListView, int i) {
-//                if(i == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastitemVisibleFlag) {
-//                    Match_Scroll Match_Scroll = new Match_Scroll();
-//                    Match_Scroll.execute();
-//                }
-//                Log.i("tt123", Integer.toString(ContentCount));
-//            }
-//
-//            @Override
-//            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-//                lastitemVisibleFlag = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
-//            }
-//        });
         JoinMatch_ImageView_Back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +81,8 @@ public class JoinMatch extends AppCompatActivity{
 
         JoinMatch_MyData = new ArrayList<JoinMatch_MyData>();
         for (int i = 0; i < parsedData_JoinMatch.length; i++) {
-            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8]));
+            String Status = getStatus(parsedData_JoinMatch[i][9], parsedData_JoinMatch[i][4], parsedData_JoinMatch[i][8]);
+            JoinMatch_MyData.add(new JoinMatch_MyData(parsedData_JoinMatch[i][0], parsedData_JoinMatch[i][1], parsedData_JoinMatch[i][2],parsedData_JoinMatch[i][3],parsedData_JoinMatch[i][4],parsedData_JoinMatch[i][5],parsedData_JoinMatch[i][6],parsedData_JoinMatch[i][7],JoinMatch.this,User_Pk,parsedData_JoinMatch[i][8],Status));
         }
         Log.i("tt123", Integer.toString(ContentCount));
         adapter = new JoinMatch_MyAdapter(this, JoinMatch_MyData);
@@ -130,7 +94,7 @@ public class JoinMatch extends AppCompatActivity{
         try{
             JSONObject json = new JSONObject(pRecvServerPage);
             JSONArray jArr = json.getJSONArray("List");
-            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9"};
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8","msg9","msg10"};
             String[][] parseredData = new String[jArr.length()][jsonName.length];
             for(int i = 0; i<jArr.length();i++){
                 json = jArr.getJSONObject(i);
@@ -183,5 +147,48 @@ public class JoinMatch extends AppCompatActivity{
 //            super.onPostExecute(result);
 //        }
 //    }
+public String getStatus(String Match_Date, String StartTime, String FinishTime){
+    String str1 = Match_Date;
+    String[] data1 = str1.split(":::");
+    String str2 = data1[1];
+    String[] data2 = str2.split(" / ");
+    if(Integer.parseInt(data2[1]) < 10){
+        data2[1] = "0"+data2[1];
+    }
+    String str3 = StartTime;
+    String[] data3 = str3.split(":");
+    if(Integer.parseInt(data3[0]) < 10){
+        data3[0] = "0"+data3[0];
+    }
+    if(Integer.parseInt(data3[1]) < 10){
+        data3[1] = "0"+data3[1];
+    }
+    String str4 = FinishTime;
+    String[] data4 = str4.split(":");
+    if(Integer.parseInt(data4[0]) < 10){
+        data4[0] = "0"+data4[0];
+    }
+    if(Integer.parseInt(data4[1]) < 10){
+        data4[1] = "0"+data4[1];
+    }
+    ////////////////////////////////////////////////////////////////////
+    String match_starttime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+    String match_finishtime = data1[0]+data2[0]+data2[1]+data4[0]+data4[1];
+    if(Long.parseLong(strCurAll) < Long.parseLong(match_starttime)){
+        return "Before";
+    }
+    else if((Long.parseLong(match_starttime) < Long.parseLong(strCurAll) &&  Long.parseLong(strCurAll) < Long.parseLong(match_finishtime))){
+        return "Gameing";
+    }
+    else{
+        return "After";
+    }
+}
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat ALLFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        strCurAll = ALLFormat.format(date);
+    }
 }
 

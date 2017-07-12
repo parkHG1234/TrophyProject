@@ -2,6 +2,7 @@ package trophy.projetc2.Match;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import trophy.projetc2.R;
+import trophy.projetc2.Score.Score_Focus;
 
 /**
  * Created by 박효근 on 2017-05-25.
@@ -101,6 +103,9 @@ public class JoinMatch_MyAdapter extends BaseAdapter{
         }
         if(arrData.get(position).getStatus().equals("Joining")){
             JoinMatch_CustomList_ImageView_Status.setImageResource(R.drawable.joinmatch_joining);
+            if(arrData.get(position).getDateStatus().equals("After")){
+                JoinMatch_CustomList_ImageView_Status.setImageResource(R.drawable.deadline);
+            }
         }
         else if(arrData.get(position).getStatus().equals("refuse")){
             JoinMatch_CustomList_ImageView_Status.setImageResource(R.drawable.joinmatch_refuse);
@@ -111,12 +116,24 @@ public class JoinMatch_MyAdapter extends BaseAdapter{
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(context, JoinMatch_Focus.class);
-                intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
-                intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
-                intent1.putExtra("Status", arrData.get(position).getStatus());
-                context.startActivity(intent1);
-                arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(arrData.get(position).getStatus().equals("allow")){
+                    Intent intent1 = new Intent(context, Score_Focus.class);
+                    intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
+                    intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                    intent1.putExtra("GameStatus", arrData.get(position).getDateStatus());
+                    context.startActivity(intent1);
+                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
+                else{
+                    Intent intent1 = new Intent(context, JoinMatch_Focus.class);
+                    intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
+                    intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                    intent1.putExtra("Status", arrData.get(position).getStatus());
+                    intent1.putExtra("GameStatus", arrData.get(position).getDateStatus());
+                    Log.i("test",arrData.get(position).getDateStatus());
+                    context.startActivity(intent1);
+                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
             }
         });
         return convertView;

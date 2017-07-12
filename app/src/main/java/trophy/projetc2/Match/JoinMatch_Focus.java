@@ -44,19 +44,18 @@ import trophy.projetc2.User.Login;
  */
 
 public class JoinMatch_Focus extends AppCompatActivity{
-    TextView title1,title2,title3,title4,title5, title6, vs;
-    ImageView Match_Focus_ImageView_Back, Match_Focus_ImageView_Status, Match_Focus_ImageView_Emblem, Match_Focus_ImageView_OpponentEmblem;
+    TextView title1,title2,title3,title4,title5, title6;
+    ImageView Match_Focus_ImageView_Back, Match_Focus_ImageView_Status, Match_Focus_ImageView_Emblem;
     TextView Match_Focus_TextView_TeamName, Match_Focus_TextView_Title, Match_Focus_TextView_Date, Match_Focus_TextView_Time,
-            Match_Focus_TextView_Place, Match_Focus_TextView_Pay, Match_Focus_TextView_Color, Match_Focus_TextView_Extra, Match_Focus_TextView_OpponentTeamName;
+            Match_Focus_TextView_Place, Match_Focus_TextView_Pay, Match_Focus_TextView_Color, Match_Focus_TextView_Extra;
     CheckBox Match_Focus_CheckBox_Parking_Not, Match_Focus_CheckBox_Parking_Free, Match_Focus_CheckBox_Parking_Charge,
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
     Button Match_Focus_Button_Apply;
-    Button JoinMatch_Focus_Joined_ImageView_Phone;
-    LinearLayout home, away;
+    LinearLayout home;
 
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String Match_Pk, User_Pk,Team_Pk, Time, Title, StartTime, MatchPlace,Emblem,TeamName, Match_User_Pk, Match_Date, FinishTime,
-            Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
+            Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra, GameStatus;
     String[][] parsedData_Match_Focus, parsedData_succed, parsedData_JoinMatch_Focus_Joined;
     String OtherTeam_Phone="";
     @Override
@@ -68,6 +67,7 @@ public class JoinMatch_Focus extends AppCompatActivity{
         Match_Pk = intent1.getStringExtra("Match_Pk");
         User_Pk = intent1.getStringExtra("User_Pk");
         Status = intent1.getStringExtra("Status");
+        GameStatus = intent1.getStringExtra("GameStatus");
 
         HttpClient http_match_focus = new HttpClient();
         String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus.jsp",Match_Pk);
@@ -89,9 +89,7 @@ public class JoinMatch_Focus extends AppCompatActivity{
         Match_Focus_ImageView_Back = (ImageView)findViewById(R.id.Match_Focus_ImageView_Back);
         Match_Focus_ImageView_Status = (ImageView)findViewById(R.id.Match_Focus_ImageView_Status);
         Match_Focus_ImageView_Emblem = (ImageView)findViewById(R.id.Match_Focus_ImageView_Emblem);
-        Match_Focus_ImageView_OpponentEmblem = (ImageView)findViewById(R.id.Match_Focus_ImageView_OpponentEmblem);
         Match_Focus_TextView_TeamName = (TextView)findViewById(R.id.Match_Focus_TextView_TeamName);
-        Match_Focus_TextView_OpponentTeamName = (TextView)findViewById(R.id.Match_Focus_TextView_OpponentTeamName);
         Match_Focus_TextView_Title = (TextView)findViewById(R.id.Match_Focus_TextView_Title);
         Match_Focus_TextView_Date = (TextView)findViewById(R.id.Match_Focus_TextView_Date);
         Match_Focus_TextView_Time = (TextView)findViewById(R.id.Match_Focus_TextView_Time);
@@ -106,38 +104,34 @@ public class JoinMatch_Focus extends AppCompatActivity{
         Match_Focus_CheckBox_Shower = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_Shower);
         Match_Focus_CheckBox_ColdHot = (CheckBox)findViewById(R.id.Match_Focus_CheckBox_ColdHot);
         Match_Focus_Button_Apply = (Button)findViewById(R.id.Match_Focus_Button_Apply);
-        JoinMatch_Focus_Joined_ImageView_Phone = (Button)findViewById(R.id.JoinMatch_Focus_Joined_ImageView_Phone);
-        home = (LinearLayout)findViewById(R.id.home);away = (LinearLayout)findViewById(R.id.away);
+        home = (LinearLayout)findViewById(R.id.home);
 
         title1 = (TextView)findViewById(R.id.title1);title2 = (TextView)findViewById(R.id.title2);title3 = (TextView)findViewById(R.id.title3);
         title4 = (TextView)findViewById(R.id.title4);title5 = (TextView)findViewById(R.id.title5);title6= (TextView)findViewById(R.id.title6);
-        vs = (TextView)findViewById(R.id.vs);
         title1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title4.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title5.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title6.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
-        vs.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_Focus_TextView_Title.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_Focus_TextView_TeamName.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
-        Match_Focus_TextView_OpponentTeamName.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
-        JoinMatch_Focus_Joined_ImageView_Phone.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_Focus_CheckBox_Parking_Not.setClickable(false);Match_Focus_CheckBox_Parking_Free.setClickable(false);Match_Focus_CheckBox_Parking_Charge.setClickable(false);
         Match_Focus_CheckBox_Display.setClickable(false);Match_Focus_CheckBox_Shower.setClickable(false);Match_Focus_CheckBox_ColdHot.setClickable(false);
 
         if(Status.equals("Joining")){
-            Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_joining);
-            Match_Focus_Button_Apply.setText("신청취소");
-            away.setVisibility(View.GONE);
-            vs.setVisibility(View.GONE);
-            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.GONE);
+            if(GameStatus.equals("After")||GameStatus.equals("Gameing")){
+                Match_Focus_ImageView_Status.setImageResource(R.drawable.deadline);
+                Match_Focus_Button_Apply.setText("삭제하기");
+            }
+            else{
+                Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_joining);
+                Match_Focus_Button_Apply.setText("신청취소");
+            }
+
         }
         else if(Status.equals("refuse")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_refuse);
-            away.setVisibility(View.GONE);
-            vs.setVisibility(View.GONE);
-            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.GONE);
             Match_Focus_Button_Apply.setText("게시글 삭제");
 //            Match_Focus_Button_Apply.setBackgroundColor(getResources().getColor(R.color.White));
 //            Match_Focus_Button_Apply.setTextColor(getResources().getColor(R.color.Black));
@@ -145,39 +139,12 @@ public class JoinMatch_Focus extends AppCompatActivity{
         }
         else if(Status.equals("allow")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.joinmatch_allow);
-            away.setVisibility(View.VISIBLE);
-            vs.setVisibility(View.VISIBLE);
-            JoinMatch_Focus_Joined_ImageView_Phone.setVisibility(View.VISIBLE);
             Match_Focus_Button_Apply.setVisibility(View.GONE);
             HttpClient http_joinmatch_focus_joined = new HttpClient();
             String result1 = http_joinmatch_focus_joined.HttpClient("Trophy_part1","JoinMatch_Focus_Joined.jsp", Match_Pk);
             parsedData_JoinMatch_Focus_Joined = jsonParserList_JoinMatch_Focus_Joined(result1);
             OtherTeam_Phone = parsedData_JoinMatch_Focus_Joined[0][4];
-
-            try {
-                String En_Profile = URLEncoder.encode(parsedData_JoinMatch_Focus_Joined[0][1], "utf-8");
-                if (En_Profile.equals(".")) {
-                    Glide.with(JoinMatch_Focus.this).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(JoinMatch_Focus.this).getBitmapPool()))
-                            .into(Match_Focus_ImageView_OpponentEmblem);
-                } else {
-                    Glide.with(JoinMatch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(JoinMatch_Focus.this).getBitmapPool()))
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .skipMemoryCache(true)
-                            .into(Match_Focus_ImageView_OpponentEmblem);
-                }
-            } catch (UnsupportedEncodingException e) {
-
-            }
-            Match_Focus_TextView_OpponentTeamName.setText(parsedData_JoinMatch_Focus_Joined[0][2]);
-
         }
-        JoinMatch_Focus_Joined_ImageView_Phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+OtherTeam_Phone));
-                startActivity(intent);
-            }
-        });
         try {
             String En_Profile = URLEncoder.encode(Emblem, "utf-8");
             if (En_Profile.equals(".")) {
@@ -248,18 +215,33 @@ public class JoinMatch_Focus extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 if (Status.equals("Joining")) {
-
-                    HttpClient http = new HttpClient();
-                    String result = http.HttpClient("Trophy_part1", "JoinMatch_Focus_Cancel.jsp", Match_Pk, User_Pk);
-                    parsedData_succed = jsonParserList_Succed(result);
-                    if (parsedData_succed[0][0].equals("succed")) {
-                        Snackbar.make(view, "신청 취소되었습니다.", Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                finish();
-                                overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-                            }
-                        }).show();
+                    if(GameStatus.equals("After")||GameStatus.equals("Gameing")){
+                        HttpClient http = new HttpClient();
+                        String result = http.HttpClient("Trophy_part1", "JoinMatch_Focus_Delete.jsp", Match_Pk, User_Pk);
+                        parsedData_succed = jsonParserList_Succed(result);
+                        if (parsedData_succed[0][0].equals("succed")) {
+                            Snackbar.make(view, "삭제되었습니다.", Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    finish();
+                                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                                }
+                            }).show();
+                        }
+                    }
+                    else{
+                        HttpClient http = new HttpClient();
+                        String result = http.HttpClient("Trophy_part1", "JoinMatch_Focus_Cancel.jsp", Match_Pk, User_Pk);
+                        parsedData_succed = jsonParserList_Succed(result);
+                        if (parsedData_succed[0][0].equals("succed")) {
+                            Snackbar.make(view, "신청 취소되었습니다.", Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    finish();
+                                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                                }
+                            }).show();
+                        }
                     }
                 } else if (Status.equals("refuse")) {
                     HttpClient http = new HttpClient();

@@ -20,7 +20,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
@@ -41,10 +43,12 @@ public class Match extends AppCompatActivity{
     Match_MyAdapter adapter;
     ArrayList<Match_MyData> Match_MyData;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    String strCurAll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_navigation_match);
+        currentTime();
         Intent intent1 = getIntent();
         User_Pk = intent1.getStringExtra("User_Pk");
         Team_Pk = intent1.getStringExtra("Team_Pk");
@@ -68,7 +72,8 @@ public class Match extends AppCompatActivity{
                 final ArrayList<Match_MyData> Match_MyData;
                 Match_MyData = new ArrayList<Match_MyData>();
                 for (int i = 0; i < parsedData_Match.length; i++) {
-                    Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+                    String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+                    Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
                 }
                 Match_MyAdapter adapter = new Match_MyAdapter(Match.this, Match_MyData);
                 Match_ListView_List.setAdapter(adapter);
@@ -82,7 +87,8 @@ public class Match extends AppCompatActivity{
 
         Match_MyData = new ArrayList<Match_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+            String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
             ContentCount = Integer.parseInt(parsedData_Match[i][8]);
         }
         Log.i("tt123", Integer.toString(ContentCount));
@@ -161,7 +167,6 @@ public class Match extends AppCompatActivity{
         Match_ListView_List.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
 
-
             public void onScrollStateChanged(AbsListView absListView, int i) {
                 if(i == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastitemVisibleFlag) {
                     Match_Scroll Match_Scroll = new Match_Scroll();
@@ -200,7 +205,8 @@ public class Match extends AppCompatActivity{
         final ArrayList<Match_MyData> Match_MyData;
         Match_MyData = new ArrayList<Match_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],parsedData_Match[i][7],Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
+            String Status = getStatus(parsedData_Match[i][9], parsedData_Match[i][10]);
+            Match_MyData.add(new Match_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,Match.this,User_Pk,parsedData_Match[i][9],Team_Pk,parsedData_Match[i][10]));
         }
         Match_MyAdapter adapter = new Match_MyAdapter(this, Match_MyData);
         Match_ListView_List.setAdapter(adapter);
@@ -246,8 +252,8 @@ public class Match extends AppCompatActivity{
                 parsedData_Match = jsonParserList_Match(result);
 
                 for (int j = 0; j < parsedData_Match.length; j++) {
-                    Match_MyData.add(new Match_MyData(parsedData_Match[j][0], parsedData_Match[j][1], parsedData_Match[j][2],parsedData_Match[j][3],parsedData_Match[j][4],parsedData_Match[j][5],parsedData_Match[j][6],parsedData_Match[j][7],Match.this,User_Pk,parsedData_Match[j][9],Team_Pk,parsedData_Match[j][10]));
-                    ContentCount = Integer.parseInt(parsedData_Match[j][8]);
+                    String Status = getStatus(parsedData_Match[j][9], parsedData_Match[j][10]);
+                    Match_MyData.add(new Match_MyData(parsedData_Match[j][0], parsedData_Match[j][1], parsedData_Match[j][2],parsedData_Match[j][3],parsedData_Match[j][4],parsedData_Match[j][5],parsedData_Match[j][6],Status,Match.this,User_Pk,parsedData_Match[j][9],Team_Pk,parsedData_Match[j][10]));ContentCount = Integer.parseInt(parsedData_Match[j][8]);
                 }
                 adapter.notifyDataSetChanged();
                 return "succed";
@@ -255,13 +261,64 @@ public class Match extends AppCompatActivity{
                 e.printStackTrace();
                 return "failed";
             }
+
         }
 
         @Override
         protected void onPostExecute(String result) {
-
             asyncDialog.dismiss();
             super.onPostExecute(result);
         }
+        public String getStatus(String Match_Date, String FinishTime){
+            String str1 = Match_Date;
+            String[] data1 = str1.split(":::");
+            String str2 = data1[1];
+            String[] data2 = str2.split(" / ");
+            if(Integer.parseInt(data2[1]) < 10){
+                data2[1] = "0"+data2[1];
+            }
+            String str3 = FinishTime;
+            String[] data3 = str3.split(":");
+            if(Integer.parseInt(data3[1]) < 10){
+                data3[1] = "0"+data3[1];
+            }
+            ////////////////////////////////////////////////////////////////////
+            String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+            if(Long.parseLong(match_finishtime)>Long.parseLong(strCurAll)){
+                return  "recruiting";
+            }
+            else{
+                return "finish";
+            }
+        }
+    }
+    public String getStatus(String Match_Date, String FinishTime){
+        String str1 = Match_Date;
+        String[] data1 = str1.split(":::");
+        String str2 = data1[1];
+        String[] data2 = str2.split(" / ");
+        if(Integer.parseInt(data2[1]) < 10){
+            data2[1] = "0"+data2[1];
+        }
+        String str3 = FinishTime;
+        String[] data3 = str3.split(":");
+        if(Integer.parseInt(data3[1]) < 10){
+            data3[1] = "0"+data3[1];
+        }
+        ////////////////////////////////////////////////////////////////////
+        String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+        Log.i("test123",match_finishtime);
+        if(Long.parseLong(match_finishtime)>Long.parseLong(strCurAll)){
+            return  "recruiting";
+        }
+        else{
+            return "finish";
+        }
+    }
+    public void currentTime(){
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat ALLFormat = new SimpleDateFormat("yyyyMMddHHmm");
+        strCurAll = ALLFormat.format(date);
     }
 }

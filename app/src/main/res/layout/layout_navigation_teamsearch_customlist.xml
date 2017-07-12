@@ -25,7 +25,7 @@
             android:textSize="13dp"
             android:textColor="@color/MainColor1"
             android:textStyle="normal|bold"
-            android:layout_weight="3.1" />
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -34,12 +34,12 @@
             android:id="@+id/Layout_Navigation_TeamSearch_ImageView_Emblem"
             android:scaleType="fitCenter"
             android:layout_margin="5dp"
-            android:layout_weight="3"/>
+            android:layout_weight="0.9"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="0.4">
             <TextView
                 android:text="TextView"
                 android:layout_width="match_parent"
@@ -63,24 +63,18 @@
                 android:textColor="@color/Black"
                 android:textStyle="normal|bold"/>
         </LinearLayout>
-
         <TextView
             android:text="1000"
             android:id="@+id/Layout_Navigation_TeamSearch_TextView_TeamRanking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
+            android:layout_weight="0.9"
+            android:gravity="right|center_vertical"
             android:layout_marginLeft="10dp"
             android:textSize="13dp"
             android:textColor="@color/Black"
-            android:textStyle="normal|bold"/>
+            android:textStyle="normal|bold"
+            android:paddingRight="5dp" />
     </LinearLayout>
-
-    <TextView
-        android:text="3.2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
 
 </LinearLayout>

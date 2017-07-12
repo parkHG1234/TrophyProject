@@ -49,6 +49,10 @@
         <activity android:name=".Match.MyMatch_Focus" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.JoinMatch" android:screenOrientation="portrait"></activity>
         <activity android:name=".Match.JoinMatch_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Score.Score" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Score.Score_Focus" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Score.Score_All" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Score.Score_Team" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_Address" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo" android:screenOrientation="portrait"></activity>
         <activity android:name=".OutCourt.OutCourt_CourtInfo_Focus" android:screenOrientation="portrait"></activity>

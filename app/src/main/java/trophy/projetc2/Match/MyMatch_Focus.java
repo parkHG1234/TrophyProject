@@ -57,11 +57,13 @@ public class MyMatch_Focus extends AppCompatActivity {
     static TextView Match_Focus_TextView_OpponentTeamName;
     static TextView vs;
     static Button MyMatch_Focus_Joined_ImageView_Phone;
+    static String[] MatchDate_All;
     CheckBox Match_Focus_CheckBox_Parking_Not, Match_Focus_CheckBox_Parking_Free, Match_Focus_CheckBox_Parking_Charge,
             Match_Focus_CheckBox_Display, Match_Focus_CheckBox_Shower, Match_Focus_CheckBox_ColdHot;
     ListView MyMatch_Focus_ListView_JoinerList;
     static LinearLayout MyMatch_Focus_LinerLayout_Joining;
-    String Match_Pk, Team_Pk, User_Pk, Time, Title, StartTime, MatchPlace,Emblem,TeamName, Match_User_Pk, FinishTime,
+    static String TeamName="";
+    String Match_Pk, Team_Pk, User_Pk, Time, Title, StartTime, MatchPlace,Emblem, Match_User_Pk, FinishTime,
             Parking_Not, Parking_Free, Parking_Charge, Display, Shower, ColdHot, Status, Pay, Color, Extra;
     String Away_Emblem;
     String Away_TeamName;
@@ -77,7 +79,7 @@ public class MyMatch_Focus extends AppCompatActivity {
         Intent intent1 = getIntent();
         Match_Pk = intent1.getStringExtra("Match_Pk");
         User_Pk = intent1.getStringExtra("User_Pk");
-
+        Status = intent1.getStringExtra("Status");
         HttpClient http_match_focus = new HttpClient();
         String result = http_match_focus.HttpClient("Trophy_part1","Match_Focus.jsp",Match_Pk);
         parsedData_Match_Focus = jsonParserList_MyMatch(result);
@@ -86,15 +88,22 @@ public class MyMatch_Focus extends AppCompatActivity {
         String[] data = str.split(":::");
         String str1 = data[1];
         String[] MatchDate = str1.split(" / ");
+        String str2 = parsedData_Match_Focus[0][20];
+        String[] data2 = str2.split(":");
 
         Match_Pk = parsedData_Match_Focus[0][0];Match_User_Pk = parsedData_Match_Focus[0][1];Team_Pk = parsedData_Match_Focus[0][2];
         Time = data[0];Title = parsedData_Match_Focus[0][4];StartTime = parsedData_Match_Focus[0][5];
         MatchPlace = parsedData_Match_Focus[0][6];Parking_Not = parsedData_Match_Focus[0][7];Parking_Free = parsedData_Match_Focus[0][8];
         Parking_Charge = parsedData_Match_Focus[0][9];Display = parsedData_Match_Focus[0][10];Shower = parsedData_Match_Focus[0][11];
-        ColdHot = parsedData_Match_Focus[0][12];Status = parsedData_Match_Focus[0][13];
+        ColdHot = parsedData_Match_Focus[0][12];
         Emblem = parsedData_Match_Focus[0][14]; TeamName = parsedData_Match_Focus[0][15];
         Pay = parsedData_Match_Focus[0][16]; Color = parsedData_Match_Focus[0][17]; Extra = parsedData_Match_Focus[0][18];
         FinishTime = parsedData_Match_Focus[0][20];
+
+        MatchDate_All = new String[5];
+        //시합 끝나는 시간
+        MatchDate_All[0]= data[0];MatchDate_All[1]= MatchDate[0];MatchDate_All[2]= MatchDate[1];
+        MatchDate_All[3]= data2[0];MatchDate_All[4]= data2[1];
 
         Match_Focus_ImageView_Back = (ImageView)findViewById(R.id.Match_Focus_ImageView_Back);
         Match_Focus_ImageView_Status = (ImageView)findViewById(R.id.Match_Focus_ImageView_Status);
@@ -196,7 +205,7 @@ public class MyMatch_Focus extends AppCompatActivity {
         Log.i("Match",Match_Pk);
 
 
-        if(parsedData_Match_Focus[0][13].equals("recruiting")){
+        if(Status.equals("recruiting")){
             Match_Focus_ImageView_Status.setImageResource(R.drawable.recruiting);
             MyMatch_Focus_LinerLayout_Joining.setVisibility(View.VISIBLE);
 
@@ -207,7 +216,7 @@ public class MyMatch_Focus extends AppCompatActivity {
             final ArrayList<MyMatch_Focus_Joiner_MyData> MyMatch_Focus_Joiner_MyData;
             MyMatch_Focus_Joiner_MyData = new ArrayList<MyMatch_Focus_Joiner_MyData>();
             for (int i = 0; i < parsedData_MyMatch_Focus_Joiner.length; i++) {
-                MyMatch_Focus_Joiner_MyData.add(new MyMatch_Focus_Joiner_MyData(parsedData_MyMatch_Focus_Joiner[i][0], parsedData_MyMatch_Focus_Joiner[i][1], parsedData_MyMatch_Focus_Joiner[i][2],parsedData_MyMatch_Focus_Joiner[i][3],parsedData_MyMatch_Focus_Joiner[i][4],parsedData_MyMatch_Focus_Joiner[i][5],parsedData_MyMatch_Focus_Joiner[i][6],parsedData_MyMatch_Focus_Joiner[i][6],MyMatch_Focus.this,parsedData_MyMatch_Focus_Joiner[i][8],User_Pk));
+                MyMatch_Focus_Joiner_MyData.add(new MyMatch_Focus_Joiner_MyData(parsedData_MyMatch_Focus_Joiner[i][0], parsedData_MyMatch_Focus_Joiner[i][1], parsedData_MyMatch_Focus_Joiner[i][2],parsedData_MyMatch_Focus_Joiner[i][3],parsedData_MyMatch_Focus_Joiner[i][4],parsedData_MyMatch_Focus_Joiner[i][5],parsedData_MyMatch_Focus_Joiner[i][6],parsedData_MyMatch_Focus_Joiner[i][6],MyMatch_Focus.this,parsedData_MyMatch_Focus_Joiner[i][8],User_Pk,parsedData_MyMatch_Focus_Joiner[i][7]));
             }
             MyMatch_Focus_Joiner_MyAdapter adapter = new MyMatch_Focus_Joiner_MyAdapter(this, MyMatch_Focus_Joiner_MyData);
             MyMatch_Focus_ListView_JoinerList.setAdapter(adapter);
@@ -219,31 +228,31 @@ public class MyMatch_Focus extends AppCompatActivity {
         else{
             Match_Focus_ImageView_Status.setImageResource(R.drawable.deadline);
             MyMatch_Focus_LinerLayout_Joining.setVisibility(View.GONE);
-            HttpClient http_mymatch_focus_joined = new HttpClient();
-            String result1 = http_mymatch_focus_joined.HttpClient("Trophy_part1","MyMatch_Focus_Joined.jsp", Match_Pk);
-            parsedData_MyMatch_Focus_Joiner = jsonParserList_MyMatch_Focus_Join(result1);
-            OtherTeam_Phone = parsedData_MyMatch_Focus_Joiner[0][8];
-            Away_Emblem = parsedData_MyMatch_Focus_Joiner[0][5];
-            Away_TeamName = parsedData_MyMatch_Focus_Joiner[0][6];
-            Away_Team_Pk = parsedData_MyMatch_Focus_Joiner[0][7];
-            try {
-                String En_Profile = URLEncoder.encode(parsedData_MyMatch_Focus_Joiner[0][5], "utf-8");
-                if (En_Profile.equals(".")) {
-                    Glide.with(MyMatch_Focus.this).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(MyMatch_Focus.this).getBitmapPool()))
-                            .into(Match_Focus_ImageView_OpponentEmblem);
-                } else {
-                    Glide.with(MyMatch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(MyMatch_Focus.this).getBitmapPool()))
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .skipMemoryCache(true)
-                            .into(Match_Focus_ImageView_OpponentEmblem);
-                }
-            } catch (UnsupportedEncodingException e) {
-
-            }
-            Match_Focus_TextView_OpponentTeamName.setText(parsedData_MyMatch_Focus_Joiner[0][6]);
-            away.setVisibility(View.VISIBLE);
-            vs.setVisibility(View.VISIBLE);
-            MyMatch_Focus_Joined_ImageView_Phone.setVisibility(View.VISIBLE);
+//            HttpClient http_mymatch_focus_joined = new HttpClient();
+//            String result1 = http_mymatch_focus_joined.HttpClient("Trophy_part1","MyMatch_Focus_Joined.jsp", Match_Pk);
+//            parsedData_MyMatch_Focus_Joiner = jsonParserList_MyMatch_Focus_Join(result1);
+//            OtherTeam_Phone = parsedData_MyMatch_Focus_Joiner[0][8];
+//            Away_Emblem = parsedData_MyMatch_Focus_Joiner[0][5];
+//            Away_TeamName = parsedData_MyMatch_Focus_Joiner[0][6];
+//            Away_Team_Pk = parsedData_MyMatch_Focus_Joiner[0][7];
+//            try {
+//                String En_Profile = URLEncoder.encode(parsedData_MyMatch_Focus_Joiner[0][5], "utf-8");
+//                if (En_Profile.equals(".")) {
+//                    Glide.with(MyMatch_Focus.this).load(R.drawable.emblem).bitmapTransform(new CropCircleTransformation(Glide.get(MyMatch_Focus.this).getBitmapPool()))
+//                            .into(Match_Focus_ImageView_OpponentEmblem);
+//                } else {
+//                    Glide.with(MyMatch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Profile + ".jpg").bitmapTransform(new CropCircleTransformation(Glide.get(MyMatch_Focus.this).getBitmapPool()))
+//                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                            .skipMemoryCache(true)
+//                            .into(Match_Focus_ImageView_OpponentEmblem);
+//                }
+//            } catch (UnsupportedEncodingException e) {
+//
+//            }
+//            Match_Focus_TextView_OpponentTeamName.setText(parsedData_MyMatch_Focus_Joiner[0][6]);
+            away.setVisibility(View.GONE);
+            vs.setVisibility(View.GONE);
+            MyMatch_Focus_Joined_ImageView_Phone.setVisibility(View.GONE);
         }
 //        String day="";
 //        if(Integer.parseInt(MatchDate[1])<10){

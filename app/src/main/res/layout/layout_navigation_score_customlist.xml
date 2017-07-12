@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/White"
+        android:orientation="vertical"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="HOME"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:textColor="@color/Black"
+                    android:layout_height="30dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/emblem"
+                    android:id="@+id/Score_Customlist_HomeEmblem"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="마동쿠스브라더스"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:id="@+id/Score_Customlist_HomeTeamName"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:text="2017 / 6 / 7"
+                    android:textSize="10dp"
+                    android:textColor="@color/DarkGray"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/Score_Customlist_MatchDate"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:text="인하공전 실내체육관"
+                    android:textSize="10dp"
+                    android:textColor="@color/DarkGray"
+                    android:gravity="center"
+                    android:id="@+id/Score_Customlist_Place"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="30"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:layout_weight="1"
+                        android:id="@+id/Score_Customlist_HomeScore"
+                        android:textColor="@color/Black"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="VS"
+                        android:textSize="16dp"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:textColor="@color/Black"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="30"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:layout_weight="1"
+                        android:id="@+id/Score_Customlist_AwayScore"
+                        android:textColor="@color/Black"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="경기전"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:id="@+id/Score_Customlist_Status"
+                    android:textColor="@color/Black"
+                    android:layout_height="20dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="오후 : 7시 30분 ~ 오후 : 9시 00분"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    android:id="@+id/Score_Customlist_MatchTime"
+                    android:textColor="@color/DarkGray"
+                    android:layout_height="20dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="AWAY"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:textColor="@color/Black"
+                    android:layout_height="30dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/emblem"
+                    android:id="@+id/Score_Customlist_AwayEmblem"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="마동쿠스브라더스"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:id="@+id/Score_Customlist_AwayTeamName"
+                    android:layout_height="30dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

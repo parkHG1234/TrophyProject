@@ -18,7 +18,8 @@ public class MyMatch_Focus_Joiner_MyData {
     private Activity activity;
     private String Phone;
     private String My_User_Pk;
-    public MyMatch_Focus_Joiner_MyData(String Match_Joiner_Pk, String User_Pk, String Match_Pk, String Time, String Memo,String Emblem, String TeamName, String Team_Pk, Activity activity,String Phone,String My_User_Pk){
+    private String Opponent_TeamPk;
+    public MyMatch_Focus_Joiner_MyData(String Match_Joiner_Pk, String User_Pk, String Match_Pk, String Time, String Memo,String Emblem, String TeamName, String Team_Pk, Activity activity,String Phone,String My_User_Pk,String Opponent_TeamPk){
         this.Match_Joiner_Pk = Match_Joiner_Pk;
         this.User_Pk = User_Pk;
         this.Match_Pk = Match_Pk;
@@ -30,6 +31,7 @@ public class MyMatch_Focus_Joiner_MyData {
         this.activity = activity;
         this.Phone = Phone;
         this.My_User_Pk = My_User_Pk;
+        this.Opponent_TeamPk = Opponent_TeamPk;
     }
     public String getMatch_Joiner_Pk() {
         return Match_Joiner_Pk;
@@ -50,5 +52,6 @@ public class MyMatch_Focus_Joiner_MyData {
     public Activity getActivity(){return activity;}
     public String getPhone(){return Phone;}
     public String getMy_User_Pk(){return My_User_Pk;}
+    public String getOpponent_TeamPk(){return Opponent_TeamPk;}
 }
 

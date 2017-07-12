@@ -21,7 +21,9 @@ public class MyMatch_MyData{
         private String User_Pk;
         private String JoinerCount;
         private String FinishTime;
-        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String JoinerCount,String FinishTime){
+        private String MatchDate;
+        private String DateStatus;
+        public MyMatch_MyData(String Match_Pk,String Emblem, String TeamName, String Title, String StartTime, String MatchPlace, String Time, String Status, Activity Activity, String User_Pk,String JoinerCount,String FinishTime,String MatchDate){
             this.Match_Pk = Match_Pk;
             this.Emblem = Emblem;
             this.TeamName = TeamName;
@@ -34,6 +36,8 @@ public class MyMatch_MyData{
             this.User_Pk = User_Pk;
             this.JoinerCount = JoinerCount;
             this.FinishTime = FinishTime;
+            this.MatchDate = MatchDate;
+            this.DateStatus = DateStatus;
         }
         public String getEmblem() {
             return Emblem;
@@ -67,4 +71,6 @@ public class MyMatch_MyData{
             return JoinerCount;
         }
         public String getFinishTime(){return FinishTime;}
+        public String getMatchDate(){return MatchDate;}
+
 }

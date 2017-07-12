@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class Match_MyAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private ArrayList<Match_MyData> arrData;
-    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
+    String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime,strCurAll;
     ImageView Match_CustomList_ImageView_Status, Match_CustomList_ImageView_Emblem;
     TextView Match_CustomList_TextView_Time, Match_CustomList_TextView_TeamName,
             Match_CustomList_TextView_Title, Match_CustomList_TextView_MatchTime, Match_CustomList_TextView_MatchPlace;
@@ -68,6 +69,7 @@ public class Match_MyAdapter extends BaseAdapter {
         Match_CustomList_TextView_MatchPlace = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_MatchPlace);
         Match_CustomList_TextView_Title.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_CustomList_TextView_TeamName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/BMJUA_ttf.ttf"));
+        //시간 분할
         String str = arrData.get(position).getTime();
         String[] data = str.split(":::");
         currentTime();
@@ -79,8 +81,7 @@ public class Match_MyAdapter extends BaseAdapter {
             String[] data1 = str1.split(" / ");
             Match_CustomList_TextView_Time.setText(data1[1] + " / " + data1[2]);
         }
-        String str1 = arrData.get(position).getMatch_Date();
-        String[] data1 = str1.split(":::");
+
         if(arrData.get(position).getTeamName().equals(".")){
             Match_CustomList_TextView_TeamName.setText("삭제된 팀");
         }
@@ -104,13 +105,12 @@ public class Match_MyAdapter extends BaseAdapter {
         } catch (UnsupportedEncodingException e) {
 
         }
-
         if(arrData.get(position).getStatus().equals("recruiting")){
             Match_CustomList_ImageView_Status.setImageResource(R.drawable.recruiting);
-        }
-        else if(arrData.get(position).getStatus().equals("deadline")){
+        }else{
             Match_CustomList_ImageView_Status.setImageResource(R.drawable.deadline);
         }
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +122,7 @@ public class Match_MyAdapter extends BaseAdapter {
                     intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
                     intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
                     intent1.putExtra("MyTeam_Pk", arrData.get(position).getMyTeam_Pk());
+                    intent1.putExtra("Status", arrData.get(position).getStatus());
                     context.startActivity(intent1);
                     arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
                 }
@@ -141,6 +142,7 @@ public class Match_MyAdapter extends BaseAdapter {
         SimpleDateFormat CurDayFormat = new SimpleDateFormat("dd");
         SimpleDateFormat CurHourFormat = new SimpleDateFormat("HH");
         SimpleDateFormat CurMinuteFormat = new SimpleDateFormat("mm");
+        SimpleDateFormat ALLFormat = new SimpleDateFormat("yyyyMMddHHmm");
 // 지정된 포맷으로 String 타입 리턴
         strCurToday = CurDateFormat.format(date);
         strCurTime = CurTimeFormat.format(date);
@@ -150,6 +152,7 @@ public class Match_MyAdapter extends BaseAdapter {
         strCurDay = CurDayFormat.format(date);
         strCurHour = CurHourFormat.format(date);
         strCurMinute = CurMinuteFormat.format(date);
+        strCurAll = ALLFormat.format(date);
     }
     public String time_changestr(String time){
         String str = time;

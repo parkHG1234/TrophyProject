@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/backColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:background="@color/White">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="교류전"
+            android:textColor="@color/Black"
+            android:textSize="16dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="3dp"
+            android:textStyle="normal|bold" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/Score_Focus_ImageView_Back"
+            android:src="@drawable/back"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="점수 입력"
+            android:textColor="@color/main1color"
+            android:textSize="16dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/Score_Focus_ImageView_ScoreInput"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="@color/DarkGray"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:id="@+id/home">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:id="@+id/Score_Focus_ImageView_Emblem"
+                                android:src="@drawable/emblem"
+                                android:padding="5dp"
+                                android:layout_height="60dp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_alignParentBottom="true"
+                                android:id="@+id/Score_Focus_TextView_TeamName"
+                                android:textSize="14dp"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:gravity="center"
+                                android:text="abcd"
+                                android:layout_height="20dp" />
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:orientation="horizontal"
+                                android:layout_centerInParent="true"
+                                android:id="@+id/Score_Layout_MainScore">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="30"
+                                    android:gravity="center"
+                                    android:textSize="18dp"
+                                    android:layout_weight="1"
+                                    android:id="@+id/Score_TextView_HomeScore"
+                                    android:textColor="@color/Black"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="VS"
+                                    android:textSize="18dp"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:textColor="@color/Black"/>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="30"
+                                    android:gravity="center"
+                                    android:textSize="18dp"
+                                    android:layout_weight="1"
+                                    android:id="@+id/Score_TextView_AwayScore"
+                                    android:textColor="@color/Black"/>
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="경기 결과 미 입력"
+                                android:layout_centerVertical="true"
+                                android:layout_centerInParent="true"
+                                android:id="@+id/Score_TextView_VS"
+                                android:gravity="center"
+                                android:textSize="16sp"
+                                android:layout_marginBottom="5dp"
+                                android:textColor="@color/DarkGray"/>
+                            <Button
+                                android:text="연락하기"
+                                android:textColor="@color/White"
+                                android:background="@color/main1color"
+                                android:id="@+id/Score_Button_Phone"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:textSize="14sp"
+                                android:layout_centerInParent="true"
+                                android:layout_below="@+id/Score_TextView_VS"
+                                android:layout_height="40dp"
+                                android:layout_width="80dp" />
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:id="@+id/away">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:id="@+id/Score_Focus_ImageView_OpponentEmblem"
+                                android:src="@drawable/emblem"
+                                android:layout_height="60dp"
+                                android:padding="5dp" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_alignParentBottom="true"
+                                android:id="@+id/Score_Focus_TextView_OpponentTeamName"
+                                android:textSize="14dp"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:gravity="center"
+                                android:text="abcd"
+                                android:layout_height="20dp" />
+                        </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/White"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="기본정보"
+                        android:textSize="12sp"
+                        android:background="@color/Match_Menu_Back"
+                        android:textColor="@color/Match_Menu_Text"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="28dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="날짜"
+                                android:layout_height="30dp"
+                                android:id="@+id/title1"
+                                android:textColor="@color/Black"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_width="70dp" />
+                            <TextView
+                                android:text="2017 / 5 / 22"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:id="@+id/Score_Focus_TextView_Date"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="시간"
+                                android:layout_height="30dp"
+                                android:id="@+id/title2"
+                                android:textColor="@color/Black"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_width="70dp" />
+                            <TextView
+                                android:text="2017 / 5 / 22"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:id="@+id/Score_Focus_TextView_Time"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="장소"
+                                android:layout_height="30dp"
+                                android:id="@+id/title3"
+                                android:textColor="@color/Black"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_width="70dp" />
+                            <TextView
+                                android:text="2017 / 5 / 22"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:id="@+id/Score_Focus_TextView_Place"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="비용"
+                                android:layout_height="30dp"
+                                android:id="@+id/title4"
+                                android:textColor="@color/Black"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_width="70dp" />
+                            <TextView
+                                android:text="2017 / 5 / 22"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:id="@+id/Score_Focus_TextView_Pay"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1">
+                            <TextView
+                                android:text="유니폼색"
+                                android:layout_height="30dp"
+                                android:id="@+id/title5"
+                                android:textColor="@color/Black"
+                                android:textSize="12sp"
+                                android:gravity="center"
+                                android:layout_width="70dp" />
+                            <TextView
+                                android:text="2017 / 5 / 22"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:id="@+id/Score_Focus_TextView_Uniform"
+                                android:textColor="@color/Match_Menu_Text"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center_vertical" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="경기결과"
+                            android:textSize="12sp"
+                            android:background="@color/Match_Menu_Back"
+                            android:textColor="@color/Match_Menu_Text"
+                            android:gravity="center"
+                            android:layout_height="28dp" />
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Score_Focus_ListView_Result">
+                        </ListView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="경기장 정보"
+                            android:textSize="12sp"
+                            android:background="@color/Match_Menu_Back"
+                            android:textColor="@color/Match_Menu_Text"
+                            android:gravity="center"
+                            android:layout_height="28dp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_height="90dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="40dp">
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="주차 금지"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"
+                                    android:id="@+id/Score_Focus_CheckBox_Parking_Not"/>
+
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/Score_Focus_CheckBox_Parking_Free"
+                                    android:layout_weight="1"
+                                    android:text="무료 주차"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"/>
+
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:id="@+id/Score_Focus_CheckBox_Parking_Charge"
+                                    android:text="유료 주차"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:orientation="horizontal"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp">
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/Score_Focus_CheckBox_Display"
+                                    android:layout_weight="1"
+                                    android:text="전광판"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"/>
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/Score_Focus_CheckBox_Shower"
+                                    android:layout_weight="1"
+                                    android:text="샤워 가능"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"/>
+                                <CheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/Score_Focus_CheckBox_ColdHot"
+                                    android:layout_weight="1"
+                                    android:text="냉/ 난방"
+                                    android:textSize="10sp"
+                                    android:textColor="@color/Match_Menu_Text"
+                                    android:gravity="center"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="기타사항"
+                        android:textSize="12sp"
+                        android:background="@color/Match_Menu_Back"
+                        android:textColor="@color/Match_Menu_Text"
+                        android:gravity="center"
+                        android:layout_height="28dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/White"
+                        android:layout_margin="1sp"
+                        android:id="@+id/Score_Focus_TextView_Extra"
+                        android:text="sdf\nsfsf\nsdfsdf"
+                        android:textSize="14dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
