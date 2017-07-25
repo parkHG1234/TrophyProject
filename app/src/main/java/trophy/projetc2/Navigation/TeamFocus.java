@@ -105,6 +105,7 @@ public class TeamFocus  extends AppCompatActivity {
 
         if(Image1.equals(".")) {
             TeamInfo_ImageView_Image1.setVisibility(View.GONE);
+            TeamInfo_ImageView_Image1.setMinimumHeight(250);
         }else{
             Glide.with(TeamFocus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + Image1 + ".jpg")
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -330,33 +331,36 @@ public class TeamFocus  extends AppCompatActivity {
             ratingBar.setRating(0);
         }
         else if(Rating > 0 && Rating <= 0.5){
-            ratingBar.setRating((float)0.5);
+            ratingBar.setRating((float)0);
         }
         else if(Rating > 0.5 && Rating <= 1){
-            ratingBar.setRating((float)1);
+            ratingBar.setRating((float)0.5);
         }
         else if(Rating > 1 && Rating <= 1.5){
-            ratingBar.setRating((float)1.5);
+            ratingBar.setRating((float)1);
         }
         else if(Rating > 1.5 && Rating <= 2){
-            ratingBar.setRating((float)2);
+            ratingBar.setRating((float)1.5);
         }
         else if(Rating > 2 && Rating <= 2.5){
-            ratingBar.setRating((float)2.5);
+            ratingBar.setRating((float)2);
         }
         else if(Rating > 2.5 && Rating <= 3){
-            ratingBar.setRating((float)3);
+            ratingBar.setRating((float)2.5);
         }
         else if(Rating > 3 && Rating <= 3.5){
-            ratingBar.setRating((float)3.5);
+            ratingBar.setRating((float)3);
         }
         else if(Rating > 3.5 && Rating <= 4){
-            ratingBar.setRating((float)4);
+            ratingBar.setRating((float)3.5);
         }
         else if(Rating > 4 && Rating <= 4.5){
-            ratingBar.setRating((float)4.5);
+            ratingBar.setRating((float)4);
         }
         else if(Rating > 4.5 && Rating <= 5){
+            ratingBar.setRating((float)4.5);
+        }
+        else if(Rating == 5){
             ratingBar.setRating((float)5);
         }
     }

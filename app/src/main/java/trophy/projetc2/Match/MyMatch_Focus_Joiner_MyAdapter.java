@@ -56,7 +56,7 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
     private ArrayList<MyMatch_Focus_Joiner_MyData> arrData;
     ImageView MyMatch_Focus_Joiner_CustomList_ImageView_Emblem;
     TextView MyMatch_Focus_Joiner_CustomList_TextView_TeamName, MyMatch_Focus_Joiner_CustomList_TextView_Title;
-    Button MyMatch_Focus_Joiner_CustomList_Button_Agree;
+    TextView MyMatch_Focus_Joiner_CustomList_Button_Agree;
     String[][] parsedData_MyMatch_Focus_Join;
     public MyMatch_Focus_Joiner_MyAdapter(Context c, ArrayList<MyMatch_Focus_Joiner_MyData> arr) {
         this.context = c;
@@ -83,7 +83,7 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
         MyMatch_Focus_Joiner_CustomList_ImageView_Emblem = (ImageView) convertView.findViewById(R.id.MyMatch_Focus_Joiner_CustomList_ImageView_Emblem);
         MyMatch_Focus_Joiner_CustomList_TextView_TeamName = (TextView) convertView.findViewById(R.id.MyMatch_Focus_Joiner_CustomList_TextView_TeamName);
         MyMatch_Focus_Joiner_CustomList_TextView_Title = (TextView) convertView.findViewById(R.id.MyMatch_Focus_Joiner_CustomList_TextView_Title);
-        MyMatch_Focus_Joiner_CustomList_Button_Agree = (Button)convertView.findViewById(R.id.MyMatch_Focus_Joiner_CustomList_Button_Agree);
+        MyMatch_Focus_Joiner_CustomList_Button_Agree = (TextView)convertView.findViewById(R.id.MyMatch_Focus_Joiner_CustomList_Button_Agree);
         if(arrData.get(position).getTeamName().equals(".")){
             MyMatch_Focus_Joiner_CustomList_TextView_TeamName.setText("삭제된 팀");
         }
@@ -123,7 +123,7 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                     final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
                     final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
                     Customdialog_2Choice_Title.setText("교류전");
-                    Customdialog_2Choice_Content.setText("수락시 교류전이 성사되며, 다른 신청팀은 자동 취소됩니다.\n성사된 교류전은 교류전결과에서 확인하실 수 있습니다.");
+                    Customdialog_2Choice_Content.setText("수락시 교류전이 성사되며, 다른 신청팀은 자동 거절됩니다.\n성사된 교류전은 교류전결과에서 확인하실 수 있습니다.");
                     Customdialog_2Choice_First.setText("수 락");
                     Customdialog_2Choice_Second.setText("취 소");
                     final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());

@@ -99,7 +99,12 @@ public class Score_MyAdapter extends BaseAdapter {
         } catch (UnsupportedEncodingException e) {
 
         }
-        Score_Customlist_HomeTeamName.setText(arrData.get(position).getHome_TeamName());
+        if(arrData.get(position).getHome_TeamName().equals(".")){
+            Score_Customlist_HomeTeamName.setText("삭제된 팀");
+        }
+        else{
+            Score_Customlist_HomeTeamName.setText(arrData.get(position).getHome_TeamName());
+        }
         //어웨이팀 정보
         try {
             String En_Profile = URLEncoder.encode(arrData.get(position).getAway_Emblem(), "utf-8");
@@ -115,7 +120,12 @@ public class Score_MyAdapter extends BaseAdapter {
         } catch (UnsupportedEncodingException e) {
 
         }
-        Score_Customlist_AwayTeamName.setText(arrData.get(position).getAway_TeamName());
+        if(arrData.get(position).getAway_TeamName().equals(".")){
+            Score_Customlist_AwayTeamName.setText("삭제된 팀");
+        }
+        else{
+            Score_Customlist_AwayTeamName.setText(arrData.get(position).getAway_TeamName());
+        }
         Score_Customlist_MatchTime.setText(time_changestr(arrData.get(position).getStartTime()) + " ~ "+time_changestr(arrData.get(position).getFinishTime()));
 
         if(arrData.get(position).getGame_Status().equals("Before")){

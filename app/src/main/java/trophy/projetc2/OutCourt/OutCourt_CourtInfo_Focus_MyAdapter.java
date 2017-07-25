@@ -246,7 +246,7 @@ public class OutCourt_CourtInfo_Focus_MyAdapter extends BaseAdapter {
                     @Override
                     public void onClick(View view) {
                         HttpClient http_delete = new HttpClient();
-                        String result1 = http_delete.HttpClient("Trophy_part1","OutCourt_Focus_Content_Delete.jsp",arrData.get(position).getOutCourt_Content_Pk());
+                        String result1 = http_delete.HttpClient("Trophy_part1","OutCourt_Focus_Content_Delete.jsp",arrData.get(position).getOutCourt_Content_Pk(),arrData.get(position).getNow_Date());
                         parsedData_Content_Delete = jsonParserList_Content_Delete(result1);
                         if(parsedData_Content_Delete[0][0].equals("succed")){
                             TeamInfo_Dialog.dismiss();

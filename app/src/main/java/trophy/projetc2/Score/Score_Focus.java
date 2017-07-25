@@ -272,12 +272,17 @@ public class Score_Focus extends AppCompatActivity {
         Score_Focus_ImageView_Emblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Score_Focus.this,TeamSearch_Focus.class);
-                intent.putExtra("TeamName", Home_TeamName);
-                intent.putExtra("User_Pk",User_Pk);
-                intent.putExtra("Team_Pk",HomeTeam_Pk);
-                startActivity(intent);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(Home_TeamName.equals(".")){
+                    Snackbar.make(view,"삭제된 팀입니다.",Snackbar.LENGTH_SHORT);
+                }
+                else{
+                    Intent intent = new Intent(Score_Focus.this,TeamSearch_Focus.class);
+                    intent.putExtra("TeamName", Home_TeamName);
+                    intent.putExtra("User_Pk",User_Pk);
+                    intent.putExtra("Team_Pk",HomeTeam_Pk);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
             }
         });
 
@@ -299,17 +304,30 @@ public class Score_Focus extends AppCompatActivity {
         Score_Focus_ImageView_OpponentEmblem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Score_Focus.this,TeamSearch_Focus.class);
-                intent.putExtra("TeamName", Away_TeamName);
-                intent.putExtra("User_Pk",User_Pk);
-                intent.putExtra("Team_Pk",AwayTeam_Pk);
-                startActivity(intent);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(Away_TeamName.equals(".")){
+                    Snackbar.make(view,"삭제된 팀입니다.", Snackbar.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(Score_Focus.this,TeamSearch_Focus.class);
+                    intent.putExtra("TeamName", Away_TeamName);
+                    intent.putExtra("User_Pk",User_Pk);
+                    intent.putExtra("Team_Pk",AwayTeam_Pk);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
             }
         });
-
+        if(Home_TeamName.equals(".")){
+            Score_Focus_TextView_TeamName.setText(".");
+        }else {
+            Score_Focus_TextView_TeamName.setText(Home_TeamName);
+        }
         Score_Focus_TextView_TeamName.setText(Home_TeamName);
-        Score_Focus_TextView_OpponentTeamName.setText(Away_TeamName);
+        if(Away_TeamName.equals(".")){
+            Score_Focus_TextView_OpponentTeamName.setText("삭제된 팀");
+        }else {
+            Score_Focus_TextView_OpponentTeamName.setText(Away_TeamName);
+        }
         Score_Focus_TextView_Date.setText(data[0] + " / " + data2[0] + " / " + data2[1]);
         Score_Focus_TextView_Time.setText(time_changestr(StartTime) + " ~ " + time_changestr(FinishTime));
         Score_Focus_TextView_Place.setText(MatchPlace);
@@ -647,7 +665,7 @@ public class Score_Focus extends AppCompatActivity {
             scoreinput_ThirdScore_Title_DD.setTextColor(getResources().getColor(R.color.DarkGray));
             scoreinput_ThirdScore_Home.setText("");scoreinput_ThirdScore_Away.setText("");
             scoreinput_FirstScore_Home.setText(Game1_Home);scoreinput_FirstScore_Away.setText(Game1_Away);
-            scoreinput_SecondScore_Home.setText(Game1_Home);scoreinput_SecondScore_Away.setText(Game2_Away);
+            scoreinput_SecondScore_Home.setText(Game2_Home);scoreinput_SecondScore_Away.setText(Game2_Away);
             if(Game2_Home.equals(".")){
                 //한경기인 경우
                 scoreinput_FirstGame.setBackgroundColor(getResources().getColor(R.color.main1color));
@@ -702,7 +720,7 @@ public class Score_Focus extends AppCompatActivity {
                     Score_TextView_AwayScore.setText(Game1_Away);
                     ScoreResult();
                     HttpClient http_push = new HttpClient();
-                    http_push.HttpClient("TodayBasket_manager","push.jsp", AwayTeam_User_Pk, "어웨이팀에서 교류전 결과를 확인하였습니다");
+                    http_push.HttpClient("TodayBasket_manager","push.jsp", Content_User_Pk, "어웨이팀에서 교류전 결과를 확인하였습니다");
                 }
             }
         });

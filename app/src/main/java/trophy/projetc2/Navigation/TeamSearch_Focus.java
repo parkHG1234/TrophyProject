@@ -46,6 +46,9 @@ import trophy.projetc2.Contest.Contest_Detail;
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.Http.HttpClient_SSL;
 import trophy.projetc2.R;
+import trophy.projetc2.Score.Score_MyAdapter;
+import trophy.projetc2.Score.Score_MyData;
+import trophy.projetc2.Score.Score_Team;
 import trophy.projetc2.User.Login;
 
 /**
@@ -59,15 +62,17 @@ public class TeamSearch_Focus extends AppCompatActivity {
     TextView TeamInfo_TextView_Grade;
     TextView TeamInfo_TextView_TeamName, TeamInfo_TextView_TeamAddress_Do, TeamInfo_TextView_TeamAddress_Si, TeamInfo_TextView_HomeCourt;
     TextView TeamInfo_TextView_TeamIntro;
-    ListView TeamInfo_ListView_Player;
+    TextView TeamInfo_TextView_Score_Focus;
+    ListView TeamInfo_ListView_Player;ListView TeamInfo_ListView_Score;
     Button TeamInfo_Button_Out;
     RatingBar ratingBar;
-
+    ArrayList<Score_MyData> Score_MyData;
+    Score_MyAdapter adapter;
     TeamSearch_Focus_MyAdapter TeamSearch_Focus_MyAdapter;
     ArrayList<TeamSearch_Focus_MyData> TeamSearch_Focus_MyData;
 
     private String User_Pk, Team_Pk, TeamName, TeamDuty, TeamAddress_Do, TeamAddress_Si, HomeCourt, Introduce, Emblem, Image1, Image2, Image3;
-    String[][] parseredData_teamInfo, parseredData_teamOverlap, parseredData_teamJoin, parsedData_Player,parsedData_Grade;
+    String[][] parseredData_teamInfo, parseredData_teamOverlap, parseredData_teamJoin, parsedData_Player,parsedData_Grade,parsedData_Score;
     int JoinerCount=0,Row=0,Extra=0,PlayerCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +89,15 @@ public class TeamSearch_Focus extends AppCompatActivity {
         TeamInfo_TextView_TeamAddress_Si = (TextView)findViewById(R.id.TeamInfo_TextView_TeamAddress_Si);
         TeamInfo_TextView_HomeCourt = (TextView)findViewById(R.id.TeamInfo_TextView_HomeCourt);
         TeamInfo_TextView_TeamIntro = (TextView)findViewById(R.id.TeamInfo_TextView_TeamIntro);
+        TeamInfo_TextView_Score_Focus = (TextView)findViewById(R.id.TeamInfo_TextView_Score_Focus);
         TeamInfo_ListView_Player = (ListView)findViewById(R.id.TeamInfo_ListView_Player);
+        TeamInfo_ListView_Score = (ListView)findViewById(R.id.TeamInfo_ListView_Score);
         TeamInfo_Button_Out = (Button)findViewById(R.id.TeamInfo_Button_Out);
         ratingBar = (RatingBar)findViewById(R.id.ratingBar);
 
         TeamInfo_TextView_caution.setVisibility(View.GONE);
         TeamInfo_ImageVIew_TeamManger.setVisibility(View.INVISIBLE);
+
         Intent intent = getIntent();
         User_Pk = intent.getStringExtra("User_Pk");
         Team_Pk = intent.getStringExtra("Team_Pk");
@@ -132,6 +140,7 @@ public class TeamSearch_Focus extends AppCompatActivity {
             if(En_Image1.equals(".")) {
                 //TeamInfo_ImageView_Image1.setVisibility(View.GONE);
                 TeamInfo_ImageView_Image1.setBackgroundColor(getResources().getColor(R.color.main1color_back));
+                TeamInfo_ImageView_Image1.setMinimumHeight(250);
             }else{
                 Glide.with(TeamSearch_Focus.this).load("http://210.122.7.193:8080/Trophy_img/team/" + En_Image1 + ".jpg")
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -154,7 +163,30 @@ public class TeamSearch_Focus extends AppCompatActivity {
             TeamInfo_TextView_Grade.setText(parsedData_Grade[0][0]);
             Rating_Range(Double.parseDouble(parsedData_Grade[0][0]));
         }
-        //팀원 정보
+        //교류전 결과 리스트
+        HttpClient http_score = new HttpClient();
+        String result = http_score.HttpClient("Trophy_part1","Score_Team_Finish.jsp", Team_Pk);
+        parsedData_Score = jsonParserList_Score(result);
+
+        Score_MyData = new ArrayList<Score_MyData>();
+        for (int i = 0; i < parsedData_Score.length; i++) {
+            Score_MyData.add(new Score_MyData(User_Pk, parsedData_Score[i][0], parsedData_Score[i][1], parsedData_Score[i][2],parsedData_Score[i][3],parsedData_Score[i][4],parsedData_Score[i][5],parsedData_Score[i][6],parsedData_Score[i][7],parsedData_Score[i][8],parsedData_Score[i][9],"After",parsedData_Score[i][10],parsedData_Score[i][11],TeamSearch_Focus.this));
+        }
+        adapter = new Score_MyAdapter(this, Score_MyData);
+        TeamInfo_ListView_Score.setAdapter(adapter);
+        setListViewHeightBasedOnChildren(TeamInfo_ListView_Score);
+
+        TeamInfo_TextView_Score_Focus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(TeamSearch_Focus.this, Score_Team.class);
+                intent1.putExtra("User_Pk", User_Pk);
+                intent1.putExtra("Team_Pk", Team_Pk);
+                startActivity(intent1);
+                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+            }
+        });
+
         //팀원 리스트
         HttpClient http_Player= new HttpClient();
         String result12 = http_Player.HttpClient("Trophy_part1","TeamInfo_Player.jsp",TeamName, Team_Pk);
@@ -396,6 +428,25 @@ public class TeamSearch_Focus extends AppCompatActivity {
             return null;
         }
     }
+    public String[][] jsonParserList_Score(String pRecvServerPage){
+        Log.i("서버에서 받은 전체 내용", pRecvServerPage);
+        try{
+            JSONObject json = new JSONObject(pRecvServerPage);
+            JSONArray jArr = json.getJSONArray("List");
+            String[] jsonName = {"msg1","msg2","msg3","msg4","msg5","msg6","msg7","msg8", "msg9","msg10","msg11","msg12"};
+            String[][] parseredData = new String[jArr.length()][jsonName.length];
+            for(int i = 0; i<jArr.length();i++){
+                json = jArr.getJSONObject(i);
+                for (int j=0;j<jsonName.length; j++){
+                    parseredData[i][j] = json.getString(jsonName[j]);
+                }
+            }
+            return parseredData;
+        }catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
     private void setData_Player()
     {
         PlayerCount = parsedData_Player.length;
@@ -444,33 +495,36 @@ public class TeamSearch_Focus extends AppCompatActivity {
             ratingBar.setRating(0);
         }
         else if(Rating > 0 && Rating <= 0.5){
-            ratingBar.setRating((float)0.5);
+            ratingBar.setRating((float)0);
         }
         else if(Rating > 0.5 && Rating <= 1){
-            ratingBar.setRating((float)1);
+            ratingBar.setRating((float)0.5);
         }
         else if(Rating > 1 && Rating <= 1.5){
-            ratingBar.setRating((float)1.5);
+            ratingBar.setRating((float)1);
         }
         else if(Rating > 1.5 && Rating <= 2){
-            ratingBar.setRating((float)2);
+            ratingBar.setRating((float)1.5);
         }
         else if(Rating > 2 && Rating <= 2.5){
-            ratingBar.setRating((float)2.5);
+            ratingBar.setRating((float)2);
         }
         else if(Rating > 2.5 && Rating <= 3){
-            ratingBar.setRating((float)3);
+            ratingBar.setRating((float)2.5);
         }
         else if(Rating > 3 && Rating <= 3.5){
-            ratingBar.setRating((float)3.5);
+            ratingBar.setRating((float)3);
         }
         else if(Rating > 3.5 && Rating <= 4){
-            ratingBar.setRating((float)4);
+            ratingBar.setRating((float)3.5);
         }
         else if(Rating > 4 && Rating <= 4.5){
+            ratingBar.setRating((float)4);
+        }
+        else if(Rating > 4.5 && Rating < 5){
             ratingBar.setRating((float)4.5);
         }
-        else if(Rating > 4.5 && Rating <= 5){
+        else if(Rating == 5){
             ratingBar.setRating((float)5);
         }
     }

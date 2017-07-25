@@ -52,12 +52,13 @@
                 android:gravity="center_vertical"
                 android:layout_weight="1"/>
 
-            <Button
+            <TextView
                 android:text="수 락"
+                android:textSize="18dp"
+                android:gravity="center"
                 android:layout_height="20dp"
                 android:id="@+id/MyMatch_Focus_Joiner_CustomList_Button_Agree"
-                android:textColor="@color/White"
-                android:background="@color/MainColor1"
+                android:textColor="@color/main1color"
                 android:layout_width="40dp"
                 android:layout_marginRight="10dp" />
         </LinearLayout>

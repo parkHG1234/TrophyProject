@@ -118,13 +118,20 @@ public class Match_MyAdapter extends BaseAdapter {
                     Snackbar.make(view,"삭제된 팀의 게시글입니다.",Snackbar.LENGTH_SHORT).show();
                 }
                 else{
-                    Intent intent1 = new Intent(context, Match_Focus.class);
-                    intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
-                    intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
-                    intent1.putExtra("MyTeam_Pk", arrData.get(position).getMyTeam_Pk());
-                    intent1.putExtra("Status", arrData.get(position).getStatus());
-                    context.startActivity(intent1);
-                    arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    if(arrData.get(position).getUser_Pk().equals(".")){
+                        Intent intent_login = new Intent(context, Login.class);
+                        arrData.get(position).getActivity().startActivity(intent_login);
+                        arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                    else{
+                        Intent intent1 = new Intent(context, Match_Focus.class);
+                        intent1.putExtra("Match_Pk", arrData.get(position).getMatch_Pk());
+                        intent1.putExtra("User_Pk", arrData.get(position).getUser_Pk());
+                        intent1.putExtra("MyTeam_Pk", arrData.get(position).getMyTeam_Pk());
+                        intent1.putExtra("Status", arrData.get(position).getStatus());
+                        context.startActivity(intent1);
+                        arrData.get(position).getActivity().overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
                 }
             }
         });

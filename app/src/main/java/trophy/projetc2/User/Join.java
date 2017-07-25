@@ -1,6 +1,8 @@
 package trophy.projetc2.User;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
@@ -538,27 +540,8 @@ public class Join extends AppCompatActivity {
             public void onClick(View v) {
                 Address_Do = Join_Spinner_AddressDo.getSelectedItem().toString();
                 Address_Si = Join_Spinner_AddressSi.getSelectedItem().toString();
-                Birth = Year + " / " + Month + " / " + Day;
-                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag && Posion_flag && Weight_flag && Height_flag) {
-                    HttpClient user = new HttpClient();
-                    user.HttpClient("Trophy_part1", "User_Join.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone,Position, Height, Weight);
-                    final MaterialDialog TeamPlayerDialog = new MaterialDialog(Join.this);
-                    TeamPlayerDialog
-                            .setTitle("확인")
-                            .setMessage("회원가입이 완료되었습니다.")
-                            .setCanceledOnTouchOutside(true)
-                            .setPositiveButton("확인", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    finish();
-                                    activity_terms.finish();
-                                    overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
-                                }
-                            });
-                    TeamPlayerDialog.show();
-                } else {
-                    Snackbar.make(v, "입력하신 정보를 확인해주세요", Snackbar.LENGTH_LONG).show();
-                }
+                Match_Input Match_Input = new Match_Input();
+                Match_Input.execute();
             }
         });
         User_Join_ImageView_Back.setOnClickListener(new View.OnClickListener() {
@@ -666,5 +649,57 @@ public class Join extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
+    public class Match_Input extends AsyncTask<String, Void, String> {
+        ProgressDialog asyncDialog = new ProgressDialog(Join.this);
+        String[][] parsedData;
+
+        @Override
+        protected void onPreExecute() {
+            asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            asyncDialog.setMessage("잠시만 기다려주세요..");
+            // show dialog
+            asyncDialog.show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Birth = Year + " / " + Month + " / " + Day;
+                if (Name_flag && Password_flag && Password_Confirm_flag && Year_flag && Month_flag && Day_flag && Sex_flag && Phone_flag && Phone_Confirm_flag && Posion_flag && Weight_flag && Height_flag) {
+                    HttpClient user = new HttpClient();
+                    user.HttpClient("Trophy_part1", "User_Join.jsp", Name, Password, Birth, Sex, Address_Do, Address_Si, Phone,Position, Height, Weight);
+
+                } else {
+                    Snackbar.make(getCurrentFocus(), "입력하신 정보를 확인해주세요", Snackbar.LENGTH_LONG).show();
+                }
+                return "succed";
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "failed";
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            asyncDialog.dismiss();
+            final MaterialDialog TeamPlayerDialog = new MaterialDialog(Join.this);
+            TeamPlayerDialog
+                    .setTitle("확인")
+                    .setMessage("회원가입이 완료되었습니다.")
+                    .setCanceledOnTouchOutside(true)
+                    .setPositiveButton("확인", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                            activity_terms.finish();
+                            overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_right);
+                        }
+                    });
+            TeamPlayerDialog.show();
+            super.onPostExecute(result);
+        }
     }
 }

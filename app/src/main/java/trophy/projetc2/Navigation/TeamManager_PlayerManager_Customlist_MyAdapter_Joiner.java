@@ -572,6 +572,7 @@ public class TeamManager_PlayerManager_Customlist_MyAdapter_Joiner extends BaseA
                             if(parsedData_Joiner_Refuse[0][0].equals("succed")){
                                 TeamPlayerDialog.dismiss();
                                 refresh_joiner= "refresh";
+
                                 HttpClient http_push = new HttpClient();
                                 http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getFourth_Pk(), arrData.get(position).getTeamName()+"팀 가입신청이 거절되었습니다");
 

@@ -27,10 +27,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
@@ -173,10 +177,14 @@ public class OutCourt_CourtInfo_Focus_Comment extends AppCompatActivity{
 
                         }
                         else{
-                            HttpClient http_push = new HttpClient();
-                            http_push.HttpClient("TodayBasket_manager","push.jsp", parsedData_Comment_Input[0][1], parsedData_Comment_Input[0][2]+"님이 피드에 답글을 남겼습니다");
+                            try {
+                                String En_Profile = URLDecoder.decode(parsedData_Comment_Input[0][2], "utf-8");
+                                HttpClient http_push = new HttpClient();
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", parsedData_Comment_Input[0][1], En_Profile+"님이 피드에 답글을 남겼습니다");
+                            }catch (UnsupportedEncodingException e) {
 
-                        }
+                            }
+                            }
                     }
                 }
             }

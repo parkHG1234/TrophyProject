@@ -31,7 +31,7 @@ public class Score_Team extends AppCompatActivity {
     ArrayList<Score_MyData> Score_MyData;
     String[][] parsedData_Score;
     String strCurAll;
-    String User_Pk;
+    String User_Pk,Team_Pk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +39,12 @@ public class Score_Team extends AppCompatActivity {
         currentTime();
         Intent intent1 = getIntent();
         User_Pk = intent1.getStringExtra("User_Pk");
+        Team_Pk = intent1.getStringExtra("Team_Pk");
         Score_Team_ImageView_Back = (ImageView) findViewById(R.id.Score_Team_ImageView_Back);
         Score_Team_ListView = (ListView)findViewById(R.id.Score_Team_ListView);
 
         HttpClient http_score = new HttpClient();
-        String result = http_score.HttpClient("Trophy_part1","Score_Team.jsp", User_Pk);
+        String result = http_score.HttpClient("Trophy_part1","Score_Team.jsp", Team_Pk);
         parsedData_Score = jsonParserList_Score(result);
 
         Score_MyData = new ArrayList<Score_MyData>();

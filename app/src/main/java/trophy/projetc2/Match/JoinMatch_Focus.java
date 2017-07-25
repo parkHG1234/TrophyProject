@@ -379,25 +379,25 @@ public class JoinMatch_Focus extends AppCompatActivity{
             calendar.setTime(date1);
             switch (calendar.get(Calendar.DAY_OF_WEEK)) {
                 case 1:
-                    day = "목";
-                    break;
-                case 2:
-                    day = "금";
-                    break;
-                case 3:
                     day = "토";
                     break;
-                case 4:
+                case 2:
                     day = "일";
                     break;
-                case 5:
+                case 3:
                     day = "월";
                     break;
-                case 6:
+                case 4:
                     day = "화";
                     break;
-                case 7:
+                case 5:
                     day = "수";
+                    break;
+                case 6:
+                    day = "목";
+                    break;
+                case 7:
+                    day = "금";
                     break;
 
             }

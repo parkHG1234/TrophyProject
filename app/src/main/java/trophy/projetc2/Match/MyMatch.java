@@ -56,7 +56,7 @@ public class MyMatch extends AppCompatActivity{
 
         MyMatch_MyData = new ArrayList<MyMatch_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][9]);
+            String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][4], parsedData_Match[i][9]);
             MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9],parsedData_Match[i][10]));
             ContentCount = Integer.parseInt(parsedData_Match[i][0]);
         }
@@ -132,7 +132,7 @@ public class MyMatch extends AppCompatActivity{
                 parsedData_Match = jsonParserList_Match(result);
 
                 for (int i = 0; i < parsedData_Match.length; i++) {
-                    String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][9]);
+                    String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][4], parsedData_Match[i][9]);
                     MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9],parsedData_Match[i][10]));
                     ContentCount = Integer.parseInt(parsedData_Match[i][0]);
                 }
@@ -150,7 +150,7 @@ public class MyMatch extends AppCompatActivity{
             asyncDialog.dismiss();
             super.onPostExecute(result);
         }
-        public String getStatus(String Match_Date, String FinishTime){
+        public String getStatus(String Match_Date, String StartTime, String FinishTime){
             String str1 = Match_Date;
             String[] data1 = str1.split(":::");
             String str2 = data1[1];
@@ -158,16 +158,27 @@ public class MyMatch extends AppCompatActivity{
             if(Integer.parseInt(data2[1]) < 10){
                 data2[1] = "0"+data2[1];
             }
-            String str3 = FinishTime;
+            String str3 = StartTime;
             String[] data3 = str3.split(":");
             if(Integer.parseInt(data3[1]) < 10){
                 data3[1] = "0"+data3[1];
             }
+            if(Integer.parseInt(data3[0]) < 10){
+                data3[0] = "0"+data3[0];
+            }
+            String str4 = FinishTime;
+            String[] data4 = str4.split(":");
+            if(Integer.parseInt(data4[1]) < 10){
+                data4[1] = "0"+data4[1];
+            }
+            if(Integer.parseInt(data4[0]) < 10){
+                data4[0] = "0"+data4[0];
+            }
             ////////////////////////////////////////////////////////////////////
-            String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
-            Log.i("test123",match_finishtime);
-            if(Long.parseLong(match_finishtime)>Long.parseLong(strCurAll)){
-                return  "recruiting";
+            String match_starttime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+            String match_finishtime = data1[0]+data2[0]+data2[1]+data4[0]+data4[1];
+            if(Long.parseLong(strCurAll) < Long.parseLong(match_starttime)){
+                return "recruiting";
             }
             else{
                 return "finish";
@@ -181,17 +192,16 @@ public class MyMatch extends AppCompatActivity{
         String result = http_match.HttpClient("Trophy_part1","MyMatch.jsp", User_Pk);
         parsedData_Match = jsonParserList_Match(result);
 
-
         MyMatch_MyData = new ArrayList<MyMatch_MyData>();
         for (int i = 0; i < parsedData_Match.length; i++) {
-            String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][9]);
+            String Status = getStatus(parsedData_Match[i][10], parsedData_Match[i][4], parsedData_Match[i][9]);
             MyMatch_MyData.add(new MyMatch_MyData(parsedData_Match[i][0], parsedData_Match[i][1], parsedData_Match[i][2],parsedData_Match[i][3],parsedData_Match[i][4],parsedData_Match[i][5],parsedData_Match[i][6],Status,MyMatch.this,User_Pk,parsedData_Match[i][8],parsedData_Match[i][9],parsedData_Match[i][10]));
             ContentCount = Integer.parseInt(parsedData_Match[i][0]);
         }
         adapter = new MyMatch_MyAdapter(this, MyMatch_MyData);
         MyMatch_ListView_List.setAdapter(adapter);
     }
-    public String getStatus(String Match_Date, String FinishTime){
+    public String getStatus(String Match_Date, String StartTime, String FinishTime){
         String str1 = Match_Date;
         String[] data1 = str1.split(":::");
         String str2 = data1[1];
@@ -199,16 +209,27 @@ public class MyMatch extends AppCompatActivity{
         if(Integer.parseInt(data2[1]) < 10){
             data2[1] = "0"+data2[1];
         }
-        String str3 = FinishTime;
+        String str3 = StartTime;
         String[] data3 = str3.split(":");
         if(Integer.parseInt(data3[1]) < 10){
             data3[1] = "0"+data3[1];
         }
+        if(Integer.parseInt(data3[0]) < 10){
+            data3[0] = "0"+data3[0];
+        }
+        String str4 = FinishTime;
+        String[] data4 = str4.split(":");
+        if(Integer.parseInt(data4[1]) < 10){
+            data4[1] = "0"+data4[1];
+        }
+        if(Integer.parseInt(data4[0]) < 10){
+            data4[0] = "0"+data4[0];
+        }
         ////////////////////////////////////////////////////////////////////
-        String match_finishtime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
-        Log.i("test123",match_finishtime);
-        if(Long.parseLong(match_finishtime)>Long.parseLong(strCurAll)){
-            return  "recruiting";
+        String match_starttime = data1[0]+data2[0]+data2[1]+data3[0]+data3[1];
+        String match_finishtime = data1[0]+data2[0]+data2[1]+data4[0]+data4[1];
+        if(Long.parseLong(strCurAll) < Long.parseLong(match_starttime)){
+            return "recruiting";
         }
         else{
             return "finish";

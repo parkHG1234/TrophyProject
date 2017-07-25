@@ -6,7 +6,7 @@
     android:id="@+id/Customdialog_Update_Root"
     android:background="@color/White">
     <TextView
-        android:text="업데이트가 있습니다."
+        android:text="새로운 업데이트가 있습니다."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/Customdialog_Update_Content"

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.LongSparseArray;
@@ -23,6 +24,7 @@ import java.util.Date;
 
 import trophy.projetc2.Http.HttpClient;
 import trophy.projetc2.R;
+import trophy.projetc2.User.Login;
 
 /**
  * Created by 박효근 on 2017-06-27.
@@ -36,7 +38,7 @@ public class Score extends AppCompatActivity {
     ArrayList<Score_MyData> Score_MyData;
     String[][] parsedData_Score;
     String strCurAll;
-    String User_Pk;
+    String User_Pk, Team_Pk;
     int ContentCount = 100000;boolean lastitemVisibleFlag = false;
     String Content = "exist";
     @Override
@@ -46,6 +48,7 @@ public class Score extends AppCompatActivity {
         currentTime();
         Intent intent1 = getIntent();
         User_Pk = intent1.getStringExtra("User_Pk");
+        Team_Pk = intent1.getStringExtra("Team_Pk");
         Score_ImageView_Back = (ImageView) findViewById(R.id.Score_ImageView_Back);
         Score_Button_AllScore = (Button)findViewById(R.id.Score_Button_AllScore);
         Score_Button_TeamScore = (Button)findViewById(R.id.Score_Button_TeamScore);
@@ -63,10 +66,23 @@ public class Score extends AppCompatActivity {
         Score_Button_TeamScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(Score.this, Score_Team.class);
-                intent1.putExtra("User_Pk", User_Pk);
-                startActivity(intent1);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                if(User_Pk.equals(".")){
+                    Intent intent_login = new Intent(Score.this, Login.class);
+                    startActivity(intent_login);
+                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                }
+                else{
+                    if(Team_Pk.equals(".")){
+                        Snackbar.make(view,"팀 가입 후 이용해주시기 바랍니다.",Snackbar.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Intent intent1 = new Intent(Score.this, Score_Team.class);
+                        intent1.putExtra("Team_Pk", Team_Pk);
+                        intent1.putExtra("User_Pk", User_Pk);
+                        startActivity(intent1);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                }
             }
         });
         HttpClient http_score = new HttpClient();
