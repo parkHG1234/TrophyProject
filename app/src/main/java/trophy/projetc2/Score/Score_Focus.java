@@ -720,7 +720,7 @@ public class Score_Focus extends AppCompatActivity {
                     Score_TextView_AwayScore.setText(Game1_Away);
                     ScoreResult();
                     HttpClient http_push = new HttpClient();
-                    http_push.HttpClient("TodayBasket_manager","push.jsp", Content_User_Pk, "어웨이팀에서 교류전 결과를 확인하였습니다");
+                    http_push.HttpClient("TodayBasket_manager","push.jsp", Content_User_Pk, "어웨이팀에서 연습게임 결과를 확인하였습니다");
                 }
             }
         });

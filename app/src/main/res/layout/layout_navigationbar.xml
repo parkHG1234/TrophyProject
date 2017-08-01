@@ -15,7 +15,7 @@
             android:layout_height="100dp">
             <ImageView
                 android:id="@+id/Main_Navigation_ImageView_Profile"
-                android:background="@color/soso"
+                android:background="@color/Navi_Gary"
                 android:padding="20dp"
                 android:layout_height="100dp"
                 android:layout_width="100dp" />
@@ -28,54 +28,50 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
         </RelativeLayout>
-
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/soso"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:id="@+id/Main_Navigation_UserInfo">
+            android:layout_height="100dp">
             <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="1">
-                <TextView
-                    android:text="TextView"
-                    android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:background="@color/Navi_Gary"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:id="@+id/Main_Navigation_UserInfo">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/Main_Navigation_TextView_Name"
-                    android:textColor="@color/Black"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:text="TextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/Main_Navigation_TextView_Team"
-                    android:textColor="@color/Black"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/Main_Navigation_TextView_Name"
+                        android:textColor="@color/Black"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="15sp" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/modify"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"/>
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/modify" />
-            </LinearLayout>
-        </LinearLayout>
+            <TextView
+                android:text="나의 팀정보"
+                android:textColor="@color/main1color"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:textSize="14sp"
+                android:layout_width="70dp"
+                android:gravity="center"
+                android:layout_height="20dp"
+                android:id="@+id/Main_Navigation_Button_TeamManager"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <ScrollView
@@ -160,34 +156,34 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="교류전"
+                android:text="연습게임"
                 android:textColor="@color/Black"
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:textSize="12sp" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_Succed_Match">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:id="@+id/Main_Navigation_Button_Succed_Match">-->
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/navigation_contest"
-                android:layout_gravity="center"/>
+            <!--<ImageView-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:src="@drawable/navigation_contest"-->
+                <!--android:layout_gravity="center"/>-->
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="교류전 결과"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="연습게임 결과"-->
+                <!--android:textColor="@color/Black"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:paddingLeft="20dp"-->
+                <!--android:textSize="12sp" />-->
+        <!--</LinearLayout>-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1sp"
@@ -224,36 +220,6 @@
             android:background="@color/soso"
             android:layout_marginLeft="10dp"
             android:id="@+id/Main_Navigation_Line_OutCourt"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="50dp"
-            android:paddingLeft="10dp"
-            android:id="@+id/Main_Navigation_Button_TeamManager">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/navigation_teaminfo"
-                android:layout_gravity="center"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="팀 정보"
-                android:textColor="@color/Black"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/soso"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/Main_Navigation_Line_TeamInfo"/>
 
         <LinearLayout
             android:layout_width="match_parent"

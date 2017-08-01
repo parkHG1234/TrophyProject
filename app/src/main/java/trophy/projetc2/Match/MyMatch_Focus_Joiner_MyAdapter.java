@@ -122,8 +122,8 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                     final TextView Customdialog_2Choice_Content = (TextView)layout.findViewById(R.id.Customdialog_2Choice_Content);
                     final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
                     final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
-                    Customdialog_2Choice_Title.setText("교류전");
-                    Customdialog_2Choice_Content.setText("수락시 교류전이 성사되며, 다른 신청팀은 자동 거절됩니다.\n성사된 교류전은 교류전결과에서 확인하실 수 있습니다.");
+                    Customdialog_2Choice_Title.setText("연습게임");
+                    Customdialog_2Choice_Content.setText("수락시 연습게임이 성사되며, 다른 신청팀은 자동 거절됩니다.\n성사된 연습게임은 연습게임결과에서 확인하실 수 있습니다.");
                     Customdialog_2Choice_First.setText("수 락");
                     Customdialog_2Choice_Second.setText("취 소");
                     final MaterialDialog TeamInfo_Dialog = new MaterialDialog(view.getContext());
@@ -145,7 +145,7 @@ public class MyMatch_Focus_Joiner_MyAdapter extends BaseAdapter {
                             parsedData_MyMatch_Focus_Join = jsonParserList_MyMatch_Focus_join(result);
                             if(parsedData_MyMatch_Focus_Join[0][0].equals("succed")){
                                 HttpClient http_push = new HttpClient();
-                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getUser_Pk(), TeamName+"팀 교류전 신청 수락! "+MatchDate_All[1]+"월 "+MatchDate_All[2]+"일 다른 신청은 자동 삭제됩니다");
+                                http_push.HttpClient("TodayBasket_manager","push.jsp", arrData.get(position).getUser_Pk(), TeamName+"팀 연습게임 신청 수락! "+MatchDate_All[1]+"월 "+MatchDate_All[2]+"일 다른 신청은 자동 삭제됩니다");
                                 AlarmHATT a = new AlarmHATT(context);
                                 a.Alarm();
                                 TeamInfo_Dialog.dismiss();

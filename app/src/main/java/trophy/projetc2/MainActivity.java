@@ -166,8 +166,7 @@ public class MainActivity extends AppCompatActivity {
         Main_Navigation_ImageView_Profile = (ImageView) aa.findViewById(R.id.Main_Navigation_ImageView_Profile);
         final LinearLayout Main_Navigation_UserInfo = (LinearLayout)aa.findViewById(R.id.Main_Navigation_UserInfo);
         final TextView Main_Navigation_TextView_Name = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Name);
-        final TextView Main_Navigation_TextView_Team = (TextView) aa.findViewById(R.id.Main_Navigation_TextView_Team);
-        final LinearLayout Main_Navigation_Button_TeamManager = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
+        final TextView Main_Navigation_Button_TeamManager = (TextView) aa.findViewById(R.id.Main_Navigation_Button_TeamManager);
         final LinearLayout Main_Navigation_Button_Contest = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Contest);
         final LinearLayout Main_Navigation_Button_LastContest = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_LastContest);
         final LinearLayout Main_Navigation_Button_Notice = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Notice);
@@ -175,9 +174,7 @@ public class MainActivity extends AppCompatActivity {
         final LinearLayout Main_Navigation_Button_Logout = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Logout);
         final LinearLayout Main_Navigation_Button_Ranking = (LinearLayout) aa.findViewById(R.id.Main_Navigation_Button_Ranking);
         final LinearLayout Main_Navigation_Button_Match = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Match);
-        final LinearLayout Main_Navigation_Button_Succed_Score = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_Succed_Match);
         final LinearLayout Main_Navigation_Button_OutCourt = (LinearLayout)aa.findViewById(R.id.Main_Navigation_Button_OutCourt);
-        final TextView Main_Navigation_Line_TeamInfo = (TextView)aa.findViewById(R.id.Main_Navigation_Line_TeamInfo);
         final TextView Main_Navigation_Line_Logout = (TextView)aa.findViewById(R.id.Main_Navigation_Line_Logout);
         if (Pk.equals("") || Pk.equals(".")) { ///////////////////////비로그인시
             Glide.with(MainActivity.this).load(R.drawable.profile_basic_image).diskCacheStrategy(DiskCacheStrategy.NONE).bitmapTransform(new CropCircleTransformation(Glide.get(MainActivity.this).getBitmapPool()))
@@ -185,14 +182,21 @@ public class MainActivity extends AppCompatActivity {
                     .into(Main_Navigation_ImageView_Profile);
 
             Main_Navigation_TextView_Name.setText("로그인을 해주세요");
-            Main_Navigation_TextView_Team.setVisibility(View.GONE);
             Main_Navigation_Button_Logout.setVisibility(View.GONE);Main_Navigation_Line_Logout.setVisibility(View.GONE);
             Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent_Login = new Intent(MainActivity.this, Login.class);
-                    startActivity(intent_Login);
-                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    if (Pk.equals(".")) {
+                        Intent intent_login = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent_login);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                    else{
+                        Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
+                        intent.putExtra("TeamName", Team);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
                 }
             });
         } else { ///////////////////////////로그인시
@@ -231,13 +235,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
             Main_Navigation_TextView_Name.setText(Name);
-            if (Team_Duty.equals("신청중")) {
-                Main_Navigation_TextView_Team.setText(".");
-                Team=".";
-            } else {
-                Main_Navigation_TextView_Team.setText(Team);
-            }
-
+            Main_Navigation_TextView_Name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Pk.equals(".")) {
+                        Intent intent_login = new Intent(MainActivity.this, Login.class);
+                        startActivity(intent_login);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                    else{
+                        Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
+                        intent.putExtra("TeamName", Team);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+                    }
+                }
+            });
             Main_Navigation_ImageView_Profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -312,23 +325,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-        //개인정보 수정
-        Main_Navigation_UserInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Pk.equals(".")) {
-                    Intent intent_login = new Intent(MainActivity.this, Login.class);
-                    startActivity(intent_login);
-                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-                }
-                else{
-                    Intent intent = new Intent(MainActivity.this, ChangePersonalInfoActivity.class);
-                    intent.putExtra("TeamName", Team);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-                }
-            }
-        });
 
         Main_Navigation_Button_Contest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -465,16 +461,16 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-        Main_Navigation_Button_Succed_Score.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Score.class);
-                intent.putExtra("User_Pk", Pk);
-                intent.putExtra("Team_Pk", Team_Pk);
-                startActivity(intent);
-                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
-            }
-        });
+//        Main_Navigation_Button_Succed_Score.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, Score.class);
+//                intent.putExtra("User_Pk", Pk);
+//                intent.putExtra("Team_Pk", Team_Pk);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
+//            }
+//        });
         //로그아웃
         Main_Navigation_Button_Logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -631,6 +627,9 @@ public class MainActivity extends AppCompatActivity {
 
         OutCourt_CourtInfo_MyData = new ArrayList<OutCourt_CourtInfo_MyData>();
         HttpClient http_outcourt = new HttpClient();
+        if(Pk.equals(".")){
+            Address_Do = "서울";Address_Si = "강남구";
+        }
         String result2 = http_outcourt.HttpClient("Trophy_part1","OutCourt_Main.jsp", Address_Do,Address_Si, strCurToday);
         String[][] parsedData_outcourt = jsonParserList_OutCourt(result2);
         if(parsedData_outcourt[0][0] == "."){
@@ -648,7 +647,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent_Match = new Intent(MainActivity.this, OutCourt_CourtInfo_Main.class);
                 intent_Match.putExtra("User_Pk", Pk);
-                intent_Match.putExtra("Address_Do", Address_Do);
+                if(Pk.equals(".")){
+                    intent_Match.putExtra("Address_Do", "서울");
+                }else{
+                    intent_Match.putExtra("Address_Do", Address_Do);
+                }
                 intent_Match.putExtra("Address_Si", Address_Si);
                 startActivity(intent_Match);
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
@@ -778,7 +781,7 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_left);
             }
         });
-        //점수입력안된 교류전이 있는 경우
+        //점수입력안된 연습게임이 있는 경우
         HttpClient score = new HttpClient();
         String result5 = score.HttpClient("Trophy_part1", "Main_Score.jsp", Pk);
         parseredData_score = jsonParserList_Score(result5);
@@ -795,7 +798,7 @@ public class MainActivity extends AppCompatActivity {
                     final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
                     final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
                     Customdialog_2Choice_Title.setText("점수입력");
-                    Customdialog_2Choice_Content.setText("점수입력되지 않은 교류전이 잇습니다");
+                    Customdialog_2Choice_Content.setText("점수입력되지 않은 연습게임이 잇습니다");
                     Customdialog_2Choice_First.setText("이 동");
                     Customdialog_2Choice_Second.setText("다음에 하기");
                     final MaterialDialog TeamInfo_Dialog = new MaterialDialog(MainActivity.this);
@@ -830,7 +833,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
         }
-        //점수확인안된 교류전이 있는 경우
+        //점수확인안된 연습게임이 있는 경우
         HttpClient score_away = new HttpClient();
         String result6 = score_away.HttpClient("Trophy_part1", "Main_Score_Away.jsp", Pk);
         parseredData_score_away = jsonParserList_Score(result6);
@@ -846,7 +849,7 @@ public class MainActivity extends AppCompatActivity {
                 final Button Customdialog_2Choice_First = (Button)layout.findViewById(R.id.Customdialog_2Choice_First);
                 final Button Customdialog_2Choice_Second = (Button)layout.findViewById(R.id.Customdialog_2Choice_Second);
                 Customdialog_2Choice_Title.setText("점수확인");
-                Customdialog_2Choice_Content.setText("점수확인되지 않은 교류전이 잇습니다");
+                Customdialog_2Choice_Content.setText("점수확인되지 않은 연습게임이 잇습니다");
                 Customdialog_2Choice_First.setText("이 동");
                 Customdialog_2Choice_Second.setText("다음에 하기");
                 final MaterialDialog TeamInfo_Dialog = new MaterialDialog(MainActivity.this);
@@ -901,7 +904,7 @@ public class MainActivity extends AppCompatActivity {
         Contest_ListView_OutCourt.setAdapter(adapter_outcourt);
         setListViewHeightBasedOnChildren(Contest_ListView_OutCourt);
 
-        //교류전 리로드
+        //연습게임 리로드
         //매치 리스트뷰
         HttpClient http_match = new HttpClient();
         String result1 = http_match.HttpClient("Trophy_part1","Match.jsp");

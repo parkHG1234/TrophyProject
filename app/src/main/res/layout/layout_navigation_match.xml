@@ -52,10 +52,20 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="등록한 교류전"
+            android:text="찾기"
             android:textSize="14dp"
             android:textColor="@color/White"
             android:background="@color/main1color"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:id="@+id/Match_Button_Match"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="등록한 교류전"
+            android:textSize="14dp"
+            android:textColor="@color/White"
+            android:background="@color/BlackGray"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:id="@+id/Match_Button_MyMatch"/>
@@ -65,7 +75,7 @@
             android:text="신청한 교류전"
             android:textSize="14dp"
             android:textColor="@color/White"
-            android:background="@color/main1color"
+            android:background="@color/BlackGray"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:id="@+id/Match_Button_JoinMatch"/>

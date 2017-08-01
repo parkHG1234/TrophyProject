@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="등록한 교류전"
+            android:text="등록한 연습게임"
             android:textColor="@color/Black"
             android:textSize="16dp"
             android:layout_centerVertical="true"

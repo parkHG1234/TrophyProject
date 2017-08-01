@@ -516,7 +516,7 @@ public class Match_Write extends AppCompatActivity {
             }
             MatchDate = year +":::"+ MatchMonth +" / "+ dayOfMonth;
             String dayoftheweek = DayoftheWeek(Integer.toString(year) +  MatchMonth + Integer.toString(dayOfMonth));
-            Title = MatchMonth + "월 " + dayOfMonth + "일(" + dayoftheweek + ") 교류전 팀 구합니다." ;
+            Title = MatchMonth + "월 " + dayOfMonth + "일(" + dayoftheweek + ") 연습게임 팀 구합니다." ;
             Match_Write_EditText_Date.setText(MatchMonth + "월  " + dayOfMonth + "일(" + dayoftheweek + ")");
             String result_null = edittext_EditText_NotNull();
 

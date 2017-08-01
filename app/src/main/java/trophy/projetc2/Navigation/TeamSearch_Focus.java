@@ -163,7 +163,7 @@ public class TeamSearch_Focus extends AppCompatActivity {
             TeamInfo_TextView_Grade.setText(parsedData_Grade[0][0]);
             Rating_Range(Double.parseDouble(parsedData_Grade[0][0]));
         }
-        //교류전 결과 리스트
+        //연습게임 결과 리스트
         HttpClient http_score = new HttpClient();
         String result = http_score.HttpClient("Trophy_part1","Score_Team_Finish.jsp", Team_Pk);
         parsedData_Score = jsonParserList_Score(result);
