@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import com.tsengvn.typekit.Typekit;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+
 /**
  * Created by ldong on 2017-02-01.
  */

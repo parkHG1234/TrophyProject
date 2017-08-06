@@ -67,7 +67,7 @@ public class Match_MyAdapter extends BaseAdapter {
         Match_CustomList_TextView_Title = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_Title);
         Match_CustomList_TextView_MatchTime = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_MatchTime);
         Match_CustomList_TextView_MatchPlace = (TextView) convertView.findViewById(R.id.Match_CustomList_TextView_MatchPlace);
-        Match_CustomList_TextView_Title.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/BMJUA_ttf.ttf"));
+        //Match_CustomList_TextView_Title.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/BMJUA_ttf.ttf"));
         Match_CustomList_TextView_TeamName.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/BMJUA_ttf.ttf"));
         //시간 분할
         String str = arrData.get(position).getTime();

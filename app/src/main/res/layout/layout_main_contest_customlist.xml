@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="230dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_weight="1"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/BlackGray"
         android:layout_height="match_parent"
-        android:elevation="1dp">
+        android:elevation="1dp"
+        android:layout_weight="1">
 
         <ImageView
             android:scaleType="fitXY"
@@ -21,15 +21,13 @@
             app:srcCompat="@drawable/contest_example"
             android:layout_margin="1dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="170dp" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:background="@color/White"
-            android:layout_height="match_parent"
-            android:layout_weight="2.3">
+            android:layout_height="30dp">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -99,7 +97,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp">
+                android:layout_marginLeft="2dp"
+                android:visibility="gone">
 
                 <TextView
                     android:text="대회명 : "
@@ -157,8 +156,7 @@
             app:srcCompat="@drawable/contest_example"
             android:layout_margin="1dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="170dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -235,7 +233,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp">
+                android:layout_marginLeft="2dp"
+                android:visibility="gone"
+                >
 
                 <TextView
                     android:text="대회명 : "

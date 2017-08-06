@@ -59,11 +59,14 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import me.drakeet.materialdialog.MaterialDialog;
+import trophy.projetc2.Contest.Contest_Text_Customlist_Adapter;
+import trophy.projetc2.Contest.Contest_Text_Customlist_MyData;
 import trophy.projetc2.Contest.Contests_Customlist_Adapter;
 import trophy.projetc2.Contest.Contests_Customlist_MyData;
 import trophy.projetc2.Http.HttpClient;
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     String[][] parseredData_score;int score_count = 0;String Game_Status="";String[][] parseredData_score_away;
 
     ListView Contest_ListView_OutCourt;ArrayList<OutCourt_CourtInfo_MyData> OutCourt_CourtInfo_MyData;OutCourt_CourtInfo_MyAdapter adapter_outcourt;
+    ListView Contest_ListView_contest_text;
     ArrayList<Match_MyData> Match_MyData;Match_MyAdapter adapter;ListView Contest_ListView_Match;
     protected boolean shouldAskPermissions() {
         return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
@@ -150,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 //추가한 라인
 
         ListView listView = (ListView) findViewById(R.id.Contest_ListView_contest);
+        Contest_ListView_contest_text = (ListView) findViewById(R.id.Contest_ListView_contest_text);
 //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 //        drawer.setDrawerListener(toggle);
 //        toggle.syncState();
@@ -564,7 +569,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<Contests_Customlist_MyData> Contests_Customlist_MyData;
         Contests_Customlist_MyData = new ArrayList<Contests_Customlist_MyData>();
-        for (int i = 0; i < 5; i=i+2) {
+        for (int i = 0; i < 2; i=i+2) {
             Contests_Customlist_MyData.add(new Contests_Customlist_MyData(this, ContestsParsedList[i][0], ContestsParsedList[i][1],
                     ContestsParsedList[i][2], ContestsParsedList[i][3], ContestsParsedList[i][4], ContestsParsedList[i][5],
                     ContestsParsedList[i][6], ContestsParsedList[i][7], ContestsParsedList[i+1][0], ContestsParsedList[i+1][1],
@@ -572,6 +577,16 @@ public class MainActivity extends AppCompatActivity {
         }
         Contests_Customlist_Adapter Adapter = new Contests_Customlist_Adapter(this, Contests_Customlist_MyData);
         listView.setAdapter(Adapter);
+
+        ArrayList<Contest_Text_Customlist_MyData> Contest_Text_Customlist_MyData;
+        Contest_Text_Customlist_MyData = new ArrayList<Contest_Text_Customlist_MyData>();
+        for (int i = 2; i < 6; i++) {
+            Contest_Text_Customlist_MyData.add(new Contest_Text_Customlist_MyData(this, ContestsParsedList[i][0], ContestsParsedList[i][1],
+                    ContestsParsedList[i][2], ContestsParsedList[i][3], ContestsParsedList[i][4], ContestsParsedList[i][5],
+                    ContestsParsedList[i][6], ContestsParsedList[i][7]));
+        }
+        Contest_Text_Customlist_Adapter Adapter1 = new Contest_Text_Customlist_Adapter(this, Contest_Text_Customlist_MyData);
+        Contest_ListView_contest_text.setAdapter(Adapter1);
 
         //랭킹 더보기
         TextView Main_Contest_TextView_RankingFocus = (TextView)findViewById(R.id.Main_Contest_TextView_RankingFocus);
@@ -1257,10 +1272,10 @@ public class MainActivity extends AppCompatActivity {
         strCurMinute = CurMinuteFormat.format(date);
         strCurAll= CurAllFormat.format(date);
     }
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+//    }
 
     @Override
     public void onBackPressed() {

@@ -54,7 +54,7 @@ public class Match_Write extends AppCompatActivity {
             Match_Write_EditText_Color,Match_Write_EditText_Extra,
             Match_Write_EditText_Date;
     CheckBox Match_Write_CheckBox_Parking_Not, Match_Write_CheckBox_Parking_Free, Match_Write_CheckBox_Parking_Charge,
-            Match_Write_CheckBox_Display,Match_Write_CheckBox_Shower,Match_Write_CheckBox_ColdHot;
+            Match_Write_CheckBox_Display, Match_Write_CheckBox_Shower, Match_Write_CheckBox_ColdHot;
     Button Match_Write_Button_Write;
     String strCurYear, strCurMonth, strCurDay, strCurHour,strCurMinute, strCurToday, strCurTime;
     String Title, MatchTime, MatchPlace, Pay, Color, Extra, MatchDate, MatchMonth, MatchDay,MatchStartTime,MatchFinishTime,
@@ -77,6 +77,7 @@ public class Match_Write extends AppCompatActivity {
 
         title1 = (TextView)findViewById(R.id.title1);title2 = (TextView)findViewById(R.id.title2);title3 = (TextView)findViewById(R.id.title3);
         title4 = (TextView)findViewById(R.id.title4);title5 = (TextView)findViewById(R.id.title5);title6= (TextView)findViewById(R.id.title6);
+
         title1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title2.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));
         title3.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BMJUA_ttf.ttf"));

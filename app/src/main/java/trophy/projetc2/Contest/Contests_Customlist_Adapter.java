@@ -1,6 +1,6 @@
 package trophy.projetc2.Contest;
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -19,10 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import trophy.projetc2.MainActivity;
 import trophy.projetc2.R;
-
-import static java.lang.System.out;
 
 /**
  * Created by KimIkJoong on 2016-11-08.

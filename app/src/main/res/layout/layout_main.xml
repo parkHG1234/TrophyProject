@@ -41,8 +41,8 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@color/White"
-                android:layout_height="740dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:layout_height="260dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -80,10 +80,14 @@
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Contest_ListView_contest"
-                    android:layout_marginBottom="10dp" />
+                    android:id="@+id/Contest_ListView_contest" />
             </LinearLayout>
-
+            <ListView
+                android:layout_width="match_parent"
+                android:id="@+id/Contest_ListView_contest_text"
+                android:layout_marginBottom="10dp"
+                android:background="@color/White"
+                android:layout_height="180dp" />
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -223,6 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/Contest_ListView_OutCourt"
+                    android:background="@color/Match_Menu_Back"
                     />
 
 
